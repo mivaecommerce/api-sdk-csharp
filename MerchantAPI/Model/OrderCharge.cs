@@ -10,9 +10,11 @@
 using System;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace MerchantAPI
 {
+	[JsonConverter(typeof(OrderChargeConverter))]
 	public class OrderCharge : Model
 	{
 		/// <value>Property OrderId - int</value>
@@ -37,15 +39,15 @@ namespace MerchantAPI
 
 		/// <value>Property Amount - float</value>
 		[JsonPropertyName("amount")]
-		public float Amount { get; set; }
+		public float? Amount { get; set; }
 
 		/// <value>Property DisplayAmount - float</value>
 		[JsonPropertyName("disp_amt")]
-		public float DisplayAmount { get; set; }
+		public float? DisplayAmount { get; set; }
 
 		/// <value>Property TaxExempt - bool</value>
 		[JsonPropertyName("tax_exempt")]
-		public bool TaxExempt { get; set; }
+		public bool? TaxExempt { get; set; }
 
 		/// <summary>
 		/// Getter for order_id.
@@ -96,7 +98,7 @@ namespace MerchantAPI
 		/// Getter for amount.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetAmount()
+		public float? GetAmount()
 		{
 			return Amount;
 		}
@@ -105,7 +107,7 @@ namespace MerchantAPI
 		/// Getter for disp_amt.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetDisplayAmount()
+		public float? GetDisplayAmount()
 		{
 			return DisplayAmount;
 		}
@@ -114,7 +116,7 @@ namespace MerchantAPI
 		/// Getter for tax_exempt.
 		/// <returns>bool</returns>
 		/// </summary>
-		public bool GetTaxExempt()
+		public bool? GetTaxExempt()
 		{
 			return TaxExempt;
 		}
@@ -194,6 +196,113 @@ namespace MerchantAPI
 		{
 			TaxExempt = value;
 			return this;
+		}
+	}
+
+	/// <summary>
+	/// Converter for model OrderCharge
+	/// </summary>
+	public class OrderChargeConverter : BaseJsonConverter<OrderCharge>
+	{
+		public override bool CanConvert(Type typeToConvert)
+		{
+			return true;
+		}
+
+		public override OrderCharge Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			OrderCharge value = new OrderCharge();
+
+			if (reader.TokenType != JsonTokenType.StartObject)
+			{
+				throw new MerchantAPIException(String.Format("Expected start of object but got {0}", reader.TokenType));
+			}
+
+			while(reader.Read())
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					if (reader.TokenType == JsonTokenType.EndObject)
+					{
+						return value;
+					}
+
+					throw new MerchantAPIException(String.Format("Expected property name but got {0}", reader.TokenType));
+				}
+
+				String property = reader.GetString();
+
+				if (String.Equals(property, "order_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.OrderId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "charge_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ChargeId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "module_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ModuleId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "type", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ChargeType = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "descrip", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Description = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "amount", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Amount = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "disp_amt", StringComparison.OrdinalIgnoreCase))
+				{
+					value.DisplayAmount = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "tax_exempt", StringComparison.OrdinalIgnoreCase))
+				{
+					value.TaxExempt = ReadNextBoolean(ref reader, options);
+				}
+				else
+				{
+					throw new MerchantAPIException(String.Format("Unexpected property {0} for OrderCharge", property));
+				}
+			}
+
+			return value;
+		}
+
+		public override void Write(Utf8JsonWriter writer, OrderCharge value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+
+			if (value.ChargeType != null && value.ChargeType.Length > 0)
+			{
+				writer.WriteString("type", value.ChargeType);
+			}
+
+			if (value.Description != null && value.Description.Length > 0)
+			{
+				writer.WriteString("descrip", value.Description);
+			}
+
+			if (value.Amount.HasValue)
+			{
+				writer.WriteNumber("amount", value.Amount.Value);
+			}
+
+			if (value.DisplayAmount.HasValue)
+			{
+				writer.WriteNumber("disp_amt", value.DisplayAmount.Value);
+			}
+
+			if (value.TaxExempt.HasValue)
+			{
+				writer.WriteBoolean("tax_exempt", value.TaxExempt.Value);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 }

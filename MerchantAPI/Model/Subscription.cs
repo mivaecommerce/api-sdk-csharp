@@ -365,16 +365,5 @@ namespace MerchantAPI
 		{
 			return FormattedTotal;
 		}
-
-		/// <summary>
-		/// Setter for cncldate.
-		/// <param name="value">String</param>
-		/// <returns>Subscription</returns>
-		/// </summary>
-		public Subscription SetCancelDate(String value)
-		{
-			CancelDate = value;
-			return this;
-		}
 	}
 }

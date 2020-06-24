@@ -158,7 +158,7 @@ namespace MerchantAPI
 		}
 	}
 
-	public class RequestConverter : JsonConverter<Request>
+	public class RequestConverter : BaseJsonConverter<Request>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{

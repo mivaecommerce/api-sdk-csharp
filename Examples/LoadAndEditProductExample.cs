@@ -50,10 +50,23 @@ namespace MerchantAPILoadAndEditProductExample
 			Console.WriteLine("Loaded Product {0} Code {1} Name {2}", product.GetId(), product.GetCode(), product.GetName());
 
 			/// You can access the custom fields of the product from the CustomFieldValues model
-			CustomFieldValue myCustomFieldValue = product.GetCustomFieldValues().GetValue("MyField");
+			VariableValue myCustomFieldValue = product.GetCustomFieldValues().GetValue("MyField");
+
+			// Field values can be inspected of their type. Supported types are any IConvertible, and Array's of IConvertible (multitext)
+			if (myCustomFieldValue.ValueType == VariableValue.ValueDataType.ConvertibleType)
+			{
+				String myCustomFieldValueString = myCustomFieldValue.ToString();
+			}
+			else if (myCustomFieldValue.ValueType == VariableValue.ValueDataType.ArrayType)
+			{
+				foreach(var v in myCustomFieldValue.GetValueArray())
+				{
+					String myCustomFieldValueMultitextString = v.ToString();
+				}
+			}
 
 			/// to get a specific module field, specify the optional 2rd argument with the module code.
-			CustomFieldValue myModuleCustomFieldValue = product.GetCustomFieldValues().GetValue("MyField", "MyModule");
+			VariableValue myModuleCustomFieldValue = product.GetCustomFieldValues().GetValue("MyField", "MyModule");
 
 			/// Some requests accept a Model object in their constructor
 			/// which will allow the Request object to inherit data from.

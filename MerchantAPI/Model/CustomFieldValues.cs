@@ -17,7 +17,7 @@ namespace MerchantAPI
 	[JsonConverter(typeof(CustomFieldValuesConverter))]
 	public class CustomFieldValues : Model
 	{
-		public Dictionary<String, Dictionary<String, CustomFieldValue>> Values { get; set; } = new Dictionary<String, Dictionary<String, CustomFieldValue>>();
+		public Dictionary<String, Dictionary<String, VariableValue>> Values { get; set; } = new Dictionary<String, Dictionary<String, VariableValue>>();
 
 		/// <summary>
 		/// Set a custom field value
@@ -25,14 +25,14 @@ namespace MerchantAPI
 		/// <param name="field">String</param>
 		/// <param name="value">String</param>
 		/// <param name="module">String</param>
-		public CustomFieldValues SetValue(String field, String value, String module = "customfields")
+		public CustomFieldValues SetValue(String field, IConvertible value, String module = "customfields")
 		{
 			if (!HasModule(module))
 			{
-				Values[module] = new Dictionary<String, CustomFieldValue>();
+				Values[module] = new Dictionary<String, VariableValue>();
 			}
 
-			Values[module][field] = new CustomFieldValue(value);
+			Values[module][field] = new VariableValue(value);
 			return this;
 		}
 
@@ -42,28 +42,28 @@ namespace MerchantAPI
 		/// <param name="field">String</param>
 		/// <param name="value">List<String></param>
 		/// <param name="module">String</param>
-		public CustomFieldValues SetValue(String field, List<String> values, String module = "customfields")
+		public CustomFieldValues SetValue(String field, List<VariableValue> values, String module = "customfields")
 		{
 			if (!HasModule(module))
 			{
-				Values[module] = new Dictionary<String, CustomFieldValue>();
+				Values[module] = new Dictionary<String, VariableValue>();
 			}
 
-			Values[module][field] = new CustomFieldValue(values);
+			Values[module][field] = new VariableValue(values);
 			return this;
 		}
 
 		/// <summary>
-		/// Set a custom field value from a CustomFieldValue instance
+		/// Set a custom field value from a VariableValue instance
 		/// </summary>
 		/// <param name="field">String</param>
 		/// <param name="value">List<String></param>
 		/// <param name="module">String</param>
-		public CustomFieldValues SetValue(String field, CustomFieldValue value, String module = "customfields")
+		public CustomFieldValues SetValue(String field, VariableValue value, String module = "customfields")
 		{
 			if (!HasModule(module))
 			{
-				Values[module] = new Dictionary<String, CustomFieldValue>();
+				Values[module] = new Dictionary<String, VariableValue>();
 			}
 
 			Values[module][field] = value;
@@ -74,20 +74,25 @@ namespace MerchantAPI
 		/// Get all values for all modules.
 		/// </summary>
 		/// <returns></returns>
-		public Dictionary<String, Dictionary<String, CustomFieldValue>> GetValues()
+		public Dictionary<String, Dictionary<String, VariableValue>> GetValues()
 		{
 			return Values;
 		}
 
 		/// <summary>
-		/// Get a value for a module by its code.
+		/// Get a value for a module by its code if it exists, or null if it does not.
 		/// </summary>
 		/// <param name="field"></param>
 		/// <param name="module"></param>
 		/// <returns></returns>
-		public CustomFieldValue GetValue(String field, String module = "customfields")
+		public VariableValue GetValue(String field, String module = "customfields")
 		{
-			return Values[module][field];
+			if (HasValue(field, module))
+			{
+				return Values[module][field];
+			}
+			
+			return null;
 		}
 
 		/// <summary>
@@ -117,55 +122,18 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Get a specific modules custom field values.
+		/// Get a specific modules custom field values, or null if it does not exist;
 		/// </summary>
 		/// <param name="module"></param>
 		/// <returns></returns>
-		public Dictionary<String, CustomFieldValue> GetModule(String module)
+		public Dictionary<String, VariableValue> GetModule(String module)
 		{
-			return Values[module];
-		}
-	}
-
-	/// <summary>
-	/// Holds the value for a custom field. Either holds string data, or an array of strings.
-	/// </summary>
-	[JsonConverter(typeof(CustomFieldValueConverter))]
-	public class CustomFieldValue
-	{
-		public enum CustomFieldValueType
-		{
-			StringType,
-			ArrayType
-		};
-
-		public String Value { get; set; }
-
-		public List<String> Values { get; set; } = new List<String>();
-
-		public CustomFieldValueType ValueType { get; } = CustomFieldValueType.StringType;
-
-		public CustomFieldValue(String value)
-		{
-			ValueType = CustomFieldValueType.StringType;
-			Value = value;
-		}
-
-		public CustomFieldValue(List<String> values)
-		{
-			ValueType = CustomFieldValueType.ArrayType;
-			Value = "";
-			Values = values;
-		}
-
-		override public String ToString()
-		{
-			if (ValueType == CustomFieldValueType.ArrayType)
+			if (HasModule(module))
 			{
-				return String.Join(",", Values);
+				return Values[module];
 			}
-
-			return Value;
+			
+			return null;
 		}
 	}
 
@@ -225,7 +193,7 @@ namespace MerchantAPI
 
 					reader.Read(); // Read to value start
 
-					CustomFieldValue value = JsonSerializer.Deserialize<CustomFieldValue>(ref reader, options);
+					VariableValue value = JsonSerializer.Deserialize<VariableValue>(ref reader, options);
 
 					values.SetValue(field, value, module);
 				}
@@ -238,83 +206,23 @@ namespace MerchantAPI
 		{
 			writer.WriteStartObject();
 
-			foreach(KeyValuePair<String, Dictionary<String, CustomFieldValue>> moduleEntry in model.Values)
+			foreach(KeyValuePair<String, Dictionary<String, VariableValue>> moduleEntry in model.Values)
 			{
 				writer.WritePropertyName(moduleEntry.Key);
 
 				writer.WriteStartObject();
 
-				foreach(KeyValuePair<String, CustomFieldValue> valueEntry in moduleEntry.Value)
+				foreach(KeyValuePair<String, VariableValue> valueEntry in moduleEntry.Value)
 				{
 					writer.WritePropertyName(valueEntry.Key);
 
-					JsonSerializer.Serialize<CustomFieldValue>(writer, valueEntry.Value, options);
+					JsonSerializer.Serialize<VariableValue>(writer, valueEntry.Value, options);
 				}
 
 				writer.WriteEndObject();
 			}
 
 			writer.WriteEndObject();
-		}
-	}
-
-	/// <summary>
-	/// Handles converting a single custom field value
-	/// </summary>
-	public class CustomFieldValueConverter : JsonConverter<CustomFieldValue>
-	{
-		public override bool CanConvert(Type typeToConvert)
-		{
-			return true;
-		}
-
-		public override CustomFieldValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			if (reader.TokenType == JsonTokenType.StartArray)
-			{
-				List<String> values = new List<String>();
-
-				while (reader.Read())
-				{
-					if (reader.TokenType != JsonTokenType.String)
-					{
-						if (reader.TokenType == JsonTokenType.EndArray)
-						{
-							return new CustomFieldValue(values);
-						}
-
-						throw new MerchantAPIException(String.Format("Expected String or EndArray but got {0}", reader.TokenType));
-					}
-
-					values.Add(reader.GetString());
-				}
-			}
-			else if (reader.TokenType == JsonTokenType.String)
-			{
-				return new CustomFieldValue(reader.GetString());
-			}
-
-			throw new MerchantAPIException(String.Format("Expected String or StartArray but got {0}", reader.TokenType));
-		}
-
-		public override void Write(Utf8JsonWriter writer, CustomFieldValue value, JsonSerializerOptions options)
-		{
-			if (value.ValueType == CustomFieldValue.CustomFieldValueType.StringType)
-			{
-				writer.WriteStringValue(value.Value);
-			}
-			else
-			{
-				writer.WriteStartArray();
-
-				foreach (var v in value.Values)
-				{
-					writer.WriteStringValue(v);
-				}
-
-				writer.WriteEndArray();
-				return;
-			}
 		}
 	}
 }

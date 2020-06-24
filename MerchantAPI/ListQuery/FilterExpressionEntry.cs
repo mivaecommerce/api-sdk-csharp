@@ -93,7 +93,7 @@ namespace MerchantAPI
 	/// <summary>
 	/// Handles serializing a FilterExpressionEntry
 	/// </summary>
-	public class FilterExpressionEntryConverter : JsonConverter<FilterExpressionEntry>
+	public class FilterExpressionEntryConverter : BaseJsonConverter<FilterExpressionEntry>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{

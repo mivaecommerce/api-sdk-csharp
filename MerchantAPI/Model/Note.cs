@@ -145,49 +145,5 @@ namespace MerchantAPI
 		{
 			return AdminUser;
 		}
-
-		/// <summary>
-		/// Setter for cust_id.
-		/// <param name="value">int</param>
-		/// <returns>Note</returns>
-		/// </summary>
-		public Note SetCustomerId(int value)
-		{
-			CustomerId = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for account_id.
-		/// <param name="value">int</param>
-		/// <returns>Note</returns>
-		/// </summary>
-		public Note SetAccountId(int value)
-		{
-			AccountId = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for order_id.
-		/// <param name="value">int</param>
-		/// <returns>Note</returns>
-		/// </summary>
-		public Note SetOrderId(int value)
-		{
-			OrderId = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for notetext.
-		/// <param name="value">String</param>
-		/// <returns>Note</returns>
-		/// </summary>
-		public Note SetNoteText(String value)
-		{
-			NoteText = value;
-			return this;
-		}
 	}
 }

@@ -27,19 +27,19 @@ namespace MerchantAPI
 
 		/// <value>Property Weight - float</value>
 		[JsonPropertyName("weight")]
-		public float Weight { get; set; }
+		public float? Weight { get; set; }
 
 		/// <value>Property Retail - float</value>
 		[JsonPropertyName("retail")]
-		public float Retail { get; set; }
+		public float? Retail { get; set; }
 
 		/// <value>Property BasePrice - float</value>
 		[JsonPropertyName("base_price")]
-		public float BasePrice { get; set; }
+		public float? BasePrice { get; set; }
 
 		/// <value>Property Price - float</value>
 		[JsonPropertyName("price")]
-		public float Price { get; set; }
+		public float? Price { get; set; }
 
 		/// <summary>
 		/// Getter for attribute.
@@ -63,7 +63,7 @@ namespace MerchantAPI
 		/// Getter for weight.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetWeight()
+		public float? GetWeight()
 		{
 			return Weight;
 		}
@@ -72,7 +72,7 @@ namespace MerchantAPI
 		/// Getter for retail.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetRetail()
+		public float? GetRetail()
 		{
 			return Retail;
 		}
@@ -81,7 +81,7 @@ namespace MerchantAPI
 		/// Getter for base_price.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetBasePrice()
+		public float? GetBasePrice()
 		{
 			return BasePrice;
 		}
@@ -90,7 +90,7 @@ namespace MerchantAPI
 		/// Getter for price.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetPrice()
+		public float? GetPrice()
 		{
 			return Price;
 		}
@@ -140,6 +140,50 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for retail.
+		/// <param name="value">float</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+	   public OrderItemOption SetRetail(float value)
+	   {
+			Retail = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for retail.
+		/// <param name="value">double</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+	   public OrderItemOption SetRetail(double value)
+	   {
+			Retail = (float) value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for base_price.
+		/// <param name="value">float</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+	   public OrderItemOption SetBasePrice(float value)
+	   {
+			BasePrice = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for base_price.
+		/// <param name="value">double</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+	   public OrderItemOption SetBasePrice(double value)
+	   {
+			BasePrice = (float) value;
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for price.
 		/// <param name="value">float</param>
 		/// <returns>OrderItemOption</returns>
@@ -165,7 +209,7 @@ namespace MerchantAPI
 	/// <summary>
 	/// This is used only for OrderItemOption since key names are different in different situations
 	/// </summary>
-	public class OrderItemOptionConverter : JsonConverter<OrderItemOption>
+	public class OrderItemOptionConverter : BaseJsonConverter<OrderItemOption>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
@@ -223,39 +267,31 @@ namespace MerchantAPI
 			return option;
 		}
 
-		protected String ReadNextString(ref Utf8JsonReader reader, JsonSerializerOptions options)
-		{
-			reader.Read();
-
-			if (reader.TokenType != JsonTokenType.String)
-			{
-				throw new MerchantAPIException(String.Format("Expected string but encountered {0}", reader.TokenType));
-			}
-
-			return reader.GetString();
-		}
-
-		protected float ReadNextFloat(ref Utf8JsonReader reader, JsonSerializerOptions options)
-		{
-			reader.Read();
-
-			if (reader.TokenType != JsonTokenType.Number)
-			{
-				throw new MerchantAPIException(String.Format("Expected number but encountered {0}", reader.TokenType));
-			}
-
-			return reader.GetSingle();
-		}
-
 		public override void Write(Utf8JsonWriter writer, OrderItemOption value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 			writer.WriteString("attr_code", value.GetAttribute());
 			writer.WriteString("opt_code_or_data", value.GetValue());
-			writer.WriteNumber("weight", value.GetWeight());
-			writer.WriteNumber("retail", value.GetRetail());
-			writer.WriteNumber("base_price", value.GetBasePrice());
-			writer.WriteNumber("price", value.GetPrice());
+
+			if (value.Weight.HasValue)
+			{
+				writer.WriteNumber("weight", value.Weight.Value);
+			}
+
+			if (value.Retail.HasValue)
+			{
+				writer.WriteNumber("retail", value.Retail.Value);
+			}
+
+			if (value.BasePrice.HasValue)
+			{
+				writer.WriteNumber("base_price", value.BasePrice.Value);
+			}
+
+			if (value.Price.HasValue)
+			{
+				writer.WriteNumber("price", value.Price.Value);
+			}
 
 			writer.WriteEndObject();
 		}

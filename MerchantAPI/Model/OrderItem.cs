@@ -10,9 +10,11 @@
 using System;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace MerchantAPI
 {
+	[JsonConverter(typeof(OrderItemConverter))]
 	public class OrderItem : Model
 	{
 		/// Enumeration OrderItemStatus
@@ -121,23 +123,23 @@ namespace MerchantAPI
 
 		/// <value>Property Price - float</value>
 		[JsonPropertyName("price")]
-		public float Price { get; set; }
+		public float? Price { get; set; }
 
 		/// <value>Property Weight - float</value>
 		[JsonPropertyName("weight")]
-		public float Weight { get; set; }
+		public float? Weight { get; set; }
 
 		/// <value>Property Taxable - bool</value>
 		[JsonPropertyName("taxable")]
-		public bool Taxable { get; set; }
+		public bool? Taxable { get; set; }
 
 		/// <value>Property Upsold - bool</value>
 		[JsonPropertyName("upsold")]
-		public bool Upsold { get; set; }
+		public bool? Upsold { get; set; }
 
 		/// <value>Property Quantity - int</value>
 		[JsonPropertyName("quantity")]
-		public int Quantity { get; set; }
+		public int? Quantity { get; set; }
 
 		/// <value>Property Shipment - OrderShipment</value>
 		[JsonPropertyName("shipment")]
@@ -306,7 +308,7 @@ namespace MerchantAPI
 		/// Getter for price.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetPrice()
+		public float? GetPrice()
 		{
 			return Price;
 		}
@@ -315,7 +317,7 @@ namespace MerchantAPI
 		/// Getter for weight.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetWeight()
+		public float? GetWeight()
 		{
 			return Weight;
 		}
@@ -324,7 +326,7 @@ namespace MerchantAPI
 		/// Getter for taxable.
 		/// <returns>bool</returns>
 		/// </summary>
-		public bool GetTaxable()
+		public bool? GetTaxable()
 		{
 			return Taxable;
 		}
@@ -333,7 +335,7 @@ namespace MerchantAPI
 		/// Getter for upsold.
 		/// <returns>bool</returns>
 		/// </summary>
-		public bool GetUpsold()
+		public bool? GetUpsold()
 		{
 			return Upsold;
 		}
@@ -342,7 +344,7 @@ namespace MerchantAPI
 		/// Getter for quantity.
 		/// <returns>int</returns>
 		/// </summary>
-		public int GetQuantity()
+		public int? GetQuantity()
 		{
 			return Quantity;
 		}
@@ -408,17 +410,6 @@ namespace MerchantAPI
 		public String GetTrackingNumber()
 		{
 			return TrackingNumber;
-		}
-
-		/// <summary>
-		/// Setter for status.
-		/// <param name="value">int</param>
-		/// <returns>OrderItem</returns>
-		/// </summary>
-		public OrderItem SetStatus(int value)
-		{
-			Status = value;
-			return this;
 		}
 
 		/// <summary>
@@ -562,6 +553,237 @@ namespace MerchantAPI
 		{
 			Options.Add(model);
 			return this;
+		}
+	}
+
+	/// <summary>
+	/// Converter for model OrderItem
+	/// </summary>
+	public class OrderItemConverter : BaseJsonConverter<OrderItem>
+	{
+		public override bool CanConvert(Type typeToConvert)
+		{
+			return true;
+		}
+
+		public override OrderItem Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			OrderItem value = new OrderItem();
+
+			if (reader.TokenType != JsonTokenType.StartObject)
+			{
+				throw new MerchantAPIException(String.Format("Expected start of object but got {0}", reader.TokenType));
+			}
+
+			while(reader.Read())
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					if (reader.TokenType == JsonTokenType.EndObject)
+					{
+						return value;
+					}
+
+					throw new MerchantAPIException(String.Format("Expected property name but got {0}", reader.TokenType));
+				}
+
+				String property = reader.GetString();
+
+				if (String.Equals(property, "order_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.OrderId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "line_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.LineId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "status", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Status = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "subscrp_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.SubscriptionId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "subterm_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.SubscriptionTermId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "rma_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.RmaId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "rma_code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.RmaCode = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "rma_dt_issued", StringComparison.OrdinalIgnoreCase))
+				{
+					value.RmaDataTimeIssued = ReadNextTimestamp(ref reader, options);
+				}
+				else if (String.Equals(property, "rma_dt_recvd", StringComparison.OrdinalIgnoreCase))
+				{
+					value.RmaDateTimeReceived = ReadNextTimestamp(ref reader, options);
+				}
+				else if (String.Equals(property, "dt_instock", StringComparison.OrdinalIgnoreCase))
+				{
+					value.DateInStock = ReadNextTimestamp(ref reader, options);
+				}
+				else if (String.Equals(property, "code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Code = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "name", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Name = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "sku", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Sku = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "retail", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Retail = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "base_price", StringComparison.OrdinalIgnoreCase))
+				{
+					value.BasePrice = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "price", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Price = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "weight", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Weight = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "taxable", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Taxable = ReadNextBoolean(ref reader, options);
+				}
+				else if (String.Equals(property, "upsold", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Upsold = ReadNextBoolean(ref reader, options);
+				}
+				else if (String.Equals(property, "quantity", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Quantity = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "shipment", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
+					}
+
+					value.Shipment = JsonSerializer.Deserialize<OrderShipment>(ref reader, options);
+				}
+				else if (String.Equals(property, "discounts", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.Discounts = JsonSerializer.Deserialize<List<OrderItemDiscount>>(ref reader, options);
+				}
+				else if (String.Equals(property, "options", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.Options = JsonSerializer.Deserialize<List<OrderItemOption>>(ref reader, options);
+				}
+				else if (String.Equals(property, "subscription", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
+					}
+
+					value.Subscription = JsonSerializer.Deserialize<OrderItemSubscription>(ref reader, options);
+				}
+				else if (String.Equals(property, "total", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Total = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "tracktype", StringComparison.OrdinalIgnoreCase))
+				{
+					value.TrackingType = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "tracknum", StringComparison.OrdinalIgnoreCase))
+				{
+					value.TrackingNumber = ReadNextString(ref reader, options);
+				}
+				else
+				{
+					throw new MerchantAPIException(String.Format("Unexpected property {0} for OrderItem", property));
+				}
+			}
+
+			return value;
+		}
+
+		public override void Write(Utf8JsonWriter writer, OrderItem value, JsonSerializerOptions options)
+		{
+			writer.WriteStartObject();
+
+			if (value.Code != null && value.Code.Length > 0)
+			{
+				writer.WriteString("code", value.Code);
+			}
+
+			if (value.Name != null && value.Name.Length > 0)
+			{
+				writer.WriteString("name", value.Name);
+			}
+
+			if (value.Sku != null && value.Sku.Length > 0)
+			{
+				writer.WriteString("sku", value.Sku);
+			}
+
+			if (value.Price.HasValue)
+			{
+				writer.WriteNumber("price", value.Price.Value);
+			}
+
+			if (value.Weight.HasValue)
+			{
+				writer.WriteNumber("weight", value.Weight.Value);
+			}
+
+			if (value.Taxable.HasValue)
+			{
+				writer.WriteBoolean("taxable", value.Taxable.Value);
+			}
+
+			if (value.Upsold.HasValue)
+			{
+				writer.WriteBoolean("upsold", value.Upsold.Value);
+			}
+
+			if (value.Quantity.HasValue)
+			{
+				writer.WriteNumber("quantity", value.Quantity.Value);
+			}
+
+			writer.WritePropertyName("options");
+			JsonSerializer.Serialize(writer, value.Options, options);
+
+			if (value.TrackingType != null && value.TrackingType.Length > 0)
+			{
+				writer.WriteString("tracktype", value.TrackingType);
+			}
+
+			if (value.TrackingNumber != null && value.TrackingNumber.Length > 0)
+			{
+				writer.WriteString("tracknum", value.TrackingNumber);
+			}
+
+			writer.WriteEndObject();
 		}
 	}
 }

@@ -14,7 +14,7 @@ using System.Text.Json.Serialization;
 
 namespace MerchantAPI
 {
-   // [JsonConverter(typeof(MultiCallResponseConverter))]
+	//[JsonConverter(typeof(MultiCallResponseConverter))]
 	public class MultiCallResponse : Response
 	{
 		/// The initating request
@@ -54,7 +54,7 @@ namespace MerchantAPI
 	/// <summary>
 	/// Handles deserializing a MultiCallResponse from JSON
 	/// </summary>
-	public class MultiCallResponseConverter : JsonConverter<MultiCallResponse>
+	public class MultiCallResponseConverter : BaseJsonConverter<MultiCallResponse>
 	{
 		protected MultiCallRequest Request;
 

@@ -162,7 +162,7 @@ namespace MerchantAPI
 	/// <summary>
 	/// Handles serializing a MultiCallOperation to JSON
 	/// </summary>
-	public class MultiCallOperationConverter : JsonConverter<MultiCallOperation>
+	public class MultiCallOperationConverter : BaseJsonConverter<MultiCallOperation>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{

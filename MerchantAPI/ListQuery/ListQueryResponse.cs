@@ -54,7 +54,7 @@ namespace MerchantAPI
 	/// Handles deserialization of a ListQueryResult of a given type.
 	/// </summary>
 	/// <typeparam name="T">The model type expected</typeparam>
-	public class ListQueryResultConverter<T> : JsonConverter<ListQueryResult<T>> where T : Model
+	public class ListQueryResultConverter<T> : BaseJsonConverter<ListQueryResult<T>> where T : Model
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{

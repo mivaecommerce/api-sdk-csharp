@@ -105,16 +105,5 @@ namespace MerchantAPI
 		{
 			return Methods;
 		}
-
-		/// <summary>
-		/// Add a ProductShippingMethod.
-		/// <param name="ProductShippingMethod"></param>
-		/// <returns>ProductShippingRules</returns>
-		/// </summary>
-		public ProductShippingRules AddMethod(ProductShippingMethod model)
-		{
-			Methods.Add(model);
-			return this;
-		}
 	}
 }

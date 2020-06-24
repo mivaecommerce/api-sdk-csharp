@@ -1,2 +1,4 @@
+v1.0.1
+	- MMAPI-7 - Added custom converters for models with mutable fields.
 v1.0.0
 	- Initial Release

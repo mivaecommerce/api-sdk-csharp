@@ -254,7 +254,7 @@ namespace MerchantAPI
 	/// <summary>
 	/// Handles serialization of a RequestBuilder
 	/// </summary>
-	public class RequestBuilderConverter : JsonConverter<RequestBuilder>
+	public class RequestBuilderConverter : BaseJsonConverter<RequestBuilder>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{

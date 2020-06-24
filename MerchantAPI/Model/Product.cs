@@ -125,9 +125,9 @@ namespace MerchantAPI
 		[JsonPropertyName("categories")]
 		public List<Category> Categories { get; set; } = new List<Category>();
 
-		/// <value>Property ProductShuppingRules - ProductShippingRules</value>
+		/// <value>Property ProductShippingRules - ProductShippingRules</value>
 		[JsonPropertyName("productshippingrules")]
-		public ProductShippingRules ProductShuppingRules { get; set; }
+		public ProductShippingRules ProductShippingRules { get; set; }
 
 		/// <value>Property ProductImageData - List<ProductImageData></value>
 		[JsonPropertyName("productimagedata")]
@@ -384,9 +384,9 @@ namespace MerchantAPI
 		/// Getter for productshippingrules.
 		/// <returns>ProductShippingRules</returns>
 		/// </summary>
-		public ProductShippingRules GetProductShuppingRules()
+		public ProductShippingRules GetProductShippingRules()
 		{
-			return ProductShuppingRules;
+			return ProductShippingRules;
 		}
 
 		/// <summary>
@@ -405,204 +405,6 @@ namespace MerchantAPI
 		public List<ProductAttribute> GetAttributes()
 		{
 			return Attributes;
-		}
-
-		/// <summary>
-		/// Setter for code.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetCode(String value)
-		{
-			Code = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for sku.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetSku(String value)
-		{
-			Sku = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for name.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetName(String value)
-		{
-			Name = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for thumbnail.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetThumbnail(String value)
-		{
-			Thumbnail = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for image.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetImage(String value)
-		{
-			Image = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for price.
-		/// <param name="value">float</param>
-		/// <returns>Product</returns>
-		/// </summary>
-	   public Product SetPrice(float value)
-	   {
-			Price = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for price.
-		/// <param name="value">double</param>
-		/// <returns>Product</returns>
-		/// </summary>
-	   public Product SetPrice(double value)
-	   {
-			Price = (float) value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for cost.
-		/// <param name="value">float</param>
-		/// <returns>Product</returns>
-		/// </summary>
-	   public Product SetCost(float value)
-	   {
-			Cost = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for cost.
-		/// <param name="value">double</param>
-		/// <returns>Product</returns>
-		/// </summary>
-	   public Product SetCost(double value)
-	   {
-			Cost = (float) value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for descrip.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetDescription(String value)
-		{
-			Description = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for weight.
-		/// <param name="value">float</param>
-		/// <returns>Product</returns>
-		/// </summary>
-	   public Product SetWeight(float value)
-	   {
-			Weight = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for weight.
-		/// <param name="value">double</param>
-		/// <returns>Product</returns>
-		/// </summary>
-	   public Product SetWeight(double value)
-	   {
-			Weight = (float) value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for active.
-		/// <param name="value">bool</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetActive(bool value)
-		{
-			Active = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for page_title.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetPageTitle(String value)
-		{
-			PageTitle = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for taxable.
-		/// <param name="value">bool</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetTaxable(bool value)
-		{
-			Taxable = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for product_inventory.
-		/// <param name="value">int</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetProductInventory(int value)
-		{
-			ProductInventory = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for cancat_code.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetCanonicalCategoryCode(String value)
-		{
-			CanonicalCategoryCode = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for page_code.
-		/// <param name="value">String</param>
-		/// <returns>Product</returns>
-		/// </summary>
-		public Product SetPageCode(String value)
-		{
-			PageCode = value;
-			return this;
 		}
 	}
 }
