@@ -36,12 +36,13 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public PrintQueueListLoadQueryRequest(Client client = null) :
+		public PrintQueueListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "PrintQueueList_Load_Query";
+			Scope = RequestScope.Domain;
 		}
 
 		/// <summary>

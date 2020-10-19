@@ -94,6 +94,9 @@ namespace MerchantAPI
 		{
 			"descrip",
 			"catcount",
+			"cancat_code",
+			"page_code",
+			"product_inventory",
 			"productinventorysettings",
 			"attributes",
 			"productimagedata",
@@ -111,9 +114,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public ProductListLoadQueryRequest(Client client = null) :
+		public ProductListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "ProductList_Load_Query";

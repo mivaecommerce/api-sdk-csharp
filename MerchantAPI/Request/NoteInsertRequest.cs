@@ -40,9 +40,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public NoteInsertRequest(Client client = null) :
+		public NoteInsertRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "Note_Insert";

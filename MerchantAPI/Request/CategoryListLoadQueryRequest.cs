@@ -71,6 +71,12 @@ namespace MerchantAPI
 			"depth"
 		};
 
+		/// The available on demand columns applicable to the request.
+		override public String[] AvailableOnDemandColumns { get; } =
+		{
+			"uris"
+		};
+
 		/// The available custom fileters applicable to the request.
 		override public String[] AvailableCustomFilters { get; } =
 		{
@@ -79,9 +85,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public CategoryListLoadQueryRequest(Client client = null) :
+		public CategoryListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "CategoryList_Load_Query";

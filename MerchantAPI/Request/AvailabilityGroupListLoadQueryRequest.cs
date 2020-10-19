@@ -38,9 +38,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public AvailabilityGroupListLoadQueryRequest(Client client = null) :
+		public AvailabilityGroupListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "AvailabilityGroupList_Load_Query";

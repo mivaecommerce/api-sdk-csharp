@@ -55,7 +55,7 @@ namespace MerchantAPI
 		/// Constructor
 		/// </summary>
 		/// <param name="client"></param>
-		public ListQueryRequest(Client client = null) :
+		public ListQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Filter = FilterExpression();

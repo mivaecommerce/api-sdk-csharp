@@ -86,9 +86,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public PriceGroupListLoadQueryRequest(Client client = null) :
+		public PriceGroupListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "PriceGroupList_Load_Query";

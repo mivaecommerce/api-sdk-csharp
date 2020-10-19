@@ -156,7 +156,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(OrderShipmentUpdate) || typeToConvert.IsSubclassOf(typeof(OrderShipmentUpdate));
 		}
 
 		public override OrderShipmentUpdate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

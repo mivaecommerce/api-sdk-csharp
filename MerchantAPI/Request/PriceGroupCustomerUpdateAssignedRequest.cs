@@ -48,10 +48,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="priceGroup">PriceGroup</param>
 		/// </summary>
-		public PriceGroupCustomerUpdateAssignedRequest(Client client = null, PriceGroup priceGroup = null) :
+		public PriceGroupCustomerUpdateAssignedRequest(BaseClient client = null, PriceGroup priceGroup = null) :
 			base(client)
 		{
 			Function = "PriceGroupCustomer_Update_Assigned";

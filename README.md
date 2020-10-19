@@ -6,22 +6,24 @@ Miva Merchant 9.12. It allows you to quickly integrate your C#
 applications with a Miva Merchant store to fetch, create, and update
 store data.
 
-For class documentation visit `https://github.com/mivaecommerce/api-sdk-csharp`.
-
-For additional documentation about the API visit `https://docs.miva.com/json-api`.
+For api documentation visit [https://docs.miva.com/json-api](https://docs.miva.com/json-api).
 
 # Requirements
 
-- Miva Merchant 9.12+
-- C# .NET STandard 2.0
+- Miva Merchant 10.0+
+- C# .NET Standard 2.1
+
+**For Miva Merchant 9.x, use the 1.x release**
 
 # Installation
 
-## Via NuGet
+## Via .NET CLI
 
-Available as an installable package with ID `MerchantAPI` via any IDE which supports NuGet packages.
+From your terminal execute the following in your dependent projects directory
 
-For more information on installing packages see the official documentation here https://docs.microsoft.com/en-us/nuget/
+`dotnet add package MerchantAPI --version 2.*`
+
+For additional installation methods visit the NuGET package page at [here](https://www.nuget.org/packages/MerchantAPI/) or consult the documentation [here](https://docs.microsoft.com/en-us/nuget/)
 
 ## Via Release Package
 
@@ -30,6 +32,78 @@ You can also download the release package from the Releases page or clone the re
 # Getting Started
 
 Examples are provided in the `Examples/` directory.
+
+#  SSH Private Key Authentication
+
+## Compatible Private Key Formats
+
+- PKCS#1 PEM Unencrypted
+- PKCS#8 PEM Encrypted or Unencrypted
+- PKCS#12 (pfx) Encrypted or Unencrypted
+
+## Create PKCS#1 from OpenSSH private key format
+
+If your private key is in OpenSSH format (starts with `-----BEGIN OPENSSH PRIVATE KEY-----`) then you will need to convert it.
+
+Create a copy of your key preserving permissions:
+
+    cp -p /path/to/private/key/id_rsa /path/to/private/key/id_rsa.pem
+
+Convert in place to the proper format:
+
+    ssh-keygen -p -m PEM -f /path/to/private/key/id_rsa.pem
+
+## Create PKCS#8 PEM from PKCS#1 PEM private key format
+
+Converting the key with encryption:
+
+     openssl pkcs8 -in /path/to/private_key.pem -topk8 -out /path/to/private_key.pkcs8.pem
+
+Converting the key without encryption:
+
+     openssl pkcs8 -in /path/to/private_key.pem -topk8 -nocrypt -out /path/to/private_key.pkcs8.pem
+
+## Create X.509 from OpenSSH private key format
+
+If your private key is in OpenSSH format (starts with `-----BEGIN OPENSSH PRIVATE KEY-----`) then you will need to convert it.
+
+Create a copy of your key preserving permissions:
+
+    cp -p /path/to/private/key/id_rsa /path/to/private/key/id_rsa.pem
+
+Convert in place to the proper format:
+
+    ssh-keygen -p -m PEM -f /path/to/private/key/id_rsa.pem
+
+Create a x509 certificate from your private key :
+
+    openssl req -new -key /path/to/private/key/id_rsa.pem -out /path/to/private/key/id_rsa.csr
+    
+    # We need to specify an expiration, but its ignored 
+    openssl req -key /path/to/private/key/id_rsa.pem -new -x509 -days 365 -out /path/to/private/key/id_rsa.crt
+    
+    openssl pkcs12 -export -out /path/to/private/key/id_rsa.pfx -inkey /path/to/private/key/id_rsa.pem -in /path/to/private/key/id_rsa_converted.crt
+
+## Create X.509 from PKCS#1 PEM private key format
+
+Create a x509 certificate from your private key:
+
+    openssl req -new -key /path/to/private/key/id_rsa.pem -out /path/to/private/key/id_rsa.csr
+    
+    # We need to specify an expiration, but its ignored 
+    openssl req -key /path/to/private/key/id_rsa.pem -new -x509 -days 365 -out /path/to/private/key/id_rsa.crt
+    
+    openssl pkcs12 -export -out /path/to/private/key/id_rsa.pfx -inkey /path/to/private/key/id_rsa.pem -in /path/to/private/key/id_rsa_converted.crt
+
+# SSH Agent Authentication
+
+## Compatible Public Key Formats
+
+Your public key must be in the OpenSSH Public Key format. The default public key format is usually the correct type if you generated your key using `ssh-keygen`.
+
+See https://tools.ietf.org/html/rfc4253#section-6.6 for format.
+
+A quick way to get the correct format if you have the key associated with your local SSH agent is to run the command `ssh-add -L` and copying the corresponding key.
 
 # License
 

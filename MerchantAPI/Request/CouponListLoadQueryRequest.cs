@@ -54,9 +54,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public CouponListLoadQueryRequest(Client client = null) :
+		public CouponListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "CouponList_Load_Query";

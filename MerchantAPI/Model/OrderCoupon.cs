@@ -35,6 +35,10 @@ namespace MerchantAPI
 		[JsonPropertyName("total")]
 		public float Total { get; set; }
 
+		/// <value>Property Assigned - bool</value>
+		[JsonPropertyName("assigned")]
+		public bool Assigned { get; set; }
+
 		/// <summary>
 		/// Getter for order_id.
 		/// <returns>int</returns>
@@ -78,6 +82,15 @@ namespace MerchantAPI
 		public float GetTotal()
 		{
 			return Total;
+		}
+
+		/// <summary>
+		/// Getter for assigned.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetAssigned()
+		{
+			return Assigned;
 		}
 	}
 }

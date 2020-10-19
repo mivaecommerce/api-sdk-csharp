@@ -25,9 +25,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public OrderCustomFieldListLoadRequest(Client client = null) :
+		public OrderCustomFieldListLoadRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "OrderCustomFieldList_Load";

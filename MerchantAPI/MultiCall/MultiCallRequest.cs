@@ -25,11 +25,15 @@ namespace MerchantAPI
 		/// Holds all requests associated with the instance.
 		public List<dynamic> Requests { get; set; } = new List<dynamic>();
 
+		public bool AutoTimeoutContinue { get; set; } = false;
+
+		public MultiCallResponse _InitialResponse { get; set; }
+
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="client"></param>
-		public MultiCallRequest(Client client) :
+		public MultiCallRequest(BaseClient client) :
 			base(client)
 		{
 			Function = "";
@@ -102,16 +106,33 @@ namespace MerchantAPI
 
 			return await Client.SendRequestAsync<MultiCallRequest, MultiCallResponse>(this);
 		}
+
+
+		/// <summary>
+		/// Allows the request to manipulate the HTTP request headers
+		/// </summary>
+		/// <param name="headers"></param>
+		override public void ProcessRequestHeaders(Dictionary<String, String> headers)
+		{
+			if (_InitialResponse != null)
+			{
+				if (_InitialResponse.Timeout)
+				{
+					headers["RANGE"] = String.Format("Operations={0}-{1}",
+						_InitialResponse.Completed + 1, _InitialResponse.Total);
+				}
+			}
+		}
 	}
 
 	/// <summary>
-	/// Handles serializing a MultiCallReqyest to JSON
+	/// Handles serializing a MultiCallRequest to JSON
 	/// </summary>
 	public class MultiCallRequestConverter : BaseJsonConverter<MultiCallRequest>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(MultiCallRequest);
 		}
 
 		public override MultiCallRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

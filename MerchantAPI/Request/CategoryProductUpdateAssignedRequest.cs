@@ -56,10 +56,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="category">Category</param>
 		/// </summary>
-		public CategoryProductUpdateAssignedRequest(Client client = null, Category category = null) :
+		public CategoryProductUpdateAssignedRequest(BaseClient client = null, Category category = null) :
 			base(client)
 		{
 			Function = "CategoryProduct_Update_Assigned";

@@ -35,9 +35,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public ModuleRequest(Client client = null) :
+		public ModuleRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "Module";

@@ -28,9 +28,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public ProvisionStoreRequest(Client client = null) :
+		public ProvisionStoreRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "Provision_Store";

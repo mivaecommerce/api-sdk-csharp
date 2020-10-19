@@ -184,9 +184,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public OrderListLoadQueryRequest(Client client = null) :
+		public OrderListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "OrderList_Load_Query";

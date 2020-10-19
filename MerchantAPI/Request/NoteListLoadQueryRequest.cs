@@ -52,9 +52,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public NoteListLoadQueryRequest(Client client = null) :
+		public NoteListLoadQueryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "NoteList_Load_Query";

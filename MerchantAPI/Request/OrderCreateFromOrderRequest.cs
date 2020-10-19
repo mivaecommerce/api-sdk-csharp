@@ -28,10 +28,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="order">Order</param>
 		/// </summary>
-		public OrderCreateFromOrderRequest(Client client = null, Order order = null) :
+		public OrderCreateFromOrderRequest(BaseClient client = null, Order order = null) :
 			base(client)
 		{
 			Function = "Order_Create_FromOrder";

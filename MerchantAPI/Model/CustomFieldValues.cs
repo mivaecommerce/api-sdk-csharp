@@ -91,7 +91,7 @@ namespace MerchantAPI
 			{
 				return Values[module][field];
 			}
-			
+
 			return null;
 		}
 
@@ -132,7 +132,7 @@ namespace MerchantAPI
 			{
 				return Values[module];
 			}
-			
+
 			return null;
 		}
 	}
@@ -144,7 +144,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(CustomFieldValues);
 		}
 
 		public override CustomFieldValues Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

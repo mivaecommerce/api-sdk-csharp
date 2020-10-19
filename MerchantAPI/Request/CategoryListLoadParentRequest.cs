@@ -28,10 +28,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="category">Category</param>
 		/// </summary>
-		public CategoryListLoadParentRequest(Client client = null, Category category = null) :
+		public CategoryListLoadParentRequest(BaseClient client = null, Category category = null) :
 			base(client)
 		{
 			Function = "CategoryList_Load_Parent";

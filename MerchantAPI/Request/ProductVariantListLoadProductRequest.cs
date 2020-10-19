@@ -52,10 +52,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="product">Product</param>
 		/// </summary>
-		public ProductVariantListLoadProductRequest(Client client = null, Product product = null) :
+		public ProductVariantListLoadProductRequest(BaseClient client = null, Product product = null) :
 			base(client)
 		{
 			Function = "ProductVariantList_Load_Product";
@@ -195,7 +195,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Add a ProductVariantLimit.
-		/// - limit: ProductVariantLimit 
+		/// - limit: ProductVariantLimit
 		/// - Returns: Self
 		/// </summary>
 		public ProductVariantListLoadProductRequest AddLimit(ProductVariantLimit limit)
@@ -214,14 +214,14 @@ namespace MerchantAPI
 			foreach(ProductVariantLimit e in limits)
 			{
 				Limits.Add(e);
-			}   
+			}
 
 			return this;
 		}
 
 		/// <summary>
 		/// Add a ProductVariantExclusion.
-		/// - exclusion: ProductVariantExclusion 
+		/// - exclusion: ProductVariantExclusion
 		/// - Returns: Self
 		/// </summary>
 		public ProductVariantListLoadProductRequest AddExclusion(ProductVariantExclusion exclusion)
@@ -240,7 +240,7 @@ namespace MerchantAPI
 			foreach(ProductVariantExclusion e in exclusions)
 			{
 				Exclusions.Add(e);
-			}   
+			}
 
 			return this;
 		}

@@ -73,6 +73,10 @@ namespace MerchantAPI
 		[JsonPropertyName("parent_category")]
 		public String ParentCategory { get; set; }
 
+		/// <value>Property Uris - List<Uri></value>
+		[JsonPropertyName("uris")]
+		public List<Uri> Uris { get; set; } = new List<Uri>();
+
 		/// <value>Property CustomFieldValues - CustomFieldValues</value>
 		[JsonPropertyName("CustomField_Values")]
 		public CustomFieldValues CustomFieldValues { get; set; }
@@ -201,6 +205,15 @@ namespace MerchantAPI
 		public String GetParentCategory()
 		{
 			return ParentCategory;
+		}
+
+		/// <summary>
+		/// Getter for uris.
+		/// <returns>List<Uri></returns>
+		/// </summary>
+		public List<Uri> GetUris()
+		{
+			return Uris;
 		}
 
 		/// <summary>

@@ -32,10 +32,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="orderPayment">OrderPayment</param>
 		/// </summary>
-		public OrderPaymentRefundRequest(Client client = null, OrderPayment orderPayment = null) :
+		public OrderPaymentRefundRequest(BaseClient client = null, OrderPayment orderPayment = null) :
 			base(client)
 		{
 			Function = "OrderPayment_Refund";

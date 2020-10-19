@@ -164,10 +164,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="customer">Customer</param>
 		/// </summary>
-		public OrderCreateRequest(Client client = null, Customer customer = null) :
+		public OrderCreateRequest(BaseClient client = null, Customer customer = null) :
 			base(client)
 		{
 			Function = "Order_Create";
@@ -842,7 +842,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Add a OrderItem.
-		/// - item: OrderItem 
+		/// - item: OrderItem
 		/// - Returns: Self
 		/// </summary>
 		public OrderCreateRequest AddItem(OrderItem item)
@@ -861,14 +861,14 @@ namespace MerchantAPI
 			foreach(OrderItem e in items)
 			{
 				Items.Add(e);
-			}   
+			}
 
 			return this;
 		}
 
 		/// <summary>
 		/// Add a OrderProduct.
-		/// - product: OrderProduct 
+		/// - product: OrderProduct
 		/// - Returns: Self
 		/// </summary>
 		public OrderCreateRequest AddProduct(OrderProduct product)
@@ -887,14 +887,14 @@ namespace MerchantAPI
 			foreach(OrderProduct e in products)
 			{
 				Products.Add(e);
-			}   
+			}
 
 			return this;
 		}
 
 		/// <summary>
 		/// Add a OrderCharge.
-		/// - charge: OrderCharge 
+		/// - charge: OrderCharge
 		/// - Returns: Self
 		/// </summary>
 		public OrderCreateRequest AddCharge(OrderCharge charge)
@@ -913,7 +913,7 @@ namespace MerchantAPI
 			foreach(OrderCharge e in charges)
 			{
 				Charges.Add(e);
-			}   
+			}
 
 			return this;
 		}

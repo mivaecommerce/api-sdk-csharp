@@ -97,7 +97,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(ProductVariantExclusion) || typeToConvert.IsSubclassOf(typeof(ProductVariantExclusion));
 		}
 
 		public override ProductVariantExclusion Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

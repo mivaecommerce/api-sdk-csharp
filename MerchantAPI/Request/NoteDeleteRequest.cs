@@ -28,10 +28,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="note">Note</param>
 		/// </summary>
-		public NoteDeleteRequest(Client client = null, Note note = null) :
+		public NoteDeleteRequest(BaseClient client = null, Note note = null) :
 			base(client)
 		{
 			Function = "Note_Delete";

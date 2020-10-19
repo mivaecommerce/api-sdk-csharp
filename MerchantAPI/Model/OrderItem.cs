@@ -563,7 +563,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(OrderItem) || typeToConvert.IsSubclassOf(typeof(OrderItem));
 		}
 
 		public override OrderItem Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

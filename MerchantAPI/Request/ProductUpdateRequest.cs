@@ -96,10 +96,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="product">Product</param>
 		/// </summary>
-		public ProductUpdateRequest(Client client = null, Product product = null) :
+		public ProductUpdateRequest(BaseClient client = null, Product product = null) :
 			base(client)
 		{
 			Function = "Product_Update";

@@ -148,10 +148,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="customer">Customer</param>
 		/// </summary>
-		public CustomerInsertRequest(Client client = null, Customer customer = null) :
+		public CustomerInsertRequest(BaseClient client = null, Customer customer = null) :
 			base(client)
 		{
 			Function = "Customer_Insert";

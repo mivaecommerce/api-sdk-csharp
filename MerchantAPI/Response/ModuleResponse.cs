@@ -25,5 +25,17 @@ namespace MerchantAPI
 			base()
 		{
 		}
+
+		[JsonPropertyName("data")]
+		public VariableValue Data { get; set; } = new VariableValue();
+
+		/// <summary>
+		/// Get the underlying data result
+		/// </summary>
+		/// <returns></returns>
+		public VariableValue GetData()
+		{
+			return Data;
+		}
 	}
 }

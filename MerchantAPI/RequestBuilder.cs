@@ -24,7 +24,7 @@ namespace MerchantAPI
 	{
 		public Dictionary<String, dynamic> Data { get; set; } = new Dictionary<String, dynamic>();
 
-		public RequestBuilder(Client client = null)
+		public RequestBuilder(BaseClient client = null)
 		{
 			Client = client;
 			Scope = RequestScope.Store;
@@ -111,6 +111,12 @@ namespace MerchantAPI
 			}
 		}
 
+		/// <summary>
+		/// Writes a key value pair
+		/// </summary>
+		/// <param name="entry"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
 		protected void WriteEntry(KeyValuePair<String, dynamic> entry, Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			if (entry.Value is IConvertible)
@@ -136,13 +142,20 @@ namespace MerchantAPI
 			}
 		}
 
+		/// <summary>
+		/// Writes a dictionary
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="dict"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
 		protected void WriteDictionary(String key, Dictionary<String, dynamic> dict, Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			if (key.Length > 0)
 			{
 				writer.WritePropertyName(key);
 			}
-			
+
 			writer.WriteStartObject();
 
 			foreach (KeyValuePair<String, dynamic> entry in dict)
@@ -153,6 +166,13 @@ namespace MerchantAPI
 			writer.WriteEndObject();
 		}
 
+		/// <summary>
+		/// Writes a list of values
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="list"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
 		protected void WriteList(String key, List<dynamic> list, Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			if ( key.Length > 0 )
@@ -189,6 +209,13 @@ namespace MerchantAPI
 			writer.WriteEndArray();
 		}
 
+		/// <summary>
+		/// Writes an IConvertible key and value
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
 		protected void WriteConvertibleKeyValue(String key, IConvertible value, Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			if (Util.IsDecimal(value))
@@ -216,6 +243,12 @@ namespace MerchantAPI
 			}
 		}
 
+		/// <summary>
+		/// Writes an IConvertible value
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
 		protected void WriteConvertibleValue(IConvertible value, Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			if (Util.IsDecimal(value))
@@ -249,6 +282,17 @@ namespace MerchantAPI
 	/// </summary>
 	public class RequestBuilderResponse : Response
 	{
+		[JsonPropertyName("data")]
+		public VariableValue Data { get; set; } = new VariableValue();
+
+		/// <summary>
+		/// Get the underlying data result
+		/// </summary>
+		/// <returns></returns>
+		public VariableValue GetData()
+		{
+			return Data;
+		}
 	}
 
 	/// <summary>
@@ -258,7 +302,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(RequestBuilder) || typeToConvert.IsSubclassOf(typeof(RequestBuilder));
 		}
 
 		public override RequestBuilder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

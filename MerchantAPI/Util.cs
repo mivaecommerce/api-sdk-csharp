@@ -23,7 +23,7 @@ namespace MerchantAPI
 		/// <returns></returns>
 		static public bool IsNumeric(IConvertible value)
 		{
-			if (value == null)	return false;
+			if (value == null)   return false;
 
 			switch (value.GetTypeCode())
 			{
@@ -96,7 +96,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(DateTime);
 		}
 
 		public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -116,7 +116,7 @@ namespace MerchantAPI
 	}
 
 	/// <summary>
-	/// Holds the value for response types that are not know until runtime. Supports any IConvertible, Arrays of VariableValue's, and Dictionartys of them as well.
+	/// Holds the value for response types that are not know until runtime. Supports any IConvertible, Arrays of VariableValue's, and Dictionarys of them as well.
 	/// </summary>
 	[JsonConverter(typeof(VariableValueConverter))]
 	public class VariableValue
@@ -135,6 +135,16 @@ namespace MerchantAPI
 		protected Dictionary<String, VariableValue> ValueDict { get; set; } = null;
 
 		public ValueDataType ValueType { get; } = ValueDataType.ConvertibleType;
+
+		/// <summary>
+		/// Default constructor, creates a null value of convertible type
+		/// </summary>
+		/// <param name="value"></param>
+		public VariableValue()
+		{
+			ValueType = ValueDataType.ConvertibleType;
+			ValueConvertible = null;
+		}
 
 		/// <summary>
 		/// Constructor for convertible type
@@ -194,7 +204,7 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Check if the underlying type is a convertible 
+		/// Check if the underlying type is a convertible
 		/// </summary>
 		/// <returns></returns>
 		public bool IsConvertible()
@@ -218,6 +228,28 @@ namespace MerchantAPI
 		public bool IsArray()
 		{
 			return ValueType == ValueDataType.ArrayType;
+		}
+
+		/// <summary>
+		/// Check if this value is null
+		/// </summary>
+		/// <returns></returns>
+		public bool IsNull()
+		{
+			if (ValueType == ValueDataType.DictionaryType && ValueDict == null)
+			{
+				return true;
+			}
+			else if (ValueType == ValueDataType.ArrayType && ValueArray == null)
+			{
+				return true;
+			}
+			else if (ValueType == ValueDataType.ConvertibleType && ValueArray == null)
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -270,44 +302,6 @@ namespace MerchantAPI
 
 			return "";
 		}
-
-		/// <summary>
-		/// Equals operator overload
-		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
-		/// <returns></returns>
-		public static bool operator ==(VariableValue a, VariableValue b)
-		{
-			if (a.ValueType == b.ValueType)
-			{
-				if (a.ValueType == ValueDataType.ConvertibleType)
-				{
-					return a.GetValueConvertible() == b.GetValueConvertible();
-				}
-			}
-
-			return false;
-		}
-
-		/// <summary>
-		/// Not equals operator overload. 
-		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
-		/// <returns></returns>
-		public static bool operator !=(VariableValue a, VariableValue b)
-		{
-			if (a.ValueType == b.ValueType)
-			{
-				if (a.ValueType == ValueDataType.ConvertibleType)
-				{
-					return a.GetValueConvertible() != b.GetValueConvertible();
-				}
-			}
-
-			return true;
-		}
 	}
 
 	/// <summary>
@@ -317,7 +311,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(VariableValue) || typeToConvert.IsSubclassOf(typeof(VariableValue));
 		}
 
 		public override VariableValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -462,7 +456,7 @@ namespace MerchantAPI
 	}
 
 	/// <summary>
-	/// Base Converter all converters inheirt from
+	/// Base converter that all converters inherit from.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	abstract public class BaseJsonConverter<T> : JsonConverter<T>
@@ -479,6 +473,13 @@ namespace MerchantAPI
 			return reader.GetString();
 		}
 
+		/// <summary>
+		/// Reads the next value as a float
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns>float</returns>
+		/// <exception cref="MerchantAPIException"></exception>
 		protected float ReadNextFloat(ref Utf8JsonReader reader, JsonSerializerOptions options)
 		{
 			reader.Read();
@@ -491,6 +492,13 @@ namespace MerchantAPI
 			return reader.GetSingle();
 		}
 
+		/// <summary>
+		/// Reads the next value as a integer
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		/// <exception cref="MerchantAPIException"></exception>
 		protected int ReadNextInteger(ref Utf8JsonReader reader, JsonSerializerOptions options)
 		{
 			reader.Read();
@@ -503,6 +511,13 @@ namespace MerchantAPI
 			return reader.GetInt32();
 		}
 
+		/// <summary>
+		/// Reads the next value as a boolean
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		/// <exception cref="MerchantAPIException"></exception>
 		protected bool ReadNextBoolean(ref Utf8JsonReader reader, JsonSerializerOptions options)
 		{
 			reader.Read();
@@ -515,6 +530,13 @@ namespace MerchantAPI
 			return reader.GetBoolean();
 		}
 
+		/// <summary>
+		/// Reads the next value as a DateTime from a timestamp
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		/// <exception cref="MerchantAPIException"></exception>
 		protected DateTime ReadNextTimestamp(ref Utf8JsonReader reader, JsonSerializerOptions options)
 		{
 			reader.Read();

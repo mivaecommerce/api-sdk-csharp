@@ -8,6 +8,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -22,8 +24,14 @@ namespace MerchantAPI
 			Domain
 		};
 
+		public enum BinaryEncodingType
+		{
+			Default,
+			Base64
+		};
+
 		[JsonIgnore]
-		public Client Client { get; set; }
+		public BaseClient Client { get; set; }
 
 		[JsonIgnore]
 		public RequestScope Scope { get; set; }
@@ -34,7 +42,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Store_Code")]
 		public String StoreCode { get; set; }
 
-		public Request(Client client = null)
+		[JsonIgnore()]
+		public BinaryEncodingType BinaryEncoding { get; set; } = BinaryEncodingType.Default;
+
+		public Request(BaseClient client = null)
 		{
 			Client = client;
 			Scope = RequestScope.Store;
@@ -114,10 +125,12 @@ namespace MerchantAPI
 		/// Send the request for a response, async
 		/// <returns>Task<Response></returns>
 		/// </summary>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 		virtual public async Task<Response> SendAsync()
 		{
 			throw new NotImplementedException("Must be implemented in inherited class");
 		}
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
 		/// <summary>
 		/// This is used for MultiCall response resolution
@@ -156,13 +169,42 @@ namespace MerchantAPI
 
 			writer.WriteString("Function", GetFunction());
 		}
+
+		/// <summary>
+		/// Allows the request to manipulate the HTTP request headers
+		/// </summary>
+		/// <param name="headers"></param>
+		virtual public void ProcessRequestHeaders(Dictionary<String, String> headers)
+		{
+			;
+		}
+
+		/// <summary>
+		/// Get the binary encoding this request uses
+		/// </summary>
+		/// <returns></returns>
+		public BinaryEncodingType GetBinaryEncoding()
+		{
+			return BinaryEncoding;
+		}
+
+		/// <summary>
+		/// Set the binary encoding this request uses
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		public Request SetBinaryEncoding(BinaryEncodingType type)
+		{
+			BinaryEncoding = type;
+			return this;
+		}
 	}
 
 	public class RequestConverter : BaseJsonConverter<Request>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(Request) || typeToConvert.IsSubclassOf(typeof(Request));
 		}
 
 		public override Request Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

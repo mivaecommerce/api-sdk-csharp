@@ -32,10 +32,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="note">Note</param>
 		/// </summary>
-		public NoteUpdateRequest(Client client = null, Note note = null) :
+		public NoteUpdateRequest(BaseClient client = null, Note note = null) :
 			base(client)
 		{
 			Function = "Note_Update";

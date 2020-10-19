@@ -28,12 +28,13 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public ProvisionDomainRequest(Client client = null) :
+		public ProvisionDomainRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "Provision_Domain";
+			Scope = RequestScope.Domain;
 		}
 
 		/// <summary>

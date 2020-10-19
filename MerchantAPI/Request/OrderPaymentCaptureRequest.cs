@@ -32,10 +32,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="orderPayment">OrderPayment</param>
 		/// </summary>
-		public OrderPaymentCaptureRequest(Client client = null, OrderPayment orderPayment = null) :
+		public OrderPaymentCaptureRequest(BaseClient client = null, OrderPayment orderPayment = null) :
 			base(client)
 		{
 			Function = "OrderPayment_Capture";

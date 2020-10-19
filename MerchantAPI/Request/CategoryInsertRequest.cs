@@ -52,10 +52,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="category">Category</param>
 		/// </summary>
-		public CategoryInsertRequest(Client client = null, Category category = null) :
+		public CategoryInsertRequest(BaseClient client = null, Category category = null) :
 			base(client)
 		{
 			Function = "Category_Insert";

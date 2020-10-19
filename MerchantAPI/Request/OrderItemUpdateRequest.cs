@@ -64,10 +64,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="orderItem">OrderItem</param>
 		/// </summary>
-		public OrderItemUpdateRequest(Client client = null, OrderItem orderItem = null) :
+		public OrderItemUpdateRequest(BaseClient client = null, OrderItem orderItem = null) :
 			base(client)
 		{
 			Function = "OrderItem_Update";
@@ -302,7 +302,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Add a OrderItemOption.
-		/// - option: OrderItemOption 
+		/// - option: OrderItemOption
 		/// - Returns: Self
 		/// </summary>
 		public OrderItemUpdateRequest AddOption(OrderItemOption option)
@@ -321,7 +321,7 @@ namespace MerchantAPI
 			foreach(OrderItemOption e in options)
 			{
 				Options.Add(e);
-			}   
+			}
 
 			return this;
 		}

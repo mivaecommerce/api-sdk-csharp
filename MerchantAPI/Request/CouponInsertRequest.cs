@@ -62,10 +62,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="coupon">Coupon</param>
 		/// </summary>
-		public CouponInsertRequest(Client client = null, Coupon coupon = null) :
+		public CouponInsertRequest(BaseClient client = null, Coupon coupon = null) :
 			base(client)
 		{
 			Function = "Coupon_Insert";

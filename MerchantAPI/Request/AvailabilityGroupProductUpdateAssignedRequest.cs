@@ -56,10 +56,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="availabilityGroup">AvailabilityGroup</param>
 		/// </summary>
-		public AvailabilityGroupProductUpdateAssignedRequest(Client client = null, AvailabilityGroup availabilityGroup = null) :
+		public AvailabilityGroupProductUpdateAssignedRequest(BaseClient client = null, AvailabilityGroup availabilityGroup = null) :
 			base(client)
 		{
 			Function = "AvailabilityGroupProduct_Update_Assigned";

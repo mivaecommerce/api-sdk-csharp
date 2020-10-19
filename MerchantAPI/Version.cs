@@ -16,11 +16,11 @@ namespace MerchantAPI
 	/// </summary>
 	public static class Version
 	{
-		public const int VERSION_MAJOR = 1;
+		public const int VERSION_MAJOR = 2;
 
 		public const int VERSION_MINOR = 0;
 
-		public const int VERSION_PATCH = 1;
+		public const int VERSION_PATCH = 0;
 
 		new public static String ToString()
 		{

@@ -32,10 +32,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="order">Order</param>
 		/// </summary>
-		public OrderCustomFieldsUpdateRequest(Client client = null, Order order = null) :
+		public OrderCustomFieldsUpdateRequest(BaseClient client = null, Order order = null) :
 			base(client)
 		{
 			Function = "OrderCustomFields_Update";

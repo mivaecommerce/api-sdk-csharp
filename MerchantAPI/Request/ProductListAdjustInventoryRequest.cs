@@ -28,9 +28,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public ProductListAdjustInventoryRequest(Client client = null) :
+		public ProductListAdjustInventoryRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "ProductList_Adjust_Inventory";
@@ -47,7 +47,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Add a ProductInventoryAdjustment.
-		/// - inventoryAdjustment: ProductInventoryAdjustment 
+		/// - inventoryAdjustment: ProductInventoryAdjustment
 		/// - Returns: Self
 		/// </summary>
 		public ProductListAdjustInventoryRequest AddInventoryAdjustment(ProductInventoryAdjustment inventoryAdjustment)
@@ -66,7 +66,7 @@ namespace MerchantAPI
 			foreach(ProductInventoryAdjustment e in inventoryAdjustments)
 			{
 				InventoryAdjustments.Add(e);
-			}   
+			}
 
 			return this;
 		}

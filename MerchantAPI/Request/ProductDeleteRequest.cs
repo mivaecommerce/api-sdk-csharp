@@ -40,10 +40,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="product">Product</param>
 		/// </summary>
-		public ProductDeleteRequest(Client client = null, Product product = null) :
+		public ProductDeleteRequest(BaseClient client = null, Product product = null) :
 			base(client)
 		{
 			Function = "Product_Delete";

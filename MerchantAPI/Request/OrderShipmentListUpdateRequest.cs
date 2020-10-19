@@ -28,9 +28,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public OrderShipmentListUpdateRequest(Client client = null) :
+		public OrderShipmentListUpdateRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "OrderShipmentList_Update";
@@ -47,7 +47,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Add a OrderShipmentUpdate.
-		/// - shipmentUpdate: OrderShipmentUpdate 
+		/// - shipmentUpdate: OrderShipmentUpdate
 		/// - Returns: Self
 		/// </summary>
 		public OrderShipmentListUpdateRequest AddShipmentUpdate(OrderShipmentUpdate shipmentUpdate)
@@ -66,7 +66,7 @@ namespace MerchantAPI
 			foreach(OrderShipmentUpdate e in shipmentUpdates)
 			{
 				ShipmentUpdates.Add(e);
-			}   
+			}
 
 			return this;
 		}

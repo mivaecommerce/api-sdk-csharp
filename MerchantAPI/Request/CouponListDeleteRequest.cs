@@ -27,9 +27,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// </summary>
-		public CouponListDeleteRequest(Client client = null) :
+		public CouponListDeleteRequest(BaseClient client = null) :
 			base(client)
 		{
 			Function = "CouponList_Delete";

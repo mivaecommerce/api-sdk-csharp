@@ -48,10 +48,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Request constructor.
-		/// <param name="client">Client</param>
+		/// <param name="client">BaseClient</param>
 		/// <param name="printQueue">PrintQueue</param>
 		/// </summary>
-		public PrintQueueJobInsertRequest(Client client = null, PrintQueue printQueue = null) :
+		public PrintQueueJobInsertRequest(BaseClient client = null, PrintQueue printQueue = null) :
 			base(client)
 		{
 			Function = "PrintQueueJob_Insert";

@@ -684,7 +684,7 @@ namespace MerchantAPI
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return true;
+			return typeToConvert == typeof(FilterExpression);
 		}
 
 		public override FilterExpression Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
