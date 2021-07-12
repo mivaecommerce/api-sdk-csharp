@@ -81,6 +81,10 @@ namespace MerchantAPI
 		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime DateTimeUpdated { get; set; }
 
+		/// <value>Property Assigned - bool</value>
+		[JsonPropertyName("assigned")]
+		public bool Assigned { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -223,6 +227,15 @@ namespace MerchantAPI
 		public DateTime GetDateTimeUpdated()
 		{
 			return DateTimeUpdated;
+		}
+
+		/// <summary>
+		/// Getter for assigned.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetAssigned()
+		{
+			return Assigned;
 		}
 	}
 }

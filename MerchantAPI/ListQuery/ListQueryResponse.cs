@@ -48,6 +48,33 @@ namespace MerchantAPI
 		{
 
 		}
+
+		/// <summary>
+		/// Get the total result count specified in the response
+		/// </summary>
+		/// <returns></returns>
+		public int GetTotalCount()
+		{
+			return Data.TotalCount;
+		}
+
+		/// <summary>
+		/// Get the starting offset specified in the response
+		/// </summary>
+		/// <returns></returns>
+		public int GetStartOffset()
+		{
+			return Data.StartOffset;
+		}
+
+		/// <summary>
+		/// Get the total number of actual records recieved
+		/// </summary>
+		/// <returns></returns>
+		public int GetDataCount()
+		{
+			return Data.Data.Count;
+		}
 	}
 
 	/// <summary>

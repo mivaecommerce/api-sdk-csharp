@@ -15,6 +15,37 @@ namespace MerchantAPI
 {
 	public class ProductAttribute : Model
 	{
+		/// Enumeration ProductAttributeType
+		public enum ProductAttributeType
+		{
+			Checkbox,
+			Radio,
+			Text,
+			Select,
+			Memo,
+			Template,
+			SwatchSelect,
+		}
+
+		/// <summary>
+		/// Helper to convert enum to a valid string sent/received in from the API
+		/// <returns>String</returns>
+		/// </summary>
+		public static String ProductAttributeTypeToString(ProductAttributeType value)
+		{
+			switch(value)
+			{
+				case ProductAttributeType.Checkbox: return "checkbox";
+				case ProductAttributeType.Radio: return "radio";
+				case ProductAttributeType.Text: return "text";
+				case ProductAttributeType.Select: return "select";
+				case ProductAttributeType.Memo: return "memo";
+				case ProductAttributeType.Template: return "template";
+				case ProductAttributeType.SwatchSelect: return "swatch-select";
+			}
+			return "";
+		}
+
 		/// <value>Property Id - int</value>
 		[JsonPropertyName("id")]
 		public int Id { get; set; }
@@ -70,6 +101,10 @@ namespace MerchantAPI
 		/// <value>Property Image - String</value>
 		[JsonPropertyName("image")]
 		public String Image { get; set; }
+
+		/// <value>Property TemplateAttributes - List<ProductAttribute></value>
+		[JsonPropertyName("attributes")]
+		public List<ProductAttribute> TemplateAttributes { get; set; } = new List<ProductAttribute>();
 
 		/// <value>Property Options - List<ProductOption></value>
 		[JsonPropertyName("options")]
@@ -199,6 +234,15 @@ namespace MerchantAPI
 		public String GetImage()
 		{
 			return Image;
+		}
+
+		/// <summary>
+		/// Getter for attributes.
+		/// <returns>List<ProductAttribute></returns>
+		/// </summary>
+		public List<ProductAttribute> GetTemplateAttributes()
+		{
+			return TemplateAttributes;
 		}
 
 		/// <summary>

@@ -49,6 +49,10 @@ namespace MerchantAPI
 		[JsonPropertyName("tax_exempt")]
 		public bool? TaxExempt { get; set; }
 
+		/// <value>Property Tax - float</value>
+		[JsonPropertyName("tax")]
+		public float Tax { get; set; }
+
 		/// <summary>
 		/// Getter for order_id.
 		/// <returns>int</returns>
@@ -119,6 +123,15 @@ namespace MerchantAPI
 		public bool? GetTaxExempt()
 		{
 			return TaxExempt;
+		}
+
+		/// <summary>
+		/// Getter for tax.
+		/// <returns>float</returns>
+		/// </summary>
+		public float GetTax()
+		{
+			return Tax;
 		}
 
 		/// <summary>
@@ -263,6 +276,10 @@ namespace MerchantAPI
 				else if (String.Equals(property, "tax_exempt", StringComparison.OrdinalIgnoreCase))
 				{
 					value.TaxExempt = ReadNextBoolean(ref reader, options);
+				}
+				else if (String.Equals(property, "tax", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Tax = ReadNextFloat(ref reader, options);
 				}
 				else
 				{

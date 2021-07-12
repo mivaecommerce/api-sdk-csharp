@@ -63,7 +63,8 @@ namespace MerchantAPI
 		/// The available on demand columns applicable to the request.
 		override public String[] AvailableOnDemandColumns { get; } =
 		{
-			"source"
+			"source",
+			"source_notes"
 		};
 
 		/// <summary>

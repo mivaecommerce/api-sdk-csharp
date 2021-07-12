@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Text.Json;
 using MerchantAPI;
 
 namespace MerchantAPICallingModuleApiFunctionsExample
@@ -22,6 +21,12 @@ namespace MerchantAPICallingModuleApiFunctionsExample
 			/// use the Module request class to call into the module.
 
 			var request = new ModuleRequest(client);
+
+			// Set the module you wish to call into
+			request.SetModuleCode("mymodule");
+
+			// Set the function name you wish to call (defined by your modules json_api feature)
+			request.SetModuleFunction("MyModuleFunction");
 
 			/// Add custom parameters to the request using the setModuleField method
 			request.SetModuleField("MyModuleField", "Foo")

@@ -23,6 +23,10 @@ namespace MerchantAPI
 		[JsonPropertyName("name")]
 		public String Name { get; set; }
 
+		/// <value>Property TaxExempt - bool</value>
+		[JsonPropertyName("tax_exempt")]
+		public bool TaxExempt { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -39,6 +43,15 @@ namespace MerchantAPI
 		public String GetName()
 		{
 			return Name;
+		}
+
+		/// <summary>
+		/// Getter for tax_exempt.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetTaxExempt()
+		{
+			return TaxExempt;
 		}
 	}
 }

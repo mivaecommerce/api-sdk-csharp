@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Text.Json;
 using MerchantAPI;
 
 namespace MerchantAPIClientExample
@@ -36,6 +35,25 @@ namespace MerchantAPIClientExample
 			/// Disabling Timestamp requirements by settings the RequiredTimestamp boolean property
 			/// It is not recommended to disable this security feature
 			client.RequireTimestamps = false;
+
+			/// For MultiCall operations only, set the timeout in 
+			/// seconds. Defaults to 60 seconds.
+			client.OperationTimeout = 60;
+
+			/// Request Logging can be enabled by assigning a Logger instance to the client
+
+			/// Currently, we provide two logger types:
+			//		 FileLogger - logs to a local file
+			//		 ConsoleLogger - logs to std out/err
+
+			// Setting up a FileLogger
+			client.SetLogger(new FileLogger("/path/to/my/logfile.log"));
+
+			// Setting up a ConsoleLogger to log to stdout
+			client.SetLogger(new ConsoleLogger(ConsleLogger.OutputDestination.StdOut));
+			
+			// Setting up a ConsoleLogger to log to stderr
+			client.SetLogger(new ConsoleLogger(ConsleLogger.OutputDestination.StdErr));
 		}
 	}
 }

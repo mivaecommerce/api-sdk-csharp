@@ -91,6 +91,10 @@ namespace MerchantAPI
 		[JsonPropertyName("linkedresources")]
 		public List<JavaScriptResource> LinkedResources { get; set; } = new List<JavaScriptResource>();
 
+		/// <value>Property SourceNotes - String</value>
+		[JsonPropertyName("source_notes")]
+		public String SourceNotes { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -260,6 +264,15 @@ namespace MerchantAPI
 		public List<JavaScriptResource> GetLinkedResources()
 		{
 			return LinkedResources;
+		}
+
+		/// <summary>
+		/// Getter for source_notes.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetSourceNotes()
+		{
+			return SourceNotes;
 		}
 	}
 }

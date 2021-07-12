@@ -148,12 +148,9 @@ namespace MerchantAPI
 			{
 				Settings = new VariableValue(new Dictionary<String, VariableValue>());
 			}
-
-
 			if (Settings.IsDictionary())
 			{
 				Settings.AddToDictionary(property, value);
-
 			}
 
 			return this;

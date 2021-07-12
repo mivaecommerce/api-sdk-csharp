@@ -128,6 +128,9 @@ namespace MerchantAPI
 		/// <returns></returns>
 		public SSHPrivateKeyAuthenticator SetPrivateKey_PKCS1(String filePath)
 		{
+#if NET472
+			throw new Exception("PKCS1 SSH Private Key authentication is not supported in .NET 472");
+#else
 			String[] fileLines = File.ReadAllLines(filePath);
 			String keyBase64 = "";
 			int keyBytesRead = 0;
@@ -157,7 +160,7 @@ namespace MerchantAPI
 			RSA.ImportRSAPrivateKey(keyBytes, out keyBytesRead);
 
 			PrivateKey = RSA;
-
+#endif
 			return this;
 		}
 
@@ -169,6 +172,9 @@ namespace MerchantAPI
 		/// <returns></returns>
 		public SSHPrivateKeyAuthenticator SetPrivateKey_PKCS8(String filePath, String password)
 		{
+#if NET472
+			throw new Exception("PKCS8 SSH Private Key authentication is not supported in .NET 472");
+#else
 			String[] fileLines = File.ReadAllLines(filePath);
 			String keyBase64 = "";
 			int keyBytesRead = 0;
@@ -209,7 +215,7 @@ namespace MerchantAPI
 			}
 
 			PrivateKey = RSA;
-
+#endif
 			return this;
 		}
 

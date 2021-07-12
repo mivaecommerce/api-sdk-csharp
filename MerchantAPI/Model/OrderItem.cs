@@ -125,6 +125,14 @@ namespace MerchantAPI
 		[JsonPropertyName("price")]
 		public float? Price { get; set; }
 
+		/// <value>Property Tax - float</value>
+		[JsonPropertyName("tax")]
+		public float Tax { get; set; }
+
+		/// <value>Property FormattedTax - String</value>
+		[JsonPropertyName("formatted_tax")]
+		public String FormattedTax { get; set; }
+
 		/// <value>Property Weight - float</value>
 		[JsonPropertyName("weight")]
 		public float? Weight { get; set; }
@@ -168,6 +176,10 @@ namespace MerchantAPI
 		/// <value>Property TrackingNumber - String</value>
 		[JsonPropertyName("tracknum")]
 		public String TrackingNumber { get; set; }
+
+		/// <value>Property ShipmentId - int</value>
+		[JsonPropertyName("shpmnt_id")]
+		public int ShipmentId { get; set; }
 
 		/// <summary>
 		/// Getter for order_id.
@@ -314,6 +326,24 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for tax.
+		/// <returns>float</returns>
+		/// </summary>
+		public float GetTax()
+		{
+			return Tax;
+		}
+
+		/// <summary>
+		/// Getter for formatted_tax.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedTax()
+		{
+			return FormattedTax;
+		}
+
+		/// <summary>
 		/// Getter for weight.
 		/// <returns>float</returns>
 		/// </summary>
@@ -410,6 +440,15 @@ namespace MerchantAPI
 		public String GetTrackingNumber()
 		{
 			return TrackingNumber;
+		}
+
+		/// <summary>
+		/// Getter for shpmnt_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetShipmentId()
+		{
+			return ShipmentId;
 		}
 
 		/// <summary>
@@ -653,6 +692,14 @@ namespace MerchantAPI
 				{
 					value.Price = ReadNextFloat(ref reader, options);
 				}
+				else if (String.Equals(property, "tax", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Tax = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_tax", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedTax = ReadNextString(ref reader, options);
+				}
 				else if (String.Equals(property, "weight", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Weight = ReadNextFloat(ref reader, options);
@@ -716,6 +763,10 @@ namespace MerchantAPI
 				else if (String.Equals(property, "tracknum", StringComparison.OrdinalIgnoreCase))
 				{
 					value.TrackingNumber = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "shpmnt_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ShipmentId = ReadNextInteger(ref reader, options);
 				}
 				else
 				{

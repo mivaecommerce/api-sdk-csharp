@@ -27,9 +27,17 @@ namespace MerchantAPI
 		[JsonPropertyName("product_name")]
 		public String ProductName { get; set; }
 
+		/// <value>Property ProductSku - String</value>
+		[JsonPropertyName("product_sku")]
+		public String ProductSku { get; set; }
+
 		/// <value>Property Quantity - int</value>
 		[JsonPropertyName("quantity")]
 		public int Quantity { get; set; }
+
+		/// <value>Property Offset - int</value>
+		[JsonPropertyName("offset")]
+		public int Offset { get; set; }
 
 		/// <summary>
 		/// Getter for product_id.
@@ -59,12 +67,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for product_sku.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetProductSku()
+		{
+			return ProductSku;
+		}
+
+		/// <summary>
 		/// Getter for quantity.
 		/// <returns>int</returns>
 		/// </summary>
 		public int GetQuantity()
 		{
 			return Quantity;
+		}
+
+		/// <summary>
+		/// Getter for offset.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetOffset()
+		{
+			return Offset;
 		}
 	}
 }

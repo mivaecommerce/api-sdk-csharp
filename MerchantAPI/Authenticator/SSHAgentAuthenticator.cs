@@ -68,7 +68,7 @@ namespace MerchantAPI
 		{
 			if (publicKey.Contains(" "))
 			{
-				String[] split = publicKey.Split(" ");
+				String[] split = publicKey.Split(' ');
 
 				if (split.Length >= 2)
 				{

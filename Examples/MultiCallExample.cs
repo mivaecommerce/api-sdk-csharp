@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Text.Json;
 using MerchantAPI;
 
 namespace MerchantAPICallingMultiCallExample
@@ -18,6 +17,11 @@ namespace MerchantAPICallingMultiCallExample
 			var client = new Client("https://www.mystore.com/mm5/json.mvc", "MY_API_TOKEN", "MY_SIGNING_KEY");
 			client.DefaultStoreCode = "STORE_CODE";
 
+			/// MultiCall operations will timeout after a default of 60 seconds
+			/// Control the timeout value from the client
+
+			client.OperationTimeout = 10;
+
 			/// Create a MultiCallRequest and add Request objects to it
 
 			var request = new MultiCallRequest(client);
@@ -26,13 +30,27 @@ namespace MerchantAPICallingMultiCallExample
 				.AddRequest(new CategoryListLoadQueryRequest())
 				.AddRequest(new PriceGroupListLoadQueryRequest());
 
+
+			/// If you wish to automatically fetch the remaining data in the event of a timeout, you can specify
+			/// the auto timeout completion flag within the request.  By default it is not enabled.
+
+			request.autoTimeoutContinue = true;
+
+
 			// Send the request
 
 			MultiCallResponse response = request.Send();
 
 			if (!response.IsSuccess())
 			{
-				Console.WriteLine("Error: {0}: {1}", response.GetErrorCode(), response.GetErrorMessage());
+				if (response.IsTimeout())
+				{
+					Console.WriteLine("Operation Timed out");
+				}
+				else
+				{
+					Console.WriteLine("Error: {0}: {1}", response.GetErrorCode(), response.GetErrorMessage());
+				}
 			}
 			else
 			{

@@ -27,13 +27,13 @@ namespace MerchantAPI
 		[JsonPropertyName("attr_id")]
 		public int AttributeId { get; set; }
 
-		/// <value>Property AttempId - int</value>
+		/// <value>Property AttributeTemplateId - int</value>
 		[JsonPropertyName("attemp_id")]
-		public int AttempId { get; set; }
+		public int AttributeTemplateId { get; set; }
 
-		/// <value>Property AttmpatId - int</value>
+		/// <value>Property AttributeTemplateAttributeId - int</value>
 		[JsonPropertyName("attmpat_id")]
-		public int AttmpatId { get; set; }
+		public int AttributeTemplateAttributeId { get; set; }
 
 		/// <value>Property DisplayOrder - int</value>
 		[JsonPropertyName("disp_order")]
@@ -62,6 +62,14 @@ namespace MerchantAPI
 		/// <value>Property Image - String</value>
 		[JsonPropertyName("image")]
 		public String Image { get; set; }
+
+		/// <value>Property FormattedPrice - String</value>
+		[JsonPropertyName("formatted_price")]
+		public String FormattedPrice { get; set; }
+
+		/// <value>Property FormattedCost - String</value>
+		[JsonPropertyName("formatted_cost")]
+		public String FormattedCost { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -94,18 +102,18 @@ namespace MerchantAPI
 		/// Getter for attemp_id.
 		/// <returns>int</returns>
 		/// </summary>
-		public int GetAttempId()
+		public int GetAttributeTemplateId()
 		{
-			return AttempId;
+			return AttributeTemplateId;
 		}
 
 		/// <summary>
 		/// Getter for attmpat_id.
 		/// <returns>int</returns>
 		/// </summary>
-		public int GetAttmpatId()
+		public int GetAttributeTemplateAttributeId()
 		{
-			return AttmpatId;
+			return AttributeTemplateAttributeId;
 		}
 
 		/// <summary>
@@ -169,6 +177,24 @@ namespace MerchantAPI
 		public String GetImage()
 		{
 			return Image;
+		}
+
+		/// <summary>
+		/// Getter for formatted_price.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedPrice()
+		{
+			return FormattedPrice;
+		}
+
+		/// <summary>
+		/// Getter for formatted_cost.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedCost()
+		{
+			return FormattedCost;
 		}
 	}
 }

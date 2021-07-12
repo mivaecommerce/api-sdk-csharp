@@ -90,6 +90,14 @@ namespace MerchantAPI
 		[JsonPropertyName("formatted_cost")]
 		public String FormattedCost { get; set; }
 
+		/// <value>Property Order - Order</value>
+		[JsonPropertyName("order")]
+		public Order Order { get; set; }
+
+		/// <value>Property Items - List<OrderItem></value>
+		[JsonPropertyName("items")]
+		public List<OrderItem> Items { get; set; } = new List<OrderItem>();
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -205,6 +213,24 @@ namespace MerchantAPI
 		public String GetFormattedCost()
 		{
 			return FormattedCost;
+		}
+
+		/// <summary>
+		/// Getter for order.
+		/// <returns>Order</returns>
+		/// </summary>
+		public Order GetOrder()
+		{
+			return Order;
+		}
+
+		/// <summary>
+		/// Getter for items.
+		/// <returns>List<OrderItem></returns>
+		/// </summary>
+		public List<OrderItem> GetItems()
+		{
+			return Items;
 		}
 	}
 }

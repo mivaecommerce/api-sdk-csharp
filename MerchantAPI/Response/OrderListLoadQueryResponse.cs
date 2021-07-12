@@ -25,7 +25,6 @@ namespace MerchantAPI
 			base()
 		{
 		}
-
 		/// <summary>
 		///  Getter for orders.
 		/// <returns>Order[]</returns>

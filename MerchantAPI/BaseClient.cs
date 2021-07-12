@@ -42,6 +42,8 @@ namespace MerchantAPI
 
 		public Logger Log { get; set; } = null;
 
+		public Dictionary<String, String> GlobalHeaders { get; set; } = new Dictionary<String, String>();
+
 		/// <summary>
 		/// Constructor with defaults for request signing.
 		/// <param name="endpoint"></param>
@@ -95,7 +97,7 @@ namespace MerchantAPI
 		{
 			String requestData;
 			TResponse response;
-			Dictionary<String, String> headers = new Dictionary<String, String>();
+			Dictionary<String, String> headers = new Dictionary<String, String>(GlobalHeaders);
 
 			if (request.Client != this)
 			{
@@ -125,6 +127,8 @@ namespace MerchantAPI
 
 			try
 			{
+				httpResponse.EnsureSuccessStatusCode();
+
 				var options = new JsonSerializerOptions();
 
 				if (request is MultiCallRequest mrequest)
@@ -140,6 +144,15 @@ namespace MerchantAPI
 				{
 					Log.LogResponse(response, httpResponse);
 				}
+			}
+			catch (HttpRequestException e)
+			{
+				if (httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+				{
+					throw new MerchantAPIException("HTTP Authentication Error", e);
+				}
+
+				throw new MerchantAPIException("HTTP Response Error", e);
 			}
 			catch (Exception e)
 			{
@@ -208,6 +221,49 @@ namespace MerchantAPI
 		public Logger GetLogger()
 		{
 			return Log;
+		}
+
+		/// <summary>
+		/// Set a global header to be included with each request
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public BaseClient SetGlobalHeader(String key, String value)
+		{
+			GlobalHeaders[key] = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Get a global header or nul if not set
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public String GetGlobalHeader(String key)
+		{
+			return GlobalHeaders.ContainsKey(key) ? GlobalHeaders[key] : null;
+		}
+
+		/// <summary>
+		/// Check if a global header is defined
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public bool HasGlobalHeader(String key)
+		{
+			return GlobalHeaders.ContainsKey(key);
+		}
+
+		/// <summary>
+		/// Remove a defined global header
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public BaseClient RemoveGlobalHeader(String key)
+		{
+			GlobalHeaders.Remove(key);
+			return this;
 		}
 	}
 }

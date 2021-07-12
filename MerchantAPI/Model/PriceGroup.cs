@@ -40,6 +40,31 @@ namespace MerchantAPI
 			return "";
 		}
 
+		/// Enumeration DiscountType
+		public enum DiscountType
+		{
+			Retail,
+			Cost,
+			DiscountRetail,
+			MarkupCost,
+		}
+
+		/// <summary>
+		/// Helper to convert enum to a valid string sent/received in from the API
+		/// <returns>String</returns>
+		/// </summary>
+		public static String DiscountTypeToString(DiscountType value)
+		{
+			switch(value)
+			{
+				case DiscountType.Retail: return "R";
+				case DiscountType.Cost: return "C";
+				case DiscountType.DiscountRetail: return "D";
+				case DiscountType.MarkupCost: return "M";
+			}
+			return "";
+		}
+
 		/// <value>Property Id - int</value>
 		[JsonPropertyName("id")]
 		public int Id { get; set; }
@@ -51,6 +76,10 @@ namespace MerchantAPI
 		/// <value>Property CustomerScope - String</value>
 		[JsonPropertyName("custscope")]
 		public String CustomerScope { get; set; }
+
+		/// <value>Property Rate - String</value>
+		[JsonPropertyName("rate")]
+		public String Rate { get; set; }
 
 		/// <value>Property Discount - float</value>
 		[JsonPropertyName("discount")]
@@ -167,6 +196,15 @@ namespace MerchantAPI
 		public String GetCustomerScope()
 		{
 			return CustomerScope;
+		}
+
+		/// <summary>
+		/// Getter for rate.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetRate()
+		{
+			return Rate;
 		}
 
 		/// <summary>

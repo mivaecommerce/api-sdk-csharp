@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Text.Json;
 using MerchantAPI;
 
 namespace MerchantAPILoadAndEditProductExample

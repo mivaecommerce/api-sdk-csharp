@@ -15,6 +15,33 @@ namespace MerchantAPI
 {
 	public class Uri : Model
 	{
+		/// Enumeration DestinationType
+		public enum DestinationType
+		{
+			Screen,
+			Page,
+			Category,
+			Product,
+			Feed,
+		}
+
+		/// <summary>
+		/// Helper to convert enum to a valid string sent/received in from the API
+		/// <returns>String</returns>
+		/// </summary>
+		public static String DestinationTypeToString(DestinationType value)
+		{
+			switch(value)
+			{
+				case DestinationType.Screen: return "screen";
+				case DestinationType.Page: return "page";
+				case DestinationType.Category: return "category";
+				case DestinationType.Product: return "product";
+				case DestinationType.Feed: return "feed";
+			}
+			return "";
+		}
+
 		/// <value>Property Id - int</value>
 		[JsonPropertyName("id")]
 		public int Id { get; set; }
@@ -54,6 +81,26 @@ namespace MerchantAPI
 		/// <value>Property Status - int</value>
 		[JsonPropertyName("status")]
 		public int Status { get; set; }
+
+		/// <value>Property Store - UriDetail</value>
+		[JsonPropertyName("store")]
+		public UriDetail Store { get; set; }
+
+		/// <value>Property Product - UriDetail</value>
+		[JsonPropertyName("product")]
+		public UriDetail Product { get; set; }
+
+		/// <value>Property Category - UriDetail</value>
+		[JsonPropertyName("category")]
+		public UriDetail Category { get; set; }
+
+		/// <value>Property Page - UriDetail</value>
+		[JsonPropertyName("page")]
+		public UriDetail Page { get; set; }
+
+		/// <value>Property Feed - UriDetail</value>
+		[JsonPropertyName("feed")]
+		public UriDetail Feed { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -143,6 +190,51 @@ namespace MerchantAPI
 		public int GetStatus()
 		{
 			return Status;
+		}
+
+		/// <summary>
+		/// Getter for store.
+		/// <returns>UriDetail</returns>
+		/// </summary>
+		public UriDetail GetStore()
+		{
+			return Store;
+		}
+
+		/// <summary>
+		/// Getter for product.
+		/// <returns>UriDetail</returns>
+		/// </summary>
+		public UriDetail GetProduct()
+		{
+			return Product;
+		}
+
+		/// <summary>
+		/// Getter for category.
+		/// <returns>UriDetail</returns>
+		/// </summary>
+		public UriDetail GetCategory()
+		{
+			return Category;
+		}
+
+		/// <summary>
+		/// Getter for page.
+		/// <returns>UriDetail</returns>
+		/// </summary>
+		public UriDetail GetPage()
+		{
+			return Page;
+		}
+
+		/// <summary>
+		/// Getter for feed.
+		/// <returns>UriDetail</returns>
+		/// </summary>
+		public UriDetail GetFeed()
+		{
+			return Feed;
 		}
 	}
 }

@@ -4,6 +4,7 @@ using System.Buffers.Binary;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Net;
 
 namespace MerchantAPI
 {
@@ -34,7 +35,7 @@ namespace MerchantAPI
 	{
 		public String SocketPath;
 
-		public UnixDomainSocketEndPoint Endpoint;
+		public UnixEndPoint Endpoint;
 
 		public Socket Connection;
 
@@ -53,7 +54,7 @@ namespace MerchantAPI
 				SocketPath = Environment.GetEnvironmentVariable("SSH_AUTH_SOCK");
 			}
 
-			Endpoint = new UnixDomainSocketEndPoint(SocketPath);
+			Endpoint = new UnixEndPoint(SocketPath);
 			Connection = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.IP);
 		}
 
@@ -93,7 +94,7 @@ namespace MerchantAPI
 
 			BinaryPrimitives.WriteUInt32BigEndian(sendDataSize, (UInt32)data.Length);
 
-			writer.Write(sendDataSize);
+			writer.Write(sendDataSize.ToArray());
 			writer.Write(data);
 
 			byte[] buf = stream.GetBuffer();
@@ -192,11 +193,11 @@ namespace MerchantAPI
 			BinaryPrimitives.WriteUInt32BigEndian(Flags, AgentSignFlags);
 
 			Writer.Write((byte)AgentCommand.SSH_AGENTC_SIGN_REQUEST);
-			Writer.Write(PublicKeyBlobSize);
+			Writer.Write(PublicKeyBlobSize.ToArray());
 			Writer.Write(PublicKeyBlob);
-			Writer.Write(SignDataSize);
+			Writer.Write(SignDataSize.ToArray());
 			Writer.Write(SignData);
-			Writer.Write(Flags);
+			Writer.Write(Flags.ToArray());
 
 			return Stream.GetBuffer();
 		}

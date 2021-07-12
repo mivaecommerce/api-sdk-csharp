@@ -77,7 +77,8 @@ namespace MerchantAPI
 		{
 			"source",
 			"linkedpages",
-			"linkedresources"
+			"linkedresources",
+			"source_notes"
 		};
 
 		/// <summary>

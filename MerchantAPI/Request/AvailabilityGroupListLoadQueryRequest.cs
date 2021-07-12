@@ -54,7 +54,6 @@ namespace MerchantAPI
 		override public void Write(Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			base.Write(writer, options);
-
 		}
 
 		/// <summary>

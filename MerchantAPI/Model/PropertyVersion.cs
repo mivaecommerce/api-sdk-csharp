@@ -91,6 +91,10 @@ namespace MerchantAPI
 		[JsonPropertyName("sync")]
 		public bool Sync { get; set; }
 
+		/// <value>Property SourceNotes - String</value>
+		[JsonPropertyName("source_notes")]
+		public String SourceNotes { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -260,6 +264,15 @@ namespace MerchantAPI
 		public bool GetSync()
 		{
 			return Sync;
+		}
+
+		/// <summary>
+		/// Getter for source_notes.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetSourceNotes()
+		{
+			return SourceNotes;
 		}
 	}
 }

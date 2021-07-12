@@ -21,7 +21,8 @@ namespace MerchantAPI
 		public enum RequestScope
 		{
 			Store,
-			Domain
+			Domain,
+			DomainOptionalStore
 		};
 
 		public enum BinaryEncodingType
@@ -148,11 +149,11 @@ namespace MerchantAPI
 		/// </summary>
 		virtual public void Write(Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
-			if (Scope == Request.RequestScope.Domain)
+			if (Scope == RequestScope.Domain)
 			{
 				StoreCode = null;
 			}
-			else if ((StoreCode == null || StoreCode.Length == 0) && (Client != null && Client.DefaultStoreCode != null))
+			else if ((StoreCode == null || StoreCode.Length == 0) && (Client != null && Client.DefaultStoreCode != null) && Scope != RequestScope.DomainOptionalStore)
 			{
 				StoreCode = Client.DefaultStoreCode;
 			}
