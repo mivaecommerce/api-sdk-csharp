@@ -46,6 +46,14 @@ namespace MerchantAPI
 		[JsonPropertyName("Module_ID")]
 		public int? ModuleId { get; set; }
 
+		/// Request field Edit_Module.
+		[JsonPropertyName("Edit_Module")]
+		public String EditModule { get; set; }
+
+		/// Request field Module_Code.
+		[JsonPropertyName("Module_Code")]
+		public String ModuleCode { get; set; }
+
 		/// Request field Exclusion.
 		[JsonPropertyName("Exclusion")]
 		public bool? Exclusion { get; set; }
@@ -185,6 +193,24 @@ namespace MerchantAPI
 		public int? GetModuleId()
 		{
 			return ModuleId;
+		}
+
+		/// <summary>
+		/// Getter for Edit_Module.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetEditModule()
+		{
+			return EditModule;
+		}
+
+		/// <summary>
+		/// Getter for Module_Code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetModuleCode()
+		{
+			return ModuleCode;
 		}
 
 		/// <summary>
@@ -443,6 +469,28 @@ namespace MerchantAPI
 		public PriceGroupInsertRequest SetModuleId(int? value)
 		{
 			ModuleId = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Edit_Module.
+		/// <param name="value">String</param>
+		/// <returns>PriceGroupInsertRequest</returns>
+		/// </summary>
+		public PriceGroupInsertRequest SetEditModule(String value)
+		{
+			EditModule = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Module_Code.
+		/// <param name="value">String</param>
+		/// <returns>PriceGroupInsertRequest</returns>
+		/// </summary>
+		public PriceGroupInsertRequest SetModuleCode(String value)
+		{
+			ModuleCode = value;
 			return this;
 		}
 
@@ -786,6 +834,19 @@ namespace MerchantAPI
 		{
 			base.Write(writer, options);
 
+			if (ModuleId.HasValue)
+			{
+				writer.WriteNumber("Module_ID", ModuleId.Value);
+			}
+			else if (EditModule != null && EditModule.Length > 0)
+			{
+				writer.WriteString("Edit_Module", EditModule);
+			}
+			else if (ModuleCode != null && ModuleCode.Length > 0)
+			{
+				writer.WriteString("Module_Code", ModuleCode);
+			}
+
 			if (Name != null && Name.Length > 0)
 			{
 				writer.WriteString("Name", Name);
@@ -809,11 +870,6 @@ namespace MerchantAPI
 			if (Markup.HasValue)
 			{
 				writer.WriteNumber("Markup", Markup.Value);
-			}
-
-			if (ModuleId.HasValue)
-			{
-				writer.WriteNumber("Module_ID", ModuleId.Value);
 			}
 
 			if (Exclusion.HasValue)

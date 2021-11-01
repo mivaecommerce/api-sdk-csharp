@@ -61,6 +61,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Settings")]
 		public TemplateVersionSettings Settings { get; set; }
 
+		/// <value>Property Notes - String</value>
+		[JsonPropertyName("Notes")]
+		public String Notes { get; set; }
+
 		/// <summary>
 		/// Getter for Property_ID.
 		/// <returns>int</returns>
@@ -158,6 +162,15 @@ namespace MerchantAPI
 		public TemplateVersionSettings GetSettings()
 		{
 			return Settings;
+		}
+
+		/// <summary>
+		/// Getter for Notes.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetNotes()
+		{
+			return Notes;
 		}
 
 		/// <summary>
@@ -269,6 +282,17 @@ namespace MerchantAPI
 			Source = value;
 			return this;
 		}
+
+		/// <summary>
+		/// Setter for Notes.
+		/// <param name="value">String</param>
+		/// <returns>PropertyChange</returns>
+		/// </summary>
+		public PropertyChange SetNotes(String value)
+		{
+			Notes = value;
+			return this;
+		}
 	}
 
 	/// <summary>
@@ -353,6 +377,10 @@ namespace MerchantAPI
 
 					value.Settings = JsonSerializer.Deserialize<TemplateVersionSettings>(ref reader, options);
 				}
+				else if (String.Equals(property, "Notes", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Notes = ReadNextString(ref reader, options);
+				}
 				else
 				{
 					throw new MerchantAPIException(String.Format("Unexpected property {0} for PropertyChange", property));
@@ -418,6 +446,11 @@ namespace MerchantAPI
 
 			writer.WritePropertyName("Settings");
 			JsonSerializer.Serialize(writer, value.Settings, options);
+
+			if (value.Notes != null && value.Notes.Length > 0)
+			{
+				writer.WriteString("Notes", value.Notes);
+			}
 
 			writer.WriteEndObject();
 		}

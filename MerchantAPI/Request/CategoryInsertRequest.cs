@@ -65,6 +65,7 @@ namespace MerchantAPI
 				CategoryName = category.Name;
 				CategoryActive = category.Active;
 				CategoryPageTitle = category.PageTitle;
+				CategoryParentCategory = category.ParentCategory;
 				CategoryAlternateDisplayPage = category.PageCode;
 				CustomFieldValues = category.CustomFieldValues;
 			}

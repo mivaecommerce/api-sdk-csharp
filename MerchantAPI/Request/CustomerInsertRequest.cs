@@ -184,6 +184,7 @@ namespace MerchantAPI
 				CustomerBillState = customer.BillState;
 				CustomerBillZip = customer.BillZip;
 				CustomerBillCountry = customer.BillCountry;
+				CustomerTaxExempt = customer.TaxExempt;
 				CustomerBusinessAccount = customer.BusinessTitle;
 				CustomFieldValues = customer.CustomFieldValues;
 			}

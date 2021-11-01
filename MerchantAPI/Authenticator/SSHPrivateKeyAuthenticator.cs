@@ -211,7 +211,7 @@ namespace MerchantAPI
 			}
 			else
 			{
-				RSA.ImportPkcs8PrivateKey(keyBytes, out keyBytesRead);				
+				RSA.ImportPkcs8PrivateKey(keyBytes, out keyBytesRead);
 			}
 
 			PrivateKey = RSA;
@@ -270,7 +270,7 @@ namespace MerchantAPI
 			{
 				return String.Format("SSH-RSA-SHA2-256 {0}:{1}", System.Convert.ToBase64String(Encoding.ASCII.GetBytes(Username)), SignData(data));
 			}
-			else if(SignDigestType == DigestType.SSH_RSA_SHA512)
+			else if (SignDigestType == DigestType.SSH_RSA_SHA512)
 			{
 				return String.Format("SSH-RSA-SHA2-512 {0}:{1}", System.Convert.ToBase64String(Encoding.ASCII.GetBytes(Username)), SignData(data));
 			}
@@ -298,4 +298,3 @@ namespace MerchantAPI
 		}
 	}
 }
-

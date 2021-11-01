@@ -144,7 +144,7 @@ namespace MerchantAPI
 
 		/// Request field Customer_Tax_Exempt.
 		[JsonPropertyName("Customer_Tax_Exempt")]
-		public String CustomerTaxExempt { get; set; }
+		public bool? CustomerTaxExempt { get; set; }
 
 		/// Request field Customer_BusinessAccount.
 		[JsonPropertyName("Customer_BusinessAccount")]
@@ -201,6 +201,7 @@ namespace MerchantAPI
 				CustomerBillState = customer.BillState;
 				CustomerBillZip = customer.BillZip;
 				CustomerBillCountry = customer.BillCountry;
+				CustomerTaxExempt = customer.TaxExempt;
 				CustomerBusinessAccount = customer.BusinessTitle;
 				CustomFieldValues = customer.CustomFieldValues;
 			}
@@ -478,9 +479,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for Customer_Tax_Exempt.
-		/// <returns>String</returns>
+		/// <returns>bool</returns>
 		/// </summary>
-		public String GetCustomerTaxExempt()
+		public bool? GetCustomerTaxExempt()
 		{
 			return CustomerTaxExempt;
 		}
@@ -835,10 +836,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Setter for Customer_Tax_Exempt.
-		/// <param name="value">String</param>
+		/// <param name="value">bool</param>
 		/// <returns>CustomerUpdateRequest</returns>
 		/// </summary>
-		public CustomerUpdateRequest SetCustomerTaxExempt(String value)
+		public CustomerUpdateRequest SetCustomerTaxExempt(bool? value)
 		{
 			CustomerTaxExempt = value;
 			return this;
@@ -1013,9 +1014,9 @@ namespace MerchantAPI
 				writer.WriteString("Customer_BillCountry", CustomerBillCountry);
 			}
 
-			if (CustomerTaxExempt != null && CustomerTaxExempt.Length > 0)
+			if (CustomerTaxExempt.HasValue)
 			{
-				writer.WriteString("Customer_Tax_Exempt", CustomerTaxExempt);
+				writer.WriteBoolean("Customer_Tax_Exempt", CustomerTaxExempt.Value);
 			}
 
 			if (CustomerBusinessAccount != null && CustomerBusinessAccount.Length > 0)

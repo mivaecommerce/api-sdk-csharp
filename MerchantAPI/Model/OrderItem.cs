@@ -127,7 +127,7 @@ namespace MerchantAPI
 
 		/// <value>Property Tax - float</value>
 		[JsonPropertyName("tax")]
-		public float Tax { get; set; }
+		public float? Tax { get; set; }
 
 		/// <value>Property FormattedTax - String</value>
 		[JsonPropertyName("formatted_tax")]
@@ -329,7 +329,7 @@ namespace MerchantAPI
 		/// Getter for tax.
 		/// <returns>float</returns>
 		/// </summary>
-		public float GetTax()
+		public float? GetTax()
 		{
 			return Tax;
 		}
@@ -503,6 +503,28 @@ namespace MerchantAPI
 	   public OrderItem SetPrice(double value)
 	   {
 			Price = (float) value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for tax.
+		/// <param name="value">float</param>
+		/// <returns>OrderItem</returns>
+		/// </summary>
+	   public OrderItem SetTax(float value)
+	   {
+			Tax = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for tax.
+		/// <param name="value">double</param>
+		/// <returns>OrderItem</returns>
+		/// </summary>
+	   public OrderItem SetTax(double value)
+	   {
+			Tax = (float) value;
 			return this;
 		}
 
@@ -799,6 +821,11 @@ namespace MerchantAPI
 			if (value.Price.HasValue)
 			{
 				writer.WriteNumber("price", value.Price.Value);
+			}
+
+			if (value.Tax.HasValue)
+			{
+				writer.WriteNumber("tax", value.Tax.Value);
 			}
 
 			if (value.Weight.HasValue)

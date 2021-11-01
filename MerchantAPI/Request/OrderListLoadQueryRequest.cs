@@ -169,7 +169,8 @@ namespace MerchantAPI
 			"coupons",
 			"discounts",
 			"payments",
-			"notes"
+			"notes",
+			"parts"
 		};
 
 		/// The available custom fileters applicable to the request.

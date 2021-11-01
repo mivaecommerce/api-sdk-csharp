@@ -118,7 +118,8 @@ namespace MerchantAPI
 				FirstName = customerAddress.FirstName;
 				LastName = customerAddress.LastName;
 				Email = customerAddress.Email;
-				Fax = customerAddress.Phone;
+				Phone = customerAddress.Phone;
+				Fax = customerAddress.Fax;
 				Company = customerAddress.Company;
 				Address1 = customerAddress.Address1;
 				Address2 = customerAddress.Address2;

@@ -15,6 +15,27 @@ namespace MerchantAPI
 {
 	public class Store : Model
 	{
+		/// Enumeration CacheTypes
+		public enum CacheTypes
+		{
+			CacheTypeNone,
+			CacheTypeRedis,
+		}
+
+		/// <summary>
+		/// Helper to convert enum to a valid string sent/received in from the API
+		/// <returns>String</returns>
+		/// </summary>
+		public static String CacheTypesToString(CacheTypes value)
+		{
+			switch(value)
+			{
+				case CacheTypes.CacheTypeNone: return "";
+				case CacheTypes.CacheTypeRedis: return "redis";
+			}
+			return "";
+		}
+
 		/// <value>Property Id - int</value>
 		[JsonPropertyName("id")]
 		public int Id { get; set; }
@@ -153,6 +174,26 @@ namespace MerchantAPI
 		/// <value>Property ItemModuleUninstallable - bool</value>
 		[JsonPropertyName("item_adel")]
 		public bool ItemModuleUninstallable { get; set; }
+
+		/// <value>Property CacheType - String</value>
+		[JsonPropertyName("cache_type")]
+		public String CacheType { get; set; }
+
+		/// <value>Property RedisHost - String</value>
+		[JsonPropertyName("redishost")]
+		public String RedisHost { get; set; }
+
+		/// <value>Property RedisPort - int</value>
+		[JsonPropertyName("redisport")]
+		public int RedisPort { get; set; }
+
+		/// <value>Property RedisTimeout - int</value>
+		[JsonPropertyName("redisto")]
+		public int RedisTimeout { get; set; }
+
+		/// <value>Property RedisExpiration - int</value>
+		[JsonPropertyName("redisex")]
+		public int RedisExpiration { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -467,6 +508,51 @@ namespace MerchantAPI
 		public bool GetItemModuleUninstallable()
 		{
 			return ItemModuleUninstallable;
+		}
+
+		/// <summary>
+		/// Getter for cache_type.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetCacheType()
+		{
+			return CacheType;
+		}
+
+		/// <summary>
+		/// Getter for redishost.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetRedisHost()
+		{
+			return RedisHost;
+		}
+
+		/// <summary>
+		/// Getter for redisport.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetRedisPort()
+		{
+			return RedisPort;
+		}
+
+		/// <summary>
+		/// Getter for redisto.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetRedisTimeout()
+		{
+			return RedisTimeout;
+		}
+
+		/// <summary>
+		/// Getter for redisex.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetRedisExpiration()
+		{
+			return RedisExpiration;
 		}
 	}
 }

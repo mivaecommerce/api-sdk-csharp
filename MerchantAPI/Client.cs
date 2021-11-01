@@ -83,7 +83,7 @@ namespace MerchantAPI
 		/// <param name="apiToken"></param>
 		/// </summary>
 		public Client(String endpoint, Authenticator authenticator) :
-			base( endpoint, authenticator)
+			base(endpoint, authenticator)
 		{
 
 		}

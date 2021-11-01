@@ -365,6 +365,10 @@ namespace MerchantAPI
 		[JsonPropertyName("notes")]
 		public List<OrderNote> Notes { get; set; } = new List<OrderNote>();
 
+		/// <value>Property Parts - List<OrderPart></value>
+		[JsonPropertyName("parts")]
+		public List<OrderPart> Parts { get; set; } = new List<OrderPart>();
+
 		/// <value>Property CustomFieldValues - CustomFieldValues</value>
 		[JsonPropertyName("CustomField_Values")]
 		public CustomFieldValues CustomFieldValues { get; set; }
@@ -970,6 +974,15 @@ namespace MerchantAPI
 		public List<OrderNote> GetNotes()
 		{
 			return Notes;
+		}
+
+		/// <summary>
+		/// Getter for parts.
+		/// <returns>List<OrderPart></returns>
+		/// </summary>
+		public List<OrderPart> GetParts()
+		{
+			return Parts;
 		}
 
 		/// <summary>

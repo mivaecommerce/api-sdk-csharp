@@ -61,6 +61,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Attributes")]
 		public List<CSSResourceVersionAttribute> Attributes { get; set; } = new List<CSSResourceVersionAttribute>();
 
+		/// <value>Property Notes - String</value>
+		[JsonPropertyName("Notes")]
+		public String Notes { get; set; }
+
 		/// <summary>
 		/// Getter for CSSResource_ID.
 		/// <returns>int</returns>
@@ -158,6 +162,15 @@ namespace MerchantAPI
 		public List<CSSResourceVersionAttribute> GetAttributes()
 		{
 			return Attributes;
+		}
+
+		/// <summary>
+		/// Getter for Notes.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetNotes()
+		{
+			return Notes;
 		}
 
 		/// <summary>
@@ -271,6 +284,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Notes.
+		/// <param name="value">String</param>
+		/// <returns>CSSResourceChange</returns>
+		/// </summary>
+		public CSSResourceChange SetNotes(String value)
+		{
+			Notes = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Add a CSSResourceVersionAttribute.
 		/// <param name="CSSResourceVersionAttribute"></param>
 		/// <returns>CSSResourceChange</returns>
@@ -372,6 +396,10 @@ namespace MerchantAPI
 
 					value.Attributes = JsonSerializer.Deserialize<List<CSSResourceVersionAttribute>>(ref reader, options);
 				}
+				else if (String.Equals(property, "Notes", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Notes = ReadNextString(ref reader, options);
+				}
 				else
 				{
 					throw new MerchantAPIException(String.Format("Unexpected property {0} for CSSResourceChange", property));
@@ -433,6 +461,11 @@ namespace MerchantAPI
 
 			writer.WritePropertyName("Attributes");
 			JsonSerializer.Serialize(writer, value.Attributes, options);
+
+			if (value.Notes != null && value.Notes.Length > 0)
+			{
+				writer.WriteString("Notes", value.Notes);
+			}
 
 			writer.WriteEndObject();
 		}

@@ -41,9 +41,17 @@ namespace MerchantAPI
 		[JsonPropertyName("amount")]
 		public float? Amount { get; set; }
 
+		/// <value>Property FormattedAmount - String</value>
+		[JsonPropertyName("formatted_amount")]
+		public String FormattedAmount { get; set; }
+
 		/// <value>Property DisplayAmount - float</value>
 		[JsonPropertyName("disp_amt")]
 		public float? DisplayAmount { get; set; }
+
+		/// <value>Property FormattedDisplayAmount - String</value>
+		[JsonPropertyName("formatted_disp_amt")]
+		public String FormattedDisplayAmount { get; set; }
 
 		/// <value>Property TaxExempt - bool</value>
 		[JsonPropertyName("tax_exempt")]
@@ -52,6 +60,10 @@ namespace MerchantAPI
 		/// <value>Property Tax - float</value>
 		[JsonPropertyName("tax")]
 		public float Tax { get; set; }
+
+		/// <value>Property FormattedTax - String</value>
+		[JsonPropertyName("formatted_tax")]
+		public String FormattedTax { get; set; }
 
 		/// <summary>
 		/// Getter for order_id.
@@ -108,12 +120,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for formatted_amount.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedAmount()
+		{
+			return FormattedAmount;
+		}
+
+		/// <summary>
 		/// Getter for disp_amt.
 		/// <returns>float</returns>
 		/// </summary>
 		public float? GetDisplayAmount()
 		{
 			return DisplayAmount;
+		}
+
+		/// <summary>
+		/// Getter for formatted_disp_amt.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedDisplayAmount()
+		{
+			return FormattedDisplayAmount;
 		}
 
 		/// <summary>
@@ -132,6 +162,15 @@ namespace MerchantAPI
 		public float GetTax()
 		{
 			return Tax;
+		}
+
+		/// <summary>
+		/// Getter for formatted_tax.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedTax()
+		{
+			return FormattedTax;
 		}
 
 		/// <summary>
@@ -269,9 +308,17 @@ namespace MerchantAPI
 				{
 					value.Amount = ReadNextFloat(ref reader, options);
 				}
+				else if (String.Equals(property, "formatted_amount", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedAmount = ReadNextString(ref reader, options);
+				}
 				else if (String.Equals(property, "disp_amt", StringComparison.OrdinalIgnoreCase))
 				{
 					value.DisplayAmount = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_disp_amt", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedDisplayAmount = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "tax_exempt", StringComparison.OrdinalIgnoreCase))
 				{
@@ -280,6 +327,10 @@ namespace MerchantAPI
 				else if (String.Equals(property, "tax", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Tax = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_tax", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedTax = ReadNextString(ref reader, options);
 				}
 				else
 				{
