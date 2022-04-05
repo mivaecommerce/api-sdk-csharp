@@ -57,9 +57,17 @@ namespace MerchantAPI
 		[JsonPropertyName("Source")]
 		public String Source { get; set; }
 
-		/// <value>Property Settings - TemplateVersionSettings</value>
+		/// <value>Property Settings - VersionSettings</value>
 		[JsonPropertyName("Settings")]
-		public TemplateVersionSettings Settings { get; set; }
+		public VersionSettings Settings { get; set; }
+
+		/// <value>Property Image - String</value>
+		[JsonPropertyName("Image")]
+		public String Image { get; set; }
+
+		/// <value>Property ImageId - int</value>
+		[JsonPropertyName("Image_ID")]
+		public int? ImageId { get; set; }
 
 		/// <value>Property Notes - String</value>
 		[JsonPropertyName("Notes")]
@@ -157,11 +165,29 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for Settings.
-		/// <returns>TemplateVersionSettings</returns>
+		/// <returns>VersionSettings</returns>
 		/// </summary>
-		public TemplateVersionSettings GetSettings()
+		public VersionSettings GetSettings()
 		{
 			return Settings;
+		}
+
+		/// <summary>
+		/// Getter for Image.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetImage()
+		{
+			return Image;
+		}
+
+		/// <summary>
+		/// Getter for Image_ID.
+		/// <returns>int</returns>
+		/// </summary>
+		public int? GetImageId()
+		{
+			return ImageId;
 		}
 
 		/// <summary>
@@ -284,6 +310,28 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Image.
+		/// <param name="value">String</param>
+		/// <returns>PropertyChange</returns>
+		/// </summary>
+		public PropertyChange SetImage(String value)
+		{
+			Image = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Image_ID.
+		/// <param name="value">int</param>
+		/// <returns>PropertyChange</returns>
+		/// </summary>
+		public PropertyChange SetImageId(int value)
+		{
+			ImageId = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Notes.
 		/// <param name="value">String</param>
 		/// <returns>PropertyChange</returns>
@@ -327,7 +375,6 @@ namespace MerchantAPI
 				}
 
 				String property = reader.GetString();
-
 				if (String.Equals(property, "Property_ID", StringComparison.OrdinalIgnoreCase))
 				{
 					value.PropertyId = ReadNextInteger(ref reader, options);
@@ -375,7 +422,15 @@ namespace MerchantAPI
 						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
 					}
 
-					value.Settings = JsonSerializer.Deserialize<TemplateVersionSettings>(ref reader, options);
+					value.Settings = JsonSerializer.Deserialize<VersionSettings>(ref reader, options);
+				}
+				else if (String.Equals(property, "Image", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Image = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "Image_ID", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ImageId = ReadNextInteger(ref reader, options);
 				}
 				else if (String.Equals(property, "Notes", StringComparison.OrdinalIgnoreCase))
 				{
@@ -446,6 +501,16 @@ namespace MerchantAPI
 
 			writer.WritePropertyName("Settings");
 			JsonSerializer.Serialize(writer, value.Settings, options);
+
+			if (value.Image != null && value.Image.Length > 0)
+			{
+				writer.WriteString("Image", value.Image);
+			}
+
+			if (value.ImageId.HasValue)
+			{
+				writer.WriteNumber("Image_ID", value.ImageId.Value);
+			}
 
 			if (value.Notes != null && value.Notes.Length > 0)
 			{

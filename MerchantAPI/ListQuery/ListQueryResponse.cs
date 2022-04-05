@@ -87,7 +87,7 @@ namespace MerchantAPI
 		{
 			return typeToConvert == typeof(ListQueryResult<T>) || typeToConvert.IsSubclassOf(typeof(ListQueryResult<T>));
 		}
-
+		
 		public override ListQueryResult<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			ListQueryResult<T> result = new ListQueryResult<T>();

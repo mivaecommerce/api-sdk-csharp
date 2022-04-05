@@ -10,8 +10,13 @@ For api documentation visit [https://docs.miva.com/json-api](https://docs.miva.c
 
 # Requirements
 
-- Miva Merchant 10.0+
-- C# .NET Standard 2.1
+- Miva Merchant 10+
+- Any of the following targets:
+    - .NET 5.0
+    - .NET Framework 4.8
+    - .NET Framework 4.7.2
+    - NetCoreApp 3.1
+    - NetStandard 2.1
 
 **For Miva Merchant 9.x, use the 1.x release**
 
@@ -109,4 +114,4 @@ A quick way to get the correct format if you have the key associated with your l
 
 This library is licensed under the `Miva SDK License Agreement`.
 
-See the `LICENSE` file for more information.
+See the `LICENSE.txt` file for more information.

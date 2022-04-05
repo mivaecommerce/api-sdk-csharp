@@ -69,15 +69,18 @@ namespace MerchantAPI
 
 		/// <value>Property FirstDate - int</value>
 		[JsonPropertyName("firstdate")]
-		public int FirstDate { get; set; }
+		[JsonConverter(typeof(DateTimeStructConverter))]
+		public DateTime FirstDate { get; set; }
 
 		/// <value>Property LastDate - int</value>
 		[JsonPropertyName("lastdate")]
-		public int LastDate { get; set; }
+		[JsonConverter(typeof(DateTimeStructConverter))]
+		public DateTime LastDate { get; set; }
 
 		/// <value>Property NextDate - int</value>
 		[JsonPropertyName("nextdate")]
-		public int NextDate { get; set; }
+		[JsonConverter(typeof(DateTimeStructConverter))]
+		public DateTime NextDate { get; set; }
 
 		/// <value>Property Status - String</value>
 		[JsonPropertyName("status")]
@@ -87,9 +90,10 @@ namespace MerchantAPI
 		[JsonPropertyName("message")]
 		public String Message { get; set; }
 
-		/// <value>Property CancelDate - String</value>
+		/// <value>Property CancelDate - int</value>
 		[JsonPropertyName("cncldate")]
-		public String CancelDate { get; set; }
+		[JsonConverter(typeof(DateTimeStructConverter))]
+		public DateTime CancelDate { get; set; }
 
 		/// <value>Property Tax - float</value>
 		[JsonPropertyName("tax")]
@@ -122,6 +126,19 @@ namespace MerchantAPI
 		/// <value>Property FormattedTotal - String</value>
 		[JsonPropertyName("formatted_total")]
 		public String FormattedTotal { get; set; }
+
+		/// <value>Property AuthorizationFailureCount - int</value>
+		[JsonPropertyName("authfails")]
+		public int AuthorizationFailureCount { get; set; }
+
+		/// <value>Property LastAuthorizationFailure - int</value>
+		[JsonPropertyName("lastafail")]
+		[JsonConverter(typeof(DateTimeStructConverter))]
+		public DateTime LastAuthorizationFailure { get; set; }
+
+		/// <value>Property Options - List<SubscriptionOption></value>
+		[JsonPropertyName("options")]
+		public List<SubscriptionOption> Options { get; set; } = new List<SubscriptionOption>();
 
 		/// <summary>
 		/// Getter for id.
@@ -242,27 +259,27 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for firstdate.
-		/// <returns>int</returns>
+		/// <returns>DateTime</returns>
 		/// </summary>
-		public int GetFirstDate()
+		public DateTime GetFirstDate()
 		{
 			return FirstDate;
 		}
 
 		/// <summary>
 		/// Getter for lastdate.
-		/// <returns>int</returns>
+		/// <returns>DateTime</returns>
 		/// </summary>
-		public int GetLastDate()
+		public DateTime GetLastDate()
 		{
 			return LastDate;
 		}
 
 		/// <summary>
 		/// Getter for nextdate.
-		/// <returns>int</returns>
+		/// <returns>DateTime</returns>
 		/// </summary>
-		public int GetNextDate()
+		public DateTime GetNextDate()
 		{
 			return NextDate;
 		}
@@ -287,9 +304,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for cncldate.
-		/// <returns>String</returns>
+		/// <returns>DateTime</returns>
 		/// </summary>
-		public String GetCancelDate()
+		public DateTime GetCancelDate()
 		{
 			return CancelDate;
 		}
@@ -364,6 +381,33 @@ namespace MerchantAPI
 		public String GetFormattedTotal()
 		{
 			return FormattedTotal;
+		}
+
+		/// <summary>
+		/// Getter for authfails.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetAuthorizationFailureCount()
+		{
+			return AuthorizationFailureCount;
+		}
+
+		/// <summary>
+		/// Getter for lastafail.
+		/// <returns>DateTime</returns>
+		/// </summary>
+		public DateTime GetLastAuthorizationFailure()
+		{
+			return LastAuthorizationFailure;
+		}
+
+		/// <summary>
+		/// Getter for options.
+		/// <returns>List<SubscriptionOption></returns>
+		/// </summary>
+		public List<SubscriptionOption> GetOptions()
+		{
+			return Options;
 		}
 	}
 }

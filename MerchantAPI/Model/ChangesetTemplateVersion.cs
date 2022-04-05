@@ -68,9 +68,9 @@ namespace MerchantAPI
 		[JsonPropertyName("source")]
 		public String Source { get; set; }
 
-		/// <value>Property Settings - TemplateVersionSettings</value>
+		/// <value>Property Settings - VersionSettings</value>
 		[JsonPropertyName("settings")]
-		public TemplateVersionSettings Settings { get; set; }
+		public VersionSettings Settings { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -191,9 +191,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for settings.
-		/// <returns>TemplateVersionSettings</returns>
+		/// <returns>VersionSettings</returns>
 		/// </summary>
-		public TemplateVersionSettings GetSettings()
+		public VersionSettings GetSettings()
 		{
 			return Settings;
 		}

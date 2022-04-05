@@ -103,7 +103,8 @@ namespace MerchantAPI
 			"categories",
 			"productshippingrules",
 			"relatedproducts",
-			"uris"
+			"uris",
+			"url"
 		};
 
 		/// The available custom fileters applicable to the request.

@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace MerchantAPI
 {
-	public class OrderItemSubscription : Model
+	public class OrderItemSubscription : Subscription
 	{
 		/// <value>Property Method - String</value>
 		[JsonPropertyName("method")]
@@ -22,10 +22,6 @@ namespace MerchantAPI
 		/// <value>Property ProductSubscriptionTerm - ProductSubscriptionTerm</value>
 		[JsonPropertyName("productsubscriptionterm")]
 		public ProductSubscriptionTerm ProductSubscriptionTerm { get; set; }
-
-		/// <value>Property Options - List<SubscriptionOption></value>
-		[JsonPropertyName("options")]
-		public List<SubscriptionOption> Options { get; set; } = new List<SubscriptionOption>();
 
 		/// <summary>
 		/// Getter for method.
@@ -43,15 +39,6 @@ namespace MerchantAPI
 		public ProductSubscriptionTerm GetProductSubscriptionTerm()
 		{
 			return ProductSubscriptionTerm;
-		}
-
-		/// <summary>
-		/// Getter for options.
-		/// <returns>List<SubscriptionOption></returns>
-		/// </summary>
-		public List<SubscriptionOption> GetOptions()
-		{
-			return Options;
 		}
 	}
 }

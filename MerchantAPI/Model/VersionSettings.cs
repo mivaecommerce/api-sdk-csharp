@@ -14,8 +14,8 @@ using System.Text.Json;
 
 namespace MerchantAPI
 {
-	[JsonConverter(typeof(TemplateVersionSettingsConverter))]
-	public class TemplateVersionSettings : Model
+	[JsonConverter(typeof(VersionSettingsConverter))]
+	public class VersionSettings : Model
 	{
 		public VariableValue Settings { get; set; }
 
@@ -120,7 +120,7 @@ namespace MerchantAPI
 		/// <param name="item"></param>
 		/// <param name="itemValues"></param>
 		/// <returns></returns>
-		public TemplateVersionSettings SetItem(String item, VariableValue itemValue)
+		public VersionSettings SetItem(String item, VariableValue itemValue)
 		{
 			if (Settings == null)
 			{
@@ -142,7 +142,7 @@ namespace MerchantAPI
 		/// <param name="property"></param>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		public TemplateVersionSettings SetItemProperty(String item, String property, VariableValue value)
+		public VersionSettings SetItemProperty(String item, String property, VariableValue value)
 		{
 			if (Settings == null)
 			{
@@ -160,23 +160,23 @@ namespace MerchantAPI
 	/// <summary>
 	/// Handles converting the version settings values model
 	/// </summary>
-	public class  TemplateVersionSettingsConverter : BaseJsonConverter<TemplateVersionSettings>
+	public class  VersionSettingsConverter : BaseJsonConverter<VersionSettings>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return typeToConvert == typeof(TemplateVersionSettings);
+			return typeToConvert == typeof(VersionSettings) || typeToConvert.IsSubclassOf(typeof(VersionSettings));
 		}
 
-		public override TemplateVersionSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override VersionSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			TemplateVersionSettings value = new TemplateVersionSettings();
+			VersionSettings value = new VersionSettings();
 
 			value.Settings = JsonSerializer.Deserialize<VariableValue>(ref reader, options);
 
 			return value;
 		}
 
-		public override void Write(Utf8JsonWriter writer, TemplateVersionSettings model, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, VersionSettings model, JsonSerializerOptions options)
 		{
 			if (model.Settings == null || model.Settings.IsNull())
 			{

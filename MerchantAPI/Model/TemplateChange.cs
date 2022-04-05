@@ -29,9 +29,9 @@ namespace MerchantAPI
 		[JsonPropertyName("Source")]
 		public String Source { get; set; }
 
-		/// <value>Property Settings - TemplateVersionSettings</value>
+		/// <value>Property Settings - VersionSettings</value>
 		[JsonPropertyName("Settings")]
-		public TemplateVersionSettings Settings { get; set; }
+		public VersionSettings Settings { get; set; }
 
 		/// <value>Property Notes - String</value>
 		[JsonPropertyName("Notes")]
@@ -66,9 +66,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for Settings.
-		/// <returns>TemplateVersionSettings</returns>
+		/// <returns>VersionSettings</returns>
 		/// </summary>
-		public TemplateVersionSettings GetSettings()
+		public VersionSettings GetSettings()
 		{
 			return Settings;
 		}
@@ -159,7 +159,6 @@ namespace MerchantAPI
 				}
 
 				String property = reader.GetString();
-
 				if (String.Equals(property, "Template_ID", StringComparison.OrdinalIgnoreCase))
 				{
 					value.TemplateId = ReadNextInteger(ref reader, options);
@@ -179,7 +178,7 @@ namespace MerchantAPI
 						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
 					}
 
-					value.Settings = JsonSerializer.Deserialize<TemplateVersionSettings>(ref reader, options);
+					value.Settings = JsonSerializer.Deserialize<VersionSettings>(ref reader, options);
 				}
 				else if (String.Equals(property, "Notes", StringComparison.OrdinalIgnoreCase))
 				{

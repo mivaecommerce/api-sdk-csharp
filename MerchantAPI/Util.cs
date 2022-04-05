@@ -92,6 +92,21 @@ namespace MerchantAPI
 	}
 
 	/// <summary>
+	/// Structure of a JSON_DateTime value
+	/// </summary>
+	struct DateTimeStruct
+	{
+		public DateTime time_t;
+		public int year;
+		public int month;
+		public int day;
+		public int hour;
+		public int minute;
+		public int second;
+		public int timezone;
+	}
+
+	/// <summary>
 	/// Handles JSON serialization/deserialization of a DateTime to/from unix timestamp
 	/// </summary>
 	public class UnixTimestampConverter : BaseJsonConverter<DateTime>
@@ -109,6 +124,86 @@ namespace MerchantAPI
 			}
 
 			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
+		}
+
+		public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+		{
+			writer.WriteNumberValue(new DateTimeOffset(value).ToUnixTimeSeconds());
+		}
+	}
+
+	/// <summary>
+	/// Handles JSON serialization/deserialization of a DateTime to/from JSON_DateTime structure
+	/// </summary>
+	public class DateTimeStructConverter : BaseJsonConverter<DateTime>
+	{
+		public override bool CanConvert(Type typeToConvert)
+		{
+			return typeToConvert == typeof(DateTime);
+		}
+
+		public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			DateTimeStruct data = new DateTimeStruct();
+
+			if (reader.TokenType != JsonTokenType.StartObject)
+			{
+				throw new MerchantAPIException(String.Format("Expected start of object but got {0}", reader.TokenType));
+			}
+
+			while (reader.Read())
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					if (reader.TokenType == JsonTokenType.EndObject)
+					{
+						break;
+					}
+
+					throw new MerchantAPIException(String.Format("Expected property name but got {0}", reader.TokenType));
+				}
+
+				String property = reader.GetString();
+
+				if (String.Equals(property, "time_t", StringComparison.OrdinalIgnoreCase))
+				{
+					data.time_t = ReadNextTimestamp(ref reader, options);
+				}
+				else if (String.Equals(property, "year", StringComparison.OrdinalIgnoreCase))
+				{
+					data.year = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "month", StringComparison.OrdinalIgnoreCase))
+				{
+					data.month = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "day", StringComparison.OrdinalIgnoreCase))
+				{
+					data.day = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "hour", StringComparison.OrdinalIgnoreCase))
+				{
+					data.hour = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "minute", StringComparison.OrdinalIgnoreCase))
+				{
+					data.minute = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "second", StringComparison.OrdinalIgnoreCase))
+				{
+					data.second = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "timezone", StringComparison.OrdinalIgnoreCase))
+				{
+					data.timezone = ReadNextInteger(ref reader, options);
+				}
+				else
+				{
+					throw new MerchantAPIException(String.Format("Unexpected property {0} for DateTimeStruct", property));
+				}
+			}
+
+			return data.time_t;
 		}
 
 		public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
@@ -533,6 +628,25 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Reads the next value as a long
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		/// <exception cref="MerchantAPIException"></exception>
+		protected long ReadNextLong(ref Utf8JsonReader reader, JsonSerializerOptions options)
+		{
+			reader.Read();
+
+			if (reader.TokenType != JsonTokenType.Number)
+			{
+				throw new MerchantAPIException(String.Format("Expected true or false but encountered {0}", reader.TokenType));
+			}
+
+			return reader.GetInt64();
+		}
+
+		/// <summary>
 		/// Reads the next value as a DateTime from a timestamp
 		/// </summary>
 		/// <param name="reader"></param>
@@ -549,6 +663,79 @@ namespace MerchantAPI
 			}
 
 			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
+		}
+
+		/// <summary>
+		/// Reads the next value as a DateTime from a timestamp structure
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		/// <exception cref="MerchantAPIException"></exception>
+		protected DateTime ReadNextTimestampStruct(ref Utf8JsonReader reader, JsonSerializerOptions options)
+		{
+			DateTimeStruct data = new DateTimeStruct();
+
+			reader.Read();
+
+			if (reader.TokenType != JsonTokenType.StartObject)
+			{
+				throw new MerchantAPIException(String.Format("Expected start of object but got {0}", reader.TokenType));
+			}
+
+			while (reader.Read())
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					if (reader.TokenType == JsonTokenType.EndObject)
+					{
+						break;
+					}
+
+					throw new MerchantAPIException(String.Format("Expected property name but got {0}", reader.TokenType));
+				}
+
+				String property = reader.GetString();
+
+				if (String.Equals(property, "time_t", StringComparison.OrdinalIgnoreCase))
+				{
+					data.time_t = ReadNextTimestamp(ref reader, options);
+				}
+				else if (String.Equals(property, "year", StringComparison.OrdinalIgnoreCase))
+				{
+					data.year = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "month", StringComparison.OrdinalIgnoreCase))
+				{
+					data.month = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "day", StringComparison.OrdinalIgnoreCase))
+				{
+					data.day = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "hour", StringComparison.OrdinalIgnoreCase))
+				{
+					data.hour = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "minute", StringComparison.OrdinalIgnoreCase))
+				{
+					data.minute = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "second", StringComparison.OrdinalIgnoreCase))
+				{
+					data.second = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "timezone", StringComparison.OrdinalIgnoreCase))
+				{
+					data.timezone = ReadNextInteger(ref reader, options);
+				}
+				else
+				{
+					throw new MerchantAPIException(String.Format("Unexpected property {0} for DateTimeStruct", property));
+				}
+			}
+
+			return data.time_t;
 		}
 	}
 }

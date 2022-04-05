@@ -161,10 +161,6 @@ namespace MerchantAPI
 		[JsonPropertyName("options")]
 		public List<OrderItemOption> Options { get; set; } = new List<OrderItemOption>();
 
-		/// <value>Property Subscription - OrderItemSubscription</value>
-		[JsonPropertyName("subscription")]
-		public OrderItemSubscription Subscription { get; set; }
-
 		/// <value>Property Total - float</value>
 		[JsonPropertyName("total")]
 		public float Total { get; set; }
@@ -180,6 +176,10 @@ namespace MerchantAPI
 		/// <value>Property ShipmentId - int</value>
 		[JsonPropertyName("shpmnt_id")]
 		public int ShipmentId { get; set; }
+
+		/// <value>Property Subscription - OrderItemSubscription</value>
+		[JsonPropertyName("subscription")]
+		public OrderItemSubscription Subscription { get; set; }
 
 		/// <summary>
 		/// Getter for order_id.
@@ -407,15 +407,6 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Getter for subscription.
-		/// <returns>OrderItemSubscription</returns>
-		/// </summary>
-		public OrderItemSubscription GetSubscription()
-		{
-			return Subscription;
-		}
-
-		/// <summary>
 		/// Getter for total.
 		/// <returns>float</returns>
 		/// </summary>
@@ -449,6 +440,15 @@ namespace MerchantAPI
 		public int GetShipmentId()
 		{
 			return ShipmentId;
+		}
+
+		/// <summary>
+		/// Getter for subscription.
+		/// <returns>OrderItemSubscription</returns>
+		/// </summary>
+		public OrderItemSubscription GetSubscription()
+		{
+			return Subscription;
 		}
 
 		/// <summary>
@@ -649,7 +649,6 @@ namespace MerchantAPI
 				}
 
 				String property = reader.GetString();
-
 				if (String.Equals(property, "order_id", StringComparison.OrdinalIgnoreCase))
 				{
 					value.OrderId = ReadNextInteger(ref reader, options);
@@ -765,15 +764,6 @@ namespace MerchantAPI
 
 					value.Options = JsonSerializer.Deserialize<List<OrderItemOption>>(ref reader, options);
 				}
-				else if (String.Equals(property, "subscription", StringComparison.OrdinalIgnoreCase))
-				{
-					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
-					{
-						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
-					}
-
-					value.Subscription = JsonSerializer.Deserialize<OrderItemSubscription>(ref reader, options);
-				}
 				else if (String.Equals(property, "total", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Total = ReadNextFloat(ref reader, options);
@@ -789,6 +779,15 @@ namespace MerchantAPI
 				else if (String.Equals(property, "shpmnt_id", StringComparison.OrdinalIgnoreCase))
 				{
 					value.ShipmentId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "subscription", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
+					}
+
+					value.Subscription = JsonSerializer.Deserialize<OrderItemSubscription>(ref reader, options);
 				}
 				else
 				{

@@ -90,6 +90,10 @@ namespace MerchantAPI
 		[JsonPropertyName("sub_count")]
 		public int SubscriptionCount { get; set; }
 
+		/// <value>Property Dates - List<ProductSubscriptionTermDate></value>
+		[JsonPropertyName("dates")]
+		public List<ProductSubscriptionTermDate> Dates { get; set; } = new List<ProductSubscriptionTermDate>();
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -169,6 +173,15 @@ namespace MerchantAPI
 		public int GetSubscriptionCount()
 		{
 			return SubscriptionCount;
+		}
+
+		/// <summary>
+		/// Getter for dates.
+		/// <returns>List<ProductSubscriptionTermDate></returns>
+		/// </summary>
+		public List<ProductSubscriptionTermDate> GetDates()
+		{
+			return Dates;
 		}
 	}
 }

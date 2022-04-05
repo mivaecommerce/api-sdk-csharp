@@ -67,7 +67,8 @@ namespace MerchantAPI
 			"product",
 			"category",
 			"source",
-			"source_notes"
+			"source_notes",
+			"image"
 		};
 
 		/// <summary>

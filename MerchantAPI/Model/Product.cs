@@ -10,9 +10,11 @@
 using System;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace MerchantAPI
 {
+	[JsonConverter(typeof(ProductConverter))]
 	public class Product : Model
 	{
 		/// <value>Property Id - int</value>
@@ -136,6 +138,13 @@ namespace MerchantAPI
 		/// <value>Property Attributes - List<ProductAttribute></value>
 		[JsonPropertyName("attributes")]
 		public List<ProductAttribute> Attributes { get; set; } = new List<ProductAttribute>();
+
+		/// <value>Property Url - String</value>
+		[JsonPropertyName("url")]
+		public String Url { get; set; }
+
+		/// <value>Property ImageTypes - List<KeyValuePair<String, Int>></value>
+		public List<KeyValuePair<String, Int32>> ImageTypes { get; set; } = new List<KeyValuePair<String, Int32>>();
 
 		/// <summary>
 		/// Getter for id.
@@ -405,6 +414,231 @@ namespace MerchantAPI
 		public List<ProductAttribute> GetAttributes()
 		{
 			return Attributes;
+		}
+
+		/// <summary>
+		/// Getter for url.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetUrl()
+		{
+			return Url;
+		}
+	}
+
+	/// <summary>
+	/// Converter for model Product
+	/// </summary>
+	public class ProductConverter : BaseJsonConverter<Product>
+	{
+		public override bool CanConvert(Type typeToConvert)
+		{
+			return typeToConvert == typeof(Product) || typeToConvert.IsSubclassOf(typeof(Product));
+		}
+
+		public override Product Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			Product value = new Product();
+
+			if (reader.TokenType != JsonTokenType.StartObject)
+			{
+				throw new MerchantAPIException(String.Format("Expected start of object but got {0}", reader.TokenType));
+			}
+
+			while(reader.Read())
+			{
+				if (reader.TokenType != JsonTokenType.PropertyName)
+				{
+					if (reader.TokenType == JsonTokenType.EndObject)
+					{
+						return value;
+					}
+
+					throw new MerchantAPIException(String.Format("Expected property name but got {0}", reader.TokenType));
+				}
+
+				String property = reader.GetString();
+				if (String.Equals(property, "id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Id = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Code = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "sku", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Sku = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "name", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Name = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "thumbnail", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Thumbnail = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "image", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Image = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "price", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Price = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_price", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedPrice = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "cost", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Cost = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_cost", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedCost = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "descrip", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Description = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "catcount", StringComparison.OrdinalIgnoreCase))
+				{
+					value.CategoryCount = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "weight", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Weight = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "active", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Active = ReadNextBoolean(ref reader, options);
+				}
+				else if (String.Equals(property, "page_title", StringComparison.OrdinalIgnoreCase))
+				{
+					value.PageTitle = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "taxable", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Taxable = ReadNextBoolean(ref reader, options);
+				}
+				else if (String.Equals(property, "dt_created", StringComparison.OrdinalIgnoreCase))
+				{
+					value.DateTimeCreated = ReadNextTimestamp(ref reader, options);
+				}
+				else if (String.Equals(property, "dt_updated", StringComparison.OrdinalIgnoreCase))
+				{
+					value.DateTimeUpdate = ReadNextTimestamp(ref reader, options);
+				}
+				else if (String.Equals(property, "productinventorysettings", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
+					}
+
+					value.ProductInventorySettings = JsonSerializer.Deserialize<ProductInventorySettings>(ref reader, options);
+				}
+				else if (String.Equals(property, "product_inventory_active", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ProductInventoryActive = ReadNextBoolean(ref reader, options);
+				}
+				else if (String.Equals(property, "product_inventory", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ProductInventory = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "cancat_code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.CanonicalCategoryCode = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "page_code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.PageCode = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "CustomField_Values", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
+					}
+
+					value.CustomFieldValues = JsonSerializer.Deserialize<CustomFieldValues>(ref reader, options);
+				}
+				else if (String.Equals(property, "uris", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.Uris = JsonSerializer.Deserialize<List<Uri>>(ref reader, options);
+				}
+				else if (String.Equals(property, "relatedproducts", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.RelatedProducts = JsonSerializer.Deserialize<List<RelatedProduct>>(ref reader, options);
+				}
+				else if (String.Equals(property, "categories", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.Categories = JsonSerializer.Deserialize<List<Category>>(ref reader, options);
+				}
+				else if (String.Equals(property, "productshippingrules", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
+					}
+
+					value.ProductShippingRules = JsonSerializer.Deserialize<ProductShippingRules>(ref reader, options);
+				}
+				else if (String.Equals(property, "productimagedata", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.ProductImageData = JsonSerializer.Deserialize<List<ProductImageData>>(ref reader, options);
+				}
+				else if (String.Equals(property, "attributes", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.Attributes = JsonSerializer.Deserialize<List<ProductAttribute>>(ref reader, options);
+				}
+				else if (String.Equals(property, "url", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Url = ReadNextString(ref reader, options);
+				}
+				else if (property.StartsWith("imagetype:", StringComparison.OrdinalIgnoreCase))
+				{
+					KeyValuePair<String, Int32> entry = new KeyValuePair<String, Int32>(property.Substring(property.IndexOf(":")+1), ReadNextInteger(ref reader, options));
+					value.ImageTypes.Add(entry);
+				}
+				else
+				{
+					throw new MerchantAPIException(String.Format("Unexpected property {0} for Product", property));
+				}
+			}
+
+			return value;
+		}
+
+		public override void Write(Utf8JsonWriter writer, Product value, JsonSerializerOptions options)
+		{
+			throw new MerchantAPIException("ProductConverter only supports deserialization");
 		}
 	}
 }

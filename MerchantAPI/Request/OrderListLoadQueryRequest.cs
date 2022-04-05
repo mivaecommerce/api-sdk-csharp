@@ -170,7 +170,9 @@ namespace MerchantAPI
 			"discounts",
 			"payments",
 			"notes",
-			"parts"
+			"parts",
+			"shipments",
+			"returns"
 		};
 
 		/// The available custom fileters applicable to the request.

@@ -373,6 +373,19 @@ namespace MerchantAPI
 		[JsonPropertyName("CustomField_Values")]
 		public CustomFieldValues CustomFieldValues { get; set; }
 
+		/// <value>Property DtUpdated - int</value>
+		[JsonPropertyName("dt_updated")]
+		[JsonConverter(typeof(UnixTimestampConverter))]
+		public DateTime DtUpdated { get; set; }
+
+		/// <value>Property Shipments - List<OrderShipment></value>
+		[JsonPropertyName("shipments")]
+		public List<OrderShipment> Shipments { get; set; } = new List<OrderShipment>();
+
+		/// <value>Property Returns - List<OrderReturn></value>
+		[JsonPropertyName("returns")]
+		public List<OrderReturn> Returns { get; set; } = new List<OrderReturn>();
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -992,6 +1005,33 @@ namespace MerchantAPI
 		public CustomFieldValues GetCustomFieldValues()
 		{
 			return CustomFieldValues;
+		}
+
+		/// <summary>
+		/// Getter for dt_updated.
+		/// <returns>DateTime</returns>
+		/// </summary>
+		public DateTime GetDtUpdated()
+		{
+			return DtUpdated;
+		}
+
+		/// <summary>
+		/// Getter for shipments.
+		/// <returns>List<OrderShipment></returns>
+		/// </summary>
+		public List<OrderShipment> GetShipments()
+		{
+			return Shipments;
+		}
+
+		/// <summary>
+		/// Getter for returns.
+		/// <returns>List<OrderReturn></returns>
+		/// </summary>
+		public List<OrderReturn> GetReturns()
+		{
+			return Returns;
 		}
 	}
 }

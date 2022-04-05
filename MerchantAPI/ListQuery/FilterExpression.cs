@@ -616,9 +616,9 @@ namespace MerchantAPI
 		/// <param name="field"></param>
 		/// <param name="values"></param>
 		/// <returns></returns>
-		public FilterExpression IsIn(String field, String[] values)
+		public FilterExpression IsIn<T>(String field, T[] values) where T : IConvertible
 		{
-			return this.Add(field, SearchOperator.IN, String.Join(",", values), SearchType.search);
+			return this.Add(field, SearchOperator.IN, ConvertibleToStringList(values), SearchType.search);
 		}
 
 		/// <summary>
@@ -627,9 +627,9 @@ namespace MerchantAPI
 		/// <param name="field"></param>
 		/// <param name="values"></param>
 		/// <returns></returns>
-		public FilterExpression AndIsIn(String field, String[] values)
+		public FilterExpression AndIsIn<T>(String field, T[] values) where T : IConvertible
 		{
-			return this.Add(field, SearchOperator.IN, String.Join(",", values), SearchType.search_AND);
+			return this.Add(field, SearchOperator.IN, ConvertibleToStringList(values), SearchType.search_AND);
 		}
 
 		/// <summary>
@@ -638,9 +638,9 @@ namespace MerchantAPI
 		/// <param name="field"></param>
 		/// <param name="values"></param>
 		/// <returns></returns>
-		public FilterExpression OrIsIn(String field, String[] values)
+		public FilterExpression OrIsIn<T>(String field, T[] values) where T : IConvertible
 		{
-			return this.Add(field, SearchOperator.IN, String.Join(",", values), SearchType.search_OR);
+			return this.Add(field, SearchOperator.IN, ConvertibleToStringList(values), SearchType.search_OR);
 		}
 
 		/// <summary>
@@ -649,9 +649,9 @@ namespace MerchantAPI
 		/// <param name="field"></param>
 		/// <param name="values"></param>
 		/// <returns></returns>
-		public FilterExpression IsNotIn(String field, String[] values)
+		public FilterExpression IsNotIn<T>(String field, T[] values) where T : IConvertible
 		{
-			return this.Add(field, SearchOperator.NOT_IN, String.Join(",", values), SearchType.search);
+			return this.Add(field, SearchOperator.NOT_IN, ConvertibleToStringList(values), SearchType.search);
 		}
 
 		/// <summary>
@@ -660,9 +660,9 @@ namespace MerchantAPI
 		/// <param name="field"></param>
 		/// <param name="values"></param>
 		/// <returns></returns>
-		public FilterExpression AndIsNotIn(String field, String[] values)
+		public FilterExpression AndIsNotIn<T>(String field, T[] values) where T : IConvertible
 		{
-			return this.Add(field, SearchOperator.NOT_IN, String.Join(",", values), SearchType.search_AND);
+			return this.Add(field, SearchOperator.NOT_IN, ConvertibleToStringList(values), SearchType.search_AND);
 		}
 
 		/// <summary>
@@ -671,9 +671,35 @@ namespace MerchantAPI
 		/// <param name="field"></param>
 		/// <param name="values"></param>
 		/// <returns></returns>
-		public FilterExpression OrIsNotIn(String field, String[] values)
+		public FilterExpression OrIsNotIn<T>(String field, T[] values) where T : IConvertible
 		{
-			return this.Add(field, SearchOperator.NOT_IN, String.Join(",", values), SearchType.search);
+			return this.Add(field, SearchOperator.NOT_IN, ConvertibleToStringList(values), SearchType.search);
+		}
+
+		/// <summary>
+		/// Converts a IConvertible array to a string list for array values
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="invalues"></param>
+		/// <returns></returns>
+		protected String ConvertibleToStringList<T>(T[] invalues)
+		{
+			String result = "";
+
+			foreach (T val in invalues)
+			{
+				if (result.Length == 0)
+				{
+					result += val.ToString();
+				}
+				else
+				{
+					result += ",";
+					result += val.ToString();
+				}
+			}
+
+			return result;
 		}
 	}
 

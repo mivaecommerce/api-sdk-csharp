@@ -71,9 +71,9 @@ namespace MerchantAPI
 		[JsonPropertyName("templ_id")]
 		public int TemplateId { get; set; }
 
-		/// <value>Property Settings - TemplateVersionSettings</value>
+		/// <value>Property Settings - VersionSettings</value>
 		[JsonPropertyName("settings")]
-		public TemplateVersionSettings Settings { get; set; }
+		public VersionSettings Settings { get; set; }
 
 		/// <value>Property Product - Product</value>
 		[JsonPropertyName("product")]
@@ -94,6 +94,22 @@ namespace MerchantAPI
 		/// <value>Property SourceNotes - String</value>
 		[JsonPropertyName("source_notes")]
 		public String SourceNotes { get; set; }
+
+		/// <value>Property ImageId - int</value>
+		[JsonPropertyName("image_id")]
+		public int ImageId { get; set; }
+
+		/// <value>Property Image - String</value>
+		[JsonPropertyName("image")]
+		public String Image { get; set; }
+
+		/// <value>Property ImageRefcount - int</value>
+		[JsonPropertyName("image_refcount")]
+		public int ImageRefcount { get; set; }
+
+		/// <value>Property ImageHeadCount - int</value>
+		[JsonPropertyName("image_head_count")]
+		public int ImageHeadCount { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -223,9 +239,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for settings.
-		/// <returns>TemplateVersionSettings</returns>
+		/// <returns>VersionSettings</returns>
 		/// </summary>
-		public TemplateVersionSettings GetSettings()
+		public VersionSettings GetSettings()
 		{
 			return Settings;
 		}
@@ -273,6 +289,42 @@ namespace MerchantAPI
 		public String GetSourceNotes()
 		{
 			return SourceNotes;
+		}
+
+		/// <summary>
+		/// Getter for image_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetImageId()
+		{
+			return ImageId;
+		}
+
+		/// <summary>
+		/// Getter for image.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetImage()
+		{
+			return Image;
+		}
+
+		/// <summary>
+		/// Getter for image_refcount.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetImageRefcount()
+		{
+			return ImageRefcount;
+		}
+
+		/// <summary>
+		/// Getter for image_head_count.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetImageHeadCount()
+		{
+			return ImageHeadCount;
 		}
 	}
 }
