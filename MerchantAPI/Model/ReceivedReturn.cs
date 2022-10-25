@@ -107,10 +107,6 @@ namespace MerchantAPI
 				{
 					value.AdjustInventory = ReadNextInteger(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for ReceivedReturn", property));
-				}
 			}
 
 			return value;

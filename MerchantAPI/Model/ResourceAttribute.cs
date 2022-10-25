@@ -107,10 +107,6 @@ namespace MerchantAPI
 				{
 					value.Value = ReadNextString(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for ResourceAttribute", property));
-				}
 			}
 
 			return value;

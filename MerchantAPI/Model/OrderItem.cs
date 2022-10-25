@@ -649,6 +649,7 @@ namespace MerchantAPI
 				}
 
 				String property = reader.GetString();
+
 				if (String.Equals(property, "order_id", StringComparison.OrdinalIgnoreCase))
 				{
 					value.OrderId = ReadNextInteger(ref reader, options);
@@ -788,10 +789,6 @@ namespace MerchantAPI
 					}
 
 					value.Subscription = JsonSerializer.Deserialize<OrderItemSubscription>(ref reader, options);
-				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for OrderItem", property));
 				}
 			}
 

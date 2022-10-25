@@ -1,3 +1,27 @@
+# Upgrade Guide from 2.1.0 to 2.2.0
+
+Issue **MMAPI-62** added the inserted object into the response. ProductVariantInsertResponse has had its original response data moved and all calling code should be updated to reflect this change.
+
+***Example usage from 2.1.x***
+
+	ProductVariantInsertResponse response;
+	response.GetProductId();
+	response.GetVariantId();
+
+***Should be updated to for 2.2.x***
+	
+	ProductVariantInsertResponse response;
+	response.GetProductVariant().GetProductId();
+	response.GetProductVariant().GetVariantId();
+
+Issue **MMAPI-67** renamed some model fields and all calling code should be updated. Use the following list to rename all usage in your applications:
+
+	CustomerSubscription.AddressDescrip 		-> CustomerSubscription.AddressDescription
+	CustomerSubscription.AddressAdress 			-> CustomerSubscription.AddressAddress
+	CustomerSubscription.AddressAddress_1		-> CustomerSubscription.AddressAddress1
+	CustomerSubscription.AddressAddress_2		-> CustomerSubscription.AddressAddress2
+	ProductAndSubscriptionTerm.TermDescrip		-> ProductAndSubscriptionTerm.TermDescription
+
 # Upgrade Guide from 2.0.X to 2.1.0+
 
 The class `TemplateVersionSettings` has been renamed to `VersionSettings`.
@@ -31,4 +55,3 @@ Replace all usage of `OrderItemOption` models that call either `GetAttribute()` 
 
 	var itemOption; // A OrderItemOption model loaded from an OrderListLoadQuery, for example
 	itemOption.GetAttributeCode();
-

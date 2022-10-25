@@ -146,9 +146,9 @@ namespace MerchantAPI
 		[JsonPropertyName("paymentcard_type")]
 		public String PaymentCardType { get; set; }
 
-		/// <value>Property AddressDescrip - String</value>
+		/// <value>Property AddressDescription - String</value>
 		[JsonPropertyName("address_descrip")]
-		public String AddressDescrip { get; set; }
+		public String AddressDescription { get; set; }
 
 		/// <value>Property AddressFirstName - String</value>
 		[JsonPropertyName("address_fname")]
@@ -174,17 +174,17 @@ namespace MerchantAPI
 		[JsonPropertyName("address_fax")]
 		public String AddressFax { get; set; }
 
-		/// <value>Property AddressAdress - String</value>
+		/// <value>Property AddressAddress - String</value>
 		[JsonPropertyName("address_addr")]
-		public String AddressAdress { get; set; }
+		public String AddressAddress { get; set; }
 
-		/// <value>Property AddressAddress_1 - String</value>
+		/// <value>Property AddressAddress1 - String</value>
 		[JsonPropertyName("address_addr1")]
-		public String AddressAddress_1 { get; set; }
+		public String AddressAddress1 { get; set; }
 
-		/// <value>Property AddressAddress_2 - String</value>
+		/// <value>Property AddressAddress2 - String</value>
 		[JsonPropertyName("address_addr2")]
-		public String AddressAddress_2 { get; set; }
+		public String AddressAddress2 { get; set; }
 
 		/// <value>Property AddressCity - String</value>
 		[JsonPropertyName("address_city")]
@@ -501,9 +501,9 @@ namespace MerchantAPI
 		/// Getter for address_descrip.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetAddressDescrip()
+		public String GetAddressDescription()
 		{
-			return AddressDescrip;
+			return AddressDescription;
 		}
 
 		/// <summary>
@@ -564,27 +564,27 @@ namespace MerchantAPI
 		/// Getter for address_addr.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetAddressAdress()
+		public String GetAddressAddress()
 		{
-			return AddressAdress;
+			return AddressAddress;
 		}
 
 		/// <summary>
 		/// Getter for address_addr1.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetAddressAddress_1()
+		public String GetAddressAddress1()
 		{
-			return AddressAddress_1;
+			return AddressAddress1;
 		}
 
 		/// <summary>
 		/// Getter for address_addr2.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetAddressAddress_2()
+		public String GetAddressAddress2()
 		{
-			return AddressAddress_2;
+			return AddressAddress2;
 		}
 
 		/// <summary>
@@ -824,7 +824,7 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "address_descrip", StringComparison.OrdinalIgnoreCase))
 				{
-					value.AddressDescrip = ReadNextString(ref reader, options);
+					value.AddressDescription = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "address_fname", StringComparison.OrdinalIgnoreCase))
 				{
@@ -852,15 +852,15 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "address_addr", StringComparison.OrdinalIgnoreCase))
 				{
-					value.AddressAdress = ReadNextString(ref reader, options);
+					value.AddressAddress = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "address_addr1", StringComparison.OrdinalIgnoreCase))
 				{
-					value.AddressAddress_1 = ReadNextString(ref reader, options);
+					value.AddressAddress1 = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "address_addr2", StringComparison.OrdinalIgnoreCase))
 				{
-					value.AddressAddress_2 = ReadNextString(ref reader, options);
+					value.AddressAddress2 = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "address_city", StringComparison.OrdinalIgnoreCase))
 				{
@@ -1018,10 +1018,6 @@ namespace MerchantAPI
 					}
 
 					value.Options = JsonSerializer.Deserialize<List<SubscriptionOption>>(ref reader, options);
-				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for CustomerSubscription", property));
 				}
 			}
 

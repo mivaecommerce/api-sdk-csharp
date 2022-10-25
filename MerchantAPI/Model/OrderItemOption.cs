@@ -85,6 +85,10 @@ namespace MerchantAPI
 		[JsonPropertyName("opt_prompt")]
 		public String OptionPrompt { get; set; }
 
+		/// <value>Property Discounts - List<OrderItemOptionDiscount></value>
+		[JsonPropertyName("discounts")]
+		public List<OrderItemOptionDiscount> Discounts { get; set; } = new List<OrderItemOptionDiscount>();
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -236,6 +240,15 @@ namespace MerchantAPI
 		public String GetOptionPrompt()
 		{
 			return OptionPrompt;
+		}
+
+		/// <summary>
+		/// Getter for discounts.
+		/// <returns>List<OrderItemOptionDiscount></returns>
+		/// </summary>
+		public List<OrderItemOptionDiscount> GetDiscounts()
+		{
+			return Discounts;
 		}
 
 		/// <summary>

@@ -252,10 +252,6 @@ namespace MerchantAPI
 
 					value.Attributes = JsonSerializer.Deserialize<List<OrderProductAttribute>>(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for OrderProduct", property));
-				}
 			}
 
 			return value;

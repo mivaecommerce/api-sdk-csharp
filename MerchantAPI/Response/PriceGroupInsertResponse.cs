@@ -18,9 +18,9 @@ namespace MerchantAPI
 	/// </summary>
 	public class PriceGroupInsertResponse : Response
 	{
-		/// Response field id.
-		[JsonPropertyName("id")]
-		public int Id { get; set; }
+		/// The response model
+		[JsonPropertyName("data")]
+		public PriceGroup Data { get; set; }
 
 		/// <summary>
 		///  Constructor
@@ -31,12 +31,12 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Getter for id.
-		/// <returns>int</returns>
+		///  Getter for priceGroup.
+		/// <returns>PriceGroup</returns>
 		/// </summary>
-		public int GetId()
+		public PriceGroup GetPriceGroup()
 		{
-			return Id;
+			return Data;
 		}
 	}
 }

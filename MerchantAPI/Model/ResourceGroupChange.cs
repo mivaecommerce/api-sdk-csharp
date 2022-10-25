@@ -171,10 +171,6 @@ namespace MerchantAPI
 					}
 					value.LinkedJavaScriptResources = JsonSerializer.Deserialize<List<String>>(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for ResourceGroupChange", property));
-				}
 			}
 
 			return value;

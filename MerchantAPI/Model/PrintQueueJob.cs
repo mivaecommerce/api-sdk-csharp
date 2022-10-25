@@ -48,10 +48,6 @@ namespace MerchantAPI
 		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime DateTimeCreated { get; set; }
 
-		/// <value>Property PrintQueueDescription - String</value>
-		[JsonPropertyName("printqueue_descrip")]
-		public String PrintQueueDescription { get; set; }
-
 		/// <value>Property UserName - String</value>
 		[JsonPropertyName("user_name")]
 		public String UserName { get; set; }
@@ -134,15 +130,6 @@ namespace MerchantAPI
 		public DateTime GetDateTimeCreated()
 		{
 			return DateTimeCreated;
-		}
-
-		/// <summary>
-		/// Getter for printqueue_descrip.
-		/// <returns>String</returns>
-		/// </summary>
-		public String GetPrintQueueDescription()
-		{
-			return PrintQueueDescription;
 		}
 
 		/// <summary>

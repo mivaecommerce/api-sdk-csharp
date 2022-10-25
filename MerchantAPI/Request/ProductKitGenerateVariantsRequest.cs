@@ -22,6 +22,28 @@ namespace MerchantAPI
 	[JsonConverter(typeof(RequestConverter))]
 	public class ProductKitGenerateVariantsRequest : Request
 	{
+		/// Enumeration VariantPricingMethod
+		public enum VariantPricingMethod
+		{
+			Master,
+			Specific,
+			Sum,
+		}
+
+		/// <summary>
+		/// Helper to convert enum to a valid string sent/received in from the API
+		/// <returns>String</returns>
+		/// </summary>
+		public static String VariantPricingMethodToString(VariantPricingMethod value)
+		{
+			switch(value) {
+				case VariantPricingMethod.Master: return "master";
+				case VariantPricingMethod.Specific: return "specific";
+				case VariantPricingMethod.Sum: return "sum";
+			}
+			return "";
+		}
+
 		/// Request field Product_ID.
 		[JsonPropertyName("Product_ID")]
 		public int? ProductId { get; set; }
@@ -36,7 +58,7 @@ namespace MerchantAPI
 
 		/// Request field Pricing_Method.
 		[JsonPropertyName("Pricing_Method")]
-		public int PricingMethod { get; set; }
+		public String PricingMethod { get; set; }
 
 		/// <summary>
 		/// Request constructor.
@@ -88,9 +110,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for Pricing_Method.
-		/// <returns>int</returns>
+		/// <returns>String</returns>
 		/// </summary>
-		public int GetPricingMethod()
+		public String GetPricingMethod()
 		{
 			return PricingMethod;
 		}
@@ -130,10 +152,10 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Setter for Pricing_Method.
-		/// <param name="value">int</param>
+		/// <param name="value">String</param>
 		/// <returns>ProductKitGenerateVariantsRequest</returns>
 		/// </summary>
-		public ProductKitGenerateVariantsRequest SetPricingMethod(int value)
+		public ProductKitGenerateVariantsRequest SetPricingMethod(String value)
 		{
 			PricingMethod = value;
 			return this;
@@ -161,7 +183,7 @@ namespace MerchantAPI
 				writer.WriteString("Edit_Product", EditProduct);
 			}
 
-			writer.WriteNumber("Pricing_Method", PricingMethod);
+			writer.WriteString("Pricing_Method", PricingMethod);
 		}
 
 		/// <summary>
@@ -191,6 +213,28 @@ namespace MerchantAPI
 			if (Client == null) throw new MerchantAPIException("Client not assigned to request");
 
 			return await Client.SendRequestAsync<ProductKitGenerateVariantsRequest, ProductKitGenerateVariantsResponse>(this);
+		}
+		
+		/// <summary>
+		/// Setter for Pricing_Method.
+		/// <param name="value">KitVariantPricingMethod</param>
+		/// <returns>ProductKitGenerateVariantsRequest</returns>
+		/// </summary>
+		public ProductKitGenerateVariantsRequest SetPricingMethod(VariantPricingMethod value)
+		{
+			PricingMethod = VariantPricingMethodToString(value);
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Pricing_Method. Backwards compatibility with less than 2.2.0
+		/// <param name="value">int</param>
+		/// <returns>ProductKitGenerateVariantsRequest</returns>
+		/// </summary>
+		public ProductKitGenerateVariantsRequest SetPricingMethod(int value)
+		{
+			PricingMethod = value.ToString();
+			return this;
 		}
 	}
 }

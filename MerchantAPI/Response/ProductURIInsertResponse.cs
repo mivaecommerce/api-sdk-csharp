@@ -18,12 +18,25 @@ namespace MerchantAPI
 	/// </summary>
 	public class ProductURIInsertResponse : Response
 	{
+		/// The response model
+		[JsonPropertyName("data")]
+		public Uri Data { get; set; }
+
 		/// <summary>
 		///  Constructor
 		/// </summary>
 		public ProductURIInsertResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		///  Getter for uri.
+		/// <returns>Uri</returns>
+		/// </summary>
+		public Uri GetUri()
+		{
+			return Data;
 		}
 	}
 }

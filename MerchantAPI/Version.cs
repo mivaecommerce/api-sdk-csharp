@@ -18,7 +18,7 @@ namespace MerchantAPI
 	{
 		public const int VERSION_MAJOR = 2;
 
-		public const int VERSION_MINOR = 1;
+		public const int VERSION_MINOR = 2;
 
 		public const int VERSION_PATCH = 0;
 

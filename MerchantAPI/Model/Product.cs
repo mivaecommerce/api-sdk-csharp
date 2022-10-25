@@ -458,6 +458,7 @@ namespace MerchantAPI
 				}
 
 				String property = reader.GetString();
+
 				if (String.Equals(property, "id", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Id = ReadNextInteger(ref reader, options);
@@ -626,10 +627,6 @@ namespace MerchantAPI
 				{
 					KeyValuePair<String, Int32> entry = new KeyValuePair<String, Int32>(property.Substring(property.IndexOf(":")+1), ReadNextInteger(ref reader, options));
 					value.ImageTypes.Add(entry);
-				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for Product", property));
 				}
 			}
 

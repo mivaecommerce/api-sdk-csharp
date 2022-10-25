@@ -18,13 +18,9 @@ namespace MerchantAPI
 	/// </summary>
 	public class SubscriptionAndOrderItemAddResponse : Response
 	{
-		/// Response field total.
-		[JsonPropertyName("total")]
-		public float Total { get; set; }
-
-		/// Response field formatted_total.
-		[JsonPropertyName("formatted_total")]
-		public String FormattedTotal { get; set; }
+		/// The response model
+		[JsonPropertyName("data")]
+		public OrderTotalAndItem Data { get; set; }
 
 		/// <summary>
 		///  Constructor
@@ -35,21 +31,12 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Getter for total.
-		/// <returns>float</returns>
+		///  Getter for orderTotalAndItem.
+		/// <returns>OrderTotalAndItem</returns>
 		/// </summary>
-		public float GetTotal()
+		public OrderTotalAndItem GetOrderTotalAndItem()
 		{
-			return Total;
-		}
-
-		/// <summary>
-		/// Getter for formatted_total.
-		/// <returns>string</returns>
-		/// </summary>
-		public String GetFormattedTotal()
-		{
-			return FormattedTotal;
+			return Data;
 		}
 	}
 }

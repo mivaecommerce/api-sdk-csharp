@@ -85,9 +85,10 @@ namespace MerchantAPI
 		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime DateTimeStamp { get; set; }
 
-		/// <value>Property Expires - String</value>
+		/// <value>Property Expires - int</value>
 		[JsonPropertyName("expires")]
-		public String Expires { get; set; }
+		[JsonConverter(typeof(UnixTimestampConverter))]
+		public DateTime Expires { get; set; }
 
 		/// <value>Property PaymentId - int</value>
 		[JsonPropertyName("pay_id")]
@@ -196,9 +197,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for expires.
-		/// <returns>String</returns>
+		/// <returns>DateTime</returns>
 		/// </summary>
-		public String GetExpires()
+		public DateTime GetExpires()
 		{
 			return Expires;
 		}

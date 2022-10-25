@@ -18,12 +18,25 @@ namespace MerchantAPI
 	/// </summary>
 	public class AvailabilityGroupInsertResponse : Response
 	{
+		/// The response model
+		[JsonPropertyName("data")]
+		public AvailabilityGroup Data { get; set; }
+
 		/// <summary>
 		///  Constructor
 		/// </summary>
 		public AvailabilityGroupInsertResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		///  Getter for availabilityGroup.
+		/// <returns>AvailabilityGroup</returns>
+		/// </summary>
+		public AvailabilityGroup GetAvailabilityGroup()
+		{
+			return Data;
 		}
 	}
 }

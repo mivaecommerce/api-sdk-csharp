@@ -159,6 +159,7 @@ namespace MerchantAPI
 				}
 
 				String property = reader.GetString();
+
 				if (String.Equals(property, "Template_ID", StringComparison.OrdinalIgnoreCase))
 				{
 					value.TemplateId = ReadNextInteger(ref reader, options);
@@ -183,10 +184,6 @@ namespace MerchantAPI
 				else if (String.Equals(property, "Notes", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Notes = ReadNextString(ref reader, options);
-				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for TemplateChange", property));
 				}
 			}
 

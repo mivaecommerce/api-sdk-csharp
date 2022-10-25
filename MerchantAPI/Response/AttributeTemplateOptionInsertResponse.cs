@@ -18,12 +18,25 @@ namespace MerchantAPI
 	/// </summary>
 	public class AttributeTemplateOptionInsertResponse : Response
 	{
+		/// The response model
+		[JsonPropertyName("data")]
+		public AttributeTemplateOption Data { get; set; }
+
 		/// <summary>
 		///  Constructor
 		/// </summary>
 		public AttributeTemplateOptionInsertResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		///  Getter for attributeTemplateOption.
+		/// <returns>AttributeTemplateOption</returns>
+		/// </summary>
+		public AttributeTemplateOption GetAttributeTemplateOption()
+		{
+			return Data;
 		}
 	}
 }

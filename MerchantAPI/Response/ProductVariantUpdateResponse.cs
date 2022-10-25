@@ -18,38 +18,12 @@ namespace MerchantAPI
 	/// </summary>
 	public class ProductVariantUpdateResponse : Response
 	{
-		/// Response field product_id.
-		[JsonPropertyName("product_id")]
-		public int ProductId { get; set; }
-
-		/// Response field variant_id.
-		[JsonPropertyName("variant_id")]
-		public int VariantId { get; set; }
-
 		/// <summary>
 		///  Constructor
 		/// </summary>
 		public ProductVariantUpdateResponse() :
 			base()
 		{
-		}
-
-		/// <summary>
-		/// Getter for product_id.
-		/// <returns>int</returns>
-		/// </summary>
-		public int GetProductId()
-		{
-			return ProductId;
-		}
-
-		/// <summary>
-		/// Getter for variant_id.
-		/// <returns>int</returns>
-		/// </summary>
-		public int GetVariantId()
-		{
-			return VariantId;
 		}
 	}
 }

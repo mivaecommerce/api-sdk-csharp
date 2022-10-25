@@ -27,9 +27,9 @@ namespace MerchantAPI
 		[JsonPropertyName("term_term")]
 		public int TermTerm { get; set; }
 
-		/// <value>Property TermDescrip - String</value>
+		/// <value>Property TermDescription - String</value>
 		[JsonPropertyName("term_descrip")]
-		public String TermDescrip { get; set; }
+		public String TermDescription { get; set; }
 
 		/// <value>Property TermN - int</value>
 		[JsonPropertyName("term_n")]
@@ -78,9 +78,9 @@ namespace MerchantAPI
 		/// Getter for term_descrip.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetTermDescrip()
+		public String GetTermDescription()
 		{
-			return TermDescrip;
+			return TermDescription;
 		}
 
 		/// <summary>

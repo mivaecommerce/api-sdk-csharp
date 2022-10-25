@@ -332,10 +332,6 @@ namespace MerchantAPI
 				{
 					value.FormattedTax = ReadNextString(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for OrderCharge", property));
-				}
 			}
 
 			return value;

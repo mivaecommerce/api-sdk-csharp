@@ -29,6 +29,18 @@ namespace MerchantAPI
 		[JsonPropertyName("option_id")]
 		public int? OptionId { get; set; }
 
+		/// <value>Property AttributeCode - String</value>
+		[JsonPropertyName("attr_code")]
+		public String AttributeCode { get; set; }
+
+		/// <value>Property AttributeTemplateAttributeCode - String</value>
+		[JsonPropertyName("attmpat_code")]
+		public String AttributeTemplateAttributeCode { get; set; }
+
+		/// <value>Property OptionCode - String</value>
+		[JsonPropertyName("option_code")]
+		public String OptionCode { get; set; }
+
 		/// <summary>
 		/// Getter for attr_id.
 		/// <returns>int</returns>
@@ -54,6 +66,33 @@ namespace MerchantAPI
 		public int? GetOptionId()
 		{
 			return OptionId;
+		}
+
+		/// <summary>
+		/// Getter for attr_code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetAttributeCode()
+		{
+			return AttributeCode;
+		}
+
+		/// <summary>
+		/// Getter for attmpat_code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetAttributeTemplateAttributeCode()
+		{
+			return AttributeTemplateAttributeCode;
+		}
+
+		/// <summary>
+		/// Getter for option_code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetOptionCode()
+		{
+			return OptionCode;
 		}
 
 		/// <summary>
@@ -86,6 +125,39 @@ namespace MerchantAPI
 		public VariantAttribute SetOptionId(int value)
 		{
 			OptionId = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for attr_code.
+		/// <param name="value">String</param>
+		/// <returns>VariantAttribute</returns>
+		/// </summary>
+		public VariantAttribute SetAttributeCode(String value)
+		{
+			AttributeCode = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for attmpat_code.
+		/// <param name="value">String</param>
+		/// <returns>VariantAttribute</returns>
+		/// </summary>
+		public VariantAttribute SetAttributeTemplateAttributeCode(String value)
+		{
+			AttributeTemplateAttributeCode = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for option_code.
+		/// <param name="value">String</param>
+		/// <returns>VariantAttribute</returns>
+		/// </summary>
+		public VariantAttribute SetOptionCode(String value)
+		{
+			OptionCode = value;
 			return this;
 		}
 	}
@@ -135,9 +207,17 @@ namespace MerchantAPI
 				{
 					value.OptionId = ReadNextInteger(ref reader, options);
 				}
-				else
+				else if (String.Equals(property, "attr_code", StringComparison.OrdinalIgnoreCase))
 				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for VariantAttribute", property));
+					value.AttributeCode = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "attmpat_code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.AttributeTemplateAttributeCode = ReadNextString(ref reader, options);
+				}
+				else if (String.Equals(property, "option_code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.OptionCode = ReadNextString(ref reader, options);
 				}
 			}
 
@@ -161,6 +241,21 @@ namespace MerchantAPI
 			if (value.OptionId.HasValue)
 			{
 				writer.WriteNumber("option_id", value.OptionId.Value);
+			}
+
+			if (value.AttributeCode != null && value.AttributeCode.Length > 0)
+			{
+				writer.WriteString("attr_code", value.AttributeCode);
+			}
+
+			if (value.AttributeTemplateAttributeCode != null && value.AttributeTemplateAttributeCode.Length > 0)
+			{
+				writer.WriteString("attmpat_code", value.AttributeTemplateAttributeCode);
+			}
+
+			if (value.OptionCode != null && value.OptionCode.Length > 0)
+			{
+				writer.WriteString("option_code", value.OptionCode);
 			}
 
 			writer.WriteEndObject();

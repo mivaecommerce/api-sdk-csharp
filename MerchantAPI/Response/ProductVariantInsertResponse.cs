@@ -18,19 +18,9 @@ namespace MerchantAPI
 	/// </summary>
 	public class ProductVariantInsertResponse : Response
 	{
+		/// The response model
 		[JsonPropertyName("data")]
-		public DataFields Data { get; set; }
-
-		/// Non model data container containing the response fields in the data propery
-		public struct DataFields
-		{
-			/// Response field product_id.
-			[JsonPropertyName("product_id")]
-			public int ProductId { get; set; }
-			/// Response field variant_id.
-			[JsonPropertyName("variant_id")]
-			public int VariantId { get; set; }
-		}
+		public ProductVariant Data { get; set; }
 
 		/// <summary>
 		///  Constructor
@@ -41,21 +31,12 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Getter for product_id.
-		/// <returns>int</returns>
+		///  Getter for productVariant.
+		/// <returns>ProductVariant</returns>
 		/// </summary>
-		public int GetProductId()
+		public ProductVariant GetProductVariant()
 		{
-			return Data.ProductId;
-		}
-
-		/// <summary>
-		/// Getter for variant_id.
-		/// <returns>int</returns>
-		/// </summary>
-		public int GetVariantId()
-		{
-			return Data.VariantId;
+			return Data;
 		}
 	}
 }

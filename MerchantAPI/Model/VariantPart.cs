@@ -21,6 +21,10 @@ namespace MerchantAPI
 		[JsonPropertyName("part_id")]
 		public int? PartId { get; set; }
 
+		/// <value>Property PartCode - String</value>
+		[JsonPropertyName("part_code")]
+		public String PartCode { get; set; }
+
 		/// <value>Property Quantity - int</value>
 		[JsonPropertyName("quantity")]
 		public int? Quantity { get; set; }
@@ -32,6 +36,15 @@ namespace MerchantAPI
 		public int? GetPartId()
 		{
 			return PartId;
+		}
+
+		/// <summary>
+		/// Getter for part_code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetPartCode()
+		{
+			return PartCode;
 		}
 
 		/// <summary>
@@ -51,6 +64,17 @@ namespace MerchantAPI
 		public VariantPart SetPartId(int value)
 		{
 			PartId = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for part_code.
+		/// <param name="value">String</param>
+		/// <returns>VariantPart</returns>
+		/// </summary>
+		public VariantPart SetPartCode(String value)
+		{
+			PartCode = value;
 			return this;
 		}
 
@@ -103,13 +127,13 @@ namespace MerchantAPI
 				{
 					value.PartId = ReadNextInteger(ref reader, options);
 				}
+				else if (String.Equals(property, "part_code", StringComparison.OrdinalIgnoreCase))
+				{
+					value.PartCode = ReadNextString(ref reader, options);
+				}
 				else if (String.Equals(property, "quantity", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Quantity = ReadNextInteger(ref reader, options);
-				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for VariantPart", property));
 				}
 			}
 
@@ -123,6 +147,11 @@ namespace MerchantAPI
 			if (value.PartId.HasValue)
 			{
 				writer.WriteNumber("part_id", value.PartId.Value);
+			}
+
+			if (value.PartCode != null && value.PartCode.Length > 0)
+			{
+				writer.WriteString("part_code", value.PartCode);
 			}
 
 			if (value.Quantity.HasValue)

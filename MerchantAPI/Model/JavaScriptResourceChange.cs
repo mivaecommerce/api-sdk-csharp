@@ -400,10 +400,6 @@ namespace MerchantAPI
 				{
 					value.Notes = ReadNextString(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for JavaScriptResourceChange", property));
-				}
 			}
 
 			return value;

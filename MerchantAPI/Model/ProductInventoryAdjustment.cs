@@ -174,10 +174,6 @@ namespace MerchantAPI
 				{
 					value.Adjustment = ReadNextFloat(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for ProductInventoryAdjustment", property));
-				}
 			}
 
 			return value;

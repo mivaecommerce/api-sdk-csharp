@@ -18,12 +18,25 @@ namespace MerchantAPI
 	/// </summary>
 	public class CategoryInsertResponse : Response
 	{
+		/// The response model
+		[JsonPropertyName("data")]
+		public Category Data { get; set; }
+
 		/// <summary>
 		///  Constructor
 		/// </summary>
 		public CategoryInsertResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		///  Getter for category.
+		/// <returns>Category</returns>
+		/// </summary>
+		public Category GetCategory()
+		{
+			return Data;
 		}
 	}
 }

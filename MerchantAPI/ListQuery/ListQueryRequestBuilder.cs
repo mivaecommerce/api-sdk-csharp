@@ -19,12 +19,12 @@ namespace MerchantAPI
 	/// Allows you to dynamically construct a custom request to the API.
 	/// Useful for modules or unimplemented functionality within this version
 	/// </summary>
-	[JsonConverter(typeof(RequestBuilderConverter))]
-	public class RequestBuilder : Request
+	[JsonConverter(typeof(ListQueryRequestBuilderConverter))]
+	public class ListQueryRequestBuilder : ListQueryRequest
 	{
 		public Dictionary<String, dynamic> Data { get; set; } = new Dictionary<String, dynamic>();
 
-		public RequestBuilder(BaseClient client = null)
+		public ListQueryRequestBuilder(BaseClient client = null)
 		{
 			Client = client;
 			Scope = RequestScope.Store;
@@ -34,9 +34,9 @@ namespace MerchantAPI
 		/// Set a fields value in the root data container
 		/// <param name="field">String</returns>
 		/// <param name="value">dynamic</returns>
-		/// <returns>RequestBuilder</returns>
+		/// <returns>ListQueryRequestBuilder</returns>
 		/// </summary>
-		public RequestBuilder SetField(String field, dynamic value)
+		public ListQueryRequestBuilder SetField(String field, dynamic value)
 		{
 			Data[field] = value;
 			return this;
@@ -73,27 +73,27 @@ namespace MerchantAPI
 		/// </summary>
 		override public Response ReadResponse(ref Utf8JsonReader reader, JsonSerializerOptions options)
 		{
-			return JsonSerializer.Deserialize<RequestBuilderResponse>(ref reader, options);
+			return JsonSerializer.Deserialize<ListQueryRequestBuilderResponse>(ref reader, options);
 		}
 
 		/// <summary>
 		/// Send the request for a response, blocking
-		/// <returns>RequestBuilderResponse</returns>
+		/// <returns>ListQueryRequestBuilderResponse</returns>
 		/// </summary>
-		public new RequestBuilderResponse Send()
+		public new ListQueryRequestBuilderResponse Send()
 		{
-			return Client.SendRequestAsync<RequestBuilder, RequestBuilderResponse>(this).Result;
+			return Client.SendRequestAsync<ListQueryRequestBuilder, ListQueryRequestBuilderResponse>(this).Result;
 		}
 
 		/// <summary>
 		/// Send the request for a response, async
 		/// <returns>Task<RequestBuilderResponse></returns>
 		/// </summary>
-		public new async Task<RequestBuilderResponse> SendAsync()
+		public new async Task<ListQueryRequestBuilderResponse> SendAsync()
 		{
 			if (Client == null) throw new MerchantAPIException("Client not assigned to request");
 
-			return await Client.SendRequestAsync<RequestBuilder, RequestBuilderResponse>(this);
+			return await Client.SendRequestAsync<ListQueryRequestBuilder, ListQueryRequestBuilderResponse>(this);
 		}
 
 		/// <summary>
@@ -104,6 +104,7 @@ namespace MerchantAPI
 		virtual new public void Write(Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			base.Write(writer, options);
+
 			JSONEncoderHelper.Write(Data, writer, options);
 		}
 	}
@@ -111,7 +112,7 @@ namespace MerchantAPI
 	/// <summary>
 	/// Response for a ResponseBuilder
 	/// </summary>
-	public class RequestBuilderResponse : Response
+	public class ListQueryRequestBuilderResponse : Response
 	{
 		[JsonPropertyName("data")]
 		public VariableValue Data { get; set; } = new VariableValue();
@@ -127,21 +128,21 @@ namespace MerchantAPI
 	}
 
 	/// <summary>
-	/// Handles serialization of a RequestBuilder
+	/// Handles serialization of a ListQueryRequestBuilder
 	/// </summary>
-	public class RequestBuilderConverter : BaseJsonConverter<RequestBuilder>
+	public class ListQueryRequestBuilderConverter : BaseJsonConverter<ListQueryRequestBuilder>
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
-			return typeToConvert == typeof(RequestBuilder) || typeToConvert.IsSubclassOf(typeof(RequestBuilder));
+			return typeToConvert == typeof(ListQueryRequestBuilder) || typeToConvert.IsSubclassOf(typeof(ListQueryRequestBuilder));
 		}
 
-		public override RequestBuilder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override ListQueryRequestBuilder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			throw new NotImplementedException("RequestBuilder do not support deserialization");
+			throw new NotImplementedException("ListQueryRequestBuilder do not support deserialization");
 		}
 
-		public override void Write(Utf8JsonWriter writer, RequestBuilder builder, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, ListQueryRequestBuilder builder, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
 

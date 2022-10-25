@@ -12,6 +12,7 @@ For api documentation visit [https://docs.miva.com/json-api](https://docs.miva.c
 
 - Miva Merchant 10+
 - Any of the following targets:
+    - .NET 6.0
     - .NET 5.0
     - .NET Framework 4.8
     - .NET Framework 4.7.2

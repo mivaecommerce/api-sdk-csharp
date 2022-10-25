@@ -20,7 +20,7 @@ namespace MerchantAPI
 	/// <see>https://docs.miva.com/json-api/functions/customersubscriptionlist_load_query</see>
 	/// </summary>
 	[JsonConverter(typeof(RequestConverter))]
-	public class CustomerSubscriptionListLoadQueryRequest : ListQueryRequest
+	public class CustomerSubscriptionListLoadQueryRequest : SubscriptionListLoadQueryRequest
 	{
 		/// Request field Customer_ID.
 		[JsonPropertyName("Customer_ID")]
@@ -37,137 +37,6 @@ namespace MerchantAPI
 		/// Request field CustomField_Values.
 		[JsonPropertyName("CustomField_Values")]
 		public CustomFieldValues CustomFieldValues { get; set; }
-
-		/// The available search fields applicable to the request.
-		override public String[] AvailableSearchFields { get; } =
-		{
-			"id",
-			"order_id",
-			"quantity",
-			"termrem",
-			"termproc",
-			"firstdate",
-			"lastdate",
-			"nextdate",
-			"status",
-			"message",
-			"cncldate",
-			"tax",
-			"shipping",
-			"subtotal",
-			"total",
-			"authfails",
-			"lastafail",
-			"frequency",
-			"term",
-			"descrip",
-			"n",
-			"fixed_dow",
-			"fixed_dom",
-			"sub_count",
-			"customer_login",
-			"customer_pw_email",
-			"customer_business_title",
-			"product_code",
-			"product_name",
-			"product_sku",
-			"product_price",
-			"product_cost",
-			"product_weight",
-			"product_descrip",
-			"product_taxable",
-			"product_thumbnail",
-			"product_image",
-			"product_active",
-			"product_page_title",
-			"product_cancat_code",
-			"product_page_code",
-			"address_descrip",
-			"address_fname",
-			"address_lname",
-			"address_email",
-			"address_phone",
-			"address_fax",
-			"address_comp",
-			"address_addr1",
-			"address_addr2",
-			"address_city",
-			"address_state",
-			"address_zip",
-			"address_cntry",
-			"product_inventory",
-			"product_inventory_active",
-			"product_inventory"
-		};
-
-		/// The available sort fields applicable to the request.
-		override public String[] AvailableSortFields { get; } =
-		{
-			"id",
-			"order_id",
-			"custpc_id",
-			"quantity",
-			"termrem",
-			"termproc",
-			"firstdate",
-			"lastdate",
-			"nextdate",
-			"status",
-			"message",
-			"cncldate",
-			"tax",
-			"shipping",
-			"subtotal",
-			"total",
-			"authfails",
-			"lastafail",
-			"frequency",
-			"term",
-			"descrip",
-			"n",
-			"fixed_dow",
-			"fixed_dom",
-			"sub_count",
-			"customer_login",
-			"customer_pw_email",
-			"customer_business_title",
-			"product_code",
-			"product_name",
-			"product_sku",
-			"product_cancat_code",
-			"product_page_code",
-			"product_price",
-			"product_cost",
-			"product_weight",
-			"product_descrip",
-			"product_taxable",
-			"product_thumbnail",
-			"product_image",
-			"product_active",
-			"product_page_title",
-			"address_descrip",
-			"address_fname",
-			"address_lname",
-			"address_email",
-			"address_phone",
-			"address_fax",
-			"address_comp",
-			"address_addr1",
-			"address_addr2",
-			"address_city",
-			"address_state",
-			"address_zip",
-			"address_cntry",
-			"product_inventory"
-		};
-
-		/// The available on demand columns applicable to the request.
-		override public String[] AvailableOnDemandColumns { get; } =
-		{
-			"imagetypes",
-			"imagetype_count",
-			"product_descrip"
-		};
 
 		/// <summary>
 		/// Request constructor.

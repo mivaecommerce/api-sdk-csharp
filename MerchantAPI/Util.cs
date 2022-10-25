@@ -737,6 +737,195 @@ namespace MerchantAPI
 
 			return data.time_t;
 		}
+
+		public void WriteDynamicDictionary(Dictionary<String, dynamic> Data, Utf8JsonWriter writer, JsonSerializerOptions options)
+		{
+			JSONEncoderHelper.Write(Data, writer, options);
+		}
+	}
+
+	/// <summary>
+	/// Helper class for encoding various dynamic data types to a writer.
+	/// </summary>
+	public class JSONEncoderHelper
+	{
+		/// <summary>
+		/// Serializes the Request to JSON for sending to the API, called from RequestConverter
+		/// <param name="writer">Utf8JsonWriter</param>
+		/// <returns>void</returns>
+		/// </summary>
+		static public void Write(Dictionary<String, dynamic> Data, Utf8JsonWriter writer, JsonSerializerOptions options)
+		{
+			foreach (KeyValuePair<String, dynamic> entry in Data)
+			{
+				WriteEntry(entry, writer, options);
+			}
+		}
+
+		/// <summary>
+		/// Writes a key value pair
+		/// </summary>
+		/// <param name="entry"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
+		static public void WriteEntry(KeyValuePair<String, dynamic> entry, Utf8JsonWriter writer, JsonSerializerOptions options)
+		{
+			if (entry.Value is IConvertible)
+			{
+				WriteConvertibleKeyValue(entry.Key, entry.Value, writer, options);
+			}
+			else if (entry.Value is Dictionary<String, dynamic>)
+			{
+				WriteDictionary(entry.Key, entry.Value, writer, options);
+			}
+			else if (entry.Value is List<dynamic>)
+			{
+				WriteList(entry.Key, entry.Value, writer, options);
+			}
+			else if (entry.Value is Model)
+			{
+				writer.WritePropertyName(entry.Key);
+				JsonSerializer.Serialize(writer, entry.Value, options);
+			}
+			else
+			{
+				throw new MerchantAPIException(String.Format("Unsupported data type for entry"));
+			}
+		}
+
+		/// <summary>
+		/// Writes a dictionary
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="dict"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
+		static public void WriteDictionary(String key, Dictionary<String, dynamic> dict, Utf8JsonWriter writer, JsonSerializerOptions options)
+		{
+			if (key.Length > 0)
+			{
+				writer.WritePropertyName(key);
+			}
+
+			writer.WriteStartObject();
+
+			foreach (KeyValuePair<String, dynamic> entry in dict)
+			{
+				WriteEntry(entry, writer, options);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		/// <summary>
+		/// Writes a list of values
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="list"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
+		static public void WriteList(String key, List<dynamic> list, Utf8JsonWriter writer, JsonSerializerOptions options)
+		{
+			if (key.Length > 0)
+			{
+				writer.WritePropertyName(key);
+			}
+
+			writer.WriteStartArray();
+
+			foreach (dynamic entry in list)
+			{
+				if (entry is IConvertible)
+				{
+					WriteConvertibleValue(entry, writer, options);
+				}
+				else if (entry is Model)
+				{
+					JsonSerializer.Serialize(writer, entry, options);
+				}
+				else if (entry is Dictionary<String, dynamic>)
+				{
+					WriteDictionary("", entry, writer, options);
+				}
+				else if (entry is List<dynamic>)
+				{
+					WriteList("", entry, writer, options);
+				}
+				else
+				{
+					throw new MerchantAPIException(String.Format("Unsupported data type for list entry"));
+				}
+			}
+
+			writer.WriteEndArray();
+		}
+
+		/// <summary>
+		/// Writes an IConvertible key and value
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
+		static public void WriteConvertibleKeyValue(String key, IConvertible value, Utf8JsonWriter writer, JsonSerializerOptions options)
+		{
+			if (Util.IsDecimal(value))
+			{
+				if (Util.IsFloat(value))
+				{
+					writer.WriteNumber(key, (float)value);
+				}
+				else
+				{
+					writer.WriteNumber(key, (double)value);
+				}
+			}
+			else if (Util.IsBoolean(value))
+			{
+				writer.WriteBoolean(key, (bool)value);
+			}
+			else if (Util.IsNumeric(value))
+			{
+				writer.WriteNumber(key, (int)value);
+			}
+			else
+			{
+				writer.WriteString(key, value.ToString());
+			}
+		}
+
+		/// <summary>
+		/// Writes an IConvertible value
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="writer"></param>
+		/// <param name="options"></param>
+		static public void WriteConvertibleValue(IConvertible value, Utf8JsonWriter writer, JsonSerializerOptions options)
+		{
+			if (Util.IsDecimal(value))
+			{
+				if (Util.IsFloat(value))
+				{
+					writer.WriteNumberValue((float)value);
+				}
+				else
+				{
+					writer.WriteNumberValue((double)value);
+				}
+			}
+			else if (Util.IsBoolean(value))
+			{
+				writer.WriteBooleanValue((bool)value);
+			}
+			else if (Util.IsNumeric(value))
+			{
+				writer.WriteNumberValue((int)value);
+			}
+			else
+			{
+				writer.WriteStringValue(value.ToString());
+			}
+		}
 	}
 }
 

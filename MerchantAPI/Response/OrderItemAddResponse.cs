@@ -20,7 +20,7 @@ namespace MerchantAPI
 	{
 		/// The response model
 		[JsonPropertyName("data")]
-		public OrderTotal Data { get; set; }
+		public OrderTotalAndItem Data { get; set; }
 
 		/// <summary>
 		///  Constructor
@@ -31,10 +31,10 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		///  Getter for orderTotal.
-		/// <returns>OrderTotal</returns>
+		///  Getter for orderTotalAndItem.
+		/// <returns>OrderTotalAndItem</returns>
 		/// </summary>
-		public OrderTotal GetOrderTotal()
+		public OrderTotalAndItem GetOrderTotalAndItem()
 		{
 			return Data;
 		}

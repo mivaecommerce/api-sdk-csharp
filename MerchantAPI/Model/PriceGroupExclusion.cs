@@ -130,10 +130,6 @@ namespace MerchantAPI
 				{
 					value.Scope = ReadNextString(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for PriceGroupExclusion", property));
-				}
 			}
 
 			return value;

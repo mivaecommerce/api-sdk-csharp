@@ -18,16 +18,9 @@ namespace MerchantAPI
 	/// </summary>
 	public class PrintQueueJobInsertResponse : Response
 	{
+		/// The response model
 		[JsonPropertyName("data")]
-		public DataFields Data { get; set; }
-
-		/// Non model data container containing the response fields in the data propery
-		public struct DataFields
-		{
-			/// Response field id.
-			[JsonPropertyName("id")]
-			public int Id { get; set; }
-		}
+		public PrintQueueJob Data { get; set; }
 
 		/// <summary>
 		///  Constructor
@@ -38,12 +31,12 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Getter for id.
-		/// <returns>int</returns>
+		///  Getter for printQueueJob.
+		/// <returns>PrintQueueJob</returns>
 		/// </summary>
-		public int GetId()
+		public PrintQueueJob GetPrintQueueJob()
 		{
-			return Data.Id;
+			return Data;
 		}
 	}
 }

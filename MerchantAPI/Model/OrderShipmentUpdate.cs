@@ -202,10 +202,6 @@ namespace MerchantAPI
 				{
 					value.Cost = ReadNextFloat(ref reader, options);
 				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for OrderShipmentUpdate", property));
-				}
 			}
 
 			return value;

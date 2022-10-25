@@ -122,6 +122,7 @@ namespace MerchantAPI
 				}
 
 				String property = reader.GetString();
+
 				if (String.Equals(property, "code", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Code = ReadNextString(ref reader, options);
@@ -133,10 +134,6 @@ namespace MerchantAPI
 				else if (String.Equals(property, "value", StringComparison.OrdinalIgnoreCase))
 				{
 					value.Value = ReadNextString(ref reader, options);
-				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for SubscriptionAttribute", property));
 				}
 			}
 

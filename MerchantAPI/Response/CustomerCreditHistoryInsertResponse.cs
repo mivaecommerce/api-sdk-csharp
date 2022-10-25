@@ -18,12 +18,25 @@ namespace MerchantAPI
 	/// </summary>
 	public class CustomerCreditHistoryInsertResponse : Response
 	{
+		/// The response model
+		[JsonPropertyName("data")]
+		public CustomerCreditHistory Data { get; set; }
+
 		/// <summary>
 		///  Constructor
 		/// </summary>
 		public CustomerCreditHistoryInsertResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		///  Getter for customerCreditHistory.
+		/// <returns>CustomerCreditHistory</returns>
+		/// </summary>
+		public CustomerCreditHistory GetCustomerCreditHistory()
+		{
+			return Data;
 		}
 	}
 }

@@ -13,30 +13,25 @@ using System.Text.Json.Serialization;
 namespace MerchantAPI
 {
 	/// <summary>
-	/// API Response for ProductImage_Add.
-	/// <see>https://docs.miva.com/json-api/functions/productimage_add</see>
+	/// API Response for SubscriptionList_Load_Query.
+	/// <see>https://docs.miva.com/json-api/functions/subscriptionlist_load_query</see>
 	/// </summary>
-	public class ProductImageAddResponse : Response
+	public class SubscriptionListLoadQueryResponse : ListQueryResponse<Subscription>
 	{
-		/// The response model
-		[JsonPropertyName("data")]
-		public ProductImageData Data { get; set; }
-
 		/// <summary>
 		///  Constructor
 		/// </summary>
-		public ProductImageAddResponse() :
+		public SubscriptionListLoadQueryResponse() :
 			base()
 		{
 		}
-
 		/// <summary>
-		///  Getter for productImageData.
-		/// <returns>ProductImageData</returns>
+		///  Getter for subscriptions.
+		/// <returns>Subscription[]</returns>
 		/// </summary>
-		public ProductImageData GetProductImageData()
+		public List<Subscription> GetSubscriptions()
 		{
-			return Data;
+			return Data.Data;
 		}
 	}
 }
