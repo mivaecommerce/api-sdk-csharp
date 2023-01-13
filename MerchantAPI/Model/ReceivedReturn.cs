@@ -107,6 +107,10 @@ namespace MerchantAPI
 				{
 					value.AdjustInventory = ReadNextInteger(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

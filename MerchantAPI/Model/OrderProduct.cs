@@ -252,6 +252,10 @@ namespace MerchantAPI
 
 					value.Attributes = JsonSerializer.Deserialize<List<OrderProductAttribute>>(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

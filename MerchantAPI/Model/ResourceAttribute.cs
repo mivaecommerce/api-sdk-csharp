@@ -107,6 +107,10 @@ namespace MerchantAPI
 				{
 					value.Value = ReadNextString(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

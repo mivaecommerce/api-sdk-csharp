@@ -482,7 +482,7 @@ namespace MerchantAPI
 				}
 				else
 				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0}", property));
+					reader.Skip();
 				}
 			}
 

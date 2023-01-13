@@ -219,6 +219,10 @@ namespace MerchantAPI
 				{
 					value.OptionCode = ReadNextString(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

@@ -20,7 +20,7 @@ namespace MerchantAPI
 
 		public const int VERSION_MINOR = 2;
 
-		public const int VERSION_PATCH = 0;
+		public const int VERSION_PATCH = 1;
 
 		new public static String ToString()
 		{

@@ -790,6 +790,10 @@ namespace MerchantAPI
 
 					value.Subscription = JsonSerializer.Deserialize<OrderItemSubscription>(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

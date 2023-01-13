@@ -48,7 +48,7 @@ namespace MerchantAPI
 		/// <param name="responseMessage"></param>
 		virtual public void LogResponse(Response response, HttpResponseMessage responseMessage)
 		{
-			WriteLine(String.Format("\r\n============= Response: {0} [HEADERS] =============\r\n", response.GetRequest().GetFunction()));
+			WriteLine(String.Format("\r\n============= Response: {0} [HEADERS] =============\r\n", response != null ? response.GetRequest().GetFunction() : ""));
 
 			foreach (var header in response.HttpResponse.Headers)
 			{
@@ -56,8 +56,17 @@ namespace MerchantAPI
 				WriteLine(String.Format("{0} = {1}", header.Key, String.Join("", header.Value)));
 			}
 
-			WriteLine(String.Format("\r\n============= Response: {0} [BODY] =============\r\n", response.GetRequest().GetFunction()));
+			WriteLine(String.Format("\r\n============= Response: {0} [BODY] =============\r\n", response != null ? response.GetRequest().GetFunction() : ""));
 			WriteLine(responseMessage.Content.ReadAsStringAsync().Result);
+		}
+
+		/// <summary>
+		/// Logs the response
+		/// </summary>
+		/// <param name="responseMessage"></param>
+		virtual public void LogResponse(HttpResponseMessage responseMessage)
+		{
+			LogResponse(null, responseMessage);
 		}
 
 		/// <summary>

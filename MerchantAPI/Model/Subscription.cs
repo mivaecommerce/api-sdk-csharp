@@ -69,17 +69,17 @@ namespace MerchantAPI
 
 		/// <value>Property FirstDate - int</value>
 		[JsonPropertyName("firstdate")]
-		[JsonConverter(typeof(DateTimeStructConverter))]
+		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime FirstDate { get; set; }
 
 		/// <value>Property LastDate - int</value>
 		[JsonPropertyName("lastdate")]
-		[JsonConverter(typeof(DateTimeStructConverter))]
+		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime LastDate { get; set; }
 
 		/// <value>Property NextDate - int</value>
 		[JsonPropertyName("nextdate")]
-		[JsonConverter(typeof(DateTimeStructConverter))]
+		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime NextDate { get; set; }
 
 		/// <value>Property Status - String</value>
@@ -92,7 +92,7 @@ namespace MerchantAPI
 
 		/// <value>Property CancelDate - int</value>
 		[JsonPropertyName("cncldate")]
-		[JsonConverter(typeof(DateTimeStructConverter))]
+		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime CancelDate { get; set; }
 
 		/// <value>Property Tax - float</value>
@@ -133,7 +133,7 @@ namespace MerchantAPI
 
 		/// <value>Property LastAuthorizationFailure - int</value>
 		[JsonPropertyName("lastafail")]
-		[JsonConverter(typeof(DateTimeStructConverter))]
+		[JsonConverter(typeof(UnixTimestampConverter))]
 		public DateTime LastAuthorizationFailure { get; set; }
 
 		/// <value>Property Options - List<SubscriptionOption></value>

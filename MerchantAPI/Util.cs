@@ -107,7 +107,7 @@ namespace MerchantAPI
 	}
 
 	/// <summary>
-	/// Handles JSON serialization/deserialization of a DateTime to/from unix timestamp
+	/// Handles JSON serialization/deserialization of a DateTime to/from JSON_DateTime structure or integer value
 	/// </summary>
 	public class UnixTimestampConverter : BaseJsonConverter<DateTime>
 	{
@@ -118,35 +118,13 @@ namespace MerchantAPI
 
 		public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			if (reader.TokenType != JsonTokenType.Number)
-			{
-				throw new MerchantAPIException(String.Format("Expected number but got {0}", reader.TokenType));
-			}
-
-			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
-		}
-
-		public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
-		{
-			writer.WriteNumberValue(new DateTimeOffset(value).ToUnixTimeSeconds());
-		}
-	}
-
-	/// <summary>
-	/// Handles JSON serialization/deserialization of a DateTime to/from JSON_DateTime structure
-	/// </summary>
-	public class DateTimeStructConverter : BaseJsonConverter<DateTime>
-	{
-		public override bool CanConvert(Type typeToConvert)
-		{
-			return typeToConvert == typeof(DateTime);
-		}
-
-		public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
 			DateTimeStruct data = new DateTimeStruct();
 
-			if (reader.TokenType != JsonTokenType.StartObject)
+			if (reader.TokenType == JsonTokenType.Number)
+			{
+				return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
+			}
+			else if (reader.TokenType != JsonTokenType.StartObject)
 			{
 				throw new MerchantAPIException(String.Format("Expected start of object but got {0}", reader.TokenType));
 			}
@@ -167,7 +145,8 @@ namespace MerchantAPI
 
 				if (String.Equals(property, "time_t", StringComparison.OrdinalIgnoreCase))
 				{
-					data.time_t = ReadNextTimestamp(ref reader, options);
+					reader.Read();
+					data.time_t = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
 				}
 				else if (String.Equals(property, "year", StringComparison.OrdinalIgnoreCase))
 				{
@@ -199,7 +178,7 @@ namespace MerchantAPI
 				}
 				else
 				{
-					throw new MerchantAPIException(String.Format("Unexpected property {0} for DateTimeStruct", property));
+					reader.Skip();
 				}
 			}
 
@@ -210,6 +189,14 @@ namespace MerchantAPI
 		{
 			writer.WriteNumberValue(new DateTimeOffset(value).ToUnixTimeSeconds());
 		}
+	}
+
+	/// <summary>
+	/// Handles JSON serialization/deserialization of a DateTime to/from unix timestamp
+	/// Alias of UnixTimestampConverter
+	/// </summary>
+	public class DateTimeStructConverter : UnixTimestampConverter
+	{
 	}
 
 	/// <summary>
@@ -647,7 +634,7 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Reads the next value as a DateTime from a timestamp
+		/// Reads the next value as a DateTime from a timestamp structure or integer
 		/// </summary>
 		/// <param name="reader"></param>
 		/// <param name="options"></param>
@@ -655,32 +642,17 @@ namespace MerchantAPI
 		/// <exception cref="MerchantAPIException"></exception>
 		protected DateTime ReadNextTimestamp(ref Utf8JsonReader reader, JsonSerializerOptions options)
 		{
-			reader.Read();
-
-			if (reader.TokenType != JsonTokenType.Number)
-			{
-				throw new MerchantAPIException(String.Format("Expected true or false but encountered {0}", reader.TokenType));
-			}
-
-			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
-		}
-
-		/// <summary>
-		/// Reads the next value as a DateTime from a timestamp structure
-		/// </summary>
-		/// <param name="reader"></param>
-		/// <param name="options"></param>
-		/// <returns></returns>
-		/// <exception cref="MerchantAPIException"></exception>
-		protected DateTime ReadNextTimestampStruct(ref Utf8JsonReader reader, JsonSerializerOptions options)
-		{
 			DateTimeStruct data = new DateTimeStruct();
 
 			reader.Read();
 
-			if (reader.TokenType != JsonTokenType.StartObject)
+			if (reader.TokenType == JsonTokenType.Number)
 			{
-				throw new MerchantAPIException(String.Format("Expected start of object but got {0}", reader.TokenType));
+				return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
+			}
+			else if (reader.TokenType != JsonTokenType.StartObject)
+			{
+				throw new MerchantAPIException(String.Format("Expected start of object or number but got {0}", reader.TokenType));
 			}
 
 			while (reader.Read())
@@ -699,7 +671,8 @@ namespace MerchantAPI
 
 				if (String.Equals(property, "time_t", StringComparison.OrdinalIgnoreCase))
 				{
-					data.time_t = ReadNextTimestamp(ref reader, options);
+					reader.Read();
+					data.time_t = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(TimeSpan.FromSeconds(reader.GetInt64()));
 				}
 				else if (String.Equals(property, "year", StringComparison.OrdinalIgnoreCase))
 				{
@@ -736,6 +709,20 @@ namespace MerchantAPI
 			}
 
 			return data.time_t;
+		}
+
+
+		/// <summary>
+		/// Reads the next value as a DateTime from a timestamp structure or integer
+		/// Alias of ReadNextTimestamp
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		/// <exception cref="MerchantAPIException"></exception>
+		protected DateTime ReadNextTimestampStruct(ref Utf8JsonReader reader, JsonSerializerOptions options)
+		{
+			return ReadNextTimestamp(ref reader, options);
 		}
 
 		public void WriteDynamicDictionary(Dictionary<String, dynamic> Data, Utf8JsonWriter writer, JsonSerializerOptions options)

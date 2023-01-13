@@ -130,6 +130,10 @@ namespace MerchantAPI
 				{
 					value.Scope = ReadNextString(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

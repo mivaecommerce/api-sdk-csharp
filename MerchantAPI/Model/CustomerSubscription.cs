@@ -948,15 +948,15 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "firstdate", StringComparison.OrdinalIgnoreCase))
 				{
-					value.FirstDate = ReadNextTimestampStruct(ref reader, options);
+					value.FirstDate = ReadNextTimestamp(ref reader, options);
 				}
 				else if (String.Equals(property, "lastdate", StringComparison.OrdinalIgnoreCase))
 				{
-					value.LastDate = ReadNextTimestampStruct(ref reader, options);
+					value.LastDate = ReadNextTimestamp(ref reader, options);
 				}
 				else if (String.Equals(property, "nextdate", StringComparison.OrdinalIgnoreCase))
 				{
-					value.NextDate = ReadNextTimestampStruct(ref reader, options);
+					value.NextDate = ReadNextTimestamp(ref reader, options);
 				}
 				else if (String.Equals(property, "status", StringComparison.OrdinalIgnoreCase))
 				{
@@ -968,7 +968,7 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "cncldate", StringComparison.OrdinalIgnoreCase))
 				{
-					value.CancelDate = ReadNextTimestampStruct(ref reader, options);
+					value.CancelDate = ReadNextTimestamp(ref reader, options);
 				}
 				else if (String.Equals(property, "tax", StringComparison.OrdinalIgnoreCase))
 				{
@@ -1008,7 +1008,7 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "lastafail", StringComparison.OrdinalIgnoreCase))
 				{
-					value.LastAuthorizationFailure = ReadNextTimestampStruct(ref reader, options);
+					value.LastAuthorizationFailure = ReadNextTimestamp(ref reader, options);
 				}
 				else if (String.Equals(property, "options", StringComparison.OrdinalIgnoreCase))
 				{
@@ -1018,6 +1018,10 @@ namespace MerchantAPI
 					}
 
 					value.Options = JsonSerializer.Deserialize<List<SubscriptionOption>>(ref reader, options);
+				}
+				else
+				{
+					reader.Skip();
 				}
 			}
 

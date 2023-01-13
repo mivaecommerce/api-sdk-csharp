@@ -158,6 +158,13 @@ namespace MerchantAPI
 			{
 				throw new MerchantAPIException("Error Parsing JSON Response", e);
 			}
+			finally
+			{
+				if (Log != null)
+				{
+					Log.LogResponse(httpResponse);
+				}
+			}
 
 			if (request is MultiCallRequest mcreq && response is MultiCallResponse mcresp)
 			{

@@ -202,6 +202,10 @@ namespace MerchantAPI
 				{
 					value.Cost = ReadNextFloat(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

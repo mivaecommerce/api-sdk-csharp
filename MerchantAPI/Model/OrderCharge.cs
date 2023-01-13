@@ -332,6 +332,10 @@ namespace MerchantAPI
 				{
 					value.FormattedTax = ReadNextString(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

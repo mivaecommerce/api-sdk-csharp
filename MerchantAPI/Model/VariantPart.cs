@@ -135,6 +135,10 @@ namespace MerchantAPI
 				{
 					value.Quantity = ReadNextInteger(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

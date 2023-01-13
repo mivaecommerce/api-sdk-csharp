@@ -174,6 +174,10 @@ namespace MerchantAPI
 				{
 					value.Adjustment = ReadNextFloat(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

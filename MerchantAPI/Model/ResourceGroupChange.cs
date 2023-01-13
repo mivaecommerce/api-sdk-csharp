@@ -171,6 +171,10 @@ namespace MerchantAPI
 					}
 					value.LinkedJavaScriptResources = JsonSerializer.Deserialize<List<String>>(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;

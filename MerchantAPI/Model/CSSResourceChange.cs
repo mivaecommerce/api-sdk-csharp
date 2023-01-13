@@ -400,6 +400,10 @@ namespace MerchantAPI
 				{
 					value.Notes = ReadNextString(ref reader, options);
 				}
+				else
+				{
+					reader.Skip();
+				}
 			}
 
 			return value;
