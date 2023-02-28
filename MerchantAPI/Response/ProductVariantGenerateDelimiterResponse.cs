@@ -16,7 +16,7 @@ namespace MerchantAPI
 	/// API Response for ProductVariant_Generate_Delimiter.
 	/// <see>https://docs.miva.com/json-api/functions/productvariant_generate_delimiter</see>
 	/// </summary>
-	public class ProductVariantGenerateDelimiterResponse : Response
+	public class ProductVariantGenerateDelimiterResponse : ProductVariantGenerateResponse
 	{
 		/// <summary>
 		///  Constructor

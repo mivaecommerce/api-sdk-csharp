@@ -152,6 +152,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>ProductAttribute.ProductAttributeType?</returns>
+		/// </summary>
+		public ProductAttribute.ProductAttributeType? GetAttributeTypeConst()
+		{
+			return ProductAttribute.ProductAttributeTypeFromString(AttributeType);
+		}
+
+		/// <summary>
 		/// Getter for Image.
 		/// <returns>String</returns>
 		/// </summary>
@@ -277,6 +286,17 @@ namespace MerchantAPI
 		public AttributeInsertRequest SetAttributeType(String value)
 		{
 			AttributeType = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">ProductAttribute.ProductAttributeType</param>
+		/// <returns></returns>
+		/// </summary>
+		public AttributeInsertRequest SetAttributeType(ProductAttribute.ProductAttributeType value)
+		{
+			AttributeType = value.ToConstString();
 			return this;
 		}
 

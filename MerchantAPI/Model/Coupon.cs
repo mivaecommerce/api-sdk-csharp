@@ -29,13 +29,22 @@ namespace MerchantAPI
 		/// </summary>
 		public static String CouponCustomerScopeToString(CouponCustomerScope value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static CouponCustomerScope? CouponCustomerScopeFromString(String value)
+		{
 			switch(value)
 			{
-				case CouponCustomerScope.AllShoppers: return "A";
-				case CouponCustomerScope.SpecificCustomers: return "X";
-				case CouponCustomerScope.AllLoggedIn: return "L";
+				case "A": return CouponCustomerScope.AllShoppers;
+				case "X": return CouponCustomerScope.SpecificCustomers;
+				case "L": return CouponCustomerScope.AllLoggedIn;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -117,6 +126,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for custscope.
+		/// <returns>CouponCustomerScope?</returns>
+		/// </summary>
+		public CouponCustomerScope? GetCustomerScopeConst()
+		{
+			return CouponCustomerScopeFromString(CustomerScope);
+		}
+
+		/// <summary>
 		/// Getter for dt_start.
 		/// <returns>DateTime</returns>
 		/// </summary>
@@ -168,6 +186,26 @@ namespace MerchantAPI
 		public int GetUseCount()
 		{
 			return UseCount;
+		}
+	}
+
+	/// Enum Extensions
+	public static class CouponExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this Coupon.CouponCustomerScope e)
+	    {
+			switch(e)
+			{
+				case Coupon.CouponCustomerScope.AllShoppers: return "A";
+				case Coupon.CouponCustomerScope.SpecificCustomers: return "X";
+				case Coupon.CouponCustomerScope.AllLoggedIn: return "L";
+			}
+			return "";
 		}
 	}
 }

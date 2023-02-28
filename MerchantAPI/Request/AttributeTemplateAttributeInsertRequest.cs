@@ -154,6 +154,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>AttributeTemplateAttribute.TemplateAttributeType?</returns>
+		/// </summary>
+		public AttributeTemplateAttribute.TemplateAttributeType? GetAttributeTypeConst()
+		{
+			return AttributeTemplateAttribute.TemplateAttributeTypeFromString(AttributeType);
+		}
+
+		/// <summary>
 		/// Getter for Image.
 		/// <returns>String</returns>
 		/// </summary>
@@ -279,6 +288,17 @@ namespace MerchantAPI
 		public AttributeTemplateAttributeInsertRequest SetAttributeType(String value)
 		{
 			AttributeType = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">AttributeTemplateAttribute.TemplateAttributeType</param>
+		/// <returns></returns>
+		/// </summary>
+		public AttributeTemplateAttributeInsertRequest SetAttributeType(AttributeTemplateAttribute.TemplateAttributeType value)
+		{
+			AttributeType = value.ToConstString();
 			return this;
 		}
 

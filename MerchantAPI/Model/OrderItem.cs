@@ -40,22 +40,21 @@ namespace MerchantAPI
 		/// </summary>
 		public static String OrderItemStatusToString(OrderItemStatus value)
 		{
-			switch(value)
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static OrderItemStatus? OrderItemStatusFromString(String value)
+		{
+			OrderItemStatus v;
+			if (Enum.TryParse<OrderItemStatus>(value, out v))
 			{
-				case OrderItemStatus.Pending: return "0";
-				case OrderItemStatus.Processing: return "100";
-				case OrderItemStatus.Shipped: return "200";
-				case OrderItemStatus.PartiallyShipped: return "201";
-				case OrderItemStatus.GiftCertNotRedeemed: return "210";
-				case OrderItemStatus.GiftCertRedeemed: return "211";
-				case OrderItemStatus.DigitalNotDownloaded: return "220";
-				case OrderItemStatus.DigitalDownloaded: return "221";
-				case OrderItemStatus.Cancelled: return "300";
-				case OrderItemStatus.Backordered: return "400";
-				case OrderItemStatus.RmaIssued: return "500";
-				case OrderItemStatus.Returned: return "600";
+				return v;
 			}
-			return "";
+			return null;
 		}
 
 		/// <value>Property OrderId - int</value>
@@ -181,6 +180,10 @@ namespace MerchantAPI
 		[JsonPropertyName("subscription")]
 		public OrderItemSubscription Subscription { get; set; }
 
+		/// <value>Property ProductId - int</value>
+		[JsonPropertyName("product_id")]
+		public int ProductId { get; set; }
+
 		/// <summary>
 		/// Getter for order_id.
 		/// <returns>int</returns>
@@ -206,6 +209,20 @@ namespace MerchantAPI
 		public int GetStatus()
 		{
 			return Status;
+		}
+
+		/// <summary>
+		/// Enum Getter for status.
+		/// <returns>OrderItemStatus?</returns>
+		/// </summary>
+		public OrderItemStatus? GetStatusConst()
+		{
+			OrderItemStatus v;
+			if (Enum.TryParse<OrderItemStatus>(Status.ToString(), out v))
+			{
+				return v;
+			}
+			return null;
 		}
 
 		/// <summary>
@@ -449,6 +466,15 @@ namespace MerchantAPI
 		public OrderItemSubscription GetSubscription()
 		{
 			return Subscription;
+		}
+
+		/// <summary>
+		/// Getter for product_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetProductId()
+		{
+			return ProductId;
 		}
 
 		/// <summary>
@@ -790,6 +816,10 @@ namespace MerchantAPI
 
 					value.Subscription = JsonSerializer.Deserialize<OrderItemSubscription>(ref reader, options);
 				}
+				else if (String.Equals(property, "product_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.ProductId = ReadNextInteger(ref reader, options);
+				}
 				else
 				{
 					reader.Skip();
@@ -862,6 +892,29 @@ namespace MerchantAPI
 			}
 
 			writer.WriteEndObject();
+		}
+	}
+
+	/// Enum Extensions
+	public static class OrderItemExtensions
+	{
+		
+		/// <summary>
+		/// Extends enum to provide a ToConstInt() method on a value
+		/// <returns>int</returns>
+		/// </summary>
+	    public static int ToConstInt(this OrderItem.OrderItemStatus e)
+	    {
+	    	return (int) e;
+	    }
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this OrderItem.OrderItemStatus e)
+	    {
+			return ((int) e).ToString();
 		}
 	}
 }

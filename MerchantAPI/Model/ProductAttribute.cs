@@ -33,17 +33,26 @@ namespace MerchantAPI
 		/// </summary>
 		public static String ProductAttributeTypeToString(ProductAttributeType value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static ProductAttributeType? ProductAttributeTypeFromString(String value)
+		{
 			switch(value)
 			{
-				case ProductAttributeType.Checkbox: return "checkbox";
-				case ProductAttributeType.Radio: return "radio";
-				case ProductAttributeType.Text: return "text";
-				case ProductAttributeType.Select: return "select";
-				case ProductAttributeType.Memo: return "memo";
-				case ProductAttributeType.Template: return "template";
-				case ProductAttributeType.SwatchSelect: return "swatch-select";
+				case "checkbox": return ProductAttributeType.Checkbox;
+				case "radio": return ProductAttributeType.Radio;
+				case "text": return ProductAttributeType.Text;
+				case "select": return ProductAttributeType.Select;
+				case "memo": return ProductAttributeType.Memo;
+				case "template": return ProductAttributeType.Template;
+				case "swatch-select": return ProductAttributeType.SwatchSelect;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -174,6 +183,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for type.
+		/// <returns>ProductAttributeType?</returns>
+		/// </summary>
+		public ProductAttributeType? GetAttributeTypeConst()
+		{
+			return ProductAttributeTypeFromString(AttributeType);
+		}
+
+		/// <summary>
 		/// Getter for prompt.
 		/// <returns>String</returns>
 		/// </summary>
@@ -252,6 +270,30 @@ namespace MerchantAPI
 		public List<ProductOption> GetOptions()
 		{
 			return Options;
+		}
+	}
+
+	/// Enum Extensions
+	public static class ProductAttributeExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this ProductAttribute.ProductAttributeType e)
+	    {
+			switch(e)
+			{
+				case ProductAttribute.ProductAttributeType.Checkbox: return "checkbox";
+				case ProductAttribute.ProductAttributeType.Radio: return "radio";
+				case ProductAttribute.ProductAttributeType.Text: return "text";
+				case ProductAttribute.ProductAttributeType.Select: return "select";
+				case ProductAttribute.ProductAttributeType.Memo: return "memo";
+				case ProductAttribute.ProductAttributeType.Template: return "template";
+				case ProductAttribute.ProductAttributeType.SwatchSelect: return "swatch-select";
+			}
+			return "";
 		}
 	}
 }

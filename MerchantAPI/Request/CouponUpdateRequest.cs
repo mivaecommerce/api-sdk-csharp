@@ -154,6 +154,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>Coupon.CouponCustomerScope?</returns>
+		/// </summary>
+		public Coupon.CouponCustomerScope? GetCustomerScopeConst()
+		{
+			return Coupon.CouponCustomerScopeFromString(CustomerScope);
+		}
+
+		/// <summary>
 		/// Getter for DateTime_Start.
 		/// <returns>DateTime</returns>
 		/// </summary>
@@ -261,6 +270,17 @@ namespace MerchantAPI
 		public CouponUpdateRequest SetCustomerScope(String value)
 		{
 			CustomerScope = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">Coupon.CouponCustomerScope</param>
+		/// <returns></returns>
+		/// </summary>
+		public CouponUpdateRequest SetCustomerScope(Coupon.CouponCustomerScope value)
+		{
+			CustomerScope = value.ToConstString();
 			return this;
 		}
 

@@ -18,6 +18,11 @@ namespace MerchantAPI
 		/// <value>Property Id - int</value>
 		[JsonPropertyName("id")]
 		public int Id { get; set; }
+
+		/// <value>Property AttributeTemplateId - int</value>
+		[JsonPropertyName("attemp_id")]
+		public int AttributeTemplateId { get; set; }
+
 		/// <value>Property AttributeTemplateAttributeId - int</value>
 		[JsonPropertyName("attmpat_id")]
 		public int AttributeTemplateAttributeId { get; set; }
@@ -69,6 +74,15 @@ namespace MerchantAPI
 		public int GetId()
 		{
 			return Id;
+		}
+
+		/// <summary>
+		/// Getter for attemp_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetAttributeTemplateId()
+		{
+			return AttributeTemplateId;
 		}
 
 		/// <summary>

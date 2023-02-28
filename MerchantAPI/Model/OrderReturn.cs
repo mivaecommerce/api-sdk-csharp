@@ -28,12 +28,21 @@ namespace MerchantAPI
 		/// </summary>
 		public static String OrderReturnStatusToString(OrderReturnStatus value)
 		{
-			switch(value)
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static OrderReturnStatus? OrderReturnStatusFromString(String value)
+		{
+			OrderReturnStatus v;
+			if (Enum.TryParse<OrderReturnStatus>(value, out v))
 			{
-				case OrderReturnStatus.Issued: return "500";
-				case OrderReturnStatus.Received: return "600";
+				return v;
 			}
-			return "";
+			return null;
 		}
 
 		/// <value>Property Id - int</value>
@@ -99,6 +108,20 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for status.
+		/// <returns>OrderReturnStatus?</returns>
+		/// </summary>
+		public OrderReturnStatus? GetStatusConst()
+		{
+			OrderReturnStatus v;
+			if (Enum.TryParse<OrderReturnStatus>(Status.ToString(), out v))
+			{
+				return v;
+			}
+			return null;
+		}
+
+		/// <summary>
 		/// Getter for dt_issued.
 		/// <returns>DateTime</returns>
 		/// </summary>
@@ -114,6 +137,29 @@ namespace MerchantAPI
 		public DateTime GetDateTimeReceived()
 		{
 			return DateTimeReceived;
+		}
+	}
+
+	/// Enum Extensions
+	public static class OrderReturnExtensions
+	{
+		
+		/// <summary>
+		/// Extends enum to provide a ToConstInt() method on a value
+		/// <returns>int</returns>
+		/// </summary>
+	    public static int ToConstInt(this OrderReturn.OrderReturnStatus e)
+	    {
+	    	return (int) e;
+	    }
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this OrderReturn.OrderReturnStatus e)
+	    {
+			return ((int) e).ToString();
 		}
 	}
 }

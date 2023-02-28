@@ -37,14 +37,25 @@ namespace MerchantAPI
 		/// </summary>
 		public static String PayStatusFilterToString(PayStatusFilter value)
 		{
-			switch(value) {
-				case PayStatusFilter.AuthOnly: return "auth_0_capt";
-				case PayStatusFilter.PartialCapture: return "partial_capt";
-				case PayStatusFilter.CapturedNotShipped: return "capt_not_ship";
-				case PayStatusFilter.ShippedNotCaptured: return "ship_not_capt";
-			}
-			return "";
+			return value.ToConstString();
 		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static PayStatusFilter? PayStatusFilterFromString(String value)
+		{
+			switch(value)
+			{
+				case "auth_0_capt": return PayStatusFilter.AuthOnly;
+				case "partial_capt": return PayStatusFilter.PartialCapture;
+				case "capt_not_ship": return PayStatusFilter.CapturedNotShipped;
+				case "ship_not_capt": return PayStatusFilter.ShippedNotCaptured;
+				default: return null;
+			}
+		}
+
 		/// Request field Passphrase.
 		[JsonPropertyName("Passphrase")]
 		public String Passphrase { get; set; }
@@ -257,6 +268,28 @@ namespace MerchantAPI
 			if (Client == null) throw new MerchantAPIException("Client not assigned to request");
 
 			return await Client.SendRequestAsync<OrderListLoadQueryRequest, OrderListLoadQueryResponse>(this);
+		}
+	}
+
+	/// Enum Extensions
+	public static class OrderListLoadQueryRequestExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this OrderListLoadQueryRequest.PayStatusFilter e)
+	    {
+			switch(e)
+			{
+				case OrderListLoadQueryRequest.PayStatusFilter.AuthOnly: return "auth_0_capt";
+				case OrderListLoadQueryRequest.PayStatusFilter.PartialCapture: return "partial_capt";
+				case OrderListLoadQueryRequest.PayStatusFilter.CapturedNotShipped: return "capt_not_ship";
+				case OrderListLoadQueryRequest.PayStatusFilter.ShippedNotCaptured: return "ship_not_capt";
+			}
+			return "";
+	    
 		}
 	}
 }

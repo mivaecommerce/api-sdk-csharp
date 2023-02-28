@@ -29,13 +29,21 @@ namespace MerchantAPI
 		/// </summary>
 		public static String OrderShipmentStatusToString(OrderShipmentStatus value)
 		{
-			switch(value)
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static OrderShipmentStatus? OrderShipmentStatusFromString(String value)
+		{
+			OrderShipmentStatus v;
+			if (Enum.TryParse<OrderShipmentStatus>(value, out v))
 			{
-				case OrderShipmentStatus.Pending: return "0";
-				case OrderShipmentStatus.Picking: return "100";
-				case OrderShipmentStatus.Shipped: return "200";
+				return v;
 			}
-			return "";
+			return null;
 		}
 
 		/// <value>Property Id - int</value>
@@ -144,6 +152,20 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for status.
+		/// <returns>OrderShipmentStatus?</returns>
+		/// </summary>
+		public OrderShipmentStatus? GetStatusConst()
+		{
+			OrderShipmentStatus v;
+			if (Enum.TryParse<OrderShipmentStatus>(Status.ToString(), out v))
+			{
+				return v;
+			}
+			return null;
+		}
+
+		/// <summary>
 		/// Getter for labelcount.
 		/// <returns>int</returns>
 		/// </summary>
@@ -231,6 +253,29 @@ namespace MerchantAPI
 		public List<OrderItem> GetItems()
 		{
 			return Items;
+		}
+	}
+
+	/// Enum Extensions
+	public static class OrderShipmentExtensions
+	{
+		
+		/// <summary>
+		/// Extends enum to provide a ToConstInt() method on a value
+		/// <returns>int</returns>
+		/// </summary>
+	    public static int ToConstInt(this OrderShipment.OrderShipmentStatus e)
+	    {
+	    	return (int) e;
+	    }
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this OrderShipment.OrderShipmentStatus e)
+	    {
+			return ((int) e).ToString();
 		}
 	}
 }

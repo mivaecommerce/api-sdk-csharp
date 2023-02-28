@@ -31,6 +31,10 @@ namespace MerchantAPI
 		[JsonPropertyName("dimensions")]
 		public List<ProductVariantDimension> Dimensions { get; set; } = new List<ProductVariantDimension>();
 
+		/// <value>Property Attributes - List<ProductVariantAttribute></value>
+		[JsonPropertyName("attributes")]
+		public List<ProductVariantAttribute> Attributes { get; set; } = new List<ProductVariantAttribute>();
+
 		/// <summary>
 		/// Getter for product_id.
 		/// <returns>int</returns>
@@ -65,6 +69,15 @@ namespace MerchantAPI
 		public List<ProductVariantDimension> GetDimensions()
 		{
 			return Dimensions;
+		}
+
+		/// <summary>
+		/// Getter for attributes.
+		/// <returns>List<ProductVariantAttribute></returns>
+		/// </summary>
+		public List<ProductVariantAttribute> GetAttributes()
+		{
+			return Attributes;
 		}
 	}
 }

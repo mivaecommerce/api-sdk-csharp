@@ -28,12 +28,21 @@ namespace MerchantAPI
 		/// </summary>
 		public static String CacheTypesToString(CacheTypes value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static CacheTypes? CacheTypesFromString(String value)
+		{
 			switch(value)
 			{
-				case CacheTypes.CacheTypeNone: return "";
-				case CacheTypes.CacheTypeRedis: return "redis";
+				case "none": return CacheTypes.CacheTypeNone;
+				case "redis": return CacheTypes.CacheTypeRedis;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -147,6 +156,11 @@ namespace MerchantAPI
 		/// <value>Property OrderMinimumQuantity - int</value>
 		[JsonPropertyName("omin_quant")]
 		public int OrderMinimumQuantity { get; set; }
+
+		/// <value>Property OrderMinimumPrice - float</value>
+		[JsonPropertyName("omin_price")]
+		public float OrderMinimumPrice { get; set; }
+
 		/// <value>Property OrderMinimumRequiredAll - bool</value>
 		[JsonPropertyName("omin_all")]
 		public bool OrderMinimumRequiredAll { get; set; }
@@ -448,6 +462,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for omin_price.
+		/// <returns>float</returns>
+		/// </summary>
+		public float GetOrderMinimumPrice()
+		{
+			return OrderMinimumPrice;
+		}
+
+		/// <summary>
 		/// Getter for omin_all.
 		/// <returns>bool</returns>
 		/// </summary>
@@ -520,6 +543,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for cache_type.
+		/// <returns>CacheTypes?</returns>
+		/// </summary>
+		public CacheTypes? GetCacheTypeConst()
+		{
+			return CacheTypesFromString(CacheType);
+		}
+
+		/// <summary>
 		/// Getter for redishost.
 		/// <returns>String</returns>
 		/// </summary>
@@ -553,6 +585,25 @@ namespace MerchantAPI
 		public int GetRedisExpiration()
 		{
 			return RedisExpiration;
+		}
+	}
+
+	/// Enum Extensions
+	public static class StoreExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this Store.CacheTypes e)
+	    {
+			switch(e)
+			{
+				case Store.CacheTypes.CacheTypeNone: return "none";
+				case Store.CacheTypes.CacheTypeRedis: return "redis";
+			}
+			return "";
 		}
 	}
 }

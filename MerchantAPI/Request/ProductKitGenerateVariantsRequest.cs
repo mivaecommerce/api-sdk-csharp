@@ -36,12 +36,22 @@ namespace MerchantAPI
 		/// </summary>
 		public static String VariantPricingMethodToString(VariantPricingMethod value)
 		{
-			switch(value) {
-				case VariantPricingMethod.Master: return "master";
-				case VariantPricingMethod.Specific: return "specific";
-				case VariantPricingMethod.Sum: return "sum";
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static VariantPricingMethod? VariantPricingMethodFromString(String value)
+		{
+			switch(value)
+			{
+				case "master": return VariantPricingMethod.Master;
+				case "specific": return VariantPricingMethod.Specific;
+				case "sum": return VariantPricingMethod.Sum;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// Request field Product_ID.
@@ -118,6 +128,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>VariantPricingMethod?</returns>
+		/// </summary>
+		public VariantPricingMethod? GetPricingMethodConst()
+		{
+			return VariantPricingMethodFromString(PricingMethod);
+		}
+
+		/// <summary>
 		/// Setter for Product_ID.
 		/// <param name="value">int</param>
 		/// <returns>ProductKitGenerateVariantsRequest</returns>
@@ -158,6 +177,17 @@ namespace MerchantAPI
 		public ProductKitGenerateVariantsRequest SetPricingMethod(String value)
 		{
 			PricingMethod = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">VariantPricingMethod</param>
+		/// <returns></returns>
+		/// </summary>
+		public ProductKitGenerateVariantsRequest SetPricingMethod(VariantPricingMethod value)
+		{
+			PricingMethod = value.ToConstString();
 			return this;
 		}
 
@@ -214,17 +244,6 @@ namespace MerchantAPI
 
 			return await Client.SendRequestAsync<ProductKitGenerateVariantsRequest, ProductKitGenerateVariantsResponse>(this);
 		}
-		
-		/// <summary>
-		/// Setter for Pricing_Method.
-		/// <param name="value">KitVariantPricingMethod</param>
-		/// <returns>ProductKitGenerateVariantsRequest</returns>
-		/// </summary>
-		public ProductKitGenerateVariantsRequest SetPricingMethod(VariantPricingMethod value)
-		{
-			PricingMethod = VariantPricingMethodToString(value);
-			return this;
-		}
 
 		/// <summary>
 		/// Setter for Pricing_Method. Backwards compatibility with less than 2.2.0
@@ -235,6 +254,27 @@ namespace MerchantAPI
 		{
 			PricingMethod = value.ToString();
 			return this;
+		}
+	}
+
+	/// Enum Extensions
+	public static class ProductKitGenerateVariantsRequestExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this ProductKitGenerateVariantsRequest.VariantPricingMethod e)
+	    {
+			switch(e)
+			{
+				case ProductKitGenerateVariantsRequest.VariantPricingMethod.Master: return "master";
+				case ProductKitGenerateVariantsRequest.VariantPricingMethod.Specific: return "specific";
+				case ProductKitGenerateVariantsRequest.VariantPricingMethod.Sum: return "sum";
+			}
+			return "";
+	    
 		}
 	}
 }

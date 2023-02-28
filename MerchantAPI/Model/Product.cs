@@ -146,6 +146,10 @@ namespace MerchantAPI
 		/// <value>Property ImageTypes - List<KeyValuePair<String, Int>></value>
 		public List<KeyValuePair<String, Int32>> ImageTypes { get; set; } = new List<KeyValuePair<String, Int32>>();
 
+		/// <value>Property DisplayOrder - int</value>
+		[JsonPropertyName("disp_order")]
+		public int DisplayOrder { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -424,6 +428,15 @@ namespace MerchantAPI
 		{
 			return Url;
 		}
+
+		/// <summary>
+		/// Getter for disp_order.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetDisplayOrder()
+		{
+			return DisplayOrder;
+		}
 	}
 
 	/// <summary>
@@ -627,6 +640,10 @@ namespace MerchantAPI
 				{
 					KeyValuePair<String, Int32> entry = new KeyValuePair<String, Int32>(property.Substring(property.IndexOf(":")+1), ReadNextInteger(ref reader, options));
 					value.ImageTypes.Add(entry);
+				}
+				else if (String.Equals(property, "disp_order", StringComparison.OrdinalIgnoreCase))
+				{
+					value.DisplayOrder = ReadNextInteger(ref reader, options);
 				}
 				else
 				{

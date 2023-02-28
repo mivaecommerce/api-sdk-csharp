@@ -15,6 +15,40 @@ namespace MerchantAPI
 {
 	public class CSSResource : Model
 	{
+		/// Enumeration CSSResourceType
+		public enum CSSResourceType
+		{
+			ResourceTypeCombined,
+			ResourceTypeInline,
+			ResourceTypeExternal,
+			ResourceTypeLocal,
+		}
+
+		/// <summary>
+		/// Helper to convert enum to a valid string sent/received in from the API
+		/// <returns>String</returns>
+		/// </summary>
+		public static String CSSResourceTypeToString(CSSResourceType value)
+		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static CSSResourceType? CSSResourceTypeFromString(String value)
+		{
+			switch(value)
+			{
+				case "C": return CSSResourceType.ResourceTypeCombined;
+				case "I": return CSSResourceType.ResourceTypeInline;
+				case "E": return CSSResourceType.ResourceTypeExternal;
+				case "L": return CSSResourceType.ResourceTypeLocal;
+				default: return null;
+			}
+		}
+
 		/// <value>Property Id - int</value>
 		[JsonPropertyName("id")]
 		public int Id { get; set; }
@@ -35,9 +69,9 @@ namespace MerchantAPI
 		[JsonPropertyName("active")]
 		public bool Active { get; set; }
 
-		/// <value>Property File - int</value>
+		/// <value>Property File - String</value>
 		[JsonPropertyName("file")]
-		public int File { get; set; }
+		public String File { get; set; }
 
 		/// <value>Property TemplateId - int</value>
 		[JsonPropertyName("templ_id")]
@@ -75,6 +109,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for type.
+		/// <returns>CSSResourceType?</returns>
+		/// </summary>
+		public CSSResourceType? GetResourceTypeConst()
+		{
+			return CSSResourceTypeFromString(ResourceType);
+		}
+
+		/// <summary>
 		/// Getter for is_global.
 		/// <returns>bool</returns>
 		/// </summary>
@@ -94,9 +137,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for file.
-		/// <returns>int</returns>
+		/// <returns>String</returns>
 		/// </summary>
-		public int GetFile()
+		public String GetFile()
 		{
 			return File;
 		}
@@ -117,6 +160,27 @@ namespace MerchantAPI
 		public List<CSSResourceAttribute> GetAttributes()
 		{
 			return Attributes;
+		}
+	}
+
+	/// Enum Extensions
+	public static class CSSResourceExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this CSSResource.CSSResourceType e)
+	    {
+			switch(e)
+			{
+				case CSSResource.CSSResourceType.ResourceTypeCombined: return "C";
+				case CSSResource.CSSResourceType.ResourceTypeInline: return "I";
+				case CSSResource.CSSResourceType.ResourceTypeExternal: return "E";
+				case CSSResource.CSSResourceType.ResourceTypeLocal: return "L";
+			}
+			return "";
 		}
 	}
 }

@@ -35,12 +35,23 @@ namespace MerchantAPI
 		/// </summary>
 		public static String CategoryShowToString(CategoryShow value)
 		{
-			switch(value) {
-				case CategoryShow.All: return "All";
-				case CategoryShow.Active: return "Active";
-			}
-			return "";
+			return value.ToConstString();
 		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static CategoryShow? CategoryShowFromString(String value)
+		{
+			switch(value)
+			{
+				case "All": return CategoryShow.All;
+				case "Active": return CategoryShow.Active;
+				default: return null;
+			}
+		}
+
 		/// The available search fields applicable to the request.
 		override public String[] AvailableSearchFields { get; } =
 		{
@@ -130,6 +141,26 @@ namespace MerchantAPI
 			if (Client == null) throw new MerchantAPIException("Client not assigned to request");
 
 			return await Client.SendRequestAsync<CategoryListLoadQueryRequest, CategoryListLoadQueryResponse>(this);
+		}
+	}
+
+	/// Enum Extensions
+	public static class CategoryListLoadQueryRequestExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this CategoryListLoadQueryRequest.CategoryShow e)
+	    {
+			switch(e)
+			{
+				case CategoryListLoadQueryRequest.CategoryShow.All: return "All";
+				case CategoryListLoadQueryRequest.CategoryShow.Active: return "Active";
+			}
+			return "";
+	    
 		}
 	}
 }

@@ -13,11 +13,11 @@
     <Title>Miva Merchant JSON API SDK</Title>
     <Description>API SDK for interaction with the Miva Merchant JSON API</Description>
     <PackageId>MerchantAPI</PackageId>
-    <Version>2.2.1</Version>
+    <Version>2.3.0</Version>
     <Authors>Miva Inc</Authors>
     <Company>Miva Inc</Company>
-    <PackageVersion>2.2.1</PackageVersion>
-    <ReleaseVersion>2.2.1</ReleaseVersion>
+    <PackageVersion>2.3.0</PackageVersion>
+    <ReleaseVersion>2.3.0</ReleaseVersion>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>

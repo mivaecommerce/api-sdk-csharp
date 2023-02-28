@@ -30,16 +30,24 @@ namespace MerchantAPI
 		/// </summary>
 		public static String EligibilityToString(Eligibility value)
 		{
-			switch(value)
-			{
-				case Eligibility.Coupon: return "C";
-				case Eligibility.All: return "A";
-				case Eligibility.Customer: return "X";
-				case Eligibility.LoggedIn: return "L";
-			}
-			return "";
+			return value.ToConstString();
 		}
 
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static Eligibility? EligibilityFromString(String value)
+		{
+			switch(value)
+			{
+				case "C": return Eligibility.Coupon;
+				case "A": return Eligibility.All;
+				case "X": return Eligibility.Customer;
+				case "L": return Eligibility.LoggedIn;
+				default: return null;
+			}
+		}
 		/// Enumeration DiscountType
 		public enum DiscountType
 		{
@@ -55,14 +63,23 @@ namespace MerchantAPI
 		/// </summary>
 		public static String DiscountTypeToString(DiscountType value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static DiscountType? DiscountTypeFromString(String value)
+		{
 			switch(value)
 			{
-				case DiscountType.Retail: return "R";
-				case DiscountType.Cost: return "C";
-				case DiscountType.DiscountRetail: return "D";
-				case DiscountType.MarkupCost: return "M";
+				case "R": return DiscountType.Retail;
+				case "C": return DiscountType.Cost;
+				case "D": return DiscountType.DiscountRetail;
+				case "M": return DiscountType.MarkupCost;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -199,12 +216,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for custscope.
+		/// <returns>Eligibility?</returns>
+		/// </summary>
+		public Eligibility? GetCustomerScopeConst()
+		{
+			return EligibilityFromString(CustomerScope);
+		}
+
+		/// <summary>
 		/// Getter for rate.
 		/// <returns>String</returns>
 		/// </summary>
 		public String GetRate()
 		{
 			return Rate;
+		}
+
+		/// <summary>
+		/// Enum Getter for rate.
+		/// <returns>DiscountType?</returns>
+		/// </summary>
+		public DiscountType? GetRateConst()
+		{
+			return DiscountTypeFromString(Rate);
 		}
 
 		/// <summary>
@@ -403,6 +438,43 @@ namespace MerchantAPI
 		public bool GetDisplay()
 		{
 			return Display;
+		}
+	}
+
+	/// Enum Extensions
+	public static class PriceGroupExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this PriceGroup.Eligibility e)
+	    {
+			switch(e)
+			{
+				case PriceGroup.Eligibility.Coupon: return "C";
+				case PriceGroup.Eligibility.All: return "A";
+				case PriceGroup.Eligibility.Customer: return "X";
+				case PriceGroup.Eligibility.LoggedIn: return "L";
+			}
+			return "";
+		}
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this PriceGroup.DiscountType e)
+	    {
+			switch(e)
+			{
+				case PriceGroup.DiscountType.Retail: return "R";
+				case PriceGroup.DiscountType.Cost: return "C";
+				case PriceGroup.DiscountType.DiscountRetail: return "D";
+				case PriceGroup.DiscountType.MarkupCost: return "M";
+			}
+			return "";
 		}
 	}
 }

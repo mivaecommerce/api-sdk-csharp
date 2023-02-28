@@ -42,8 +42,7 @@ namespace MerchantAPI
 			"user_id",
 			"user_name",
 			"dtstamp",
-			"notes",
-			"user_name"
+			"notes"
 		};
 
 		/// The available sort fields applicable to the request.
@@ -54,8 +53,7 @@ namespace MerchantAPI
 			"user_id",
 			"user_name",
 			"dtstamp",
-			"notes",
-			"user_name"
+			"notes"
 		};
 
 		/// <summary>

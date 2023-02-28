@@ -128,6 +128,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Priority")]
 		public int? Priority { get; set; }
 
+		/// Request field Exclusions.
+		[JsonPropertyName("Exclusions")]
+		public List<PriceGroupExclusion> Exclusions { get; set; } = new List<PriceGroupExclusion>();
+
 		/// User set request fields
 		public Dictionary<String, IConvertible> ModuleFields { get; set; } = new Dictionary<String, IConvertible>();
 
@@ -160,12 +164,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>PriceGroup.Eligibility?</returns>
+		/// </summary>
+		public PriceGroup.Eligibility? GetCustomerScopeConst()
+		{
+			return PriceGroup.EligibilityFromString(CustomerScope);
+		}
+
+		/// <summary>
 		/// Getter for Rate.
 		/// <returns>String</returns>
 		/// </summary>
 		public String GetRate()
 		{
 			return Rate;
+		}
+
+		/// <summary>
+		/// Enum Getter for .
+		/// <returns>PriceGroup.DiscountType?</returns>
+		/// </summary>
+		public PriceGroup.DiscountType? GetRateConst()
+		{
+			return PriceGroup.DiscountTypeFromString(Rate);
 		}
 
 		/// <summary>
@@ -376,6 +398,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for Exclusions.
+		/// <returns>List<PriceGroupExclusion></returns>
+		/// </summary>
+		public List<PriceGroupExclusion> GetExclusions()
+		{
+			return Exclusions;
+		}
+
+		/// <summary>
 		///  Get user set request fields.
 		/// <returns>Dictionary<String, IConvertible></returns>
 		/// </summary>
@@ -407,6 +438,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for .
+		/// <param name="value">PriceGroup.Eligibility</param>
+		/// <returns></returns>
+		/// </summary>
+		public PriceGroupInsertRequest SetCustomerScope(PriceGroup.Eligibility value)
+		{
+			CustomerScope = value.ToConstString();
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Rate.
 		/// <param name="value">String</param>
 		/// <returns>PriceGroupInsertRequest</returns>
@@ -414,6 +456,17 @@ namespace MerchantAPI
 		public PriceGroupInsertRequest SetRate(String value)
 		{
 			Rate = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">PriceGroup.DiscountType</param>
+		/// <returns></returns>
+		/// </summary>
+		public PriceGroupInsertRequest SetRate(PriceGroup.DiscountType value)
+		{
+			Rate = value.ToConstString();
 			return this;
 		}
 
@@ -826,6 +879,32 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Add a PriceGroupExclusion.
+		/// - priceGroupExclusion: PriceGroupExclusion
+		/// - Returns: Self
+		/// </summary>
+		public PriceGroupInsertRequest AddPriceGroupExclusion(PriceGroupExclusion priceGroupExclusion)
+		{
+			Exclusions.Add(priceGroupExclusion);
+			return this;
+		}
+
+		/// <summary>
+		/// Add an array of PriceGroupExclusion.
+		/// <param name="exclusions">List<PriceGroupExclusion></param>
+		/// <returns>PriceGroupInsertRequest</returns>
+		/// </summary>
+		public PriceGroupInsertRequest AddExclusions(List<PriceGroupExclusion> exclusions)
+		{
+			foreach(PriceGroupExclusion e in exclusions)
+			{
+				Exclusions.Add(e);
+			}
+
+			return this;
+		}
+
+		/// <summary>
 		/// Write to the JSON writer. Used during serialization with a requests associated converter.
 		/// <param name="writer">Utf8JsonWriter</param>
 		/// <param name="options">JsonSerializerOptions</param>
@@ -960,6 +1039,12 @@ namespace MerchantAPI
 			if (Priority.HasValue)
 			{
 				writer.WriteNumber("Priority", Priority.Value);
+			}
+
+			if (Exclusions.Count > 0)
+			{
+				writer.WritePropertyName("Exclusions");
+				JsonSerializer.Serialize(writer, this.Exclusions, options);
 			}
 
 			if (ModuleFields.Count > 0)

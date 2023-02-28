@@ -15,6 +15,40 @@ namespace MerchantAPI
 {
 	public class JavaScriptResource : Model
 	{
+		/// Enumeration JavaScriptResourceType
+		public enum JavaScriptResourceType
+		{
+			ResourceTypeCombined,
+			ResourceTypeInline,
+			ResourceTypeExternal,
+			ResourceTypeLocal,
+		}
+
+		/// <summary>
+		/// Helper to convert enum to a valid string sent/received in from the API
+		/// <returns>String</returns>
+		/// </summary>
+		public static String JavaScriptResourceTypeToString(JavaScriptResourceType value)
+		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static JavaScriptResourceType? JavaScriptResourceTypeFromString(String value)
+		{
+			switch(value)
+			{
+				case "C": return JavaScriptResourceType.ResourceTypeCombined;
+				case "I": return JavaScriptResourceType.ResourceTypeInline;
+				case "E": return JavaScriptResourceType.ResourceTypeExternal;
+				case "L": return JavaScriptResourceType.ResourceTypeLocal;
+				default: return null;
+			}
+		}
+
 		/// <value>Property Id - int</value>
 		[JsonPropertyName("id")]
 		public int Id { get; set; }
@@ -35,9 +69,9 @@ namespace MerchantAPI
 		[JsonPropertyName("active")]
 		public bool Active { get; set; }
 
-		/// <value>Property File - int</value>
+		/// <value>Property File - String</value>
 		[JsonPropertyName("file")]
-		public int File { get; set; }
+		public String File { get; set; }
 
 		/// <value>Property TemplateId - int</value>
 		[JsonPropertyName("templ_id")]
@@ -75,6 +109,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for type.
+		/// <returns>JavaScriptResourceType?</returns>
+		/// </summary>
+		public JavaScriptResourceType? GetResourceTypeConst()
+		{
+			return JavaScriptResourceTypeFromString(ResourceType);
+		}
+
+		/// <summary>
 		/// Getter for is_global.
 		/// <returns>bool</returns>
 		/// </summary>
@@ -94,9 +137,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for file.
-		/// <returns>int</returns>
+		/// <returns>String</returns>
 		/// </summary>
-		public int GetFile()
+		public String GetFile()
 		{
 			return File;
 		}
@@ -117,6 +160,27 @@ namespace MerchantAPI
 		public List<JavaScriptResourceAttribute> GetAttributes()
 		{
 			return Attributes;
+		}
+	}
+
+	/// Enum Extensions
+	public static class JavaScriptResourceExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this JavaScriptResource.JavaScriptResourceType e)
+	    {
+			switch(e)
+			{
+				case JavaScriptResource.JavaScriptResourceType.ResourceTypeCombined: return "C";
+				case JavaScriptResource.JavaScriptResourceType.ResourceTypeInline: return "I";
+				case JavaScriptResource.JavaScriptResourceType.ResourceTypeExternal: return "E";
+				case JavaScriptResource.JavaScriptResourceType.ResourceTypeLocal: return "L";
+			}
+			return "";
 		}
 	}
 }

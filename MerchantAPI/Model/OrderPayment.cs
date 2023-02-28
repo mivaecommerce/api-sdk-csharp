@@ -34,18 +34,21 @@ namespace MerchantAPI
 		/// </summary>
 		public static String OrderPaymentTypeToString(OrderPaymentType value)
 		{
-			switch(value)
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static OrderPaymentType? OrderPaymentTypeFromString(String value)
+		{
+			OrderPaymentType v;
+			if (Enum.TryParse<OrderPaymentType>(value, out v))
 			{
-				case OrderPaymentType.Declined: return "0";
-				case OrderPaymentType.LegacyAuth: return "1";
-				case OrderPaymentType.LegacyCapture: return "2";
-				case OrderPaymentType.Auth: return "3";
-				case OrderPaymentType.Capture: return "4";
-				case OrderPaymentType.AuthCapture: return "5";
-				case OrderPaymentType.Refund: return "6";
-				case OrderPaymentType.Void: return "7";
+				return v;
 			}
-			return "";
+			return null;
 		}
 
 		/// <value>Property Id - int</value>
@@ -114,6 +117,10 @@ namespace MerchantAPI
 		[JsonPropertyName("data")]
 		public List<String> PaymentData { get; set; } = new List<String>();
 
+		/// <value>Property Ip - String</value>
+		[JsonPropertyName("ip")]
+		public String Ip { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -139,6 +146,20 @@ namespace MerchantAPI
 		public int GetPaymentType()
 		{
 			return PaymentType;
+		}
+
+		/// <summary>
+		/// Enum Getter for type.
+		/// <returns>OrderPaymentType?</returns>
+		/// </summary>
+		public OrderPaymentType? GetPaymentTypeConst()
+		{
+			OrderPaymentType v;
+			if (Enum.TryParse<OrderPaymentType>(PaymentType.ToString(), out v))
+			{
+				return v;
+			}
+			return null;
 		}
 
 		/// <summary>
@@ -256,6 +277,38 @@ namespace MerchantAPI
 		public List<String> GetPaymentData()
 		{
 			return PaymentData;
+		}
+
+		/// <summary>
+		/// Getter for ip.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetIp()
+		{
+			return Ip;
+		}
+	}
+
+	/// Enum Extensions
+	public static class OrderPaymentExtensions
+	{
+		
+		/// <summary>
+		/// Extends enum to provide a ToConstInt() method on a value
+		/// <returns>int</returns>
+		/// </summary>
+	    public static int ToConstInt(this OrderPayment.OrderPaymentType e)
+	    {
+	    	return (int) e;
+	    }
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this OrderPayment.OrderPaymentType e)
+	    {
+			return ((int) e).ToString();
 		}
 	}
 }

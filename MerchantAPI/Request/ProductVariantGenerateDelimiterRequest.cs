@@ -32,7 +32,7 @@ namespace MerchantAPI
 		/// <param name="product">Product</param>
 		/// </summary>
 		public ProductVariantGenerateDelimiterRequest(BaseClient client = null, Product product = null) :
-			base(client)
+			base(client, product)
 		{
 			Function = "ProductVariant_Generate_Delimiter";
 			if (product != null) {

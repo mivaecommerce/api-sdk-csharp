@@ -151,6 +151,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for type.
+		/// <returns>ProductAttribute.ProductAttributeType?</returns>
+		/// </summary>
+		public ProductAttribute.ProductAttributeType? GetAttributeTypeConst()
+		{
+			return ProductAttribute.ProductAttributeTypeFromString(AttributeType);
+		}
+
+		/// <summary>
 		/// Getter for prompt.
 		/// <returns>String</returns>
 		/// </summary>

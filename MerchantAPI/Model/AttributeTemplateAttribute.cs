@@ -33,17 +33,26 @@ namespace MerchantAPI
 		/// </summary>
 		public static String TemplateAttributeTypeToString(TemplateAttributeType value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static TemplateAttributeType? TemplateAttributeTypeFromString(String value)
+		{
 			switch(value)
 			{
-				case TemplateAttributeType.Checkbox: return "checkbox";
-				case TemplateAttributeType.Radio: return "radio";
-				case TemplateAttributeType.Text: return "text";
-				case TemplateAttributeType.Select: return "select";
-				case TemplateAttributeType.Memo: return "memo";
-				case TemplateAttributeType.Template: return "template";
-				case TemplateAttributeType.SwatchSelect: return "swatch-select";
+				case "checkbox": return TemplateAttributeType.Checkbox;
+				case "radio": return TemplateAttributeType.Radio;
+				case "text": return TemplateAttributeType.Text;
+				case "select": return TemplateAttributeType.Select;
+				case "memo": return TemplateAttributeType.Memo;
+				case "template": return TemplateAttributeType.Template;
+				case "swatch-select": return TemplateAttributeType.SwatchSelect;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -157,6 +166,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for type.
+		/// <returns>TemplateAttributeType?</returns>
+		/// </summary>
+		public TemplateAttributeType? GetAttributeTypeConst()
+		{
+			return TemplateAttributeTypeFromString(AttributeType);
+		}
+
+		/// <summary>
 		/// Getter for prompt.
 		/// <returns>String</returns>
 		/// </summary>
@@ -226,6 +244,30 @@ namespace MerchantAPI
 		public List<AttributeTemplateOption> GetOptions()
 		{
 			return Options;
+		}
+	}
+
+	/// Enum Extensions
+	public static class AttributeTemplateAttributeExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this AttributeTemplateAttribute.TemplateAttributeType e)
+	    {
+			switch(e)
+			{
+				case AttributeTemplateAttribute.TemplateAttributeType.Checkbox: return "checkbox";
+				case AttributeTemplateAttribute.TemplateAttributeType.Radio: return "radio";
+				case AttributeTemplateAttribute.TemplateAttributeType.Text: return "text";
+				case AttributeTemplateAttribute.TemplateAttributeType.Select: return "select";
+				case AttributeTemplateAttribute.TemplateAttributeType.Memo: return "memo";
+				case AttributeTemplateAttribute.TemplateAttributeType.Template: return "template";
+				case AttributeTemplateAttribute.TemplateAttributeType.SwatchSelect: return "swatch-select";
+			}
+			return "";
 		}
 	}
 }

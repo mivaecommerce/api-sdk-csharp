@@ -36,13 +36,24 @@ namespace MerchantAPI
 		/// </summary>
 		public static String ProductShowToString(ProductShow value)
 		{
-			switch(value) {
-				case ProductShow.All: return "All";
-				case ProductShow.Uncategorized: return "Uncategorized";
-				case ProductShow.Active: return "Active";
-			}
-			return "";
+			return value.ToConstString();
 		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static ProductShow? ProductShowFromString(String value)
+		{
+			switch(value)
+			{
+				case "All": return ProductShow.All;
+				case "Uncategorized": return ProductShow.Uncategorized;
+				case "Active": return ProductShow.Active;
+				default: return null;
+			}
+		}
+
 		/// The available search fields applicable to the request.
 		override public String[] AvailableSearchFields { get; } =
 		{
@@ -160,6 +171,27 @@ namespace MerchantAPI
 			if (Client == null) throw new MerchantAPIException("Client not assigned to request");
 
 			return await Client.SendRequestAsync<ProductListLoadQueryRequest, ProductListLoadQueryResponse>(this);
+		}
+	}
+
+	/// Enum Extensions
+	public static class ProductListLoadQueryRequestExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this ProductListLoadQueryRequest.ProductShow e)
+	    {
+			switch(e)
+			{
+				case ProductListLoadQueryRequest.ProductShow.All: return "All";
+				case ProductListLoadQueryRequest.ProductShow.Uncategorized: return "Uncategorized";
+				case ProductListLoadQueryRequest.ProductShow.Active: return "Active";
+			}
+			return "";
+	    
 		}
 	}
 }

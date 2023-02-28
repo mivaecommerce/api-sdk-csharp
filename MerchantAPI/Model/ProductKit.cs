@@ -15,25 +15,25 @@ namespace MerchantAPI
 {
 	public class ProductKit : Model
 	{
-		/// <value>Property AttrId - int</value>
+		/// <value>Property AttributeId - int</value>
 		[JsonPropertyName("attr_id")]
-		public int AttrId { get; set; }
+		public int AttributeId { get; set; }
 
-		/// <value>Property AttrType - String</value>
+		/// <value>Property AttributeType - String</value>
 		[JsonPropertyName("attr_type")]
-		public String AttrType { get; set; }
+		public String AttributeType { get; set; }
 
-		/// <value>Property AttrCode - String</value>
+		/// <value>Property AttributeCode - String</value>
 		[JsonPropertyName("attr_code")]
-		public String AttrCode { get; set; }
+		public String AttributeCode { get; set; }
 
-		/// <value>Property AttrPrompt - String</value>
+		/// <value>Property AttributePrompt - String</value>
 		[JsonPropertyName("attr_prompt")]
-		public String AttrPrompt { get; set; }
+		public String AttributePrompt { get; set; }
 
-		/// <value>Property AttmpatId - int</value>
+		/// <value>Property AttributeTemplateAttributeId - int</value>
 		[JsonPropertyName("attmpat_id")]
-		public int AttmpatId { get; set; }
+		public int AttributeTemplateAttributeId { get; set; }
 
 		/// <value>Property OptionId - int</value>
 		[JsonPropertyName("option_id")]
@@ -47,6 +47,10 @@ namespace MerchantAPI
 		[JsonPropertyName("option_prompt")]
 		public String OptionPrompt { get; set; }
 
+		/// <value>Property OptionDisplayOrder - int</value>
+		[JsonPropertyName("option_disp_order")]
+		public int OptionDisplayOrder { get; set; }
+
 		/// <value>Property Parts - List<ProductKitPart></value>
 		[JsonPropertyName("parts")]
 		public List<ProductKitPart> Parts { get; set; } = new List<ProductKitPart>();
@@ -55,45 +59,45 @@ namespace MerchantAPI
 		/// Getter for attr_id.
 		/// <returns>int</returns>
 		/// </summary>
-		public int GetAttrId()
+		public int GetAttributeId()
 		{
-			return AttrId;
+			return AttributeId;
 		}
 
 		/// <summary>
 		/// Getter for attr_type.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetAttrType()
+		public String GetAttributeType()
 		{
-			return AttrType;
+			return AttributeType;
 		}
 
 		/// <summary>
 		/// Getter for attr_code.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetAttrCode()
+		public String GetAttributeCode()
 		{
-			return AttrCode;
+			return AttributeCode;
 		}
 
 		/// <summary>
 		/// Getter for attr_prompt.
 		/// <returns>String</returns>
 		/// </summary>
-		public String GetAttrPrompt()
+		public String GetAttributePrompt()
 		{
-			return AttrPrompt;
+			return AttributePrompt;
 		}
 
 		/// <summary>
 		/// Getter for attmpat_id.
 		/// <returns>int</returns>
 		/// </summary>
-		public int GetAttmpatId()
+		public int GetAttributeTemplateAttributeId()
 		{
-			return AttmpatId;
+			return AttributeTemplateAttributeId;
 		}
 
 		/// <summary>
@@ -121,6 +125,15 @@ namespace MerchantAPI
 		public String GetOptionPrompt()
 		{
 			return OptionPrompt;
+		}
+
+		/// <summary>
+		/// Getter for option_disp_order.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetOptionDisplayOrder()
+		{
+			return OptionDisplayOrder;
 		}
 
 		/// <summary>

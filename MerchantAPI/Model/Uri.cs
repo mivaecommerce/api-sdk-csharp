@@ -31,15 +31,24 @@ namespace MerchantAPI
 		/// </summary>
 		public static String DestinationTypeToString(DestinationType value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static DestinationType? DestinationTypeFromString(String value)
+		{
 			switch(value)
 			{
-				case DestinationType.Screen: return "screen";
-				case DestinationType.Page: return "page";
-				case DestinationType.Category: return "category";
-				case DestinationType.Product: return "product";
-				case DestinationType.Feed: return "feed";
+				case "screen": return DestinationType.Screen;
+				case "page": return DestinationType.Page;
+				case "category": return DestinationType.Category;
+				case "product": return DestinationType.Product;
+				case "feed": return DestinationType.Feed;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -235,6 +244,28 @@ namespace MerchantAPI
 		public UriDetail GetFeed()
 		{
 			return Feed;
+		}
+	}
+
+	/// Enum Extensions
+	public static class UriExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this Uri.DestinationType e)
+	    {
+			switch(e)
+			{
+				case Uri.DestinationType.Screen: return "screen";
+				case Uri.DestinationType.Page: return "page";
+				case Uri.DestinationType.Category: return "category";
+				case Uri.DestinationType.Product: return "product";
+				case Uri.DestinationType.Feed: return "feed";
+			}
+			return "";
 		}
 	}
 }

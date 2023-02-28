@@ -36,13 +36,24 @@ namespace MerchantAPI
 		/// </summary>
 		public static String InventoryChoiceToString(InventoryChoice value)
 		{
-			switch(value) {
-				case InventoryChoice.Default: return "d";
-				case InventoryChoice.Yes: return "y";
-				case InventoryChoice.No: return "n";
-			}
-			return "";
+			return value.ToConstString();
 		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static InventoryChoice? InventoryChoiceFromString(String value)
+		{
+			switch(value)
+			{
+				case "Default": return InventoryChoice.Default;
+				case "Yes": return InventoryChoice.Yes;
+				case "No": return InventoryChoice.No;
+				default: return null;
+			}
+		}
+
 		/// Request field Product_ID.
 		[JsonPropertyName("Product_ID")]
 		public int? ProductId { get; set; }
@@ -173,6 +184,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>InventoryChoice?</returns>
+		/// </summary>
+		public InventoryChoice? GetTrackLowStockLevelConst()
+		{
+			return InventoryChoiceFromString(TrackLowStockLevel);
+		}
+
+		/// <summary>
 		/// Getter for TrackOutOfStockLevel.
 		/// <returns>String</returns>
 		/// </summary>
@@ -182,12 +202,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>InventoryChoice?</returns>
+		/// </summary>
+		public InventoryChoice? GetTrackOutOfStockLevelConst()
+		{
+			return InventoryChoiceFromString(TrackOutOfStockLevel);
+		}
+
+		/// <summary>
 		/// Getter for HideOutOfStockProducts.
 		/// <returns>String</returns>
 		/// </summary>
 		public String GetHideOutOfStockProducts()
 		{
 			return HideOutOfStockProducts;
+		}
+
+		/// <summary>
+		/// Enum Getter for .
+		/// <returns>InventoryChoice?</returns>
+		/// </summary>
+		public InventoryChoice? GetHideOutOfStockProductsConst()
+		{
+			return InventoryChoiceFromString(HideOutOfStockProducts);
 		}
 
 		/// <summary>
@@ -343,6 +381,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for .
+		/// <param name="value">InventoryChoice</param>
+		/// <returns></returns>
+		/// </summary>
+		public InventoryProductSettingsUpdateRequest SetTrackLowStockLevel(InventoryChoice value)
+		{
+			TrackLowStockLevel = value.ToConstString();
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for TrackOutOfStockLevel.
 		/// <param name="value">String</param>
 		/// <returns>InventoryProductSettingsUpdateRequest</returns>
@@ -354,6 +403,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for .
+		/// <param name="value">InventoryChoice</param>
+		/// <returns></returns>
+		/// </summary>
+		public InventoryProductSettingsUpdateRequest SetTrackOutOfStockLevel(InventoryChoice value)
+		{
+			TrackOutOfStockLevel = value.ToConstString();
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for HideOutOfStockProducts.
 		/// <param name="value">String</param>
 		/// <returns>InventoryProductSettingsUpdateRequest</returns>
@@ -361,6 +421,17 @@ namespace MerchantAPI
 		public InventoryProductSettingsUpdateRequest SetHideOutOfStockProducts(String value)
 		{
 			HideOutOfStockProducts = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">InventoryChoice</param>
+		/// <returns></returns>
+		/// </summary>
+		public InventoryProductSettingsUpdateRequest SetHideOutOfStockProducts(InventoryChoice value)
+		{
+			HideOutOfStockProducts = value.ToConstString();
 			return this;
 		}
 
@@ -621,6 +692,27 @@ namespace MerchantAPI
 			if (Client == null) throw new MerchantAPIException("Client not assigned to request");
 
 			return await Client.SendRequestAsync<InventoryProductSettingsUpdateRequest, InventoryProductSettingsUpdateResponse>(this);
+		}
+	}
+
+	/// Enum Extensions
+	public static class InventoryProductSettingsUpdateRequestExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this InventoryProductSettingsUpdateRequest.InventoryChoice e)
+	    {
+			switch(e)
+			{
+				case InventoryProductSettingsUpdateRequest.InventoryChoice.Default: return "Default";
+				case InventoryProductSettingsUpdateRequest.InventoryChoice.Yes: return "Yes";
+				case InventoryProductSettingsUpdateRequest.InventoryChoice.No: return "No";
+			}
+			return "";
+	    
 		}
 	}
 }

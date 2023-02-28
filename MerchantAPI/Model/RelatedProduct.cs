@@ -85,6 +85,10 @@ namespace MerchantAPI
 		[JsonPropertyName("assigned")]
 		public bool Assigned { get; set; }
 
+		/// <value>Property DisplayOrder - int</value>
+		[JsonPropertyName("disp_order")]
+		public int DisplayOrder { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -236,6 +240,15 @@ namespace MerchantAPI
 		public bool GetAssigned()
 		{
 			return Assigned;
+		}
+
+		/// <summary>
+		/// Getter for disp_order.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetDisplayOrder()
+		{
+			return DisplayOrder;
 		}
 	}
 }

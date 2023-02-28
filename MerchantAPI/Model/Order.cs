@@ -34,20 +34,22 @@ namespace MerchantAPI
 		/// </summary>
 		public static String OrderStatusToString(OrderStatus value)
 		{
-			switch(value)
-			{
-				case OrderStatus.Pending: return "0";
-				case OrderStatus.Processing: return "100";
-				case OrderStatus.Shipped: return "200";
-				case OrderStatus.PartiallyShipped: return "201";
-				case OrderStatus.Cancelled: return "300";
-				case OrderStatus.Backordered: return "400";
-				case OrderStatus.RmaIssued: return "500";
-				case OrderStatus.Returned: return "600";
-			}
-			return "";
+			return value.ToConstString();
 		}
 
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static OrderStatus? OrderStatusFromString(String value)
+		{
+			OrderStatus v;
+			if (Enum.TryParse<OrderStatus>(value, out v))
+			{
+				return v;
+			}
+			return null;
+		}
 		/// Enumeration OrderPaymentStatus
 		public enum OrderPaymentStatus
 		{
@@ -63,16 +65,22 @@ namespace MerchantAPI
 		/// </summary>
 		public static String OrderPaymentStatusToString(OrderPaymentStatus value)
 		{
-			switch(value)
-			{
-				case OrderPaymentStatus.Pending: return "0";
-				case OrderPaymentStatus.Authorized: return "100";
-				case OrderPaymentStatus.Captured: return "200";
-				case OrderPaymentStatus.PartiallyCaptured: return "201";
-			}
-			return "";
+			return value.ToConstString();
 		}
 
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static OrderPaymentStatus? OrderPaymentStatusFromString(String value)
+		{
+			OrderPaymentStatus v;
+			if (Enum.TryParse<OrderPaymentStatus>(value, out v))
+			{
+				return v;
+			}
+			return null;
+		}
 		/// Enumeration OrderStockStatus
 		public enum OrderStockStatus
 		{
@@ -87,13 +95,21 @@ namespace MerchantAPI
 		/// </summary>
 		public static String OrderStockStatusToString(OrderStockStatus value)
 		{
-			switch(value)
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static OrderStockStatus? OrderStockStatusFromString(String value)
+		{
+			OrderStockStatus v;
+			if (Enum.TryParse<OrderStockStatus>(value, out v))
 			{
-				case OrderStockStatus.Available: return "100";
-				case OrderStockStatus.Unavailable: return "200";
-				case OrderStockStatus.Partial: return "201";
+				return v;
 			}
-			return "";
+			return null;
 		}
 
 		/// <value>Property Id - int</value>
@@ -423,6 +439,20 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for status.
+		/// <returns>OrderStatus?</returns>
+		/// </summary>
+		public OrderStatus? GetStatusConst()
+		{
+			OrderStatus v;
+			if (Enum.TryParse<OrderStatus>(Status.ToString(), out v))
+			{
+				return v;
+			}
+			return null;
+		}
+
+		/// <summary>
 		/// Getter for pay_status.
 		/// <returns>int</returns>
 		/// </summary>
@@ -432,12 +462,40 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for pay_status.
+		/// <returns>OrderPaymentStatus?</returns>
+		/// </summary>
+		public OrderPaymentStatus? GetPaymentStatusConst()
+		{
+			OrderPaymentStatus v;
+			if (Enum.TryParse<OrderPaymentStatus>(PaymentStatus.ToString(), out v))
+			{
+				return v;
+			}
+			return null;
+		}
+
+		/// <summary>
 		/// Getter for stk_status.
 		/// <returns>int</returns>
 		/// </summary>
 		public int GetStockStatus()
 		{
 			return StockStatus;
+		}
+
+		/// <summary>
+		/// Enum Getter for stk_status.
+		/// <returns>OrderStockStatus?</returns>
+		/// </summary>
+		public OrderStockStatus? GetStockStatusConst()
+		{
+			OrderStockStatus v;
+			if (Enum.TryParse<OrderStockStatus>(StockStatus.ToString(), out v))
+			{
+				return v;
+			}
+			return null;
 		}
 
 		/// <summary>
@@ -1032,6 +1090,65 @@ namespace MerchantAPI
 		public List<OrderReturn> GetReturns()
 		{
 			return Returns;
+		}
+	}
+
+	/// Enum Extensions
+	public static class OrderExtensions
+	{
+		
+		/// <summary>
+		/// Extends enum to provide a ToConstInt() method on a value
+		/// <returns>int</returns>
+		/// </summary>
+	    public static int ToConstInt(this Order.OrderStatus e)
+	    {
+	    	return (int) e;
+	    }
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this Order.OrderStatus e)
+	    {
+			return ((int) e).ToString();
+		}
+		
+		/// <summary>
+		/// Extends enum to provide a ToConstInt() method on a value
+		/// <returns>int</returns>
+		/// </summary>
+	    public static int ToConstInt(this Order.OrderPaymentStatus e)
+	    {
+	    	return (int) e;
+	    }
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this Order.OrderPaymentStatus e)
+	    {
+			return ((int) e).ToString();
+		}
+		
+		/// <summary>
+		/// Extends enum to provide a ToConstInt() method on a value
+		/// <returns>int</returns>
+		/// </summary>
+	    public static int ToConstInt(this Order.OrderStockStatus e)
+	    {
+	    	return (int) e;
+	    }
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this Order.OrderStockStatus e)
+	    {
+			return ((int) e).ToString();
 		}
 	}
 }

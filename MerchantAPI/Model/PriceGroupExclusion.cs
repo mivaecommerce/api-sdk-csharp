@@ -31,13 +31,22 @@ namespace MerchantAPI
 		/// </summary>
 		public static String ExclusionScopeToString(ExclusionScope value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static ExclusionScope? ExclusionScopeFromString(String value)
+		{
 			switch(value)
 			{
-				case ExclusionScope.Basket: return "basket";
-				case ExclusionScope.Group: return "group";
-				case ExclusionScope.Item: return "item";
+				case "basket": return ExclusionScope.Basket;
+				case "group": return ExclusionScope.Group;
+				case "item": return ExclusionScope.Item;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -67,6 +76,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for scope.
+		/// <returns>ExclusionScope?</returns>
+		/// </summary>
+		public ExclusionScope? GetScopeConst()
+		{
+			return ExclusionScopeFromString(Scope);
+		}
+
+		/// <summary>
 		/// Setter for id.
 		/// <param name="value">int</param>
 		/// <returns>PriceGroupExclusion</returns>
@@ -85,6 +103,17 @@ namespace MerchantAPI
 		public PriceGroupExclusion SetScope(String value)
 		{
 			Scope = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for scope.
+		/// <param name="value">ExclusionScope</param>
+		/// <returns>PriceGroupExclusion</returns>
+		/// </summary>
+		public PriceGroupExclusion SetScope(ExclusionScope value)
+		{
+			Scope = value.ToConstString();
 			return this;
 		}
 	}
@@ -151,6 +180,26 @@ namespace MerchantAPI
 			}
 
 			writer.WriteEndObject();
+		}
+	}
+
+	/// Enum Extensions
+	public static class PriceGroupExclusionExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this PriceGroupExclusion.ExclusionScope e)
+	    {
+			switch(e)
+			{
+				case PriceGroupExclusion.ExclusionScope.Basket: return "basket";
+				case PriceGroupExclusion.ExclusionScope.Group: return "group";
+				case PriceGroupExclusion.ExclusionScope.Item: return "item";
+			}
+			return "";
 		}
 	}
 }

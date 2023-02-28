@@ -18,12 +18,25 @@ namespace MerchantAPI
 	/// </summary>
 	public class OrderItemSplitResponse : Response
 	{
+		/// The response model
+		[JsonPropertyName("data")]
+		public SplitOrderItem Data { get; set; }
+
 		/// <summary>
 		///  Constructor
 		/// </summary>
 		public OrderItemSplitResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		///  Getter for splitOrderItem.
+		/// <returns>SplitOrderItem</returns>
+		/// </summary>
+		public SplitOrderItem GetSplitOrderItem()
+		{
+			return Data;
 		}
 	}
 }

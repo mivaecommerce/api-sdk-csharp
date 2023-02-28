@@ -67,6 +67,10 @@ namespace MerchantAPI
 		[JsonPropertyName("default_opt")]
 		public bool DefaultOption { get; set; }
 
+		/// <value>Property HasVariantParts - bool</value>
+		[JsonPropertyName("has_variant_parts")]
+		public bool HasVariantParts { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -182,6 +186,15 @@ namespace MerchantAPI
 		public bool GetDefaultOption()
 		{
 			return DefaultOption;
+		}
+
+		/// <summary>
+		/// Getter for has_variant_parts.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetHasVariantParts()
+		{
+			return HasVariantParts;
 		}
 	}
 }

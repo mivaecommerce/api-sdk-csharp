@@ -227,12 +227,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>PriceGroup.Eligibility?</returns>
+		/// </summary>
+		public PriceGroup.Eligibility? GetCustomerScopeConst()
+		{
+			return PriceGroup.EligibilityFromString(CustomerScope);
+		}
+
+		/// <summary>
 		/// Getter for Rate.
 		/// <returns>String</returns>
 		/// </summary>
 		public String GetRate()
 		{
 			return Rate;
+		}
+
+		/// <summary>
+		/// Enum Getter for .
+		/// <returns>PriceGroup.DiscountType?</returns>
+		/// </summary>
+		public PriceGroup.DiscountType? GetRateConst()
+		{
+			return PriceGroup.DiscountTypeFromString(Rate);
 		}
 
 		/// <summary>
@@ -498,6 +516,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for .
+		/// <param name="value">PriceGroup.Eligibility</param>
+		/// <returns></returns>
+		/// </summary>
+		public PriceGroupUpdateRequest SetCustomerScope(PriceGroup.Eligibility value)
+		{
+			CustomerScope = value.ToConstString();
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Rate.
 		/// <param name="value">String</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
@@ -505,6 +534,17 @@ namespace MerchantAPI
 		public PriceGroupUpdateRequest SetRate(String value)
 		{
 			Rate = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">PriceGroup.DiscountType</param>
+		/// <returns></returns>
+		/// </summary>
+		public PriceGroupUpdateRequest SetRate(PriceGroup.DiscountType value)
+		{
+			Rate = value.ToConstString();
 			return this;
 		}
 

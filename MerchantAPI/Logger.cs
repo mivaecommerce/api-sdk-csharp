@@ -50,7 +50,7 @@ namespace MerchantAPI
 		{
 			WriteLine(String.Format("\r\n============= Response: {0} [HEADERS] =============\r\n", response != null ? response.GetRequest().GetFunction() : ""));
 
-			foreach (var header in response.HttpResponse.Headers)
+			foreach (var header in responseMessage.Headers)
 			{
 
 				WriteLine(String.Format("{0} = {1}", header.Key, String.Join("", header.Value)));

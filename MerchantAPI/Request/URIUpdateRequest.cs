@@ -92,6 +92,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Enum Getter for .
+		/// <returns>Uri.DestinationType?</returns>
+		/// </summary>
+		public Uri.DestinationType? GetDestinationTypeConst()
+		{
+			return MerchantAPI.Uri.DestinationTypeFromString(DestinationType);
+		}
+
+		/// <summary>
 		/// Getter for Destination.
 		/// <returns>String</returns>
 		/// </summary>
@@ -148,6 +157,17 @@ namespace MerchantAPI
 		public URIUpdateRequest SetDestinationType(String value)
 		{
 			DestinationType = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for .
+		/// <param name="value">Uri.DestinationType</param>
+		/// <returns></returns>
+		/// </summary>
+		public URIUpdateRequest SetDestinationType(Uri.DestinationType value)
+		{
+			DestinationType = value.ToConstString();
 			return this;
 		}
 

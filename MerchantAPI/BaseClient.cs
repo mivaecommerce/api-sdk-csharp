@@ -139,11 +139,6 @@ namespace MerchantAPI
 				response = JsonSerializer.Deserialize<TResponse>(httpResponse.Content.ReadAsStringAsync().Result, options);
 				response.Request = request;
 				response.HttpResponse = httpResponse;
-
-				if (Log != null)
-				{
-					Log.LogResponse(response, httpResponse);
-				}
 			}
 			catch (HttpRequestException e)
 			{

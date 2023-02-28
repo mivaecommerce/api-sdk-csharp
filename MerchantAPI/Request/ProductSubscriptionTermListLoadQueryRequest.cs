@@ -54,7 +54,6 @@ namespace MerchantAPI
 			"term",
 			"descrip",
 			"n",
-			"frequency",
 			"fixed_dow",
 			"fixed_dom",
 			"sub_count",

@@ -29,6 +29,7 @@ namespace MerchantAPI
 			FixedWeekly,
 			FixedMonthly,
 			Dates,
+			Monthly,
 		}
 
 		/// <summary>
@@ -37,21 +38,31 @@ namespace MerchantAPI
 		/// </summary>
 		public static String TermFrequencyToString(TermFrequency value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static TermFrequency? TermFrequencyFromString(String value)
+		{
 			switch(value)
 			{
-				case TermFrequency.NDays: return "n";
-				case TermFrequency.NMonths: return "n_months";
-				case TermFrequency.Daily: return "daily";
-				case TermFrequency.Weekly: return "weekly";
-				case TermFrequency.Biweekly: return "biweekly";
-				case TermFrequency.Quarterly: return "quarterly";
-				case TermFrequency.Semiannually: return "semiannually";
-				case TermFrequency.Annually: return "annually";
-				case TermFrequency.FixedWeekly: return "fixedweekly";
-				case TermFrequency.FixedMonthly: return "fixedmonthly";
-				case TermFrequency.Dates: return "dates";
+				case "n": return TermFrequency.NDays;
+				case "n_months": return TermFrequency.NMonths;
+				case "daily": return TermFrequency.Daily;
+				case "weekly": return TermFrequency.Weekly;
+				case "biweekly": return TermFrequency.Biweekly;
+				case "quarterly": return TermFrequency.Quarterly;
+				case "semiannually": return TermFrequency.Semiannually;
+				case "annually": return TermFrequency.Annually;
+				case "fixedweekly": return TermFrequency.FixedWeekly;
+				case "fixedmonthly": return TermFrequency.FixedMonthly;
+				case "dates": return TermFrequency.Dates;
+				case "monthly": return TermFrequency.Monthly;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -94,6 +105,10 @@ namespace MerchantAPI
 		[JsonPropertyName("dates")]
 		public List<ProductSubscriptionTermDate> Dates { get; set; } = new List<ProductSubscriptionTermDate>();
 
+		/// <value>Property DisplayOrder - int</value>
+		[JsonPropertyName("disp_order")]
+		public int DisplayOrder { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -119,6 +134,15 @@ namespace MerchantAPI
 		public String GetFrequency()
 		{
 			return Frequency;
+		}
+
+		/// <summary>
+		/// Enum Getter for frequency.
+		/// <returns>TermFrequency?</returns>
+		/// </summary>
+		public TermFrequency? GetFrequencyConst()
+		{
+			return TermFrequencyFromString(Frequency);
 		}
 
 		/// <summary>
@@ -182,6 +206,44 @@ namespace MerchantAPI
 		public List<ProductSubscriptionTermDate> GetDates()
 		{
 			return Dates;
+		}
+
+		/// <summary>
+		/// Getter for disp_order.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetDisplayOrder()
+		{
+			return DisplayOrder;
+		}
+	}
+
+	/// Enum Extensions
+	public static class ProductSubscriptionTermExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this ProductSubscriptionTerm.TermFrequency e)
+	    {
+			switch(e)
+			{
+				case ProductSubscriptionTerm.TermFrequency.NDays: return "n";
+				case ProductSubscriptionTerm.TermFrequency.NMonths: return "n_months";
+				case ProductSubscriptionTerm.TermFrequency.Daily: return "daily";
+				case ProductSubscriptionTerm.TermFrequency.Weekly: return "weekly";
+				case ProductSubscriptionTerm.TermFrequency.Biweekly: return "biweekly";
+				case ProductSubscriptionTerm.TermFrequency.Quarterly: return "quarterly";
+				case ProductSubscriptionTerm.TermFrequency.Semiannually: return "semiannually";
+				case ProductSubscriptionTerm.TermFrequency.Annually: return "annually";
+				case ProductSubscriptionTerm.TermFrequency.FixedWeekly: return "fixedweekly";
+				case ProductSubscriptionTerm.TermFrequency.FixedMonthly: return "fixedmonthly";
+				case ProductSubscriptionTerm.TermFrequency.Dates: return "dates";
+				case ProductSubscriptionTerm.TermFrequency.Monthly: return "monthly";
+			}
+			return "";
 		}
 	}
 }
