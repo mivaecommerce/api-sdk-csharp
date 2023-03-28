@@ -13,28 +13,28 @@ using System.Text.Json.Serialization;
 namespace MerchantAPI
 {
 	/// <summary>
-	/// API Response for JavaScriptResource_Insert.
-	/// <see>https://docs.miva.com/json-api/functions/javascriptresource_insert</see>
+	/// API Response for CopyPageRules_Insert.
+	/// <see>https://docs.miva.com/json-api/functions/copypagerules_insert</see>
 	/// </summary>
-	public class JavaScriptResourceInsertResponse : Response
+	public class CopyPageRulesInsertResponse : Response
 	{
 		/// The response model
 		[JsonPropertyName("data")]
-		public JavaScriptResource Data { get; set; }
+		public CopyPageRule Data { get; set; }
 
 		/// <summary>
 		///  Constructor
 		/// </summary>
-		public JavaScriptResourceInsertResponse() :
+		public CopyPageRulesInsertResponse() :
 			base()
 		{
 		}
 
 		/// <summary>
-		///  Getter for javaScriptResource.
-		/// <returns>JavaScriptResource</returns>
+		///  Getter for copyPageRule.
+		/// <returns>CopyPageRule</returns>
 		/// </summary>
-		public JavaScriptResource GetJavaScriptResource()
+		public CopyPageRule GetCopyPageRule()
 		{
 			return Data;
 		}

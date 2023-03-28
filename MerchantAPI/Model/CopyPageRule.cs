@@ -29,13 +29,22 @@ namespace MerchantAPI
 		/// </summary>
 		public static String PageRuleSettingsToString(PageRuleSettings value)
 		{
+			return value.ToConstString();
+		}
+
+		/// <summary>
+		/// Helper to convert string to enum
+		/// <returns>String</returns>
+		/// </summary>
+		public static PageRuleSettings? PageRuleSettingsFromString(String value)
+		{
 			switch(value)
 			{
-				case PageRuleSettings.All: return "all";
-				case PageRuleSettings.None: return "none";
-				case PageRuleSettings.Specific: return "specific";
+				case "all": return PageRuleSettings.All;
+				case "none": return PageRuleSettings.None;
+				case "specific": return PageRuleSettings.Specific;
+				default: return null;
 			}
-			return "";
 		}
 
 		/// <value>Property Id - int</value>
@@ -66,17 +75,17 @@ namespace MerchantAPI
 		[JsonPropertyName("settings")]
 		public String Settings { get; set; }
 
-		/// <value>Property Jsres - bool</value>
+		/// <value>Property JavascriptResourceAssignments - bool</value>
 		[JsonPropertyName("jsres")]
-		public bool Jsres { get; set; }
+		public bool JavascriptResourceAssignments { get; set; }
 
-		/// <value>Property CSSres - bool</value>
+		/// <value>Property CSSResourceAssignments - bool</value>
 		[JsonPropertyName("cssres")]
-		public bool CSSres { get; set; }
+		public bool CSSResourceAssignments { get; set; }
 
-		/// <value>Property Cacheset - bool</value>
+		/// <value>Property CacheSettings - bool</value>
 		[JsonPropertyName("cacheset")]
-		public bool Cacheset { get; set; }
+		public bool CacheSettings { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -145,27 +154,47 @@ namespace MerchantAPI
 		/// Getter for jsres.
 		/// <returns>bool</returns>
 		/// </summary>
-		public bool GetJsres()
+		public bool GetJavascriptResourceAssignments()
 		{
-			return Jsres;
+			return JavascriptResourceAssignments;
 		}
 
 		/// <summary>
 		/// Getter for cssres.
 		/// <returns>bool</returns>
 		/// </summary>
-		public bool GetCSSres()
+		public bool GetCSSResourceAssignments()
 		{
-			return CSSres;
+			return CSSResourceAssignments;
 		}
 
 		/// <summary>
 		/// Getter for cacheset.
 		/// <returns>bool</returns>
 		/// </summary>
-		public bool GetCacheset()
+		public bool GetCacheSettings()
 		{
-			return Cacheset;
+			return CacheSettings;
+		}
+	}
+
+	/// Enum Extensions
+	public static class CopyPageRuleExtensions
+	{
+
+		/// <summary>
+		/// Extends enum to provide a ToConstString() method on a value
+		/// <returns>String</returns>
+		/// </summary>
+	    public static String ToConstString(this CopyPageRule.PageRuleSettings e)
+	    {
+			switch(e)
+			{
+				case CopyPageRule.PageRuleSettings.All: return "all";
+				case CopyPageRule.PageRuleSettings.None: return "none";
+				case CopyPageRule.PageRuleSettings.Specific: return "specific";
+			}
+			return "";
 		}
 	}
 }

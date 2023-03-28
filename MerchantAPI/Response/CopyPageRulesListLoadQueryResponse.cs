@@ -13,30 +13,25 @@ using System.Text.Json.Serialization;
 namespace MerchantAPI
 {
 	/// <summary>
-	/// API Response for CSSResource_Insert.
-	/// <see>https://docs.miva.com/json-api/functions/cssresource_insert</see>
+	/// API Response for CopyPageRulesList_Load_Query.
+	/// <see>https://docs.miva.com/json-api/functions/copypageruleslist_load_query</see>
 	/// </summary>
-	public class CSSResourceInsertResponse : Response
+	public class CopyPageRulesListLoadQueryResponse : ListQueryResponse<CopyPageRule>
 	{
-		/// The response model
-		[JsonPropertyName("data")]
-		public CSSResource Data { get; set; }
-
 		/// <summary>
 		///  Constructor
 		/// </summary>
-		public CSSResourceInsertResponse() :
+		public CopyPageRulesListLoadQueryResponse() :
 			base()
 		{
 		}
-
 		/// <summary>
-		///  Getter for CSSResource.
-		/// <returns>CSSResource</returns>
+		///  Getter for copyPageRules.
+		/// <returns>CopyPageRule[]</returns>
 		/// </summary>
-		public CSSResource GetCSSResource()
+		public List<CopyPageRule> GetCopyPageRules()
 		{
-			return Data;
+			return Data.Data;
 		}
 	}
 }

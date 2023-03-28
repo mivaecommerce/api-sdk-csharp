@@ -115,7 +115,9 @@ namespace MerchantAPI
 			"productshippingrules",
 			"relatedproducts",
 			"uris",
-			"url"
+			"url",
+			"subscriptionsettings",
+			"subscriptionterms"
 		};
 
 		/// The available custom fileters applicable to the request.

@@ -150,6 +150,14 @@ namespace MerchantAPI
 		[JsonPropertyName("disp_order")]
 		public int DisplayOrder { get; set; }
 
+		/// <value>Property SubscriptionSettings - ProductSubscriptionSettings</value>
+		[JsonPropertyName("subscriptionsettings")]
+		public ProductSubscriptionSettings SubscriptionSettings { get; set; }
+
+		/// <value>Property SubscriptionTerms - List<ProductSubscriptionTerm></value>
+		[JsonPropertyName("subscriptionterms")]
+		public List<ProductSubscriptionTerm> SubscriptionTerms { get; set; } = new List<ProductSubscriptionTerm>();
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -437,6 +445,24 @@ namespace MerchantAPI
 		{
 			return DisplayOrder;
 		}
+
+		/// <summary>
+		/// Getter for subscriptionsettings.
+		/// <returns>ProductSubscriptionSettings</returns>
+		/// </summary>
+		public ProductSubscriptionSettings GetSubscriptionSettings()
+		{
+			return SubscriptionSettings;
+		}
+
+		/// <summary>
+		/// Getter for subscriptionterms.
+		/// <returns>List<ProductSubscriptionTerm></returns>
+		/// </summary>
+		public List<ProductSubscriptionTerm> GetSubscriptionTerms()
+		{
+			return SubscriptionTerms;
+		}
 	}
 
 	/// <summary>
@@ -644,6 +670,24 @@ namespace MerchantAPI
 				else if (String.Equals(property, "disp_order", StringComparison.OrdinalIgnoreCase))
 				{
 					value.DisplayOrder = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "subscriptionsettings", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartObject)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of object but encountered {0}", reader.TokenType));
+					}
+
+					value.SubscriptionSettings = JsonSerializer.Deserialize<ProductSubscriptionSettings>(ref reader, options);
+				}
+				else if (String.Equals(property, "subscriptionterms", StringComparison.OrdinalIgnoreCase))
+				{
+					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
+					{
+						throw new MerchantAPIException(String.Format("Expected start of array but encountered {0}", reader.TokenType));
+					}
+
+					value.SubscriptionTerms = JsonSerializer.Deserialize<List<ProductSubscriptionTerm>>(ref reader, options);
 				}
 				else
 				{
