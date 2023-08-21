@@ -29,7 +29,9 @@ namespace MerchantAPI
 			"type",
 			"is_global",
 			"active",
-			"file"
+			"file",
+			"mod_code",
+			"mod_data"
 		};
 
 		/// The available sort fields applicable to the request.
@@ -40,7 +42,9 @@ namespace MerchantAPI
 			"type",
 			"is_global",
 			"active",
-			"file"
+			"file",
+			"mod_code",
+			"mod_data"
 		};
 
 		/// <summary>

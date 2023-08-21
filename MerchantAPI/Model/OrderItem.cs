@@ -184,6 +184,10 @@ namespace MerchantAPI
 		[JsonPropertyName("product_id")]
 		public int ProductId { get; set; }
 
+		/// <value>Property GroupId - int</value>
+		[JsonPropertyName("group_id")]
+		public int GroupId { get; set; }
+
 		/// <summary>
 		/// Getter for order_id.
 		/// <returns>int</returns>
@@ -475,6 +479,15 @@ namespace MerchantAPI
 		public int GetProductId()
 		{
 			return ProductId;
+		}
+
+		/// <summary>
+		/// Getter for group_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetGroupId()
+		{
+			return GroupId;
 		}
 
 		/// <summary>
@@ -819,6 +832,10 @@ namespace MerchantAPI
 				else if (String.Equals(property, "product_id", StringComparison.OrdinalIgnoreCase))
 				{
 					value.ProductId = ReadNextInteger(ref reader, options);
+				}
+				else if (String.Equals(property, "group_id", StringComparison.OrdinalIgnoreCase))
+				{
+					value.GroupId = ReadNextInteger(ref reader, options);
 				}
 				else
 				{

@@ -46,6 +46,14 @@ namespace MerchantAPI
 		[JsonPropertyName("CSSResource_Attributes")]
 		public List<CSSResourceAttribute> CSSResourceAttributes { get; set; } = new List<CSSResourceAttribute>();
 
+		/// Request field CSSResource_Module_Code.
+		[JsonPropertyName("CSSResource_Module_Code")]
+		public String CSSResourceModuleCode { get; set; }
+
+		/// Request field CSSResource_Module_Data.
+		[JsonPropertyName("CSSResource_Module_Data")]
+		public String CSSResourceModuleData { get; set; }
+
 		/// <summary>
 		/// Request constructor.
 		/// <param name="client">BaseClient</param>
@@ -120,6 +128,24 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for CSSResource_Module_Code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetCSSResourceModuleCode()
+		{
+			return CSSResourceModuleCode;
+		}
+
+		/// <summary>
+		/// Getter for CSSResource_Module_Data.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetCSSResourceModuleData()
+		{
+			return CSSResourceModuleData;
+		}
+
+		/// <summary>
 		/// Setter for CSSResource_Code.
 		/// <param name="value">String</param>
 		/// <returns>CSSResourceInsertRequest</returns>
@@ -186,6 +212,28 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for CSSResource_Module_Code.
+		/// <param name="value">String</param>
+		/// <returns>CSSResourceInsertRequest</returns>
+		/// </summary>
+		public CSSResourceInsertRequest SetCSSResourceModuleCode(String value)
+		{
+			CSSResourceModuleCode = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for CSSResource_Module_Data.
+		/// <param name="value">String</param>
+		/// <returns>CSSResourceInsertRequest</returns>
+		/// </summary>
+		public CSSResourceInsertRequest SetCSSResourceModuleData(String value)
+		{
+			CSSResourceModuleData = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Add a CSSResourceAttribute.
 		/// - CSSResourceAttribute: CSSResourceAttribute
 		/// - Returns: Self
@@ -240,6 +288,16 @@ namespace MerchantAPI
 			{
 				writer.WritePropertyName("CSSResource_Attributes");
 				JsonSerializer.Serialize(writer, this.CSSResourceAttributes, options);
+			}
+
+			if (CSSResourceModuleCode != null && CSSResourceModuleCode.Length > 0)
+			{
+				writer.WriteString("CSSResource_Module_Code", CSSResourceModuleCode);
+			}
+
+			if (CSSResourceModuleData != null && CSSResourceModuleData.Length > 0)
+			{
+				writer.WriteString("CSSResource_Module_Data", CSSResourceModuleData);
 			}
 		}
 

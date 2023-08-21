@@ -31,8 +31,12 @@ namespace MerchantAPI
 		{
 			"item_type",
 			"item_id",
+			"item_user_id",
+			"item_user_name",
+			"item_user_icon",
 			"item_version_id",
-			"item_identifier"
+			"item_identifier",
+			"item_change_type"
 		};
 
 		/// The available sort fields applicable to the request.
@@ -40,8 +44,11 @@ namespace MerchantAPI
 		{
 			"item_type",
 			"item_id",
+			"item_user_id",
+			"item_user_name",
 			"item_version_id",
-			"item_identifier"
+			"item_identifier",
+			"item_change_type"
 		};
 
 		/// <summary>

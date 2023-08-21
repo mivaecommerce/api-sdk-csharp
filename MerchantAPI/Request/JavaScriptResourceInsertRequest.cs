@@ -46,6 +46,14 @@ namespace MerchantAPI
 		[JsonPropertyName("JavaScriptResource_Attributes")]
 		public List<JavaScriptResourceAttribute> JavaScriptResourceAttributes { get; set; } = new List<JavaScriptResourceAttribute>();
 
+		/// Request field JavaScriptResource_Module_Code.
+		[JsonPropertyName("JavaScriptResource_Module_Code")]
+		public String JavaScriptResourceModuleCode { get; set; }
+
+		/// Request field JavaScriptResource_Module_Data.
+		[JsonPropertyName("JavaScriptResource_Module_Data")]
+		public String JavaScriptResourceModuleData { get; set; }
+
 		/// <summary>
 		/// Request constructor.
 		/// <param name="client">BaseClient</param>
@@ -120,6 +128,24 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for JavaScriptResource_Module_Code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetJavaScriptResourceModuleCode()
+		{
+			return JavaScriptResourceModuleCode;
+		}
+
+		/// <summary>
+		/// Getter for JavaScriptResource_Module_Data.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetJavaScriptResourceModuleData()
+		{
+			return JavaScriptResourceModuleData;
+		}
+
+		/// <summary>
 		/// Setter for JavaScriptResource_Code.
 		/// <param name="value">String</param>
 		/// <returns>JavaScriptResourceInsertRequest</returns>
@@ -186,6 +212,28 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for JavaScriptResource_Module_Code.
+		/// <param name="value">String</param>
+		/// <returns>JavaScriptResourceInsertRequest</returns>
+		/// </summary>
+		public JavaScriptResourceInsertRequest SetJavaScriptResourceModuleCode(String value)
+		{
+			JavaScriptResourceModuleCode = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for JavaScriptResource_Module_Data.
+		/// <param name="value">String</param>
+		/// <returns>JavaScriptResourceInsertRequest</returns>
+		/// </summary>
+		public JavaScriptResourceInsertRequest SetJavaScriptResourceModuleData(String value)
+		{
+			JavaScriptResourceModuleData = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Add a JavaScriptResourceAttribute.
 		/// - javaScriptResourceAttribute: JavaScriptResourceAttribute
 		/// - Returns: Self
@@ -240,6 +288,16 @@ namespace MerchantAPI
 			{
 				writer.WritePropertyName("JavaScriptResource_Attributes");
 				JsonSerializer.Serialize(writer, this.JavaScriptResourceAttributes, options);
+			}
+
+			if (JavaScriptResourceModuleCode != null && JavaScriptResourceModuleCode.Length > 0)
+			{
+				writer.WriteString("JavaScriptResource_Module_Code", JavaScriptResourceModuleCode);
+			}
+
+			if (JavaScriptResourceModuleData != null && JavaScriptResourceModuleData.Length > 0)
+			{
+				writer.WriteString("JavaScriptResource_Module_Data", JavaScriptResourceModuleData);
 			}
 		}
 

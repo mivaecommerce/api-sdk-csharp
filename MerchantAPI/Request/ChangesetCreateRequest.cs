@@ -62,6 +62,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Property_Changes")]
 		public List<PropertyChange> PropertyChanges { get; set; } = new List<PropertyChange>();
 
+		/// Request field Module_Changes.
+		[JsonPropertyName("Module_Changes")]
+		public List<ModuleChange> ModuleChanges { get; set; } = new List<ModuleChange>();
+
 		/// <summary>
 		/// Request constructor.
 		/// <param name="client">BaseClient</param>
@@ -169,6 +173,15 @@ namespace MerchantAPI
 		public List<PropertyChange> GetPropertyChanges()
 		{
 			return PropertyChanges;
+		}
+
+		/// <summary>
+		/// Getter for Module_Changes.
+		/// <returns>List<ModuleChange></returns>
+		/// </summary>
+		public List<ModuleChange> GetModuleChanges()
+		{
+			return ModuleChanges;
 		}
 
 		/// <summary>
@@ -357,6 +370,32 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Add a ModuleChange.
+		/// - moduleChange: ModuleChange
+		/// - Returns: Self
+		/// </summary>
+		public ChangesetCreateRequest AddModuleChange(ModuleChange moduleChange)
+		{
+			ModuleChanges.Add(moduleChange);
+			return this;
+		}
+
+		/// <summary>
+		/// Add an array of ModuleChange.
+		/// <param name="moduleChanges">List<ModuleChange></param>
+		/// <returns>ChangesetCreateRequest</returns>
+		/// </summary>
+		public ChangesetCreateRequest AddModuleChanges(List<ModuleChange> moduleChanges)
+		{
+			foreach(ModuleChange e in moduleChanges)
+			{
+				ModuleChanges.Add(e);
+			}
+
+			return this;
+		}
+
+		/// <summary>
 		/// Write to the JSON writer. Used during serialization with a requests associated converter.
 		/// <param name="writer">Utf8JsonWriter</param>
 		/// <param name="options">JsonSerializerOptions</param>
@@ -421,6 +460,12 @@ namespace MerchantAPI
 			{
 				writer.WritePropertyName("Property_Changes");
 				JsonSerializer.Serialize(writer, this.PropertyChanges, options);
+			}
+
+			if (ModuleChanges.Count > 0)
+			{
+				writer.WritePropertyName("Module_Changes");
+				JsonSerializer.Serialize(writer, this.ModuleChanges, options);
 			}
 		}
 

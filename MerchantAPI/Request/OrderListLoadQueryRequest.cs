@@ -183,7 +183,8 @@ namespace MerchantAPI
 			"notes",
 			"parts",
 			"shipments",
-			"returns"
+			"returns",
+			"payment_data"
 		};
 
 		/// The available custom fileters applicable to the request.

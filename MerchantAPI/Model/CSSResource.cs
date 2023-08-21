@@ -22,6 +22,9 @@ namespace MerchantAPI
 			ResourceTypeInline,
 			ResourceTypeExternal,
 			ResourceTypeLocal,
+			ResourceTypeModule,
+			ResourceTypeModuleInline,
+			ResourceTypeModuleManaged,
 		}
 
 		/// <summary>
@@ -45,6 +48,9 @@ namespace MerchantAPI
 				case "I": return CSSResourceType.ResourceTypeInline;
 				case "E": return CSSResourceType.ResourceTypeExternal;
 				case "L": return CSSResourceType.ResourceTypeLocal;
+				case "M": return CSSResourceType.ResourceTypeModule;
+				case "Y": return CSSResourceType.ResourceTypeModuleInline;
+				case "Z": return CSSResourceType.ResourceTypeModuleManaged;
 				default: return null;
 			}
 		}
@@ -80,6 +86,14 @@ namespace MerchantAPI
 		/// <value>Property Attributes - List<CSSResourceAttribute></value>
 		[JsonPropertyName("attributes")]
 		public List<CSSResourceAttribute> Attributes { get; set; } = new List<CSSResourceAttribute>();
+
+		/// <value>Property ModuleCode - String</value>
+		[JsonPropertyName("mod_code")]
+		public String ModuleCode { get; set; }
+
+		/// <value>Property ModuleData - String</value>
+		[JsonPropertyName("mod_data")]
+		public String ModuleData { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -161,6 +175,24 @@ namespace MerchantAPI
 		{
 			return Attributes;
 		}
+
+		/// <summary>
+		/// Getter for mod_code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetModuleCode()
+		{
+			return ModuleCode;
+		}
+
+		/// <summary>
+		/// Getter for mod_data.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetModuleData()
+		{
+			return ModuleData;
+		}
 	}
 
 	/// Enum Extensions
@@ -179,6 +211,9 @@ namespace MerchantAPI
 				case CSSResource.CSSResourceType.ResourceTypeInline: return "I";
 				case CSSResource.CSSResourceType.ResourceTypeExternal: return "E";
 				case CSSResource.CSSResourceType.ResourceTypeLocal: return "L";
+				case CSSResource.CSSResourceType.ResourceTypeModule: return "M";
+				case CSSResource.CSSResourceType.ResourceTypeModuleInline: return "Y";
+				case CSSResource.CSSResourceType.ResourceTypeModuleManaged: return "Z";
 			}
 			return "";
 		}

@@ -15,9 +15,25 @@ using System.Text.Json;
 namespace MerchantAPI
 {
 	[JsonConverter(typeof(VersionSettingsConverter))]
-	public class VersionSettings : Model
+	public class VersionSettings : VariableValue
 	{
-		public VariableValue Settings { get; set; }
+		/// <summary>
+		/// Default constructor, creates a null value of convertible type
+		/// </summary>
+		/// <param name="value"></param>
+		public VersionSettings() : base()
+		{
+			
+		}
+
+		/// <summary>
+		/// Constructor for dynamic types
+		/// </summary>
+		/// <param name="values"></param>
+		public VersionSettings(dynamic value)
+		{
+			SetValue(value);
+		}
 
 		/// <summary>
 		/// Check if a specific item settings is defined.
@@ -26,11 +42,9 @@ namespace MerchantAPI
 		/// <returns></returns>
 		public bool HasItem(String item)
 		{
-			if (Settings == null) return false;
-
-			if (Settings.IsDictionary())
+			if (IsDictionary())
 			{
-				return Settings.GetValueDictionary().ContainsKey(item);
+				return GetValue().ContainsKey(item);
 			}
 
 			return false;
@@ -41,15 +55,13 @@ namespace MerchantAPI
 		/// </summary>
 		/// <param name="item"></param>
 		/// <returns></returns>
-		public VariableValue GetItem(String item)
+		public dynamic GetItem(String item)
 		{
-			if (Settings == null) return null;
-
 			if (HasItem(item))
 			{
-				VariableValue value;
+				dynamic value;
 
-				if (Settings.GetValueDictionary().TryGetValue(item, out value))
+				if (GetValue().TryGetValue(item, out value))
 				{
 					return value;
 				}
@@ -66,20 +78,15 @@ namespace MerchantAPI
 		/// <returns></returns>
 		public bool ItemHasProperty(String item, String property)
 		{
-			if (Settings == null) return false;
+			if (!HasItem(item))		return false;
 
-			if (!HasItem(item))
+			dynamic itemvalue;
+
+			if (GetValue().TryGetValue(item, out itemvalue))
 			{
-				return false;
-			}
-
-			VariableValue itemvalue;
-
-			if (Settings.GetValueDictionary().TryGetValue(item, out itemvalue))
-			{
-				if (itemvalue.IsDictionary())
+				if (Util.IsDictionaryType(itemvalue.GetType()))
 				{
-					return itemvalue.GetValueDictionary().ContainsKey(property);
+					return itemvalue.ContainsKey(property);
 				}
 			}
 
@@ -92,18 +99,18 @@ namespace MerchantAPI
 		/// <param name="item"></param>
 		/// <param name="property"></param>
 		/// <returns></returns>
-		public VariableValue GetItemProperty(String item, String property)
+		public dynamic GetItemProperty(String item, String property)
 		{
 			if (ItemHasProperty(item, property))
 			{
-				VariableValue itemvalue;
-				VariableValue ret;
+				dynamic itemvalue;
+				dynamic ret;
 
-				if (Settings.GetValueDictionary().TryGetValue(item, out itemvalue))
+				if (GetValue().TryGetValue(item, out itemvalue))
 				{
-					if (itemvalue.IsDictionary())
+					if (Util.IsDictionaryType(itemvalue.GetType()))
 					{
-						if (itemvalue.GetValueDictionary().TryGetValue(property, out ret))
+						if (itemvalue.TryGetValue(property, out ret))
 						{
 							return ret;
 						}
@@ -120,16 +127,11 @@ namespace MerchantAPI
 		/// <param name="item"></param>
 		/// <param name="itemValues"></param>
 		/// <returns></returns>
-		public VersionSettings SetItem(String item, VariableValue itemValue)
+		public VersionSettings SetItem(String item, dynamic itemValue)
 		{
-			if (Settings == null)
+			if (IsDictionary())
 			{
-				Settings = new VariableValue(new Dictionary<String, VariableValue>());
-			}
-
-			if (Settings.IsDictionary())
-			{
-				Settings.AddToDictionary(item, itemValue);
+				GetValue()[item] = itemValue;
 			}
 
 			return this;
@@ -142,15 +144,20 @@ namespace MerchantAPI
 		/// <param name="property"></param>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		public VersionSettings SetItemProperty(String item, String property, VariableValue value)
+		public VersionSettings SetItemProperty(String item, String property, dynamic value)
 		{
-			if (Settings == null)
+			if (IsDictionary())
 			{
-				Settings = new VariableValue(new Dictionary<String, VariableValue>());
-			}
-			if (Settings.IsDictionary())
-			{
-				Settings.AddToDictionary(property, value);
+				if (!GetValue().ContainsKey(item))
+				{
+					GetValue()[item] = new Dictionary<String, dynamic>() { { property, value } };
+				} else
+				{
+					if (Util.IsDictionaryType(GetValue()[item].getType()))
+					{
+						GetValue()[item][property] = value;
+					}					
+				}
 			}
 
 			return this;
@@ -160,64 +167,21 @@ namespace MerchantAPI
 	/// <summary>
 	/// Handles converting the version settings values model
 	/// </summary>
-	public class  VersionSettingsConverter : BaseJsonConverter<VersionSettings>
+	public class  VersionSettingsConverter : VariableValueConverter
 	{
 		public override bool CanConvert(Type typeToConvert)
 		{
 			return typeToConvert == typeof(VersionSettings) || typeToConvert.IsSubclassOf(typeof(VersionSettings));
 		}
 
-		public override VersionSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override VariableValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			VersionSettings value = new VersionSettings();
-
-			value.Settings = JsonSerializer.Deserialize<VariableValue>(ref reader, options);
-
-			return value;
+			return new VersionSettings(Read(ref reader, options));
 		}
 
-		public override void Write(Utf8JsonWriter writer, VersionSettings model, JsonSerializerOptions options)
+		public override void Write(Utf8JsonWriter writer, VariableValue value, JsonSerializerOptions options)
 		{
-			if (model.Settings == null || model.Settings.IsNull())
-			{
-				writer.WritePropertyName("");
-				return;
-			}
-
-			if (model.Settings.IsDictionary())
-			{
-				writer.WriteStartObject();
-
-				foreach (KeyValuePair<String, VariableValue> itemEntry in model.Settings.GetValueDictionary())
-				{
-					writer.WritePropertyName(itemEntry.Key);
-
-					JsonSerializer.Serialize<VariableValue>(writer, itemEntry.Value, options);
-
-					writer.WriteEndObject();
-				}
-
-				writer.WriteEndObject();
-			}
-			else if (model.Settings.IsArray())
-			{
-				writer.WriteStartArray();
-
-				foreach (VariableValue itemEntry in model.Settings.GetValueArray())
-				{
-					JsonSerializer.Serialize<VariableValue>(writer, itemEntry, options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (model.Settings.IsConvertible())
-			{
-				JsonSerializer.Serialize<VariableValue>(writer, model.Settings, options);
-			}
-			else
-			{
-				throw new MerchantAPIException("Unexpected VariableValue type");
-			}
+			JsonSerializer.Serialize<dynamic>(writer, value.GetValue(), options);
 		}
 	}
 }

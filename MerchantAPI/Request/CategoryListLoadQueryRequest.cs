@@ -85,7 +85,8 @@ namespace MerchantAPI
 		/// The available on demand columns applicable to the request.
 		override public String[] AvailableOnDemandColumns { get; } =
 		{
-			"uris"
+			"uris",
+			"url"
 		};
 
 		/// The available custom fileters applicable to the request.

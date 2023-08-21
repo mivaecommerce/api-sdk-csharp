@@ -263,7 +263,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Setter for LinkedPages.
-		/// <param name="value">ist<String></param>
+		/// <param name="value">List<String></param>
 		/// <returns>CSSResourceChange</returns>
 		/// </summary>
 		public CSSResourceChange SetLinkedPages(List<String> value)
@@ -274,7 +274,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Setter for LinkedResources.
-		/// <param name="value">ist<String></param>
+		/// <param name="value">List<String></param>
 		/// <returns>CSSResourceChange</returns>
 		/// </summary>
 		public CSSResourceChange SetLinkedResources(List<String> value)

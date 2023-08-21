@@ -141,7 +141,7 @@ namespace MerchantAPI
 
 			this.Entries.Add(new FilterExpressionEntry(
 				this,
-				SearchType.search_AND,
+				type,
 				new FilterExpressionOperation(field, value.ToString(), op, type)
 			));
 
@@ -155,9 +155,7 @@ namespace MerchantAPI
 		/// <returns></returns>
 		public FilterExpression AndX(FilterExpression expression)
 		{
-			expression.Parent = this;
-			Entries.Add(new FilterExpressionEntry(this, SearchType.search_AND, expression));
-			return this;
+			return SubX(SearchType.search_AND, expression);
 		}
 
 		/// <summary>
@@ -167,8 +165,23 @@ namespace MerchantAPI
 		/// <returns></returns>
 		public FilterExpression OrX(FilterExpression expression)
 		{
+			return SubX(SearchType.search_OR, expression);
+		}
+
+		/// <summary>
+		/// Add a sub OR expression
+		/// </summary>
+		/// <param name="expression"></param>
+		/// <returns></returns>
+		public FilterExpression SubX(SearchType type, FilterExpression expression)
+		{
+			if (expression == this)
+			{
+				throw new MerchantAPIException("Cannot add a subexpression with itself");
+			}
+
 			expression.Parent = this;
-			Entries.Add(new FilterExpressionEntry(this, SearchType.search_OR, expression));
+			Entries.Add(new FilterExpressionEntry(this, type, expression));
 			return this;
 		}
 
@@ -720,9 +733,65 @@ namespace MerchantAPI
 
 		public override void Write(Utf8JsonWriter writer, FilterExpression value, JsonSerializerOptions options)
 		{
-			foreach(FilterExpressionEntry entry in value.Entries)
+			if (value.IsChild())
 			{
-				JsonSerializer.Serialize(writer, entry, options);
+				WriteLowLevel(writer, value, options);
+				return;
+			}
+
+			writer.WriteStartObject();
+			writer.WriteString("name", "search");
+			writer.WritePropertyName("value");
+			writer.WriteStartArray();
+
+			WriteLowLevel(writer, value, options);
+
+			writer.WriteEndArray();
+			writer.WriteEndObject();
+		}
+
+		public void WriteLowLevel(Utf8JsonWriter writer, FilterExpression value, JsonSerializerOptions options)
+		{
+			String lastType = "";
+
+			foreach (FilterExpressionEntry entry in value.Entries)
+			{
+				if (entry.Expression != null)
+				{
+					writer.WriteStartObject();
+					writer.WriteString("field", entry.Type.ToString());
+					writer.WriteString("operator", FilterExpression.SearchOperator.SUBWHERE.ToString());
+					writer.WriteStartArray("value");
+
+					JsonSerializer.Serialize(writer, entry.Expression, options);
+
+					writer.WriteEndArray();
+					writer.WriteEndObject();
+				}
+				else if (value.IsChild() || lastType.Length > 0 && lastType != entry.Type.ToString())
+				{
+					writer.WriteStartObject();
+					writer.WriteString("field", entry.Type.ToString());
+					writer.WriteString("operator", FilterExpression.SearchOperator.SUBWHERE.ToString());
+					writer.WriteStartArray("value");
+					writer.WriteStartObject();
+					writer.WriteString("field", entry.Operation.Left);
+					writer.WriteString("operator", entry.Operation.Operator.ToString());
+					writer.WriteString("value", entry.Operation.Right);
+					writer.WriteEndObject();
+					writer.WriteEndArray();
+					writer.WriteEndObject();
+				}
+				else
+				{
+					lastType = entry.Type.ToString();
+
+					writer.WriteStartObject();
+					writer.WriteString("field", entry.Operation.Left);
+					writer.WriteString("operator", entry.Operation.Operator.ToString());
+					writer.WriteString("value", entry.Operation.Right);
+					writer.WriteEndObject();
+				}
 			}
 		}
 	}

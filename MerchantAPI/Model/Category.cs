@@ -77,6 +77,10 @@ namespace MerchantAPI
 		[JsonPropertyName("uris")]
 		public List<Uri> Uris { get; set; } = new List<Uri>();
 
+		/// <value>Property Url - String</value>
+		[JsonPropertyName("url")]
+		public String Url { get; set; }
+
 		/// <value>Property CustomFieldValues - CustomFieldValues</value>
 		[JsonPropertyName("CustomField_Values")]
 		public CustomFieldValues CustomFieldValues { get; set; }
@@ -214,6 +218,15 @@ namespace MerchantAPI
 		public List<Uri> GetUris()
 		{
 			return Uris;
+		}
+
+		/// <summary>
+		/// Getter for url.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetUrl()
+		{
+			return Url;
 		}
 
 		/// <summary>

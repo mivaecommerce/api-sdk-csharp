@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
@@ -18,6 +19,31 @@ namespace MerchantAPI
 {
 	public static class Util
 	{
+		static public bool IsConvertibleType(Type type)
+		{
+			return Type.GetTypeCode(type) != TypeCode.Object;
+		}
+
+		static public bool IsConvertibleType(TypeCode typecode)
+		{
+			return typecode != TypeCode.Object;
+		}
+
+		static public bool IsDictionaryType(Type type)
+		{
+			return typeof(IDictionary).IsAssignableFrom(type);
+		}
+
+		static public bool IsListType(Type type)
+		{
+			return typeof(IEnumerable).IsAssignableFrom(type);
+		}
+
+		static public bool IsNativeArray(Type type)
+		{
+			return type.IsArray;
+		}
+
 		/// <summary>
 		/// Check if a value is a numeric type
 		/// </summary>
@@ -197,346 +223,6 @@ namespace MerchantAPI
 	/// </summary>
 	public class DateTimeStructConverter : UnixTimestampConverter
 	{
-	}
-
-	/// <summary>
-	/// Holds the value for response types that are not know until runtime. Supports any IConvertible, Arrays of VariableValue's, and Dictionarys of them as well.
-	/// </summary>
-	[JsonConverter(typeof(VariableValueConverter))]
-	public class VariableValue
-	{
-		public enum ValueDataType
-		{
-			ConvertibleType,
-			DictionaryType,
-			ArrayType
-		};
-
-		protected IConvertible ValueConvertible { get; set; } = null;
-
-		protected List<VariableValue> ValueArray { get; set; } = null;
-
-		protected Dictionary<String, VariableValue> ValueDict { get; set; } = null;
-
-		public ValueDataType ValueType { get; } = ValueDataType.ConvertibleType;
-
-		/// <summary>
-		/// Default constructor, creates a null value of convertible type
-		/// </summary>
-		/// <param name="value"></param>
-		public VariableValue()
-		{
-			ValueType = ValueDataType.ConvertibleType;
-			ValueConvertible = null;
-		}
-
-		/// <summary>
-		/// Constructor for convertible type
-		/// </summary>
-		/// <param name="value"></param>
-		public VariableValue(IConvertible value)
-		{
-			ValueType = ValueDataType.ConvertibleType;
-			ValueConvertible = value;
-		}
-
-		/// <summary>
-		/// Constructor for array type
-		/// </summary>
-		/// <param name="values"></param>
-		public VariableValue(List<VariableValue> values)
-		{
-			ValueType = ValueDataType.ArrayType;
-			ValueArray = values;
-		}
-
-		/// <summary>
-		/// Constructor for Dictionary type
-		/// </summary>
-		/// <param name="values"></param>
-		public VariableValue(Dictionary<String, VariableValue> values)
-		{
-			ValueType = ValueDataType.DictionaryType;
-			ValueDict = values;
-		}
-
-		/// <summary>
-		/// Get the dictionary value, will be null if not convertible type
-		/// </summary>
-		/// <returns></returns>
-		public Dictionary<String, VariableValue> GetValueDictionary()
-		{
-			return ValueDict;
-		}
-
-		/// <summary>
-		/// Get the array value, will be null if not convertible type
-		/// </summary>
-		/// <returns></returns>
-		public List<VariableValue> GetValueArray()
-		{
-			return ValueArray;
-		}
-
-		/// <summary>
-		/// Get the convertible value, will be null if not convertible type
-		/// </summary>
-		/// <returns></returns>
-		public IConvertible GetValueConvertible()
-		{
-			return ValueConvertible;
-		}
-
-		/// <summary>
-		/// Check if the underlying type is a convertible
-		/// </summary>
-		/// <returns></returns>
-		public bool IsConvertible()
-		{
-			return ValueType == ValueDataType.ConvertibleType;
-		}
-
-		/// <summary>
-		/// Check if the underlying type is a dictionary
-		/// </summary>
-		/// <returns></returns>
-		public bool IsDictionary()
-		{
-			return ValueType == ValueDataType.DictionaryType;
-		}
-
-		/// <summary>
-		/// Check if the underlying type is a array
-		/// </summary>
-		/// <returns></returns>
-		public bool IsArray()
-		{
-			return ValueType == ValueDataType.ArrayType;
-		}
-
-		/// <summary>
-		/// Check if this value is null
-		/// </summary>
-		/// <returns></returns>
-		public bool IsNull()
-		{
-			if (ValueType == ValueDataType.DictionaryType && ValueDict == null)
-			{
-				return true;
-			}
-			else if (ValueType == ValueDataType.ArrayType && ValueArray == null)
-			{
-				return true;
-			}
-			else if (ValueType == ValueDataType.ConvertibleType && ValueArray == null)
-			{
-				return true;
-			}
-
-			return false;
-		}
-
-		/// <summary>
-		/// Add an entry to the value array only if it is an array type
-		/// </summary>
-		/// <param name="value"></param>
-		public void AddToArray(VariableValue value)
-		{
-			if (ValueType == ValueDataType.ArrayType)
-			{
-				ValueArray.Add(value);
-			}
-		}
-
-		/// <summary>
-		/// Add an entry to the dictionary only if it is a dictionary type
-		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="value"></param>
-		public void AddToDictionary(String key, VariableValue value)
-		{
-			if (ValueType == ValueDataType.DictionaryType)
-			{
-				ValueDict[key] = value;
-			}
-		}
-
-		/// <summary>
-		/// Set the convertible value, only if it is a convertible type
-		/// </summary>
-		/// <param name="value"></param>
-		public void SetConvertible(IConvertible value)
-		{
-			if (ValueType == ValueDataType.ConvertibleType)
-			{
-				ValueConvertible = value;
-			}
-		}
-
-		/// <summary>
-		/// Get a string value from this object. Only returns a value for convertible type
-		/// </summary>
-		/// <returns></returns>
-		public new String ToString()
-		{
-			if (ValueType == ValueDataType.ConvertibleType)
-			{
-				return ValueConvertible.ToString();
-			}
-
-			return "";
-		}
-	}
-
-	/// <summary>
-	/// Handles serializing/deserializing a single variable value
-	/// </summary>
-	public class VariableValueConverter : BaseJsonConverter<VariableValue>
-	{
-		public override bool CanConvert(Type typeToConvert)
-		{
-			return typeToConvert == typeof(VariableValue) || typeToConvert.IsSubclassOf(typeof(VariableValue));
-		}
-
-		public override VariableValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			if (reader.TokenType == JsonTokenType.StartArray)
-			{
-				List<VariableValue> values = new List<VariableValue>();
-
-				while (reader.Read())
-				{
-					if (reader.TokenType == JsonTokenType.EndArray)
-					{
-						return new VariableValue(values);
-					}
-
-					values.Add(JsonSerializer.Deserialize<VariableValue>(ref reader, options));
-				}
-			}
-			else if (reader.TokenType == JsonTokenType.StartObject)
-			{
-				Dictionary<String, VariableValue> properties = new Dictionary<String, VariableValue>();
-				String property = null;
-
-				while (reader.Read())
-				{
-					if (reader.TokenType == JsonTokenType.EndObject)
-					{
-						return new VariableValue(properties);
-					}
-					else if (reader.TokenType == JsonTokenType.PropertyName)
-					{
-						property = reader.GetString();
-
-						properties[property] = JsonSerializer.Deserialize<VariableValue>(ref reader, options);
-					}
-					else
-					{
-						throw new MerchantAPIException(String.Format("Expected PropertyName or EndObject but got {0}", reader.TokenType));
-					}
-				}
-			}
-			else if (reader.TokenType == JsonTokenType.String)
-			{
-				return new VariableValue(reader.GetString());
-			}
-			else if (reader.TokenType == JsonTokenType.Number)
-			{
-				float ftest;
-				double dtest;
-				decimal detest;
-				int itest;
-
-				if (reader.TryGetSingle(out ftest))
-				{
-					return new VariableValue(ftest);
-				}
-				else if (reader.TryGetDouble(out dtest))
-				{
-					return new VariableValue(dtest);
-				}
-				else if (reader.TryGetDecimal(out detest))
-				{
-					return new VariableValue(detest);
-				}
-				else if (reader.TryGetInt32(out itest))
-				{
-					return new VariableValue(itest);
-				}
-				else
-				{
-					throw new MerchantAPIException(String.Format("Unexpected IConvertible type {0}", reader.TokenType));
-				}
-			}
-			else if (reader.TokenType == JsonTokenType.False || reader.TokenType == JsonTokenType.True)
-			{
-				return new VariableValue(reader.GetBoolean());
-			}
-
-			throw new MerchantAPIException(String.Format("Expected StartArray, StartObject, or value type but got {0}", reader.TokenType));
-		}
-
-		public override void Write(Utf8JsonWriter writer, VariableValue value, JsonSerializerOptions options)
-		{
-
-			if (value.IsConvertible())
-			{
-				IConvertible val = value.GetValueConvertible();
-
-				if (val is String)
-				{
-					writer.WriteStringValue(val.ToString());
-				}
-				else if (Util.IsBoolean(val))
-				{
-					writer.WriteBooleanValue((bool)val);
-				}
-				else if (Util.IsNumeric(val))
-				{
-					if (Util.IsFloat(val))
-					{
-						writer.WriteNumberValue((float)val);
-					}
-					else if (Util.IsDecimal(val))
-					{
-						writer.WriteNumberValue((decimal)val);
-					}
-					else
-					{
-						writer.WriteNumberValue((int)val);
-					}
-				}
-			}
-			else if (value.IsArray())
-			{
-				writer.WriteStartArray();
-
-				foreach (VariableValue v in value.GetValueArray())
-				{
-					JsonSerializer.Serialize<VariableValue>(writer, v, options);
-				}
-
-				writer.WriteEndArray();
-			}
-			else if (value.IsDictionary())
-			{
-				writer.WriteStartObject();
-
-				foreach (KeyValuePair<String, VariableValue> v in value.GetValueDictionary())
-				{
-					writer.WritePropertyName(v.Key);
-
-					JsonSerializer.Serialize<VariableValue>(writer, v.Value, options);
-				}
-
-				writer.WriteEndObject();
-			}
-			else
-			{
-				throw new MerchantAPIException(String.Format("Invalid value data type {0}", value.ValueType));
-			}
-		}
 	}
 
 	/// <summary>
@@ -741,9 +427,9 @@ namespace MerchantAPI
 		/// <param name="writer">Utf8JsonWriter</param>
 		/// <returns>void</returns>
 		/// </summary>
-		static public void Write(Dictionary<String, dynamic> Data, Utf8JsonWriter writer, JsonSerializerOptions options)
+		static public void Write(Dictionary<String, dynamic> data, Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
-			foreach (KeyValuePair<String, dynamic> entry in Data)
+			foreach (KeyValuePair<String, dynamic> entry in data)
 			{
 				WriteEntry(entry, writer, options);
 			}

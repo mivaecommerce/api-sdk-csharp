@@ -664,7 +664,7 @@ namespace MerchantAPI
 				}
 				else if (property.StartsWith("imagetype:", StringComparison.OrdinalIgnoreCase))
 				{
-					KeyValuePair<String, Int32> entry = new KeyValuePair<String, Int32>(property.Substring(property.IndexOf(":")+1), ReadNextInteger(ref reader, options));
+					KeyValuePair<String, Int32> entry = new KeyValuePair<String, Int32>(property.Substring(property.IndexOf(":") + 1), ReadNextInteger(ref reader, options));
 					value.ImageTypes.Add(entry);
 				}
 				else if (String.Equals(property, "disp_order", StringComparison.OrdinalIgnoreCase))

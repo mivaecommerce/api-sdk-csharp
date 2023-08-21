@@ -115,11 +115,15 @@ namespace MerchantAPI
 
 		/// <value>Property PaymentData - List<String></value>
 		[JsonPropertyName("data")]
-		public List<String> PaymentData { get; set; } = new List<String>();
+		public Dictionary<String, String> PaymentData { get; set; } = new Dictionary<String, String>();
 
 		/// <value>Property Ip - String</value>
 		[JsonPropertyName("ip")]
 		public String Ip { get; set; }
+
+		/// <value>Property Module - Module</value>
+		[JsonPropertyName("module")]
+		public Module Module { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -272,9 +276,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for data.
-		/// <returns>List<String></returns>
+		/// <returns>Dictionary<String,String></returns>
 		/// </summary>
-		public List<String> GetPaymentData()
+		public Dictionary<String,String> GetPaymentData()
 		{
 			return PaymentData;
 		}
@@ -286,6 +290,15 @@ namespace MerchantAPI
 		public String GetIp()
 		{
 			return Ip;
+		}
+
+		/// <summary>
+		/// Getter for module.
+		/// <returns>Module</returns>
+		/// </summary>
+		public Module GetModule()
+		{
+			return Module;
 		}
 	}
 

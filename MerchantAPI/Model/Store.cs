@@ -209,6 +209,14 @@ namespace MerchantAPI
 		[JsonPropertyName("redisex")]
 		public int RedisExpiration { get; set; }
 
+		/// <value>Property BoxPackingId - int</value>
+		[JsonPropertyName("boxpack_id")]
+		public int BoxPackingId { get; set; }
+
+		/// <value>Property AddressValidationId - int</value>
+		[JsonPropertyName("addrval_id")]
+		public int AddressValidationId { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -585,6 +593,24 @@ namespace MerchantAPI
 		public int GetRedisExpiration()
 		{
 			return RedisExpiration;
+		}
+
+		/// <summary>
+		/// Getter for boxpack_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetBoxPackingId()
+		{
+			return BoxPackingId;
+		}
+
+		/// <summary>
+		/// Getter for addrval_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetAddressValidationId()
+		{
+			return AddressValidationId;
 		}
 	}
 

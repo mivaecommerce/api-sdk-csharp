@@ -23,6 +23,18 @@ namespace MerchantAPI
 		[JsonPropertyName("item_id")]
 		public int ItemId { get; set; }
 
+		/// <value>Property ItemUserId - int</value>
+		[JsonPropertyName("item_user_id")]
+		public int ItemUserId { get; set; }
+
+		/// <value>Property ItemUserName - String</value>
+		[JsonPropertyName("item_user_name")]
+		public String ItemUserName { get; set; }
+
+		/// <value>Property ItemUserIcon - String</value>
+		[JsonPropertyName("item_user_icon")]
+		public String ItemUserIcon { get; set; }
+
 		/// <value>Property ItemVersionId - int</value>
 		[JsonPropertyName("item_version_id")]
 		public int ItemVersionId { get; set; }
@@ -30,6 +42,10 @@ namespace MerchantAPI
 		/// <value>Property ItemIdentifier - String</value>
 		[JsonPropertyName("item_identifier")]
 		public String ItemIdentifier { get; set; }
+
+		/// <value>Property ItemChangeType - String</value>
+		[JsonPropertyName("item_change_type")]
+		public String ItemChangeType { get; set; }
 
 		/// <summary>
 		/// Getter for item_type.
@@ -50,6 +66,33 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for item_user_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetItemUserId()
+		{
+			return ItemUserId;
+		}
+
+		/// <summary>
+		/// Getter for item_user_name.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetItemUserName()
+		{
+			return ItemUserName;
+		}
+
+		/// <summary>
+		/// Getter for item_user_icon.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetItemUserIcon()
+		{
+			return ItemUserIcon;
+		}
+
+		/// <summary>
 		/// Getter for item_version_id.
 		/// <returns>int</returns>
 		/// </summary>
@@ -65,6 +108,15 @@ namespace MerchantAPI
 		public String GetItemIdentifier()
 		{
 			return ItemIdentifier;
+		}
+
+		/// <summary>
+		/// Getter for item_change_type.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetItemChangeType()
+		{
+			return ItemChangeType;
 		}
 	}
 }

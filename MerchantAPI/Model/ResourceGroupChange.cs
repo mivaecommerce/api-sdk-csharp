@@ -93,7 +93,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Setter for LinkedCSSResources.
-		/// <param name="value">ist<String></param>
+		/// <param name="value">List<String></param>
 		/// <returns>ResourceGroupChange</returns>
 		/// </summary>
 		public ResourceGroupChange SetLinkedCSSResources(List<String> value)
@@ -104,7 +104,7 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Setter for LinkedJavaScriptResources.
-		/// <param name="value">ist<String></param>
+		/// <param name="value">List<String></param>
 		/// <returns>ResourceGroupChange</returns>
 		/// </summary>
 		public ResourceGroupChange SetLinkedJavaScriptResources(List<String> value)

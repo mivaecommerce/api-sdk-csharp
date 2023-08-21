@@ -22,6 +22,9 @@ namespace MerchantAPI
 			ResourceTypeInline,
 			ResourceTypeExternal,
 			ResourceTypeLocal,
+			ResourceTypeModule,
+			ResourceTypeModuleInline,
+			ResourceTypeModuleManaged,
 		}
 
 		/// <summary>
@@ -45,6 +48,9 @@ namespace MerchantAPI
 				case "I": return JavaScriptResourceType.ResourceTypeInline;
 				case "E": return JavaScriptResourceType.ResourceTypeExternal;
 				case "L": return JavaScriptResourceType.ResourceTypeLocal;
+				case "M": return JavaScriptResourceType.ResourceTypeModule;
+				case "Y": return JavaScriptResourceType.ResourceTypeModuleInline;
+				case "Z": return JavaScriptResourceType.ResourceTypeModuleManaged;
 				default: return null;
 			}
 		}
@@ -80,6 +86,14 @@ namespace MerchantAPI
 		/// <value>Property Attributes - List<JavaScriptResourceAttribute></value>
 		[JsonPropertyName("attributes")]
 		public List<JavaScriptResourceAttribute> Attributes { get; set; } = new List<JavaScriptResourceAttribute>();
+
+		/// <value>Property ModuleCode - String</value>
+		[JsonPropertyName("mod_code")]
+		public String ModuleCode { get; set; }
+
+		/// <value>Property ModuleData - String</value>
+		[JsonPropertyName("mod_data")]
+		public String ModuleData { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -161,6 +175,24 @@ namespace MerchantAPI
 		{
 			return Attributes;
 		}
+
+		/// <summary>
+		/// Getter for mod_code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetModuleCode()
+		{
+			return ModuleCode;
+		}
+
+		/// <summary>
+		/// Getter for mod_data.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetModuleData()
+		{
+			return ModuleData;
+		}
 	}
 
 	/// Enum Extensions
@@ -179,6 +211,9 @@ namespace MerchantAPI
 				case JavaScriptResource.JavaScriptResourceType.ResourceTypeInline: return "I";
 				case JavaScriptResource.JavaScriptResourceType.ResourceTypeExternal: return "E";
 				case JavaScriptResource.JavaScriptResourceType.ResourceTypeLocal: return "L";
+				case JavaScriptResource.JavaScriptResourceType.ResourceTypeModule: return "M";
+				case JavaScriptResource.JavaScriptResourceType.ResourceTypeModuleInline: return "Y";
+				case JavaScriptResource.JavaScriptResourceType.ResourceTypeModuleManaged: return "Z";
 			}
 			return "";
 		}
