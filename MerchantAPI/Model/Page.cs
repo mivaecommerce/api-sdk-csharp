@@ -115,6 +115,10 @@ namespace MerchantAPI
 		[JsonPropertyName("CustomField_Values")]
 		public CustomFieldValues CustomFieldValues { get; set; }
 
+		/// <value>Property VersionId - int</value>
+		[JsonPropertyName("version_id")]
+		public int VersionId { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -266,6 +270,15 @@ namespace MerchantAPI
 		public CustomFieldValues GetCustomFieldValues()
 		{
 			return CustomFieldValues;
+		}
+
+		/// <summary>
+		/// Getter for version_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetVersionId()
+		{
+			return VersionId;
 		}
 	}
 

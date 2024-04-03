@@ -62,6 +62,18 @@ namespace MerchantAPI
 		[JsonPropertyName("CustomField_Values")]
 		public CustomFieldValues CustomFieldValues { get; set; }
 
+		/// Request field Branch_ID.
+		[JsonPropertyName("Branch_ID")]
+		public int? BranchId { get; set; }
+
+		/// Request field Edit_Branch.
+		[JsonPropertyName("Edit_Branch")]
+		public String EditBranch { get; set; }
+
+		/// Request field Branch_Name.
+		[JsonPropertyName("Branch_Name")]
+		public String BranchName { get; set; }
+
 		/// <summary>
 		/// Request constructor.
 		/// <param name="client">BaseClient</param>
@@ -187,6 +199,33 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for Branch_ID.
+		/// <returns>int</returns>
+		/// </summary>
+		public int? GetBranchId()
+		{
+			return BranchId;
+		}
+
+		/// <summary>
+		/// Getter for Edit_Branch.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetEditBranch()
+		{
+			return EditBranch;
+		}
+
+		/// <summary>
+		/// Getter for Branch_Name.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetBranchName()
+		{
+			return BranchName;
+		}
+
+		/// <summary>
 		/// Setter for Page_ID.
 		/// <param name="value">int</param>
 		/// <returns>PageUpdateRequest</returns>
@@ -297,6 +336,39 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Branch_ID.
+		/// <param name="value">int</param>
+		/// <returns>PageUpdateRequest</returns>
+		/// </summary>
+		public PageUpdateRequest SetBranchId(int? value)
+		{
+			BranchId = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Edit_Branch.
+		/// <param name="value">String</param>
+		/// <returns>PageUpdateRequest</returns>
+		/// </summary>
+		public PageUpdateRequest SetEditBranch(String value)
+		{
+			EditBranch = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Branch_Name.
+		/// <param name="value">String</param>
+		/// <returns>PageUpdateRequest</returns>
+		/// </summary>
+		public PageUpdateRequest SetBranchName(String value)
+		{
+			BranchName = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Write to the JSON writer. Used during serialization with a requests associated converter.
 		/// <param name="writer">Utf8JsonWriter</param>
 		/// <param name="options">JsonSerializerOptions</param>
@@ -316,6 +388,19 @@ namespace MerchantAPI
 			else if (PageCode != null && PageCode.Length > 0)
 			{
 				writer.WriteString("Page_Code", PageCode);
+			}
+
+			if (BranchId.HasValue)
+			{
+				writer.WriteNumber("Branch_ID", BranchId.Value);
+			}
+			else if (EditBranch != null && EditBranch.Length > 0)
+			{
+				writer.WriteString("Edit_Branch", EditBranch);
+			}
+			else if (BranchName != null && BranchName.Length > 0)
+			{
+				writer.WriteString("Branch_Name", BranchName);
 			}
 
 			if (PageCode != null && PageCode.Length > 0)

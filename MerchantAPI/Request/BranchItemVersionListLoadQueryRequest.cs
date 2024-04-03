@@ -16,24 +16,12 @@ using System.Threading.Tasks;
 namespace MerchantAPI
 {
 	/// <summary>
-	/// Handles API Request Page_Delete.
-	/// <see>https://docs.miva.com/json-api/functions/page_delete</see>
+	/// Handles API Request BranchItemVersionList_Load_Query.
+	/// <see>https://docs.miva.com/json-api/functions/branchitemversionlist_load_query</see>
 	/// </summary>
 	[JsonConverter(typeof(RequestConverter))]
-	public class PageDeleteRequest : Request
+	public class BranchItemVersionListLoadQueryRequest : ListQueryRequest
 	{
-		/// Request field Page_ID.
-		[JsonPropertyName("Page_ID")]
-		public int? PageId { get; set; }
-
-		/// Request field Edit_Page.
-		[JsonPropertyName("Edit_Page")]
-		public String EditPage { get; set; }
-
-		/// Request field Page_Code.
-		[JsonPropertyName("Page_Code")]
-		public String PageCode { get; set; }
-
 		/// Request field Branch_ID.
 		[JsonPropertyName("Branch_ID")]
 		public int? BranchId { get; set; }
@@ -46,56 +34,54 @@ namespace MerchantAPI
 		[JsonPropertyName("Branch_Name")]
 		public String BranchName { get; set; }
 
+		/// Request field Changeset_ID.
+		[JsonPropertyName("Changeset_ID")]
+		public int? ChangesetId { get; set; }
+
+		/// The available search fields applicable to the request.
+		override public String[] AvailableSearchFields { get; } =
+		{
+			"id",
+			"item_id",
+			"user_id",
+			"user_name",
+			"code",
+			"module_code",
+			"module_name"
+		};
+
+		/// The available sort fields applicable to the request.
+		override public String[] AvailableSortFields { get; } =
+		{
+			"id",
+			"item_id",
+			"user_id",
+			"user_name",
+			"code",
+			"module_id",
+			"module_code",
+			"module_name"
+		};
+
 		/// <summary>
 		/// Request constructor.
 		/// <param name="client">BaseClient</param>
-		/// <param name="page">Page</param>
+		/// <param name="branch">Branch</param>
 		/// </summary>
-		public PageDeleteRequest(BaseClient client = null, Page page = null) :
+		public BranchItemVersionListLoadQueryRequest(BaseClient client = null, Branch branch = null) :
 			base(client)
 		{
-			Function = "Page_Delete";
-			if (page != null) {
-				if (page.Id > 0)
+			Function = "BranchItemVersionList_Load_Query";
+			if (branch != null) {
+				if (branch.Id > 0)
 				{
-					PageId = page.Id;
+					BranchId = branch.Id;
 				}
-				else if (page.Code.Length > 0)
+				else if (branch.Name.Length > 0)
 				{
-					EditPage = page.Code;
-				}
-				else if (page.Code.Length > 0)
-				{
-					PageCode = page.Code;
+					EditBranch = branch.Name;
 				}
 			}
-		}
-
-		/// <summary>
-		/// Getter for Page_ID.
-		/// <returns>int</returns>
-		/// </summary>
-		public int? GetPageId()
-		{
-			return PageId;
-		}
-
-		/// <summary>
-		/// Getter for Edit_Page.
-		/// <returns>String</returns>
-		/// </summary>
-		public String GetEditPage()
-		{
-			return EditPage;
-		}
-
-		/// <summary>
-		/// Getter for Page_Code.
-		/// <returns>String</returns>
-		/// </summary>
-		public String GetPageCode()
-		{
-			return PageCode;
 		}
 
 		/// <summary>
@@ -126,44 +112,20 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Setter for Page_ID.
-		/// <param name="value">int</param>
-		/// <returns>PageDeleteRequest</returns>
+		/// Getter for Changeset_ID.
+		/// <returns>int</returns>
 		/// </summary>
-		public PageDeleteRequest SetPageId(int? value)
+		public int? GetChangesetId()
 		{
-			PageId = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for Edit_Page.
-		/// <param name="value">String</param>
-		/// <returns>PageDeleteRequest</returns>
-		/// </summary>
-		public PageDeleteRequest SetEditPage(String value)
-		{
-			EditPage = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for Page_Code.
-		/// <param name="value">String</param>
-		/// <returns>PageDeleteRequest</returns>
-		/// </summary>
-		public PageDeleteRequest SetPageCode(String value)
-		{
-			PageCode = value;
-			return this;
+			return ChangesetId;
 		}
 
 		/// <summary>
 		/// Setter for Branch_ID.
 		/// <param name="value">int</param>
-		/// <returns>PageDeleteRequest</returns>
+		/// <returns>BranchItemVersionListLoadQueryRequest</returns>
 		/// </summary>
-		public PageDeleteRequest SetBranchId(int? value)
+		public BranchItemVersionListLoadQueryRequest SetBranchId(int? value)
 		{
 			BranchId = value;
 			return this;
@@ -172,9 +134,9 @@ namespace MerchantAPI
 		/// <summary>
 		/// Setter for Edit_Branch.
 		/// <param name="value">String</param>
-		/// <returns>PageDeleteRequest</returns>
+		/// <returns>BranchItemVersionListLoadQueryRequest</returns>
 		/// </summary>
-		public PageDeleteRequest SetEditBranch(String value)
+		public BranchItemVersionListLoadQueryRequest SetEditBranch(String value)
 		{
 			EditBranch = value;
 			return this;
@@ -183,11 +145,22 @@ namespace MerchantAPI
 		/// <summary>
 		/// Setter for Branch_Name.
 		/// <param name="value">String</param>
-		/// <returns>PageDeleteRequest</returns>
+		/// <returns>BranchItemVersionListLoadQueryRequest</returns>
 		/// </summary>
-		public PageDeleteRequest SetBranchName(String value)
+		public BranchItemVersionListLoadQueryRequest SetBranchName(String value)
 		{
 			BranchName = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Changeset_ID.
+		/// <param name="value">int</param>
+		/// <returns>BranchItemVersionListLoadQueryRequest</returns>
+		/// </summary>
+		public BranchItemVersionListLoadQueryRequest SetChangesetId(int? value)
+		{
+			ChangesetId = value;
 			return this;
 		}
 
@@ -199,19 +172,6 @@ namespace MerchantAPI
 		override public void Write(Utf8JsonWriter writer, JsonSerializerOptions options)
 		{
 			base.Write(writer, options);
-
-			if (PageId.HasValue)
-			{
-				writer.WriteNumber("Page_ID", PageId.Value);
-			}
-			else if (EditPage != null && EditPage.Length > 0)
-			{
-				writer.WriteString("Edit_Page", EditPage);
-			}
-			else if (PageCode != null && PageCode.Length > 0)
-			{
-				writer.WriteString("Page_Code", PageCode);
-			}
 
 			if (BranchId.HasValue)
 			{
@@ -233,27 +193,27 @@ namespace MerchantAPI
 		/// </summary>
 		override public Response ReadResponse(ref Utf8JsonReader reader, JsonSerializerOptions options)
 		{
-			return JsonSerializer.Deserialize<PageDeleteResponse>(ref reader, options);
+			return JsonSerializer.Deserialize<BranchItemVersionListLoadQueryResponse>(ref reader, options);
 		}
 
 		/// <summary>
 		/// Send the request for a response, blocking
-		/// <returns>PageDeleteResponse</returns>
+		/// <returns>BranchItemVersionListLoadQueryResponse</returns>
 		/// </summary>
-		public new PageDeleteResponse Send()
+		public new BranchItemVersionListLoadQueryResponse Send()
 		{
-			return Client.SendRequestAsync<PageDeleteRequest, PageDeleteResponse>(this).Result;
+			return Client.SendRequestAsync<BranchItemVersionListLoadQueryRequest, BranchItemVersionListLoadQueryResponse>(this).Result;
 		}
 
 		/// <summary>
 		/// Send the request for a response, async
-		/// <returns>Task<PageDeleteResponse></returns>
+		/// <returns>Task<BranchItemVersionListLoadQueryResponse></returns>
 		/// </summary>
-		public new async Task<PageDeleteResponse> SendAsync()
+		public new async Task<BranchItemVersionListLoadQueryResponse> SendAsync()
 		{
 			if (Client == null) throw new MerchantAPIException("Client not assigned to request");
 
-			return await Client.SendRequestAsync<PageDeleteRequest, PageDeleteResponse>(this);
+			return await Client.SendRequestAsync<BranchItemVersionListLoadQueryRequest, BranchItemVersionListLoadQueryResponse>(this);
 		}
 	}
 }

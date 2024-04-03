@@ -71,6 +71,10 @@ namespace MerchantAPI
 		[JsonPropertyName("page_id")]
 		public int PageId { get; set; }
 
+		/// <value>Property PageCode - String</value>
+		[JsonPropertyName("page_code")]
+		public String PageCode { get; set; }
+
 		/// <value>Property CategoryId - int</value>
 		[JsonPropertyName("cat_id")]
 		public int CategoryId { get; set; }
@@ -154,6 +158,15 @@ namespace MerchantAPI
 		public int GetPageId()
 		{
 			return PageId;
+		}
+
+		/// <summary>
+		/// Getter for page_code.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetPageCode()
+		{
+			return PageCode;
 		}
 
 		/// <summary>

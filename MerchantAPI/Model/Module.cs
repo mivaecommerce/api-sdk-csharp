@@ -51,6 +51,10 @@ namespace MerchantAPI
 		[JsonPropertyName("active")]
 		public bool Active { get; set; }
 
+		/// <value>Property Priority - int</value>
+		[JsonPropertyName("priority")]
+		public int Priority { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -130,6 +134,15 @@ namespace MerchantAPI
 		public bool GetActive()
 		{
 			return Active;
+		}
+
+		/// <summary>
+		/// Getter for priority.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetPriority()
+		{
+			return Priority;
 		}
 	}
 }
