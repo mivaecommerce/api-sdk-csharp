@@ -35,9 +35,9 @@ namespace MerchantAPI
 		[JsonPropertyName("descrip")]
 		public String Description { get; set; }
 
-		/// <value>Property Discount - float</value>
+		/// <value>Property Discount - decimal</value>
 		[JsonPropertyName("discount")]
-		public float Discount { get; set; }
+		public decimal Discount { get; set; }
 
 		/// <summary>
 		/// Getter for order_id.
@@ -86,9 +86,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for discount.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetDiscount()
+		public decimal GetDiscount()
 		{
 			return Discount;
 		}

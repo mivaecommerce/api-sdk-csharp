@@ -25,6 +25,7 @@ namespace MerchantAPI
 			base()
 		{
 		}
+
 		/// <summary>
 		///  Getter for resourceGroups.
 		/// <returns>ResourceGroup[]</returns>

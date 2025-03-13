@@ -131,8 +131,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderShipmentUpdate</returns>
 		/// </summary>
-	   public OrderShipmentUpdate SetCost(float value)
-	   {
+		public OrderShipmentUpdate SetCost(float? value)
+		{
 			Cost = value;
 			return this;
 		}
@@ -142,9 +142,9 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderShipmentUpdate</returns>
 		/// </summary>
-	   public OrderShipmentUpdate SetCost(double value)
-	   {
-			Cost = (float) value;
+		public OrderShipmentUpdate SetCost(double? value)
+		{
+			Cost = (float?) value;
 			return this;
 		}
 	}

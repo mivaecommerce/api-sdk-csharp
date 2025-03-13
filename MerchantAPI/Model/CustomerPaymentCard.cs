@@ -67,9 +67,9 @@ namespace MerchantAPI
 		[JsonPropertyName("cntry")]
 		public String Country { get; set; }
 
-		/// <value>Property LastUsed - String</value>
+		/// <value>Property LastUsed - int</value>
 		[JsonPropertyName("lastused")]
-		public String LastUsed { get; set; }
+		public int LastUsed { get; set; }
 
 		/// <value>Property Token - String</value>
 		[JsonPropertyName("token")]
@@ -214,9 +214,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for lastused.
-		/// <returns>String</returns>
+		/// <returns>int</returns>
 		/// </summary>
-		public String GetLastUsed()
+		public int GetLastUsed()
 		{
 			return LastUsed;
 		}

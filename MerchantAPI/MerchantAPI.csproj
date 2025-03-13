@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net472;net48;net5.0;net6.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net472;net48;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
     <Configurations>Debug;Release</Configurations>
     <Platforms>AnyCPU</Platforms>
     <PackOnBuild>true</PackOnBuild>
@@ -13,11 +13,11 @@
     <Title>Miva Merchant JSON API SDK</Title>
     <Description>API SDK for interaction with the Miva Merchant JSON API</Description>
     <PackageId>MerchantAPI</PackageId>
-    <Version>2.6.0</Version>
+    <Version>2.7.0</Version>
     <Authors>Miva Inc</Authors>
     <Company>Miva Inc</Company>
-    <PackageVersion>2.6.0</PackageVersion>
-    <ReleaseVersion>2.6.0</ReleaseVersion>
+    <PackageVersion>2.7.0</PackageVersion>
+    <ReleaseVersion>2.7.0</ReleaseVersion>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
@@ -42,9 +42,11 @@
   <ItemGroup>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.6" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Net.Sockets" Version="4.3.0" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" Condition="'$(TargetFramework)' != 'net8.0' AND '$(TargetFramework)' != 'net9.0'" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" Condition="'$(TargetFramework)' == 'net8.0' OR '$(TargetFramework)' == 'net9.0'" />
   </ItemGroup>
 
   <ItemGroup>

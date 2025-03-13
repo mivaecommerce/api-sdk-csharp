@@ -18,6 +18,14 @@ namespace MerchantAPI
 	/// </summary>
 	public class ChangesetListMergeResponse : Response
 	{
+		/// Response field completed.
+		[JsonPropertyName("completed")]
+		public bool Completed { get; set; }
+
+		/// Response field changesetlist_merge_session_id.
+		[JsonPropertyName("changesetlist_merge_session_id")]
+		public String ChangesetlistMergeSessionId { get; set; }
+
 		/// The response model
 		[JsonPropertyName("data")]
 		public Changeset Data { get; set; }
@@ -28,6 +36,24 @@ namespace MerchantAPI
 		public ChangesetListMergeResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		/// Getter for completed.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetCompleted()
+		{
+			return Completed;
+		}
+
+		/// <summary>
+		/// Getter for changesetlist_merge_session_id.
+		/// <returns>string</returns>
+		/// </summary>
+		public String GetChangesetlistMergeSessionId()
+		{
+			return ChangesetlistMergeSessionId;
 		}
 
 		/// <summary>

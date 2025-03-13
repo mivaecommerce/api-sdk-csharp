@@ -13,7 +13,19 @@ using System.Collections.Generic;
 
 namespace MerchantAPI
 {
-	public class CustomerSubscription : Subscription
+	public class ChildCategory : Category
 	{
+		/// <value>Property Assigned - bool</value>
+		[JsonPropertyName("assigned")]
+		public bool Assigned { get; set; }
+
+		/// <summary>
+		/// Getter for assigned.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetAssigned()
+		{
+			return Assigned;
+		}
 	}
 }

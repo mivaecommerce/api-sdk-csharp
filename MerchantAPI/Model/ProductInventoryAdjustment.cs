@@ -29,9 +29,9 @@ namespace MerchantAPI
 		[JsonPropertyName("product_sku")]
 		public String ProductSku { get; set; }
 
-		/// <value>Property Adjustment - float</value>
+		/// <value>Property Adjustment - int</value>
 		[JsonPropertyName("adjustment")]
-		public float Adjustment { get; set; }
+		public int Adjustment { get; set; }
 
 		/// <summary>
 		/// Getter for product_id.
@@ -62,9 +62,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for adjustment.
-		/// <returns>float</returns>
+		/// <returns>int</returns>
 		/// </summary>
-		public float GetAdjustment()
+		public int GetAdjustment()
 		{
 			return Adjustment;
 		}
@@ -74,7 +74,7 @@ namespace MerchantAPI
 		/// <param name="value">int</param>
 		/// <returns>ProductInventoryAdjustment</returns>
 		/// </summary>
-		public ProductInventoryAdjustment SetProductId(int value)
+		public ProductInventoryAdjustment SetProductId(int? value)
 		{
 			ProductId = value;
 			return this;
@@ -104,23 +104,12 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Setter for adjustment.
-		/// <param name="value">float</param>
+		/// <param name="value">int</param>
 		/// <returns>ProductInventoryAdjustment</returns>
 		/// </summary>
-	   public ProductInventoryAdjustment SetAdjustment(float value)
-	   {
+		public ProductInventoryAdjustment SetAdjustment(int value)
+		{
 			Adjustment = value;
-			return this;
-		}
-
-		/// <summary>
-		/// Setter for adjustment.
-		/// <param name="value">double</param>
-		/// <returns>ProductInventoryAdjustment</returns>
-		/// </summary>
-	   public ProductInventoryAdjustment SetAdjustment(double value)
-	   {
-			Adjustment = (float) value;
 			return this;
 		}
 	}
@@ -172,7 +161,7 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "adjustment", StringComparison.OrdinalIgnoreCase))
 				{
-					value.Adjustment = ReadNextFloat(ref reader, options);
+					value.Adjustment = ReadNextInteger(ref reader, options);
 				}
 				else
 				{

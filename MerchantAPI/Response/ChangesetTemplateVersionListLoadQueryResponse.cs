@@ -25,6 +25,7 @@ namespace MerchantAPI
 			base()
 		{
 		}
+
 		/// <summary>
 		///  Getter for changesetTemplateVersions.
 		/// <returns>ChangesetTemplateVersion[]</returns>

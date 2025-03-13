@@ -26,6 +26,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Parent_Branch_ID")]
 		public int? ParentBranchId { get; set; }
 
+		/// Request field Branch_Create_Session_ID.
+		[JsonPropertyName("Branch_Create_Session_ID")]
+		public String BranchCreateSessionId { get; set; }
+
 		/// Request field Name.
 		[JsonPropertyName("Name")]
 		public String Name { get; set; }
@@ -66,6 +70,15 @@ namespace MerchantAPI
 		public int? GetParentBranchId()
 		{
 			return ParentBranchId;
+		}
+
+		/// <summary>
+		/// Getter for Branch_Create_Session_ID.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetBranchCreateSessionId()
+		{
+			return BranchCreateSessionId;
 		}
 
 		/// <summary>
@@ -112,6 +125,17 @@ namespace MerchantAPI
 		public BranchCreateRequest SetParentBranchId(int? value)
 		{
 			ParentBranchId = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Branch_Create_Session_ID.
+		/// <param name="value">String</param>
+		/// <returns>BranchCreateRequest</returns>
+		/// </summary>
+		public BranchCreateRequest SetBranchCreateSessionId(String value)
+		{
+			BranchCreateSessionId = value;
 			return this;
 		}
 
@@ -171,6 +195,11 @@ namespace MerchantAPI
 			if (ParentBranchId.HasValue)
 			{
 				writer.WriteNumber("Parent_Branch_ID", ParentBranchId.Value);
+			}
+
+			if (BranchCreateSessionId != null && BranchCreateSessionId.Length > 0)
+			{
+				writer.WriteString("Branch_Create_Session_ID", BranchCreateSessionId);
 			}
 
 			if (Name != null && Name.Length > 0)

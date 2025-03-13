@@ -42,7 +42,7 @@ namespace MerchantAPI
 
 		public Logger Log { get; set; } = null;
 
-		public Dictionary<String, String> GlobalHeaders { get; set; } = new Dictionary<String, String>();
+		public Dictionary<String, String> GlobalHeaders { get; set; } = new Dictionary<String, String>(StringComparer.OrdinalIgnoreCase);
 
 		/// <summary>
 		/// Constructor with defaults for request signing.
@@ -97,7 +97,7 @@ namespace MerchantAPI
 		{
 			String requestData;
 			TResponse response;
-			Dictionary<String, String> headers = new Dictionary<String, String>(GlobalHeaders);
+			Dictionary<String, String> headers = new Dictionary<String, String>(GlobalHeaders, StringComparer.OrdinalIgnoreCase);
 
 			if (request.Client != this)
 			{
@@ -185,12 +185,22 @@ namespace MerchantAPI
 		public async Task<HttpResponseMessage> SendRequestLowLevel(String content, Dictionary<String, String> headers)
 		{
 			HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Post, Endpoint);
+			String ua = "MerchantAPI/" + MerchantAPI.Version.ToString() + " dotnet/" + Environment.Version.ToString() + " " + Environment.OSVersion.ToString();
 
+			if (headers.ContainsKey("User-Agent")) {
+				if (headers["User-Agent"].Length > 0) {
+					ua = headers["User-Agent"];
+				}
+
+				headers.Remove("User-Agent");
+			}
+			
 			foreach (KeyValuePair<String, String> header in headers)
 			{
 				httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
 			}
 
+			httpRequest.Headers.TryAddWithoutValidation("User-Agent", ua);
 			httpRequest.Headers.TryAddWithoutValidation("X-Miva-API-Authorization", CurrentAuthenticator.GenerateAuthenticationHeader(content));
 			httpRequest.Content = new StringContent(content);
 			httpRequest.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");

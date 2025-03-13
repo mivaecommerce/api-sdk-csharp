@@ -78,8 +78,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderPaymentRefundRequest</returns>
 		/// </summary>
-	   public OrderPaymentRefundRequest SetAmount(float? value)
-	   {
+		public OrderPaymentRefundRequest SetAmount(float? value)
+		{
 			Amount = value;
 			return this;
 		}
@@ -89,8 +89,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderPaymentRefundRequest</returns>
 		/// </summary>
-	   public OrderPaymentRefundRequest SetAmount(double? value)
-	   {
+		public OrderPaymentRefundRequest SetAmount(double? value)
+		{
 			Amount = (float?) value;
 			return this;
 		}

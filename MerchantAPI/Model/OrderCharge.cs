@@ -200,8 +200,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderCharge</returns>
 		/// </summary>
-	   public OrderCharge SetAmount(float value)
-	   {
+		public OrderCharge SetAmount(float? value)
+		{
 			Amount = value;
 			return this;
 		}
@@ -211,9 +211,9 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderCharge</returns>
 		/// </summary>
-	   public OrderCharge SetAmount(double value)
-	   {
-			Amount = (float) value;
+		public OrderCharge SetAmount(double? value)
+		{
+			Amount = (float?) value;
 			return this;
 		}
 
@@ -222,8 +222,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderCharge</returns>
 		/// </summary>
-	   public OrderCharge SetDisplayAmount(float value)
-	   {
+		public OrderCharge SetDisplayAmount(float? value)
+		{
 			DisplayAmount = value;
 			return this;
 		}
@@ -233,9 +233,9 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderCharge</returns>
 		/// </summary>
-	   public OrderCharge SetDisplayAmount(double value)
-	   {
-			DisplayAmount = (float) value;
+		public OrderCharge SetDisplayAmount(double? value)
+		{
+			DisplayAmount = (float?) value;
 			return this;
 		}
 

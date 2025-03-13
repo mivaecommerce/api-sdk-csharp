@@ -26,9 +26,17 @@ namespace MerchantAPI
 		[JsonPropertyName("Source_Branch_ID")]
 		public int? SourceBranchId { get; set; }
 
+		/// Request field Source_Changeset_ID.
+		[JsonPropertyName("Source_Changeset_ID")]
+		public int? SourceChangesetId { get; set; }
+
 		/// Request field Destination_Branch_ID.
 		[JsonPropertyName("Destination_Branch_ID")]
 		public int? DestinationBranchId { get; set; }
+
+		/// Request field Branch_Copy_Session_ID.
+		[JsonPropertyName("Branch_Copy_Session_ID")]
+		public String BranchCopySessionId { get; set; }
 
 		/// Request field Notes.
 		[JsonPropertyName("Notes")]
@@ -61,12 +69,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for Source_Changeset_ID.
+		/// <returns>int</returns>
+		/// </summary>
+		public int? GetSourceChangesetId()
+		{
+			return SourceChangesetId;
+		}
+
+		/// <summary>
 		/// Getter for Destination_Branch_ID.
 		/// <returns>int</returns>
 		/// </summary>
 		public int? GetDestinationBranchId()
 		{
 			return DestinationBranchId;
+		}
+
+		/// <summary>
+		/// Getter for Branch_Copy_Session_ID.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetBranchCopySessionId()
+		{
+			return BranchCopySessionId;
 		}
 
 		/// <summary>
@@ -90,6 +116,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Source_Changeset_ID.
+		/// <param name="value">int</param>
+		/// <returns>BranchCopyRequest</returns>
+		/// </summary>
+		public BranchCopyRequest SetSourceChangesetId(int? value)
+		{
+			SourceChangesetId = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Destination_Branch_ID.
 		/// <param name="value">int</param>
 		/// <returns>BranchCopyRequest</returns>
@@ -97,6 +134,17 @@ namespace MerchantAPI
 		public BranchCopyRequest SetDestinationBranchId(int? value)
 		{
 			DestinationBranchId = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Branch_Copy_Session_ID.
+		/// <param name="value">String</param>
+		/// <returns>BranchCopyRequest</returns>
+		/// </summary>
+		public BranchCopyRequest SetBranchCopySessionId(String value)
+		{
+			BranchCopySessionId = value;
 			return this;
 		}
 
@@ -128,6 +176,16 @@ namespace MerchantAPI
 			if (DestinationBranchId.HasValue)
 			{
 				writer.WriteNumber("Destination_Branch_ID", DestinationBranchId.Value);
+			}
+
+			if (SourceChangesetId.HasValue)
+			{
+				writer.WriteNumber("Source_Changeset_ID", SourceChangesetId.Value);
+			}
+
+			if (BranchCopySessionId != null && BranchCopySessionId.Length > 0)
+			{
+				writer.WriteString("Branch_Copy_Session_ID", BranchCopySessionId);
 			}
 
 			if (Notes != null && Notes.Length > 0)

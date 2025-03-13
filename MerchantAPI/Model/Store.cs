@@ -65,6 +65,10 @@ namespace MerchantAPI
 		[JsonPropertyName("name")]
 		public String Name { get; set; }
 
+		/// <value>Property Icon - String</value>
+		[JsonPropertyName("icon")]
+		public String Icon { get; set; }
+
 		/// <value>Property Owner - String</value>
 		[JsonPropertyName("owner")]
 		public String Owner { get; set; }
@@ -112,6 +116,18 @@ namespace MerchantAPI
 		/// <value>Property WeightUnitCode - String</value>
 		[JsonPropertyName("wtunitcode")]
 		public String WeightUnitCode { get; set; }
+
+		/// <value>Property DisplayMixedWeightUnits - bool</value>
+		[JsonPropertyName("wtdispmix")]
+		public bool DisplayMixedWeightUnits { get; set; }
+
+		/// <value>Property DisplayWeightLessThan - bool</value>
+		[JsonPropertyName("wtdisplow")]
+		public bool DisplayWeightLessThan { get; set; }
+
+		/// <value>Property WeightDigits - int</value>
+		[JsonPropertyName("wtdispdig")]
+		public int WeightDigits { get; set; }
 
 		/// <value>Property DimensionUnits - String</value>
 		[JsonPropertyName("dmunitcode")]
@@ -193,6 +209,22 @@ namespace MerchantAPI
 		[JsonPropertyName("cache_type")]
 		public String CacheType { get; set; }
 
+		/// <value>Property CacheExpiration - int</value>
+		[JsonPropertyName("cache_exp")]
+		public int CacheExpiration { get; set; }
+
+		/// <value>Property CacheVersion - int</value>
+		[JsonPropertyName("cache_ver")]
+		public int CacheVersion { get; set; }
+
+		/// <value>Property CacheCompression - bool</value>
+		[JsonPropertyName("cache_comp")]
+		public bool CacheCompression { get; set; }
+
+		/// <value>Property CacheSet - int</value>
+		[JsonPropertyName("cacheset")]
+		public int CacheSet { get; set; }
+
 		/// <value>Property RedisHost - String</value>
 		[JsonPropertyName("redishost")]
 		public String RedisHost { get; set; }
@@ -216,6 +248,34 @@ namespace MerchantAPI
 		/// <value>Property AddressValidationId - int</value>
 		[JsonPropertyName("addrval_id")]
 		public int AddressValidationId { get; set; }
+
+		/// <value>Property DeferBaskets - bool</value>
+		[JsonPropertyName("deferbask")]
+		public bool DeferBaskets { get; set; }
+
+		/// <value>Property TrackPageHits - bool</value>
+		[JsonPropertyName("trackhits")]
+		public bool TrackPageHits { get; set; }
+
+		/// <value>Property MaintenanceAllowedIps - String</value>
+		[JsonPropertyName("mnt_ips")]
+		public String MaintenanceAllowedIps { get; set; }
+
+		/// <value>Property BranchId - int</value>
+		[JsonPropertyName("branch_id")]
+		public int BranchId { get; set; }
+
+		/// <value>Property CharacterSet - String</value>
+		[JsonPropertyName("charset")]
+		public String CharacterSet { get; set; }
+
+		/// <value>Property ScheduledTaskAdvance - int</value>
+		[JsonPropertyName("schtsk_adv")]
+		public int ScheduledTaskAdvance { get; set; }
+
+		/// <value>Property ScheduledTaskTimeout - int</value>
+		[JsonPropertyName("schtsk_min")]
+		public int ScheduledTaskTimeout { get; set; }
 
 		/// <summary>
 		/// Getter for id.
@@ -260,6 +320,15 @@ namespace MerchantAPI
 		public String GetName()
 		{
 			return Name;
+		}
+
+		/// <summary>
+		/// Getter for icon.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetIcon()
+		{
+			return Icon;
 		}
 
 		/// <summary>
@@ -368,6 +437,33 @@ namespace MerchantAPI
 		public String GetWeightUnitCode()
 		{
 			return WeightUnitCode;
+		}
+
+		/// <summary>
+		/// Getter for wtdispmix.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetDisplayMixedWeightUnits()
+		{
+			return DisplayMixedWeightUnits;
+		}
+
+		/// <summary>
+		/// Getter for wtdisplow.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetDisplayWeightLessThan()
+		{
+			return DisplayWeightLessThan;
+		}
+
+		/// <summary>
+		/// Getter for wtdispdig.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetWeightDigits()
+		{
+			return WeightDigits;
 		}
 
 		/// <summary>
@@ -560,6 +656,42 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for cache_exp.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetCacheExpiration()
+		{
+			return CacheExpiration;
+		}
+
+		/// <summary>
+		/// Getter for cache_ver.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetCacheVersion()
+		{
+			return CacheVersion;
+		}
+
+		/// <summary>
+		/// Getter for cache_comp.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetCacheCompression()
+		{
+			return CacheCompression;
+		}
+
+		/// <summary>
+		/// Getter for cacheset.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetCacheSet()
+		{
+			return CacheSet;
+		}
+
+		/// <summary>
 		/// Getter for redishost.
 		/// <returns>String</returns>
 		/// </summary>
@@ -611,6 +743,69 @@ namespace MerchantAPI
 		public int GetAddressValidationId()
 		{
 			return AddressValidationId;
+		}
+
+		/// <summary>
+		/// Getter for deferbask.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetDeferBaskets()
+		{
+			return DeferBaskets;
+		}
+
+		/// <summary>
+		/// Getter for trackhits.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetTrackPageHits()
+		{
+			return TrackPageHits;
+		}
+
+		/// <summary>
+		/// Getter for mnt_ips.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetMaintenanceAllowedIps()
+		{
+			return MaintenanceAllowedIps;
+		}
+
+		/// <summary>
+		/// Getter for branch_id.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetBranchId()
+		{
+			return BranchId;
+		}
+
+		/// <summary>
+		/// Getter for charset.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetCharacterSet()
+		{
+			return CharacterSet;
+		}
+
+		/// <summary>
+		/// Getter for schtsk_adv.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetScheduledTaskAdvance()
+		{
+			return ScheduledTaskAdvance;
+		}
+
+		/// <summary>
+		/// Getter for schtsk_min.
+		/// <returns>int</returns>
+		/// </summary>
+		public int GetScheduledTaskTimeout()
+		{
+			return ScheduledTaskTimeout;
 		}
 	}
 

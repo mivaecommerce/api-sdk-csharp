@@ -16,7 +16,7 @@ namespace MerchantAPI
 	/// API Response for ChildCategoryList_Load_Query.
 	/// <see>https://docs.miva.com/json-api/functions/childcategorylist_load_query</see>
 	/// </summary>
-	public class ChildCategoryListLoadQueryResponse : ListQueryResponse<Category>
+	public class ChildCategoryListLoadQueryResponse : ListQueryResponse<ChildCategory>
 	{
 		/// <summary>
 		///  Constructor
@@ -25,11 +25,12 @@ namespace MerchantAPI
 			base()
 		{
 		}
+
 		/// <summary>
 		///  Getter for categories.
-		/// <returns>Category[]</returns>
+		/// <returns>ChildCategory[]</returns>
 		/// </summary>
-		public List<Category> GetCategories()
+		public List<ChildCategory> GetCategories()
 		{
 			return Data.Data;
 		}

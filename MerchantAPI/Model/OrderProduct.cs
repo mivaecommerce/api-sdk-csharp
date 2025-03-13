@@ -41,6 +41,10 @@ namespace MerchantAPI
 		[JsonPropertyName("quantity")]
 		public int Quantity { get; set; }
 
+		/// <value>Property Tax - float</value>
+		[JsonPropertyName("tax")]
+		public float? Tax { get; set; }
+
 		/// <value>Property Attributes - List<OrderProductAttribute></value>
 		[JsonPropertyName("attributes")]
 		public List<OrderProductAttribute> Attributes { get; set; } = new List<OrderProductAttribute>();
@@ -97,6 +101,15 @@ namespace MerchantAPI
 		public int GetQuantity()
 		{
 			return Quantity;
+		}
+
+		/// <summary>
+		/// Getter for tax.
+		/// <returns>float</returns>
+		/// </summary>
+		public float? GetTax()
+		{
+			return Tax;
 		}
 
 		/// <summary>
@@ -175,6 +188,28 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for tax.
+		/// <param name="value">float</param>
+		/// <returns>OrderProduct</returns>
+		/// </summary>
+		public OrderProduct SetTax(float? value)
+		{
+			Tax = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for tax.
+		/// <param name="value">double</param>
+		/// <returns>OrderProduct</returns>
+		/// </summary>
+		public OrderProduct SetTax(double? value)
+		{
+			Tax = (float?) value;
+			return this;
+		}
+
+		/// <summary>
 		/// Add a OrderProductAttribute.
 		/// <param name="OrderProductAttribute"></param>
 		/// <returns>OrderProduct</returns>
@@ -243,6 +278,10 @@ namespace MerchantAPI
 				{
 					value.Quantity = ReadNextInteger(ref reader, options);
 				}
+				else if (String.Equals(property, "tax", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Tax = ReadNextFloat(ref reader, options);
+				}
 				else if (String.Equals(property, "attributes", StringComparison.OrdinalIgnoreCase))
 				{
 					if (!reader.Read() || reader.TokenType != JsonTokenType.StartArray)
@@ -291,6 +330,11 @@ namespace MerchantAPI
 			}
 
 			writer.WriteNumber("quantity", value.Quantity);
+
+			if (value.Tax.HasValue)
+			{
+				writer.WriteNumber("tax", value.Tax.Value);
+			}
 
 			writer.WritePropertyName("attributes");
 			JsonSerializer.Serialize(writer, value.Attributes, options);

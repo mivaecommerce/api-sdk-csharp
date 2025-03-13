@@ -25,6 +25,7 @@ namespace MerchantAPI
 			base()
 		{
 		}
+
 		/// <summary>
 		///  Getter for availabilityGroupShippingMethods.
 		/// <returns>AvailabilityGroupShippingMethod[]</returns>

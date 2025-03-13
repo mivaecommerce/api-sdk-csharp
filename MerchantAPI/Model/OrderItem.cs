@@ -112,17 +112,25 @@ namespace MerchantAPI
 		[JsonPropertyName("sku")]
 		public String Sku { get; set; }
 
-		/// <value>Property Retail - float</value>
+		/// <value>Property Retail - decimal</value>
 		[JsonPropertyName("retail")]
-		public float Retail { get; set; }
+		public decimal Retail { get; set; }
 
-		/// <value>Property BasePrice - float</value>
+		/// <value>Property BasePrice - decimal</value>
 		[JsonPropertyName("base_price")]
-		public float BasePrice { get; set; }
+		public decimal BasePrice { get; set; }
 
-		/// <value>Property Price - float</value>
+		/// <value>Property Price - decimal</value>
 		[JsonPropertyName("price")]
-		public float? Price { get; set; }
+		public decimal? Price { get; set; }
+
+		/// <value>Property Total - float</value>
+		[JsonPropertyName("total")]
+		public float Total { get; set; }
+
+		/// <value>Property FormattedTotal - String</value>
+		[JsonPropertyName("formatted_total")]
+		public String FormattedTotal { get; set; }
 
 		/// <value>Property Tax - float</value>
 		[JsonPropertyName("tax")]
@@ -132,9 +140,13 @@ namespace MerchantAPI
 		[JsonPropertyName("formatted_tax")]
 		public String FormattedTax { get; set; }
 
-		/// <value>Property Weight - float</value>
+		/// <value>Property Weight - decimal</value>
 		[JsonPropertyName("weight")]
-		public float? Weight { get; set; }
+		public decimal? Weight { get; set; }
+
+		/// <value>Property FormattedWeight - String</value>
+		[JsonPropertyName("formatted_weight")]
+		public String FormattedWeight { get; set; }
 
 		/// <value>Property Taxable - bool</value>
 		[JsonPropertyName("taxable")]
@@ -159,10 +171,6 @@ namespace MerchantAPI
 		/// <value>Property Options - List<OrderItemOption></value>
 		[JsonPropertyName("options")]
 		public List<OrderItemOption> Options { get; set; } = new List<OrderItemOption>();
-
-		/// <value>Property Total - float</value>
-		[JsonPropertyName("total")]
-		public float Total { get; set; }
 
 		/// <value>Property TrackingType - String</value>
 		[JsonPropertyName("tracktype")]
@@ -321,29 +329,47 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for retail.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetRetail()
+		public decimal GetRetail()
 		{
 			return Retail;
 		}
 
 		/// <summary>
 		/// Getter for base_price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetBasePrice()
+		public decimal GetBasePrice()
 		{
 			return BasePrice;
 		}
 
 		/// <summary>
 		/// Getter for price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetPrice()
+		public decimal? GetPrice()
 		{
 			return Price;
+		}
+
+		/// <summary>
+		/// Getter for total.
+		/// <returns>float</returns>
+		/// </summary>
+		public float GetTotal()
+		{
+			return Total;
+		}
+
+		/// <summary>
+		/// Getter for formatted_total.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedTotal()
+		{
+			return FormattedTotal;
 		}
 
 		/// <summary>
@@ -366,11 +392,20 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for weight.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetWeight()
+		public decimal? GetWeight()
 		{
 			return Weight;
+		}
+
+		/// <summary>
+		/// Getter for formatted_weight.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedWeight()
+		{
+			return FormattedWeight;
 		}
 
 		/// <summary>
@@ -425,15 +460,6 @@ namespace MerchantAPI
 		public List<OrderItemOption> GetOptions()
 		{
 			return Options;
-		}
-
-		/// <summary>
-		/// Getter for total.
-		/// <returns>float</returns>
-		/// </summary>
-		public float GetTotal()
-		{
-			return Total;
 		}
 
 		/// <summary>
@@ -528,9 +554,14 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderItem</returns>
 		/// </summary>
-	   public OrderItem SetPrice(float value)
-	   {
-			Price = value;
+		public OrderItem SetPrice(float? value)
+		{
+			if (value is float v) {
+				Price = new Decimal(v);
+				return this;
+			}
+
+			Price = null;
 			return this;
 		}
 
@@ -539,9 +570,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderItem</returns>
 		/// </summary>
-	   public OrderItem SetPrice(double value)
-	   {
-			Price = (float) value;
+		public OrderItem SetPrice(double? value)
+		{
+			if (value is double v) {
+				Price = new Decimal(v);
+				return this;
+			}
+
+			Price = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for price.
+		/// <param name="value">decimal</param>
+		/// <returns>OrderItem</returns>
+		/// </summary>
+		public OrderItem SetPrice(decimal? value)
+		{
+			Price = value;
 			return this;
 		}
 
@@ -550,8 +597,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderItem</returns>
 		/// </summary>
-	   public OrderItem SetTax(float value)
-	   {
+		public OrderItem SetTax(float? value)
+		{
 			Tax = value;
 			return this;
 		}
@@ -561,9 +608,9 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderItem</returns>
 		/// </summary>
-	   public OrderItem SetTax(double value)
-	   {
-			Tax = (float) value;
+		public OrderItem SetTax(double? value)
+		{
+			Tax = (float?) value;
 			return this;
 		}
 
@@ -572,9 +619,14 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderItem</returns>
 		/// </summary>
-	   public OrderItem SetWeight(float value)
-	   {
-			Weight = value;
+		public OrderItem SetWeight(float? value)
+		{
+			if (value is float v) {
+				Weight = new Decimal(v);
+				return this;
+			}
+
+			Weight = null;
 			return this;
 		}
 
@@ -583,9 +635,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderItem</returns>
 		/// </summary>
-	   public OrderItem SetWeight(double value)
-	   {
-			Weight = (float) value;
+		public OrderItem SetWeight(double? value)
+		{
+			if (value is double v) {
+				Weight = new Decimal(v);
+				return this;
+			}
+
+			Weight = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for weight.
+		/// <param name="value">decimal</param>
+		/// <returns>OrderItem</returns>
+		/// </summary>
+		public OrderItem SetWeight(decimal? value)
+		{
+			Weight = value;
 			return this;
 		}
 
@@ -616,7 +684,7 @@ namespace MerchantAPI
 		/// <param name="value">int</param>
 		/// <returns>OrderItem</returns>
 		/// </summary>
-		public OrderItem SetQuantity(int value)
+		public OrderItem SetQuantity(int? value)
 		{
 			Quantity = value;
 			return this;
@@ -743,15 +811,23 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "retail", StringComparison.OrdinalIgnoreCase))
 				{
-					value.Retail = ReadNextFloat(ref reader, options);
+					value.Retail = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "base_price", StringComparison.OrdinalIgnoreCase))
 				{
-					value.BasePrice = ReadNextFloat(ref reader, options);
+					value.BasePrice = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "price", StringComparison.OrdinalIgnoreCase))
 				{
-					value.Price = ReadNextFloat(ref reader, options);
+					value.Price = ReadNextDecimal(ref reader, options);
+				}
+				else if (String.Equals(property, "total", StringComparison.OrdinalIgnoreCase))
+				{
+					value.Total = ReadNextFloat(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_total", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedTotal = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "tax", StringComparison.OrdinalIgnoreCase))
 				{
@@ -763,7 +839,11 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "weight", StringComparison.OrdinalIgnoreCase))
 				{
-					value.Weight = ReadNextFloat(ref reader, options);
+					value.Weight = ReadNextDecimal(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_weight", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedWeight = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "taxable", StringComparison.OrdinalIgnoreCase))
 				{
@@ -803,10 +883,6 @@ namespace MerchantAPI
 					}
 
 					value.Options = JsonSerializer.Deserialize<List<OrderItemOption>>(ref reader, options);
-				}
-				else if (String.Equals(property, "total", StringComparison.OrdinalIgnoreCase))
-				{
-					value.Total = ReadNextFloat(ref reader, options);
 				}
 				else if (String.Equals(property, "tracktype", StringComparison.OrdinalIgnoreCase))
 				{

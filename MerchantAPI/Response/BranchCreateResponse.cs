@@ -18,6 +18,14 @@ namespace MerchantAPI
 	/// </summary>
 	public class BranchCreateResponse : Response
 	{
+		/// Response field completed.
+		[JsonPropertyName("completed")]
+		public bool Completed { get; set; }
+
+		/// Response field branch_create_session_id.
+		[JsonPropertyName("branch_create_session_id")]
+		public String BranchCreateSessionId { get; set; }
+
 		/// The response model
 		[JsonPropertyName("data")]
 		public Branch Data { get; set; }
@@ -28,6 +36,24 @@ namespace MerchantAPI
 		public BranchCreateResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		/// Getter for completed.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetCompleted()
+		{
+			return Completed;
+		}
+
+		/// <summary>
+		/// Getter for branch_create_session_id.
+		/// <returns>string</returns>
+		/// </summary>
+		public String GetBranchCreateSessionId()
+		{
+			return BranchCreateSessionId;
 		}
 
 		/// <summary>

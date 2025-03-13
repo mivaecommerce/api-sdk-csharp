@@ -43,7 +43,9 @@ namespace MerchantAPI
 			"title",
 			"cache",
 			"admin",
-			"layout"
+			"layout",
+			"public",
+			"fragment"
 		};
 
 		/// The available sort fields applicable to the request.
@@ -55,7 +57,9 @@ namespace MerchantAPI
 			"title",
 			"cache",
 			"admin",
-			"layout"
+			"layout",
+			"public",
+			"fragment"
 		};
 
 		/// The available on demand columns applicable to the request.

@@ -39,25 +39,25 @@ namespace MerchantAPI
 		[JsonPropertyName("image")]
 		public String Image { get; set; }
 
-		/// <value>Property Price - float</value>
+		/// <value>Property Price - decimal</value>
 		[JsonPropertyName("price")]
-		public float Price { get; set; }
+		public decimal Price { get; set; }
 
 		/// <value>Property FormattedPrice - String</value>
 		[JsonPropertyName("formatted_price")]
 		public String FormattedPrice { get; set; }
 
-		/// <value>Property Cost - float</value>
+		/// <value>Property Cost - decimal</value>
 		[JsonPropertyName("cost")]
-		public float Cost { get; set; }
+		public decimal Cost { get; set; }
 
 		/// <value>Property FormattedCost - String</value>
 		[JsonPropertyName("formatted_cost")]
 		public String FormattedCost { get; set; }
 
-		/// <value>Property Weight - float</value>
+		/// <value>Property Weight - decimal</value>
 		[JsonPropertyName("weight")]
-		public float Weight { get; set; }
+		public decimal Weight { get; set; }
 
 		/// <value>Property Active - bool</value>
 		[JsonPropertyName("active")]
@@ -145,9 +145,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetPrice()
+		public decimal GetPrice()
 		{
 			return Price;
 		}
@@ -163,9 +163,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for cost.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetCost()
+		public decimal GetCost()
 		{
 			return Cost;
 		}
@@ -181,9 +181,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for weight.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetWeight()
+		public decimal GetWeight()
 		{
 			return Weight;
 		}

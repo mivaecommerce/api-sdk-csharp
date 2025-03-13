@@ -12,11 +12,12 @@ For api documentation visit [https://docs.miva.com/json-api](https://docs.miva.c
 
 - Miva Merchant 10+
 - Any of the following targets:
+    - .NET 9.0
+    - .NET 8.0
+    - .NET 7.0
     - .NET 6.0
-    - .NET 5.0
     - .NET Framework 4.8
     - .NET Framework 4.7.2
-    - NetCoreApp 3.1
     - NetStandard 2.1
 
 **For Miva Merchant 9.x, use the 1.x release**
@@ -110,6 +111,10 @@ Your public key must be in the OpenSSH Public Key format. The default public key
 See https://tools.ietf.org/html/rfc4253#section-6.6 for format.
 
 A quick way to get the correct format if you have the key associated with your local SSH agent is to run the command `ssh-add -L` and copying the corresponding key.
+
+# High Precision Pricing & Weight
+
+Miva Merchant 10.11 added support for high precision pricing and weight. To support these changes, all supported fields are now Decimal type. Transition should be seamless, and you can perform arithmetic against these values as you would native floats or doubles.
 
 # License
 

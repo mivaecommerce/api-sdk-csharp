@@ -25,9 +25,11 @@ namespace MerchantAPI
 		/// Response field product_copy_session_id.
 		[JsonPropertyName("product_copy_session_id")]
 		public String ProductCopySessionId { get; set; }
+
 		/// The response model
 		[JsonPropertyName("data")]
 		public Product Data { get; set; }
+
 		/// <summary>
 		///  Constructor
 		/// </summary>

@@ -248,8 +248,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>ProductShippingRulesUpdateRequest</returns>
 		/// </summary>
-	   public ProductShippingRulesUpdateRequest SetWidth(float? value)
-	   {
+		public ProductShippingRulesUpdateRequest SetWidth(float? value)
+		{
 			Width = value;
 			return this;
 		}
@@ -259,8 +259,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>ProductShippingRulesUpdateRequest</returns>
 		/// </summary>
-	   public ProductShippingRulesUpdateRequest SetWidth(double? value)
-	   {
+		public ProductShippingRulesUpdateRequest SetWidth(double? value)
+		{
 			Width = (float?) value;
 			return this;
 		}
@@ -270,8 +270,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>ProductShippingRulesUpdateRequest</returns>
 		/// </summary>
-	   public ProductShippingRulesUpdateRequest SetLength(float? value)
-	   {
+		public ProductShippingRulesUpdateRequest SetLength(float? value)
+		{
 			Length = value;
 			return this;
 		}
@@ -281,8 +281,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>ProductShippingRulesUpdateRequest</returns>
 		/// </summary>
-	   public ProductShippingRulesUpdateRequest SetLength(double? value)
-	   {
+		public ProductShippingRulesUpdateRequest SetLength(double? value)
+		{
 			Length = (float?) value;
 			return this;
 		}
@@ -292,8 +292,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>ProductShippingRulesUpdateRequest</returns>
 		/// </summary>
-	   public ProductShippingRulesUpdateRequest SetHeight(float? value)
-	   {
+		public ProductShippingRulesUpdateRequest SetHeight(float? value)
+		{
 			Height = value;
 			return this;
 		}
@@ -303,8 +303,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>ProductShippingRulesUpdateRequest</returns>
 		/// </summary>
-	   public ProductShippingRulesUpdateRequest SetHeight(double? value)
-	   {
+		public ProductShippingRulesUpdateRequest SetHeight(double? value)
+		{
 			Height = (float?) value;
 			return this;
 		}

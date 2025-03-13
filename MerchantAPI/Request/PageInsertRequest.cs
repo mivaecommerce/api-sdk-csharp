@@ -42,6 +42,14 @@ namespace MerchantAPI
 		[JsonPropertyName("Page_Layout")]
 		public bool? PageLayout { get; set; }
 
+		/// Request field Page_Fragment.
+		[JsonPropertyName("Page_Fragment")]
+		public bool? PageFragment { get; set; }
+
+		/// Request field Page_Public.
+		[JsonPropertyName("Page_Public")]
+		public bool? PagePublic { get; set; }
+
 		/// Request field Page_Secure.
 		[JsonPropertyName("Page_Secure")]
 		public bool? PageSecure { get; set; }
@@ -128,6 +136,24 @@ namespace MerchantAPI
 		public bool? GetPageLayout()
 		{
 			return PageLayout;
+		}
+
+		/// <summary>
+		/// Getter for Page_Fragment.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool? GetPageFragment()
+		{
+			return PageFragment;
+		}
+
+		/// <summary>
+		/// Getter for Page_Public.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool? GetPagePublic()
+		{
+			return PagePublic;
 		}
 
 		/// <summary>
@@ -267,6 +293,28 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Page_Fragment.
+		/// <param name="value">bool</param>
+		/// <returns>PageInsertRequest</returns>
+		/// </summary>
+		public PageInsertRequest SetPageFragment(bool? value)
+		{
+			PageFragment = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Page_Public.
+		/// <param name="value">bool</param>
+		/// <returns>PageInsertRequest</returns>
+		/// </summary>
+		public PageInsertRequest SetPagePublic(bool? value)
+		{
+			PagePublic = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Page_Secure.
 		/// <param name="value">bool</param>
 		/// <returns>PageInsertRequest</returns>
@@ -393,6 +441,16 @@ namespace MerchantAPI
 			if (PageLayout.HasValue)
 			{
 				writer.WriteBoolean("Page_Layout", PageLayout.Value);
+			}
+
+			if (PageFragment.HasValue)
+			{
+				writer.WriteBoolean("Page_Fragment", PageFragment.Value);
+			}
+
+			if (PagePublic.HasValue)
+			{
+				writer.WriteBoolean("Page_Public", PagePublic.Value);
 			}
 
 			if (PageSecure.HasValue)

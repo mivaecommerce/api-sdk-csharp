@@ -25,6 +25,7 @@ namespace MerchantAPI
 			base()
 		{
 		}
+
 		/// <summary>
 		///  Getter for categoryProducts.
 		/// <returns>CategoryProduct[]</returns>

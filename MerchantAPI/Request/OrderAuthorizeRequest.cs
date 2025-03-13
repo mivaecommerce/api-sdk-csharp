@@ -141,8 +141,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderAuthorizeRequest</returns>
 		/// </summary>
-	   public OrderAuthorizeRequest SetAmount(float value)
-	   {
+		public OrderAuthorizeRequest SetAmount(float value)
+		{
 			Amount = value;
 			return this;
 		}
@@ -152,8 +152,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderAuthorizeRequest</returns>
 		/// </summary>
-	   public OrderAuthorizeRequest SetAmount(double value)
-	   {
+		public OrderAuthorizeRequest SetAmount(double value)
+		{
 			Amount = (float) value;
 			return this;
 		}

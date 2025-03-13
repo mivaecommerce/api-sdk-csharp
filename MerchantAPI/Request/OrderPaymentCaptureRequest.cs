@@ -78,8 +78,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderPaymentCaptureRequest</returns>
 		/// </summary>
-	   public OrderPaymentCaptureRequest SetAmount(float? value)
-	   {
+		public OrderPaymentCaptureRequest SetAmount(float? value)
+		{
 			Amount = value;
 			return this;
 		}
@@ -89,8 +89,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderPaymentCaptureRequest</returns>
 		/// </summary>
-	   public OrderPaymentCaptureRequest SetAmount(double? value)
-	   {
+		public OrderPaymentCaptureRequest SetAmount(double? value)
+		{
 			Amount = (float?) value;
 			return this;
 		}

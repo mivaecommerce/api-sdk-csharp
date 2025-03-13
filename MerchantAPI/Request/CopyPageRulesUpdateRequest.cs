@@ -50,6 +50,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Items")]
 		public bool? Items { get; set; }
 
+		/// Request field Public.
+		[JsonPropertyName("Public")]
+		public bool? Public { get; set; }
+
 		/// Request field Settings.
 		[JsonPropertyName("Settings")]
 		public String Settings { get; set; }
@@ -148,6 +152,15 @@ namespace MerchantAPI
 		public bool? GetItems()
 		{
 			return Items;
+		}
+
+		/// <summary>
+		/// Getter for Public.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool? GetPublic()
+		{
+			return Public;
 		}
 
 		/// <summary>
@@ -273,6 +286,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Public.
+		/// <param name="value">bool</param>
+		/// <returns>CopyPageRulesUpdateRequest</returns>
+		/// </summary>
+		public CopyPageRulesUpdateRequest SetPublic(bool? value)
+		{
+			Public = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Settings.
 		/// <param name="value">String</param>
 		/// <returns>CopyPageRulesUpdateRequest</returns>
@@ -368,6 +392,11 @@ namespace MerchantAPI
 			if (Items.HasValue)
 			{
 				writer.WriteBoolean("Items", Items.Value);
+			}
+
+			if (Public.HasValue)
+			{
+				writer.WriteBoolean("Public", Public.Value);
 			}
 
 			if (Settings != null && Settings.Length > 0)

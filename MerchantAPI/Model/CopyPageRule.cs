@@ -87,6 +87,10 @@ namespace MerchantAPI
 		[JsonPropertyName("cacheset")]
 		public bool CacheSettings { get; set; }
 
+		/// <value>Property Public - bool</value>
+		[JsonPropertyName("public")]
+		public bool Public { get; set; }
+
 		/// <summary>
 		/// Getter for id.
 		/// <returns>int</returns>
@@ -175,6 +179,15 @@ namespace MerchantAPI
 		public bool GetCacheSettings()
 		{
 			return CacheSettings;
+		}
+
+		/// <summary>
+		/// Getter for public.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetPublic()
+		{
+			return Public;
 		}
 	}
 

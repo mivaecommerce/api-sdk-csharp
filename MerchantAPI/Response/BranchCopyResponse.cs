@@ -18,6 +18,14 @@ namespace MerchantAPI
 	/// </summary>
 	public class BranchCopyResponse : Response
 	{
+		/// Response field completed.
+		[JsonPropertyName("completed")]
+		public bool Completed { get; set; }
+
+		/// Response field branch_copy_session_id.
+		[JsonPropertyName("branch_copy_session_id")]
+		public String BranchCopySessionId { get; set; }
+
 		/// The response model
 		[JsonPropertyName("data")]
 		public Changeset Data { get; set; }
@@ -28,6 +36,24 @@ namespace MerchantAPI
 		public BranchCopyResponse() :
 			base()
 		{
+		}
+
+		/// <summary>
+		/// Getter for completed.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetCompleted()
+		{
+			return Completed;
+		}
+
+		/// <summary>
+		/// Getter for branch_copy_session_id.
+		/// <returns>string</returns>
+		/// </summary>
+		public String GetBranchCopySessionId()
+		{
+			return BranchCopySessionId;
 		}
 
 		/// <summary>

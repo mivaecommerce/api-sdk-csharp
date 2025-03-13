@@ -71,23 +71,6 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
-		/// Set a custom field value from a VariableValue instance
-		/// </summary>
-		/// <param name="field">String</param>
-		/// <param name="value">List<String></param>
-		/// <param name="module">String</param>
-		public CustomFieldValues SetValue(String field, dynamic value, String module = "customfields")
-		{
-			if (!HasModule(module))
-			{
-				Values[module] = new Dictionary<String, VariableValue>();
-			}
-
-			Values[module][field] = value is VariableValue ? (VariableValue)value : new VariableValue(value);
-			return this;
-		}
-
-		/// <summary>
 		/// Get all values for all modules.
 		/// </summary>
 		/// <returns></returns>

@@ -70,6 +70,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Dest_Page_Layout")]
 		public bool? DestinationPageLayout { get; set; }
 
+		/// Request field Dest_Page_Fragment.
+		[JsonPropertyName("Dest_Page_Fragment")]
+		public bool? DestinationPageFragment { get; set; }
+
 		/// <summary>
 		/// Request constructor.
 		/// <param name="client">BaseClient</param>
@@ -204,6 +208,15 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for Dest_Page_Fragment.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool? GetDestinationPageFragment()
+		{
+			return DestinationPageFragment;
+		}
+
+		/// <summary>
 		/// Setter for Source_Page_ID.
 		/// <param name="value">int</param>
 		/// <returns>PageCopyRequest</returns>
@@ -325,6 +338,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Dest_Page_Fragment.
+		/// <param name="value">bool</param>
+		/// <returns>PageCopyRequest</returns>
+		/// </summary>
+		public PageCopyRequest SetDestinationPageFragment(bool? value)
+		{
+			DestinationPageFragment = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Write to the JSON writer. Used during serialization with a requests associated converter.
 		/// <param name="writer">Utf8JsonWriter</param>
 		/// <param name="options">JsonSerializerOptions</param>
@@ -381,6 +405,11 @@ namespace MerchantAPI
 			if (DestinationPageLayout.HasValue)
 			{
 				writer.WriteBoolean("Dest_Page_Layout", DestinationPageLayout.Value);
+			}
+
+			if (DestinationPageFragment.HasValue)
+			{
+				writer.WriteBoolean("Dest_Page_Fragment", DestinationPageFragment.Value);
 			}
 		}
 

@@ -29,9 +29,17 @@ namespace MerchantAPI
 		[JsonPropertyName("Destination_Branch_ID")]
 		public int? DestinationBranchId { get; set; }
 
+		/// Request field ChangesetList_Merge_Session_ID.
+		[JsonPropertyName("ChangesetList_Merge_Session_ID")]
+		public String ChangesetListMergeSessionId { get; set; }
+
 		/// Request field Notes.
 		[JsonPropertyName("Notes")]
 		public String Notes { get; set; }
+
+		/// Request field Tags.
+		[JsonPropertyName("Tags")]
+		public String Tags { get; set; }
 
 		/// <summary>
 		/// Request constructor.
@@ -60,12 +68,30 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Getter for ChangesetList_Merge_Session_ID.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetChangesetListMergeSessionId()
+		{
+			return ChangesetListMergeSessionId;
+		}
+
+		/// <summary>
 		/// Getter for Notes.
 		/// <returns>String</returns>
 		/// </summary>
 		public String GetNotes()
 		{
 			return Notes;
+		}
+
+		/// <summary>
+		/// Getter for Tags.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetTags()
+		{
+			return Tags;
 		}
 
 		/// <summary>
@@ -80,6 +106,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for ChangesetList_Merge_Session_ID.
+		/// <param name="value">String</param>
+		/// <returns>ChangesetListMergeRequest</returns>
+		/// </summary>
+		public ChangesetListMergeRequest SetChangesetListMergeSessionId(String value)
+		{
+			ChangesetListMergeSessionId = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Notes.
 		/// <param name="value">String</param>
 		/// <returns>ChangesetListMergeRequest</returns>
@@ -87,6 +124,17 @@ namespace MerchantAPI
 		public ChangesetListMergeRequest SetNotes(String value)
 		{
 			Notes = value;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Tags.
+		/// <param name="value">String</param>
+		/// <returns>ChangesetListMergeRequest</returns>
+		/// </summary>
+		public ChangesetListMergeRequest SetTags(String value)
+		{
+			Tags = value;
 			return this;
 		}
 
@@ -133,9 +181,19 @@ namespace MerchantAPI
 			writer.WritePropertyName("Source_Changeset_IDs");
 			JsonSerializer.Serialize(writer, this.SourceChangesetIds, options);
 
+			if (ChangesetListMergeSessionId != null && ChangesetListMergeSessionId.Length > 0)
+			{
+				writer.WriteString("ChangesetList_Merge_Session_ID", ChangesetListMergeSessionId);
+			}
+
 			if (Notes != null && Notes.Length > 0)
 			{
 				writer.WriteString("Notes", Notes);
+			}
+
+			if (Tags != null && Tags.Length > 0)
+			{
+				writer.WriteString("Tags", Tags);
 			}
 		}
 

@@ -60,15 +60,15 @@ namespace MerchantAPI
 
 		/// Request field Product_Price.
 		[JsonPropertyName("Product_Price")]
-		public float? ProductPrice { get; set; }
+		public decimal? ProductPrice { get; set; }
 
 		/// Request field Product_Cost.
 		[JsonPropertyName("Product_Cost")]
-		public float? ProductCost { get; set; }
+		public decimal? ProductCost { get; set; }
 
 		/// Request field Product_Weight.
 		[JsonPropertyName("Product_Weight")]
-		public float? ProductWeight { get; set; }
+		public decimal? ProductWeight { get; set; }
 
 		/// Request field Product_Inventory.
 		[JsonPropertyName("Product_Inventory")]
@@ -199,27 +199,27 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for Product_Price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetProductPrice()
+		public decimal? GetProductPrice()
 		{
 			return ProductPrice;
 		}
 
 		/// <summary>
 		/// Getter for Product_Cost.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetProductCost()
+		public decimal? GetProductCost()
 		{
 			return ProductCost;
 		}
 
 		/// <summary>
 		/// Getter for Product_Weight.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetProductWeight()
+		public decimal? GetProductWeight()
 		{
 			return ProductWeight;
 		}
@@ -364,9 +364,14 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>ProductInsertRequest</returns>
 		/// </summary>
-	   public ProductInsertRequest SetProductPrice(float? value)
-	   {
-			ProductPrice = value;
+		public ProductInsertRequest SetProductPrice(float? value)
+		{
+			if (value is float v) {
+				ProductPrice = new Decimal(v);
+				return this;
+			}
+
+			ProductPrice = null;
 			return this;
 		}
 
@@ -375,9 +380,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>ProductInsertRequest</returns>
 		/// </summary>
-	   public ProductInsertRequest SetProductPrice(double? value)
-	   {
-			ProductPrice = (float?) value;
+		public ProductInsertRequest SetProductPrice(double? value)
+		{
+			if (value is double v) {
+				ProductPrice = new Decimal(v);
+				return this;
+			}
+
+			ProductPrice = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Product_Price.
+		/// <param name="value">decimal</param>
+		/// <returns>ProductInsertRequest</returns>
+		/// </summary>
+		public ProductInsertRequest SetProductPrice(decimal? value)
+		{
+			ProductPrice = value;
 			return this;
 		}
 
@@ -386,31 +407,57 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>ProductInsertRequest</returns>
 		/// </summary>
-	   public ProductInsertRequest SetProductCost(float? value)
-	   {
+		public ProductInsertRequest SetProductCost(float? value)
+		{
+			if (value is float v) {
+				ProductCost = new Decimal(v);
+				return this;
+			}
+
+			ProductCost = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Product_Cost.
+		/// <param name="value">double</param>
+		/// <returns>ProductInsertRequest</returns>
+		/// </summary>
+		public ProductInsertRequest SetProductCost(double? value)
+		{
+			if (value is double v) {
+				ProductCost = new Decimal(v);
+				return this;
+			}
+
+			ProductCost = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Product_Cost.
+		/// <param name="value">decimal</param>
+		/// <returns>ProductInsertRequest</returns>
+		/// </summary>
+		public ProductInsertRequest SetProductCost(decimal? value)
+		{
 			ProductCost = value;
 			return this;
 		}
 
 		/// <summary>
-		/// Setter for Product_Cost.
-		/// <param name="value">double</param>
-		/// <returns>ProductInsertRequest</returns>
-		/// </summary>
-	   public ProductInsertRequest SetProductCost(double? value)
-	   {
-			ProductCost = (float?) value;
-			return this;
-		}
-
-		/// <summary>
 		/// Setter for Product_Weight.
 		/// <param name="value">float</param>
 		/// <returns>ProductInsertRequest</returns>
 		/// </summary>
-	   public ProductInsertRequest SetProductWeight(float? value)
-	   {
-			ProductWeight = value;
+		public ProductInsertRequest SetProductWeight(float? value)
+		{
+			if (value is float v) {
+				ProductWeight = new Decimal(v);
+				return this;
+			}
+
+			ProductWeight = null;
 			return this;
 		}
 
@@ -419,9 +466,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>ProductInsertRequest</returns>
 		/// </summary>
-	   public ProductInsertRequest SetProductWeight(double? value)
-	   {
-			ProductWeight = (float?) value;
+		public ProductInsertRequest SetProductWeight(double? value)
+		{
+			if (value is double v) {
+				ProductWeight = new Decimal(v);
+				return this;
+			}
+
+			ProductWeight = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Product_Weight.
+		/// <param name="value">decimal</param>
+		/// <returns>ProductInsertRequest</returns>
+		/// </summary>
+		public ProductInsertRequest SetProductWeight(decimal? value)
+		{
+			ProductWeight = value;
 			return this;
 		}
 

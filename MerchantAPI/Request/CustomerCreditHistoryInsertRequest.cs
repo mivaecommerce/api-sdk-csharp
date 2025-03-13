@@ -159,8 +159,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>CustomerCreditHistoryInsertRequest</returns>
 		/// </summary>
-	   public CustomerCreditHistoryInsertRequest SetAmount(float value)
-	   {
+		public CustomerCreditHistoryInsertRequest SetAmount(float value)
+		{
 			Amount = value;
 			return this;
 		}
@@ -170,8 +170,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>CustomerCreditHistoryInsertRequest</returns>
 		/// </summary>
-	   public CustomerCreditHistoryInsertRequest SetAmount(double value)
-	   {
+		public CustomerCreditHistoryInsertRequest SetAmount(double value)
+		{
 			Amount = (float) value;
 			return this;
 		}

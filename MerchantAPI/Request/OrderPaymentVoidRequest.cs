@@ -78,8 +78,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderPaymentVoidRequest</returns>
 		/// </summary>
-	   public OrderPaymentVoidRequest SetAmount(float? value)
-	   {
+		public OrderPaymentVoidRequest SetAmount(float? value)
+		{
 			Amount = value;
 			return this;
 		}
@@ -89,8 +89,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderPaymentVoidRequest</returns>
 		/// </summary>
-	   public OrderPaymentVoidRequest SetAmount(double? value)
-	   {
+		public OrderPaymentVoidRequest SetAmount(double? value)
+		{
 			Amount = (float?) value;
 			return this;
 		}

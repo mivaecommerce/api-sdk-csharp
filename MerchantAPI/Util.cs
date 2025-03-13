@@ -263,6 +263,25 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Reads the next value as a float
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="options"></param>
+		/// <returns>float</returns>
+		/// <exception cref="MerchantAPIException"></exception>
+		protected decimal ReadNextDecimal(ref Utf8JsonReader reader, JsonSerializerOptions options)
+		{
+			reader.Read();
+
+			if (reader.TokenType != JsonTokenType.Number)
+			{
+				throw new MerchantAPIException(String.Format("Expected number but encountered {0}", reader.TokenType));
+			}
+
+			return reader.GetDecimal();
+		}
+
+		/// <summary>
 		/// Reads the next value as a integer
 		/// </summary>
 		/// <param name="reader"></param>

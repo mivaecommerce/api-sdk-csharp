@@ -553,8 +553,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetDiscount(float? value)
-	   {
+		public PriceGroupUpdateRequest SetDiscount(float? value)
+		{
 			Discount = value;
 			return this;
 		}
@@ -564,8 +564,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetDiscount(double? value)
-	   {
+		public PriceGroupUpdateRequest SetDiscount(double? value)
+		{
 			Discount = (float?) value;
 			return this;
 		}
@@ -575,8 +575,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetMarkup(float? value)
-	   {
+		public PriceGroupUpdateRequest SetMarkup(float? value)
+		{
 			Markup = value;
 			return this;
 		}
@@ -586,8 +586,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetMarkup(double? value)
-	   {
+		public PriceGroupUpdateRequest SetMarkup(double? value)
+		{
 			Markup = (float?) value;
 			return this;
 		}
@@ -697,8 +697,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMinSubtotal(float? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMinSubtotal(float? value)
+		{
 			QualifyingMinSubtotal = value;
 			return this;
 		}
@@ -708,8 +708,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMinSubtotal(double? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMinSubtotal(double? value)
+		{
 			QualifyingMinSubtotal = (float?) value;
 			return this;
 		}
@@ -719,8 +719,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMaxSubtotal(float? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMaxSubtotal(float? value)
+		{
 			QualifyingMaxSubtotal = value;
 			return this;
 		}
@@ -730,8 +730,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMaxSubtotal(double? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMaxSubtotal(double? value)
+		{
 			QualifyingMaxSubtotal = (float?) value;
 			return this;
 		}
@@ -763,8 +763,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMinWeight(float? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMinWeight(float? value)
+		{
 			QualifyingMinWeight = value;
 			return this;
 		}
@@ -774,8 +774,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMinWeight(double? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMinWeight(double? value)
+		{
 			QualifyingMinWeight = (float?) value;
 			return this;
 		}
@@ -785,8 +785,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMaxWeight(float? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMaxWeight(float? value)
+		{
 			QualifyingMaxWeight = value;
 			return this;
 		}
@@ -796,8 +796,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetQualifyingMaxWeight(double? value)
-	   {
+		public PriceGroupUpdateRequest SetQualifyingMaxWeight(double? value)
+		{
 			QualifyingMaxWeight = (float?) value;
 			return this;
 		}
@@ -807,8 +807,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMinSubtotal(float? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMinSubtotal(float? value)
+		{
 			BasketMinSubtotal = value;
 			return this;
 		}
@@ -818,8 +818,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMinSubtotal(double? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMinSubtotal(double? value)
+		{
 			BasketMinSubtotal = (float?) value;
 			return this;
 		}
@@ -829,8 +829,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMaxSubtotal(float? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMaxSubtotal(float? value)
+		{
 			BasketMaxSubtotal = value;
 			return this;
 		}
@@ -840,8 +840,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMaxSubtotal(double? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMaxSubtotal(double? value)
+		{
 			BasketMaxSubtotal = (float?) value;
 			return this;
 		}
@@ -873,8 +873,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMinWeight(float? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMinWeight(float? value)
+		{
 			BasketMinWeight = value;
 			return this;
 		}
@@ -884,8 +884,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMinWeight(double? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMinWeight(double? value)
+		{
 			BasketMinWeight = (float?) value;
 			return this;
 		}
@@ -895,8 +895,8 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMaxWeight(float? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMaxWeight(float? value)
+		{
 			BasketMaxWeight = value;
 			return this;
 		}
@@ -906,8 +906,8 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>PriceGroupUpdateRequest</returns>
 		/// </summary>
-	   public PriceGroupUpdateRequest SetBasketMaxWeight(double? value)
-	   {
+		public PriceGroupUpdateRequest SetBasketMaxWeight(double? value)
+		{
 			BasketMaxWeight = (float?) value;
 			return this;
 		}

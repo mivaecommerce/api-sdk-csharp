@@ -46,6 +46,10 @@ namespace MerchantAPI
 		[JsonPropertyName("Page_Secure")]
 		public bool? PageSecure { get; set; }
 
+		/// Request field Page_Public.
+		[JsonPropertyName("Page_Public")]
+		public bool? PagePublic { get; set; }
+
 		/// Request field Page_Cache.
 		[JsonPropertyName("Page_Cache")]
 		public String PageCache { get; set; }
@@ -151,6 +155,15 @@ namespace MerchantAPI
 		public bool? GetPageSecure()
 		{
 			return PageSecure;
+		}
+
+		/// <summary>
+		/// Getter for Page_Public.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool? GetPagePublic()
+		{
+			return PagePublic;
 		}
 
 		/// <summary>
@@ -292,6 +305,17 @@ namespace MerchantAPI
 		}
 
 		/// <summary>
+		/// Setter for Page_Public.
+		/// <param name="value">bool</param>
+		/// <returns>PageUpdateRequest</returns>
+		/// </summary>
+		public PageUpdateRequest SetPagePublic(bool? value)
+		{
+			PagePublic = value;
+			return this;
+		}
+
+		/// <summary>
 		/// Setter for Page_Cache.
 		/// <param name="value">String</param>
 		/// <returns>PageUpdateRequest</returns>
@@ -418,6 +442,11 @@ namespace MerchantAPI
 			if (PageSecure.HasValue)
 			{
 				writer.WriteBoolean("Page_Secure", PageSecure.Value);
+			}
+
+			if (PagePublic.HasValue)
+			{
+				writer.WriteBoolean("Page_Public", PagePublic.Value);
 			}
 
 			writer.WriteString("Page_Cache", PageCache);

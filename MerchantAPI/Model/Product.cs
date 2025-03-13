@@ -41,17 +41,17 @@ namespace MerchantAPI
 		[JsonPropertyName("image")]
 		public String Image { get; set; }
 
-		/// <value>Property Price - float</value>
+		/// <value>Property Price - decimal</value>
 		[JsonPropertyName("price")]
-		public float Price { get; set; }
+		public decimal Price { get; set; }
 
 		/// <value>Property FormattedPrice - String</value>
 		[JsonPropertyName("formatted_price")]
 		public String FormattedPrice { get; set; }
 
-		/// <value>Property Cost - float</value>
+		/// <value>Property Cost - decimal</value>
 		[JsonPropertyName("cost")]
-		public float Cost { get; set; }
+		public decimal Cost { get; set; }
 
 		/// <value>Property FormattedCost - String</value>
 		[JsonPropertyName("formatted_cost")]
@@ -65,9 +65,13 @@ namespace MerchantAPI
 		[JsonPropertyName("catcount")]
 		public int CategoryCount { get; set; }
 
-		/// <value>Property Weight - float</value>
+		/// <value>Property Weight - decimal</value>
 		[JsonPropertyName("weight")]
-		public float Weight { get; set; }
+		public decimal Weight { get; set; }
+
+		/// <value>Property FormattedWeight - String</value>
+		[JsonPropertyName("formatted_weight")]
+		public String FormattedWeight { get; set; }
 
 		/// <value>Property Active - bool</value>
 		[JsonPropertyName("active")]
@@ -218,9 +222,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetPrice()
+		public decimal GetPrice()
 		{
 			return Price;
 		}
@@ -236,9 +240,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for cost.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetCost()
+		public decimal GetCost()
 		{
 			return Cost;
 		}
@@ -272,11 +276,20 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for weight.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetWeight()
+		public decimal GetWeight()
 		{
 			return Weight;
+		}
+
+		/// <summary>
+		/// Getter for formatted_weight.
+		/// <returns>String</returns>
+		/// </summary>
+		public String GetFormattedWeight()
+		{
+			return FormattedWeight;
 		}
 
 		/// <summary>
@@ -537,7 +550,7 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "price", StringComparison.OrdinalIgnoreCase))
 				{
-					value.Price = ReadNextFloat(ref reader, options);
+					value.Price = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "formatted_price", StringComparison.OrdinalIgnoreCase))
 				{
@@ -545,7 +558,7 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "cost", StringComparison.OrdinalIgnoreCase))
 				{
-					value.Cost = ReadNextFloat(ref reader, options);
+					value.Cost = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "formatted_cost", StringComparison.OrdinalIgnoreCase))
 				{
@@ -561,7 +574,11 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "weight", StringComparison.OrdinalIgnoreCase))
 				{
-					value.Weight = ReadNextFloat(ref reader, options);
+					value.Weight = ReadNextDecimal(ref reader, options);
+				}
+				else if (String.Equals(property, "formatted_weight", StringComparison.OrdinalIgnoreCase))
+				{
+					value.FormattedWeight = ReadNextString(ref reader, options);
 				}
 				else if (String.Equals(property, "active", StringComparison.OrdinalIgnoreCase))
 				{

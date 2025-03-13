@@ -31,9 +31,9 @@ namespace MerchantAPI
 		[JsonPropertyName("descrip")]
 		public String Description { get; set; }
 
-		/// <value>Property Total - float</value>
+		/// <value>Property Total - decimal</value>
 		[JsonPropertyName("total")]
-		public float Total { get; set; }
+		public decimal Total { get; set; }
 
 		/// <value>Property Assigned - bool</value>
 		[JsonPropertyName("assigned")]
@@ -77,9 +77,9 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for total.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float GetTotal()
+		public decimal GetTotal()
 		{
 			return Total;
 		}

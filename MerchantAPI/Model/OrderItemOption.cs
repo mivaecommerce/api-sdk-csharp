@@ -53,21 +53,25 @@ namespace MerchantAPI
 		[JsonPropertyName("value")]
 		public String Value { get; set; }
 
-		/// <value>Property Weight - float</value>
+		/// <value>Property Weight - decimal</value>
 		[JsonPropertyName("weight")]
-		public float? Weight { get; set; }
+		public decimal? Weight { get; set; }
 
-		/// <value>Property Retail - float</value>
+		/// <value>Property FormattedWeight - String</value>
+		[JsonPropertyName("formatted_weight")]
+		public String FormattedWeight { get; set; }
+
+		/// <value>Property Retail - decimal</value>
 		[JsonPropertyName("retail")]
-		public float? Retail { get; set; }
+		public decimal? Retail { get; set; }
 
-		/// <value>Property BasePrice - float</value>
+		/// <value>Property BasePrice - decimal</value>
 		[JsonPropertyName("base_price")]
-		public float? BasePrice { get; set; }
+		public decimal? BasePrice { get; set; }
 
-		/// <value>Property Price - float</value>
+		/// <value>Property Price - decimal</value>
 		[JsonPropertyName("price")]
-		public float? Price { get; set; }
+		public decimal? Price { get; set; }
 
 		/// <value>Property OptionData - String</value>
 		[JsonPropertyName("data")]
@@ -172,36 +176,45 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for weight.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetWeight()
+		public decimal? GetWeight()
 		{
 			return Weight;
 		}
 
 		/// <summary>
-		/// Getter for retail.
-		/// <returns>float</returns>
+		/// Getter for formatted_weight.
+		/// <returns>String</returns>
 		/// </summary>
-		public float? GetRetail()
+		public String GetFormattedWeight()
+		{
+			return FormattedWeight;
+		}
+
+		/// <summary>
+		/// Getter for retail.
+		/// <returns>decimal</returns>
+		/// </summary>
+		public decimal? GetRetail()
 		{
 			return Retail;
 		}
 
 		/// <summary>
 		/// Getter for base_price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetBasePrice()
+		public decimal? GetBasePrice()
 		{
 			return BasePrice;
 		}
 
 		/// <summary>
 		/// Getter for price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetPrice()
+		public decimal? GetPrice()
 		{
 			return Price;
 		}
@@ -267,7 +280,7 @@ namespace MerchantAPI
 		/// <param name="value">int</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-		public OrderItemOption SetAttributeId(int value)
+		public OrderItemOption SetAttributeId(int? value)
 		{
 			AttributeId = value;
 			return this;
@@ -278,7 +291,7 @@ namespace MerchantAPI
 		/// <param name="value">int</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-		public OrderItemOption SetAttributeTemplateAttributeId(int value)
+		public OrderItemOption SetAttributeTemplateAttributeId(int? value)
 		{
 			AttributeTemplateAttributeId = value;
 			return this;
@@ -300,9 +313,14 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-	   public OrderItemOption SetWeight(float value)
-	   {
-			Weight = value;
+		public OrderItemOption SetWeight(float? value)
+		{
+			if (value is float v) {
+				Weight = new Decimal(v);
+				return this;
+			}
+
+			Weight = null;
 			return this;
 		}
 
@@ -311,9 +329,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-	   public OrderItemOption SetWeight(double value)
-	   {
-			Weight = (float) value;
+		public OrderItemOption SetWeight(double? value)
+		{
+			if (value is double v) {
+				Weight = new Decimal(v);
+				return this;
+			}
+
+			Weight = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for weight.
+		/// <param name="value">decimal</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+		public OrderItemOption SetWeight(decimal? value)
+		{
+			Weight = value;
 			return this;
 		}
 
@@ -322,53 +356,100 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-	   public OrderItemOption SetRetail(float value)
-	   {
+		public OrderItemOption SetRetail(float? value)
+		{
+			if (value is float v) {
+				Retail = new Decimal(v);
+				return this;
+			}
+
+			Retail = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for retail.
+		/// <param name="value">double</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+		public OrderItemOption SetRetail(double? value)
+		{
+			if (value is double v) {
+				Retail = new Decimal(v);
+				return this;
+			}
+
+			Retail = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for retail.
+		/// <param name="value">decimal</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+		public OrderItemOption SetRetail(decimal? value)
+		{
 			Retail = value;
 			return this;
 		}
 
 		/// <summary>
-		/// Setter for retail.
-		/// <param name="value">double</param>
+		/// Setter for base_price.
+		/// <param name="value">float</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-	   public OrderItemOption SetRetail(double value)
-	   {
-			Retail = (float) value;
+		public OrderItemOption SetBasePrice(float? value)
+		{
+			if (value is float v) {
+				BasePrice = new Decimal(v);
+				return this;
+			}
+
+			BasePrice = null;
 			return this;
 		}
 
 		/// <summary>
 		/// Setter for base_price.
-		/// <param name="value">float</param>
+		/// <param name="value">double</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-	   public OrderItemOption SetBasePrice(float value)
-	   {
+		public OrderItemOption SetBasePrice(double? value)
+		{
+			if (value is double v) {
+				BasePrice = new Decimal(v);
+				return this;
+			}
+
+			BasePrice = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for base_price.
+		/// <param name="value">decimal</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+		public OrderItemOption SetBasePrice(decimal? value)
+		{
 			BasePrice = value;
 			return this;
 		}
 
 		/// <summary>
-		/// Setter for base_price.
-		/// <param name="value">double</param>
-		/// <returns>OrderItemOption</returns>
-		/// </summary>
-	   public OrderItemOption SetBasePrice(double value)
-	   {
-			BasePrice = (float) value;
-			return this;
-		}
-
-		/// <summary>
 		/// Setter for price.
 		/// <param name="value">float</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-	   public OrderItemOption SetPrice(float value)
-	   {
-			Price = value;
+		public OrderItemOption SetPrice(float? value)
+		{
+			if (value is float v) {
+				Price = new Decimal(v);
+				return this;
+			}
+
+			Price = null;
 			return this;
 		}
 
@@ -377,9 +458,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>OrderItemOption</returns>
 		/// </summary>
-	   public OrderItemOption SetPrice(double value)
-	   {
-			Price = (float) value;
+		public OrderItemOption SetPrice(double? value)
+		{
+			if (value is double v) {
+				Price = new Decimal(v);
+				return this;
+			}
+
+			Price = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for price.
+		/// <param name="value">decimal</param>
+		/// <returns>OrderItemOption</returns>
+		/// </summary>
+		public OrderItemOption SetPrice(decimal? value)
+		{
+			Price = value;
 			return this;
 		}
 	}
@@ -446,19 +543,19 @@ namespace MerchantAPI
 				}
 				else if (String.Equals(property, "weight", StringComparison.OrdinalIgnoreCase))
 				{
-					option.Weight = ReadNextFloat(ref reader, options);
+					option.Weight = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "retail", StringComparison.OrdinalIgnoreCase))
 				{
-					option.Retail = ReadNextFloat(ref reader, options);
+					option.Retail = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "base_price", StringComparison.OrdinalIgnoreCase))
 				{
-					option.BasePrice = ReadNextFloat(ref reader, options);
+					option.BasePrice = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "price", StringComparison.OrdinalIgnoreCase))
 				{
-					option.Price = ReadNextFloat(ref reader, options);
+					option.Price = ReadNextDecimal(ref reader, options);
 				}
 				else if (String.Equals(property, "opt_code", StringComparison.OrdinalIgnoreCase))
 				{

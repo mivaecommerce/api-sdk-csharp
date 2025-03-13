@@ -72,15 +72,15 @@ namespace MerchantAPI
 
 		/// Request field Price.
 		[JsonPropertyName("Price")]
-		public float? Price { get; set; }
+		public decimal? Price { get; set; }
 
 		/// Request field Cost.
 		[JsonPropertyName("Cost")]
-		public float? Cost { get; set; }
+		public decimal? Cost { get; set; }
 
 		/// Request field Weight.
 		[JsonPropertyName("Weight")]
-		public float? Weight { get; set; }
+		public decimal? Weight { get; set; }
 
 		/// Request field Default.
 		[JsonPropertyName("Default")]
@@ -213,27 +213,27 @@ namespace MerchantAPI
 
 		/// <summary>
 		/// Getter for Price.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetPrice()
+		public decimal? GetPrice()
 		{
 			return Price;
 		}
 
 		/// <summary>
 		/// Getter for Cost.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetCost()
+		public decimal? GetCost()
 		{
 			return Cost;
 		}
 
 		/// <summary>
 		/// Getter for Weight.
-		/// <returns>float</returns>
+		/// <returns>decimal</returns>
 		/// </summary>
-		public float? GetWeight()
+		public decimal? GetWeight()
 		{
 			return Weight;
 		}
@@ -384,9 +384,14 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
 		/// </summary>
-	   public AttributeTemplateOptionUpdateRequest SetPrice(float? value)
-	   {
-			Price = value;
+		public AttributeTemplateOptionUpdateRequest SetPrice(float? value)
+		{
+			if (value is float v) {
+				Price = new Decimal(v);
+				return this;
+			}
+
+			Price = null;
 			return this;
 		}
 
@@ -395,9 +400,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
 		/// </summary>
-	   public AttributeTemplateOptionUpdateRequest SetPrice(double? value)
-	   {
-			Price = (float?) value;
+		public AttributeTemplateOptionUpdateRequest SetPrice(double? value)
+		{
+			if (value is double v) {
+				Price = new Decimal(v);
+				return this;
+			}
+
+			Price = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Price.
+		/// <param name="value">decimal</param>
+		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
+		/// </summary>
+		public AttributeTemplateOptionUpdateRequest SetPrice(decimal? value)
+		{
+			Price = value;
 			return this;
 		}
 
@@ -406,31 +427,57 @@ namespace MerchantAPI
 		/// <param name="value">float</param>
 		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
 		/// </summary>
-	   public AttributeTemplateOptionUpdateRequest SetCost(float? value)
-	   {
+		public AttributeTemplateOptionUpdateRequest SetCost(float? value)
+		{
+			if (value is float v) {
+				Cost = new Decimal(v);
+				return this;
+			}
+
+			Cost = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Cost.
+		/// <param name="value">double</param>
+		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
+		/// </summary>
+		public AttributeTemplateOptionUpdateRequest SetCost(double? value)
+		{
+			if (value is double v) {
+				Cost = new Decimal(v);
+				return this;
+			}
+
+			Cost = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Cost.
+		/// <param name="value">decimal</param>
+		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
+		/// </summary>
+		public AttributeTemplateOptionUpdateRequest SetCost(decimal? value)
+		{
 			Cost = value;
 			return this;
 		}
 
 		/// <summary>
-		/// Setter for Cost.
-		/// <param name="value">double</param>
-		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
-		/// </summary>
-	   public AttributeTemplateOptionUpdateRequest SetCost(double? value)
-	   {
-			Cost = (float?) value;
-			return this;
-		}
-
-		/// <summary>
 		/// Setter for Weight.
 		/// <param name="value">float</param>
 		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
 		/// </summary>
-	   public AttributeTemplateOptionUpdateRequest SetWeight(float? value)
-	   {
-			Weight = value;
+		public AttributeTemplateOptionUpdateRequest SetWeight(float? value)
+		{
+			if (value is float v) {
+				Weight = new Decimal(v);
+				return this;
+			}
+
+			Weight = null;
 			return this;
 		}
 
@@ -439,9 +486,25 @@ namespace MerchantAPI
 		/// <param name="value">double</param>
 		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
 		/// </summary>
-	   public AttributeTemplateOptionUpdateRequest SetWeight(double? value)
-	   {
-			Weight = (float?) value;
+		public AttributeTemplateOptionUpdateRequest SetWeight(double? value)
+		{
+			if (value is double v) {
+				Weight = new Decimal(v);
+				return this;
+			}
+
+			Weight = null;
+			return this;
+		}
+
+		/// <summary>
+		/// Setter for Weight.
+		/// <param name="value">decimal</param>
+		/// <returns>AttributeTemplateOptionUpdateRequest</returns>
+		/// </summary>
+		public AttributeTemplateOptionUpdateRequest SetWeight(decimal? value)
+		{
+			Weight = value;
 			return this;
 		}
 
@@ -504,9 +567,15 @@ namespace MerchantAPI
 				writer.WriteString("Edit_AttributeTemplateOption", EditAttributeTemplateOption);
 			}
 
-			writer.WriteString("Code", Code);
+			if (Code != null && Code.Length > 0)
+			{
+				writer.WriteString("Code", Code);
+			}
 
-			writer.WriteString("Prompt", Prompt);
+			if (Prompt != null && Prompt.Length > 0)
+			{
+				writer.WriteString("Prompt", Prompt);
+			}
 
 			if (Image != null && Image.Length > 0)
 			{

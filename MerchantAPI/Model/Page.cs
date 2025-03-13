@@ -87,6 +87,14 @@ namespace MerchantAPI
 		[JsonPropertyName("layout")]
 		public bool Layout { get; set; }
 
+		/// <value>Property Fragment - bool</value>
+		[JsonPropertyName("fragment")]
+		public bool Fragment { get; set; }
+
+		/// <value>Property Public - bool</value>
+		[JsonPropertyName("public")]
+		public bool Public { get; set; }
+
 		/// <value>Property Notes - String</value>
 		[JsonPropertyName("notes")]
 		public String Notes { get; set; }
@@ -198,6 +206,24 @@ namespace MerchantAPI
 		public bool GetLayout()
 		{
 			return Layout;
+		}
+
+		/// <summary>
+		/// Getter for fragment.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetFragment()
+		{
+			return Fragment;
+		}
+
+		/// <summary>
+		/// Getter for public.
+		/// <returns>bool</returns>
+		/// </summary>
+		public bool GetPublic()
+		{
+			return Public;
 		}
 
 		/// <summary>

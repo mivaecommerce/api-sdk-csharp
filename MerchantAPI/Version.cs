@@ -18,13 +18,13 @@ namespace MerchantAPI
 	{
 		public const int VERSION_MAJOR = 2;
 
-		public const int VERSION_MINOR = 6;
+		public const int VERSION_MINOR = 7;
 
 		public const int VERSION_PATCH = 0;
 
 		new public static String ToString()
 		{
-			return String.Format( "v%d.%d.%d",
+			return String.Format( "v{0}.{1}.{2}",
 				Version.VERSION_MAJOR,
 				Version.VERSION_MINOR,
 				Version.VERSION_PATCH

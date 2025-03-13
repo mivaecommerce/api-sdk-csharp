@@ -34,7 +34,8 @@ namespace MerchantAPI
 			"settings",
 			"jsres",
 			"cssres",
-			"cacheset"
+			"cacheset",
+			"public"
 		};
 
 		/// The available sort fields applicable to the request.
@@ -49,7 +50,8 @@ namespace MerchantAPI
 			"settings",
 			"jsres",
 			"cssres",
-			"cacheset"
+			"cacheset",
+			"public"
 		};
 
 		/// <summary>
